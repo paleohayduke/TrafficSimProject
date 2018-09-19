@@ -27,7 +27,11 @@ public class TrafficSimProject {
  // TEST 
         System.out.println(reader.roads.get(0).getNodes().get(0).getRef());
         System.out.println(reader.roads.get(0).getNodes().get(0).getLong());
-        System.out.println(reader.roads.get(0).getNodes().get(0).getLat());        
+        System.out.println(reader.roads.get(0).getNodes().get(0).getLat()); 
+        
+        
+        Renderer display = new Renderer();
+        
     }
 
 }
