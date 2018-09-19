@@ -39,12 +39,13 @@ public class MapReader {
         getListOfNd(listOfWays);
         
         
-        System.out.println("Number of Roads: " + roads.size());
+        System.out.println("Number of Roads: " + roads.size()+ "\nRodeCounter: "
+        +roadCounter);
     }
 
     int roadCounter = 0;
     private void getListOfNd(NodeList wayList){
-//        try{
+        try{
             for(int i = 0; i< wayList.getLength();i++){
                 Node way = wayList.item(i);
                 
@@ -109,11 +110,11 @@ public class MapReader {
                 //
                 
             }
-//        }
-//        catch(Exception ex){
-//            System.out.println("error; private void getListOfNd");
-//            System.out.println(ex.getMessage());
-//        }
+        }
+        catch(Exception ex){
+            System.out.println("error; private void getListOfNd");
+            System.out.println(ex.getMessage());
+        }
     }
     
     //Element ndShowElement =(Element)nd;

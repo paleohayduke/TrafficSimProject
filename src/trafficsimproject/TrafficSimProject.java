@@ -21,7 +21,10 @@ public class TrafficSimProject {
     public static void main(String[] args) {
         
         MapReader reader = new MapReader("./src/TestMap.osm");
+ //       MapReader reader = new MapReader("./src/KilleenMap.osm");
         
+ 
+ // TEST 
         System.out.println(reader.roads.get(0).getNodes().get(0).getRef());
         System.out.println(reader.roads.get(0).getNodes().get(0).getLong());
         System.out.println(reader.roads.get(0).getNodes().get(0).getLat());        
