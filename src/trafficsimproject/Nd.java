@@ -7,35 +7,33 @@ package trafficsimproject;
 
 /**
  *
- * @author paleo
+ * These are the nodes, Node was already reserved by another library in use. 
  */
-public class Node {
-    private int ref = 0;
-    private int longitude = 0;
-    private int latitude = 0;
+public class Nd {
+    private long ref = 0;
+    private double longitude = 0;
+    private double latitude = 0;
     
-    Node(int ref, int longi, int lati){
-        setRef(ref);
-        setLong(longi);
-        setLat(lati);
+    Nd(){
+
     }
     
-    public void setRef(int ref){
+    public void setRef(long ref){
         this.ref = ref;
     }
-    public int getRef(){
+    public long getRef(){
         return ref;
     }
-    public void setLong(int longitude){
+    public void setLong(double longitude){
         this.longitude = longitude;
     }
-    public int getLong(){
+    public double getLong(){
         return longitude;
     }
-    public void setLat(int latitude){
+    public void setLat(double latitude){
         this.latitude = latitude;
     }
-    public int getLat(){
+    public double getLat(){
         return latitude;
     }    
 }

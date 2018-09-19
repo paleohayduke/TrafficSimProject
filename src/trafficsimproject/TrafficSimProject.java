@@ -19,10 +19,12 @@ public class TrafficSimProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         MapReader reader = new MapReader("./src/TestMap.osm");
         
-        
-
+        System.out.println(reader.roads.get(0).getNodes().get(0).getRef());
+        System.out.println(reader.roads.get(0).getNodes().get(0).getLong());
+        System.out.println(reader.roads.get(0).getNodes().get(0).getLat());        
     }
 
 }

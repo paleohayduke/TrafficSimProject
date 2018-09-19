@@ -9,27 +9,28 @@ import java.util.ArrayList;
 
 /**
  *
- * @author paleo
+ * TODO: figure what else we need here, currently just using to test 
+ * // parser
  */
 public class Road {
-    private String name = "";
-    ArrayList<Node> nodeList = new ArrayList<Node>(); 
+    private int id = 0;
+    ArrayList<Nd> nodeList = new ArrayList<Nd>(); 
     
     Road(){
         
     }
-    public void setName(String name){
-        this.name = name;
+    public void setID(int id){
+        this.id = id;
     }
-    public String getName(){
-        return name;
+    public int getID(){
+        return id;
     }
     
-    public void addNode(Node node){
+    public void addNode(Nd node){
         nodeList.add(node);
     }
     
-    public ArrayList<Node> getNodes(){
+    public ArrayList<Nd> getNodes(){
         return nodeList;
     }
 

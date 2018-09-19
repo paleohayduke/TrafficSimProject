@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package trafficsimproject;
+import java.util.ArrayList;
 import org.xml.sax.*;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
@@ -14,6 +15,8 @@ import javax.xml.parsers.*;
  */
 public class MapReader {
     
+    public ArrayList<Road> roads = new ArrayList<Road>();
+    NodeList allNodes;
     //
     MapReader(String docString){
         
@@ -25,16 +28,23 @@ public class MapReader {
         
         NodeList listOfWays = xmlDoc.getElementsByTagName("way");
         
+        
+        // list of all nodes to get info
+        allNodes = xmlDoc.getElementsByTagName("node");
+        
+        
         System.out.println("Number of ways " + listOfWays.getLength());
         
         //NodeList listOfNodes = 
         getListOfNd(listOfWays);
         
+        
+        System.out.println("Number of Roads: " + roads.size());
     }
 
     int roadCounter = 0;
     private void getListOfNd(NodeList wayList){
-        try{
+//        try{
             for(int i = 0; i< wayList.getLength();i++){
                 Node way = wayList.item(i);
                 
@@ -60,15 +70,26 @@ public class MapReader {
                 System.out.println(++roadCounter);
 
 
-
-
+                int roadID = Integer.parseInt(showElement.getAttribute("id"));
+                System.out.println("Road ID: " + roadID);
+                Road tempRoad = new Road();
+                tempRoad.setID(roadID);
+                
+                
                 for(int j=0;j<ndList.getLength();j++){
+                    Nd tempNd = new Nd();
+                    
+                    
                     Node nd = ndList.item(j);
                     Element ndShowElement =(Element)nd;
                     NodeList refList = ndShowElement.getElementsByTagName("ref");
                     
                     System.out.println(nd.toString());
                     
+                    long ref = Long.parseLong(ndShowElement.getAttribute("ref"));
+                    /////////////////////////////////////////////////////////////                           /WORKING HERE
+                    tempNd=makeNd(ref);
+                    tempRoad.addNode(tempNd);
                     
                     
                     System.out.println(ndShowElement.getAttribute("ref"));
@@ -83,11 +104,16 @@ public class MapReader {
                 
                 }
                 
+                //
+                roads.add(tempRoad);
+                //
+                
             }
-        }
-        catch(Exception ex){
-            System.out.println("error; private void getListOfNd");
-        }
+//        }
+//        catch(Exception ex){
+//            System.out.println("error; private void getListOfNd");
+//            System.out.println(ex.getMessage());
+//        }
     }
     
     //Element ndShowElement =(Element)nd;
@@ -143,4 +169,32 @@ public class MapReader {
         
         return null;
     }
+    
+    private Nd makeNd(long ref){
+        Nd nd = new Nd();
+        
+        for(int i = 0; i<allNodes.getLength();i++){
+            Node tempNode = allNodes.item(i);
+            Element showElement = (Element)tempNode;
+            if(ref==Long.parseLong(showElement.getAttribute("id"))){
+                System.out.println("FOUND A MATCH: "+showElement.getAttribute("id") );
+                nd.setRef(ref);
+                nd.setLat(Double.parseDouble(showElement.getAttribute("lat")));
+                nd.setLong(Double.parseDouble(showElement.getAttribute("lon")));
+                
+                return nd;
+            }
+
+            
+                
+        }
+        
+        
+        
+        
+        
+        
+        return nd;
+    }
+    
 }
