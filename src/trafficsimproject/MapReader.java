@@ -13,11 +13,17 @@ import javax.xml.parsers.*;
  *
  * @author paleo
  */
+
+// reads osm map
 public class MapReader {
-    
+
+//holds list of  roads for now    
     public ArrayList<Road> roads = new ArrayList<Road>();
+
+// this holds all the nodes for use in search for coordinates 
+// compared to Way refs
     NodeList allNodes;
-    //
+    //docString is file name
     MapReader(String docString){
         
         Document xmlDoc = getDocument(docString);
@@ -43,7 +49,11 @@ public class MapReader {
         +roadCounter);
     }
 
+    
+    //roadCounter for debug purposes
     int roadCounter = 0;
+    
+    //this needs to be revisited
     private void getListOfNd(NodeList wayList){
         try{
             for(int i = 0; i< wayList.getLength();i++){
@@ -120,6 +130,7 @@ public class MapReader {
     //Element ndShowElement =(Element)nd;
     //                NodeList refList = ndShowElement.getElementsByTagName("ref");
     //
+    // this function is for testing if a <way> is a road vs something else
     private boolean isRoad(Element showElement){
         boolean isRoad = false;
         NodeList list = showElement.getElementsByTagName("tag");
@@ -147,9 +158,10 @@ public class MapReader {
         return isRoad;
     }
     
-    private void getListOfWays(){
-        
-    }
+    
+    //private void getListOfWays(){
+    //    
+    //}
 
     
     
@@ -171,6 +183,9 @@ public class MapReader {
         return null;
     }
     
+    
+    // this finds the lat and logtitude for Nd elements of a <way> by comparing
+    // their <nd> ref vs <node> ID in allNodes. 
     private Nd makeNd(long ref){
         Nd nd = new Nd();
         

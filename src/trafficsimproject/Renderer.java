@@ -44,6 +44,26 @@ public class Renderer extends JFrame{
             graph2.draw(drawLine);
             
         }
+        
+        public void renderFrame(){
+            
+        }
+        
+        public void newFrame(){
+            
+        }
+        
+        public void addLine(int x1, int y1, int x2, int y2){
+            
+        }
+        
+        public void addPoint(int x, int y){
+            
+        }
+        
+        
+        
+        
     }
     
     
