@@ -43,8 +43,8 @@ public class Renderer extends JFrame{
             for(int j = 0 ; j<roads.get(i).nodeList.size();j++){
                 double lon = roads.get(i).nodeList.get(j).getLong();
                 double lat = roads.get(i).nodeList.get(j).getLat();
-                lons.add((int)(roads.get(i).nodeList.get(j).getLong()*100000-minLon*100000));
-                lats.add((int)(roads.get(i).nodeList.get(j).getLat()*100000-minLat*100000));     
+                lons.add((int)((roads.get(i).nodeList.get(j).getLong()*100000-minLon*100000)+200));
+                lats.add((int)(latRange-(roads.get(i).nodeList.get(j).getLat()*100000-minLat*100000)+200));     
                 
                 System.out.println( "MATH"+(roads.get(i).nodeList.get(j).getLong()*100000) +" - "+ (minLon*100000)  );
                 System.out.println("lon "+lon);
@@ -60,20 +60,26 @@ public class Renderer extends JFrame{
     double minLat=0;
     double minLon=0;
     double maxLon=0;
-    
+    double maxLat =0;
+    int latRange=0;
+    int lonRange=0;
     Renderer(double minLat, double maxLat, double minLon, double maxLon){
         this.minLat=minLat;
         this.minLon=minLon;
         this.maxLon=maxLon;
-        int latRange = (int)(maxLat*100000-minLat*100000);
-        int lonRange = (int)(maxLon*100000- minLon*100000);
+        this.maxLat=maxLat;
+        System.out.println("SIZE OF WINDOW: " + (maxLon*100000-minLon*100000) + " " +(maxLat*100000-minLat*100000) );
+        latRange = (int)(maxLat*100000-minLat*100000);
+        lonRange = (int)(maxLon*100000- minLon*100000);
         
         this.setSize(lonRange,latRange);
-        System.out.println("SIZE OF WINDOW: " + (maxLon*100000-minLon*100000) + " " +(maxLat*100000-minLat*100000) );
+        
         this.setTitle("Traffic Sim");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(new DrawStuff(), BorderLayout.CENTER);
         this.setVisible(true);
+        
+        
     }
     
     private class DrawStuff extends JComponent{
@@ -89,14 +95,14 @@ public class Renderer extends JFrame{
             //graph2.draw(drawLine);
             for(int i =0; i<lats.size();i++){
                 Shape drawPoint = new Line2D.Float(lons.get(i)/scale,lats.get(i)/scale,lons.get(i)/scale+5,lats.get(i)/scale+5);
-                System.out.println("DRAWING POINT"+lons.get(i)+ " " +lats.get(i)+" " +lons.get(i)+" "+lats.get(i));
+                System.out.println("DRAWING POINT: "+lons.get(i)+ " " +lats.get(i));
                 graph2.draw(drawPoint);
             }
-            
+            System.out.println("SIZE OF WINDOW: " + (maxLon*100000-minLon*100000) + " " +(maxLat*100000-minLat*100000) );
 
             
         }
-        int scale = 2;
+        int scale = 2;//scale where drawings are on map...
         public void renderFrame(){
             
         }
