@@ -28,9 +28,16 @@ public class TrafficSimProject {
         System.out.println(reader.roads.get(0).getNodes().get(0).getRef());
         System.out.println(reader.roads.get(0).getNodes().get(0).getLong());
         System.out.println(reader.roads.get(0).getNodes().get(0).getLat()); 
+        System.out.println(reader.roads.get(0).getIntersections().get(0).getSecondary()); 
         
         
-        Renderer display = new Renderer();
+        
+        
+
+        
+
+        Renderer display = new Renderer(reader.minLat,reader.maxLat,reader.minLon,reader.maxLon);
+        display.setMap(reader.getRoads());
         
     }
 

@@ -17,9 +17,17 @@ import javax.xml.parsers.*;
 // reads osm map
 public class MapReader {
 
+    
+    double minLat =0;
+    double maxLat =0;
+    double minLon =0;
+    double maxLon=0;
+    
+    
+    
 //holds list of  roads for now    
     public ArrayList<Road> roads = new ArrayList<Road>();
-
+    int startIndex = 0;
 // this holds all the nodes for use in search for coordinates 
 // compared to Way refs
     NodeList allNodes;
@@ -35,6 +43,9 @@ public class MapReader {
         NodeList listOfWays = xmlDoc.getElementsByTagName("way");
         
         
+        NodeList bounds = xmlDoc.getElementsByTagName("bounds");
+        //
+        setBounds(bounds);
         // list of all nodes to get info
         allNodes = xmlDoc.getElementsByTagName("node");
         
@@ -47,8 +58,31 @@ public class MapReader {
         
         System.out.println("Number of Roads: " + roads.size()+ "\nRodeCounter: "
         +roadCounter);
+        
+        setIntersections();
     }
 
+    private void setBounds(NodeList bounds){
+        Element showElement = (Element)bounds.item(0);
+        
+        
+        minLat=Double.parseDouble(showElement.getAttribute("minlat"));
+        maxLat=Double.parseDouble(showElement.getAttribute("maxlat"));
+        minLon=Double.parseDouble(showElement.getAttribute("minlon"));
+        maxLon=Double.parseDouble(showElement.getAttribute("maxlon"));
+        
+        
+        System.out.println("MINLAT:"+showElement.getAttribute("minlat"));
+        System.out.println("MAXLAT:"+showElement.getAttribute("maxlat"));
+        System.out.println("MINLON:"+showElement.getAttribute("minlon"));
+        System.out.println("MAXLON:"+showElement.getAttribute("maxlon"));
+    }
+    
+    
+    public ArrayList<Road> getRoads(){
+        return roads;
+    }
+    
     
     //roadCounter for debug purposes
     int roadCounter = 0;
@@ -56,6 +90,10 @@ public class MapReader {
     //this needs to be revisited
     private void getListOfNd(NodeList wayList){
         try{
+            
+            
+            //START INDEX FOR HEURISTIC
+            startIndex = 0;
             for(int i = 0; i< wayList.getLength();i++){
                 Node way = wayList.item(i);
                 
@@ -71,7 +109,7 @@ public class MapReader {
                 ////////  that include a tag with attribute of 
                 ////////  highway or road 
                 /////////
-                
+
                 if(!isRoad(showElement)){
                     continue;
                 }
@@ -95,6 +133,11 @@ public class MapReader {
                     Element ndShowElement =(Element)nd;
                     NodeList refList = ndShowElement.getElementsByTagName("ref");
                     
+                    
+                    
+                    
+                    
+                    
                     System.out.println(nd.toString());
                     
                     long ref = Long.parseLong(ndShowElement.getAttribute("ref"));
@@ -116,6 +159,7 @@ public class MapReader {
                 }
                 
                 //
+                
                 roads.add(tempRoad);
                 //
                 
@@ -192,12 +236,13 @@ public class MapReader {
         for(int i = 0; i<allNodes.getLength();i++){
             Node tempNode = allNodes.item(i);
             Element showElement = (Element)tempNode;
+//            System.out.println("\tsearching for match... try:"+i);
             if(ref==Long.parseLong(showElement.getAttribute("id"))){
                 System.out.println("FOUND A MATCH: "+showElement.getAttribute("id") );
                 nd.setRef(ref);
                 nd.setLat(Double.parseDouble(showElement.getAttribute("lat")));
                 nd.setLong(Double.parseDouble(showElement.getAttribute("lon")));
-                
+                startIndex=i;
                 return nd;
             }
 
@@ -213,4 +258,35 @@ public class MapReader {
         return nd;
     }
     
+    
+    
+    void setIntersections(){
+        
+        
+        for(int i = 1; i< roads.size();i++){
+            Road road = roads.get(i-1);
+            Road road2 = roads.get(i);
+            
+            ArrayList<IntersectNd> intersects = new ArrayList<IntersectNd>();
+            
+            for(int j=0;j<road.nodeList.size();j++){
+                for(int k=0;k<road2.nodeList.size();k++){
+                    if(road.getNodes().get(j).getRef()==road2.getNodes().get(k).getRef()){
+                        IntersectNd tempIntersect = new IntersectNd();
+                        tempIntersect.setLat(road.getNodes().get(j).getLat());
+                        tempIntersect.setLong(road.getNodes().get(j).getLong());
+                        tempIntersect.setRef(road.getNodes().get(j).getRef());
+                        tempIntersect.setSecondary(road2.getNodes().get(k).getRef());
+                        
+                        intersects.add(tempIntersect);
+                        System.out.println("Intersect: ");
+                    }
+                }
+                
+            }
+            roads.get(i-1).setIntersections(intersects);
+            
+        }
+        
+    }
 }

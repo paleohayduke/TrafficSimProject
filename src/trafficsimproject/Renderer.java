@@ -11,6 +11,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.geom.*;
+import java.util.ArrayList;
 
 @SuppressWarnings("serial")
 
@@ -23,8 +24,22 @@ import java.awt.geom.*;
 //
 
 public class Renderer extends JFrame{
-    Renderer(){
-        this.setSize(500,500);
+    
+    
+    int xRes = 500;
+    int yRes = 500;
+    public void setMap(ArrayList<Road> roads){
+        
+    }
+    
+    
+    Renderer(double minLat, double maxLat, double minLon, double maxLon){
+        
+        int latRange = (int)(maxLat*100000-minLat*100000);
+        int lonRange = (int)(maxLon*100000- minLon*100000);
+        
+        this.setSize(lonRange,latRange);
+        System.out.println("SIZE OF WINDOW: " + (maxLon*100000-minLon*100000) + " " +(maxLat*100000-minLat*100000) );
         this.setTitle("Traffic Sim");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(new DrawStuff(), BorderLayout.CENTER);

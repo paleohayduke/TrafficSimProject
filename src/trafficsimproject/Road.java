@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class Road {
     private int id = 0;
     ArrayList<Nd> nodeList = new ArrayList<Nd>(); 
+    ArrayList<IntersectNd> intersections = new ArrayList<IntersectNd>();
     
     Road(){
         
@@ -33,6 +34,13 @@ public class Road {
     public ArrayList<Nd> getNodes(){
         return nodeList;
     }
-
-    
+    public void addIntersection(IntersectNd nd){
+        intersections.add(nd);
+    }
+    public void setIntersections(ArrayList<IntersectNd> list){
+        intersections=list;
+    }
+    public ArrayList<IntersectNd> getIntersections(){
+        return intersections;
+    }
 }
