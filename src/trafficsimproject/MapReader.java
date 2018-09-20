@@ -241,7 +241,13 @@ public class MapReader {
                 System.out.println("FOUND A MATCH: "+showElement.getAttribute("id") );
                 nd.setRef(ref);
                 nd.setLat(Double.parseDouble(showElement.getAttribute("lat")));
+                
+
                 nd.setLong(Double.parseDouble(showElement.getAttribute("lon")));
+
+
+                System.out.println("setLat " + nd.getLat());                
+                System.out.println("setLon " + nd.getLong());
                 startIndex=i;
                 return nd;
             }

@@ -20,7 +20,7 @@ public class TrafficSimProject {
      */
     public static void main(String[] args) {
         
-        MapReader reader = new MapReader("./src/TestMap.osm");
+        MapReader reader = new MapReader("./src/HomeMap.osm");
  //       MapReader reader = new MapReader("./src/KilleenMap.osm");
         
  
@@ -38,6 +38,7 @@ public class TrafficSimProject {
 
         Renderer display = new Renderer(reader.minLat,reader.maxLat,reader.minLon,reader.maxLon);
         display.setMap(reader.getRoads());
+
         
     }
 
