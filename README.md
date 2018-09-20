@@ -15,3 +15,6 @@ Priority 2: Reimplement the method "private Nd makeND(long ref){ }" inside the "
 *important to test the program with a map of the entire city of killeen to fullfil requirements. 
 
 Once we can generate routes we can start testing the cars and everything else.
+
+Check this out to see how to create branches
+https://netbeans.org/kb/docs/ide/git.html#branch
