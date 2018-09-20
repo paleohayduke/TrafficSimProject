@@ -3,7 +3,7 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 Tasks available:
 
-Priority 1: Determing order of nodes in a road. This is important for drawing the roads correctly on the map.
+Priority 1: Determining order of nodes in a road. This is important for drawing the roads correctly on the map.
 I am thinking going through list of nodes and then doing distance formula distance=sqrt((x1-x2)^2+(y1-y2)^2)
 to find the shortest distances to two nodes from and one node in a road will work to figure their correct order.
 There are lots of nodes on curves so that shouldnt cause a problem but some of the roads will be "ends" and only have one node connected to them. 
