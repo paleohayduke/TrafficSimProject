@@ -1,7 +1,7 @@
 # TrafficSimProject
 TAMUCT COSC-3320-110 Programmers Group 1
 
-Tasks available:
+Tasks:
 
 Priority 1: Determining order of nodes in a road. This is important for drawing the roads correctly on the map.
 I am thinking going through list of nodes and then doing distance formula distance=sqrt((x1-x2)^2+(y1-y2)^2)
