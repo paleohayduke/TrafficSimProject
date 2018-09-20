@@ -16,5 +16,5 @@ Priority 2: Reimplement the method "private Nd makeND(long ref){ }" inside the "
 
 Once we can generate routes we can start testing the cars and everything else.
 
-Check this out to see how to create branches
+
 https://netbeans.org/kb/docs/ide/git.html#branch
