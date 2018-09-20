@@ -11,6 +11,8 @@ import java.util.ArrayList;
  *
  * @author paleo
  */
+
+// just a Nd with info about who this node intersects with 
 public class IntersectNd extends Nd {
     
     private long secondaryRef = 0;

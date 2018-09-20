@@ -14,10 +14,14 @@ import javax.xml.parsers.*;
  * @author paleo
  */
 
-// reads osm map
+// reads osm map and makes an ArrayList of the Roads, each Road contains 
+// an ArrayList of Nd and second ArrayList of IntersectionNd. 
+// each Nd has its node ID, longitude and lattitude. 
+// IntersectNd extends Nd and includes a field to tell you what road it
+// intersects with (the field is called secondaryRef). 
 public class MapReader {
 
-    
+    // these were for testing 
     double minLat =0;
     double maxLat =0;
     double minLon =0;
@@ -25,43 +29,59 @@ public class MapReader {
     
     
     
-//holds list of  roads for now    
+//holds the list of  Roads of all the roads on the map   
     public ArrayList<Road> roads = new ArrayList<Road>();
-    int startIndex = 0;
+//    int startIndex = 0;
 // this holds all the nodes for use in search for coordinates 
 // compared to Way refs
     NodeList allNodes;
     //docString is file name
     MapReader(String docString){
         
+        
+        // this reads the xml document into memory
         Document xmlDoc = getDocument(docString);
         
+        // looks like testing stuff, ill clean it up later dont wanna break 
+        // it right now
         String nodeName = xmlDoc.getDocumentElement().getNodeName();
         
         System.out.println("nodeName: " + nodeName);
         
+        //
+        //
+        //This is a list of ALL <ways> on the map. the program
+        // will refine this list to only the <ways> that are Roads
         NodeList listOfWays = xmlDoc.getElementsByTagName("way");
         
-        
+        // Getting the bounds from the file
         NodeList bounds = xmlDoc.getElementsByTagName("bounds");
-        //
+        //seting bounds of map (max and min long and lat) so the renderer can use it later
         setBounds(bounds);
-        // list of all nodes to get info
+        
+        // This list of nodes is searched against to find longitude and latitude
+        // to link to the node IDs in our roads. 
         allNodes = xmlDoc.getElementsByTagName("node");
         
         
         System.out.println("Number of ways " + listOfWays.getLength());
         
-        //NodeList listOfNodes = 
+        //NodeList listOfNodes =
+        //
+        // ******** This actually starts the real work. All the real work is in
+        // getListOfNd
+        // this shit is sloppy.TODO: tidy this up
         getListOfNd(listOfWays);
         
-        
+        //tells us how many roads we got. the process to get the number of
+        // roads is in getListOfNd
         System.out.println("Number of Roads: " + roads.size()+ "\nRodeCounter: "
         +roadCounter);
         
         setIntersections();
     }
 
+    // this is to set the min and max lats and longs
     private void setBounds(NodeList bounds){
         Element showElement = (Element)bounds.item(0);
         
@@ -78,7 +98,9 @@ public class MapReader {
         System.out.println("MAXLON:"+showElement.getAttribute("maxlon"));
     }
     
-    
+    // * When u initialize this class, use this function to get the list of Roads
+    // to build a tree and do whatever eelse u need. The whole point
+    // of this entire class is to give u this ArrayList<Road> roads
     public ArrayList<Road> getRoads(){
         return roads;
     }
@@ -88,45 +110,60 @@ public class MapReader {
     int roadCounter = 0;
     
     //this needs to be revisited
+    // this does everything, it needs improvement and to be tidyed up.
+    // can modularize this code
     private void getListOfNd(NodeList wayList){
         try{
             
-            
-            //START INDEX FOR HEURISTIC
-            startIndex = 0;
+            //This is the start og going through the unfiltered <ways> to
+            // build up our Roads
             for(int i = 0; i< wayList.getLength();i++){
+                
+                // the following pattern repeats as we go through the nodes
+                // of the XML file to get all the data we need to
+                // build up the list of roads with all their info
+                
+                // make grab an individual Node from i to wayList.getLength()
                 Node way = wayList.item(i);
                 
+                // turn that Node into an Element because
+                // elements have lots of methods that are useful
                 Element showElement = (Element)way;
+                
+                //This is making a node list of all the nodes (nd) that
+                // make up the <way> 
                 NodeList ndList = showElement.getElementsByTagName("nd");
                 System.out.println("way" + way.toString());
-                
 
-                
-                
                 ////////
                 ///////// you need a node list of nds from ways
                 ////////  that include a tag with attribute of 
                 ////////  highway or road 
                 /////////
 
+                ///// This checks if the way is a Road. go visit
+                // its function to see implementation details. 
                 if(!isRoad(showElement)){
-                    continue;
+                    continue; // if the <way> is not a road, start loop over
                 }
                 
 
 
                 System.out.println(++roadCounter);
 
-
+                // grabbing id of the Road
                 int roadID = Integer.parseInt(showElement.getAttribute("id"));
                 System.out.println("Road ID: " + roadID);
+
+//////////////// tempRoad is made to build a road that holds all its nodes 
+//////////////// with all their data. After it is built, it is added to
+//////////////// an ArrayList and then reinitialized here
                 Road tempRoad = new Road();
-                tempRoad.setID(roadID);
+                tempRoad.setID(roadID); 
                 
-                
+                // This cycles through all the nodes in a Road
                 for(int j=0;j<ndList.getLength();j++){
-                    Nd tempNd = new Nd();
+                    Nd tempNd = new Nd();// familiar pattern
                     
                     
                     Node nd = ndList.item(j);
@@ -140,8 +177,15 @@ public class MapReader {
                     
                     System.out.println(nd.toString());
                     
+                    // Ref is the ID# of a Nd (a node that makes up a road)
                     long ref = Long.parseLong(ndShowElement.getAttribute("ref"));
                     /////////////////////////////////////////////////////////////                           /WORKING HERE
+
+
+//////////////////// This grabs the coordinates. This makeNd() function is so
+//////////////////// inefficient. it needs to be reimplemented in binary search
+//////////////////// before we can process the entire map of killeen. 
+//////////////////// it should be lightening fast after its turned to Binary Search. 
                     tempNd=makeNd(ref);
                     tempRoad.addNode(tempNd);
                     
@@ -159,7 +203,8 @@ public class MapReader {
                 }
                 
                 //
-                
+                // add the road we built to the array list, entire point of the class
+                //
                 roads.add(tempRoad);
                 //
                 
@@ -171,9 +216,7 @@ public class MapReader {
         }
     }
     
-    //Element ndShowElement =(Element)nd;
-    //                NodeList refList = ndShowElement.getElementsByTagName("ref");
-    //
+
     // this function is for testing if a <way> is a road vs something else
     private boolean isRoad(Element showElement){
         boolean isRoad = false;
@@ -230,6 +273,8 @@ public class MapReader {
     
     // this finds the lat and logtitude for Nd elements of a <way> by comparing
     // their <nd> ref vs <node> ID in allNodes. 
+    //
+    // TODO: reimplement as binary search
     private Nd makeNd(long ref){
         Nd nd = new Nd();
         
@@ -248,7 +293,7 @@ public class MapReader {
 
                 System.out.println("setLat " + nd.getLat());                
                 System.out.println("setLon " + nd.getLong());
-                startIndex=i;
+ //               startIndex=i;
                 return nd;
             }
 
@@ -265,7 +310,10 @@ public class MapReader {
     }
     
     
-    
+    // 
+    // gets all the intersections and adds them to the roads. 
+    // This code runs but it has not been tested to see if it
+    // is working correctly. 
     void setIntersections(){
         
         

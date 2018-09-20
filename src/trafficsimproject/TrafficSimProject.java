@@ -13,6 +13,8 @@ import javax.xml.parsers.*;
  *
  * @author paleo
  */
+
+// Just being used to test stuff right now. 
 public class TrafficSimProject {
 
     /**
@@ -20,7 +22,11 @@ public class TrafficSimProject {
      */
     public static void main(String[] args) {
         
-        MapReader reader = new MapReader("./src/MediumMap.osm");
+        
+        // use this to read the .osm file, reader has a couple methods, refer
+        // to its class file
+        
+        MapReader reader = new MapReader("./src/TestMap.osm");
  //       MapReader reader = new MapReader("./src/KilleenMap.osm");
         
  

@@ -9,6 +9,9 @@ package trafficsimproject;
  *
  * These are the nodes, Node was already reserved by another library in use. 
  */
+// This is a Node, Node was a reserved word and 
+// Nd is used to indicate a Node for a <way> in the original .OSM file.
+// its as u see
 public class Nd {
     private long ref = 0;
     private double longitude = 0;

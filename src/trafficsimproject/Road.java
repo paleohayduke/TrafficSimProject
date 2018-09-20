@@ -12,6 +12,8 @@ import java.util.ArrayList;
  * TODO: figure what else we need here, currently just using to test 
  * // parser
  */
+
+// creates a Road data type for us. 
 public class Road {
     private int id = 0;
     ArrayList<Nd> nodeList = new ArrayList<Nd>(); 
