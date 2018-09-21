@@ -271,30 +271,48 @@ public class MapReader {
     }
     
     
-    // this finds the lat and logtitude for Nd elements of a <way> by comparing
-    // their <nd> ref vs <node> ID in allNodes. 
-    //
+    
     // TODO: reimplement as binary search
+    // Preamble
+    // This function currently takes a long ref which identifies a node ID
+    // in a road... The nodes linked by the road do not include longitude and 
+    // lattitude data... but luckily there are indpendent <node>'s in the file,
+    // seperate from the <ways> that do have the location data.. 
+    // 
+    // After the function finds the node that has longitude and latitude data,
+    // it constructs a temporare node (Nd nd) that has all the datafields of a 
+    // Node filled out and then returns it.
+    //
+    // Currently it searches linearly, I'll try to walk through what it does now
+    // that corresponds to regular linear search.
     private Nd makeNd(long ref){
-        Nd nd = new Nd();
         
+        Nd nd = new Nd();   // the Nd is one of our data types that holds the
+                            // node data: ref, longitude, latitude
+        
+        // this loop goes through _all_ of the Nodes on the map. 
         for(int i = 0; i<allNodes.getLength();i++){
-            Node tempNode = allNodes.item(i);
-            Element showElement = (Element)tempNode;
+            Node tempNode = allNodes.item(i);   //pulls an individual node from 
+                                                //list of all nodes
+            Element showElement = (Element)tempNode;// this convets it to Element
+                                                    // to let us get the attributes
 //            System.out.println("\tsearching for match... try:"+i);
+
+
+            // This is where we see if ref IDs match between nodes. 
+            // if they do match, then we grab the Longitude and Lattitude
+            // data from the Nd nd. 
             if(ref==Long.parseLong(showElement.getAttribute("id"))){
                 System.out.println("FOUND A MATCH: "+showElement.getAttribute("id") );
-                nd.setRef(ref);
-                nd.setLat(Double.parseDouble(showElement.getAttribute("lat")));
-                
-
-                nd.setLong(Double.parseDouble(showElement.getAttribute("lon")));
+                nd.setRef(ref); // Set reference ID number of the node
+                nd.setLat(Double.parseDouble(showElement.getAttribute("lat")));  // seting latitude
+                nd.setLong(Double.parseDouble(showElement.getAttribute("lon"))); // setting longitude
 
 
                 System.out.println("setLat " + nd.getLat());                
                 System.out.println("setLon " + nd.getLong());
  //               startIndex=i;
-                return nd;
+                return nd; // return back a Completed node. 
             }
 
             
