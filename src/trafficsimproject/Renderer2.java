@@ -159,7 +159,7 @@ public class Renderer2 extends JFrame{
 
             
         }
-        int scale = 1;//scale where drawings are on map... 
+        int scale = 5;//scale where drawings are on map... 
         
         // lots of crap 
         public void renderFrame(){
