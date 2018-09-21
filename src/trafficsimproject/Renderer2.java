@@ -29,23 +29,22 @@ public class Renderer2 extends JFrame{
     
     // this draws the nodes on the map
     ArrayList<Road> roads;
+    
+    
+    
+    
+    
+    ArrayList<Integer> skipThisIndex = new ArrayList<Integer>();
     public void setMap(){
         this.roads=roads;
 //        int arrayIndex =0;
         
-
-
-
-
-
-
-
-
-
-
-
+        int runTotal=0;
         for(int i = 0; i<roads.size();i++){
+            int jcount =0;
             for(int j = 0 ; j<roads.get(i).nodeList.size();j++){
+                jcount++;
+                
                 double lon = roads.get(i).nodeList.get(j).getLong();
                 double lat = roads.get(i).nodeList.get(j).getLat();
                 lons.add((int)((roads.get(i).nodeList.get(j).getLong()*100000-minLon*100000)+0));
@@ -63,6 +62,10 @@ public class Renderer2 extends JFrame{
                 
                 
             }
+            
+            skipThisIndex.add(jcount+runTotal);
+            runTotal+=runTotal;
+
         }
         System.out.println("maxLon"+minLon);
         System.out.println("minLat"+minLat);
@@ -124,9 +127,17 @@ public class Renderer2 extends JFrame{
                 System.out.println("DRAWING POINT: "+lons.get(i)+ " " +lats.get(i));
                 graph2.draw(drawPoint);
                 
+                
+                boolean skip = false;
+                if(i==skipThisIndex.get(counter)){
+                    counter++;
+                    skip=true;
+                }
+                
+                
                 //// drawing roads?
                 Shape drawRoad;
-                if(i-counter<lons.size()-1&&// i-counter<lons.size()-1&&
+                if(!skip&&i<lons.size()-1&&// i-counter<lons.size()-1&&
                         lons.get(i)>0&&lats.get(i)>0&&lons.get(i+1)>0&&lats.get(i+1)>0
                         &&lons.get(i)<lonRange&&lats.get(i)<latRange&&lons.get(i+1)<lonRange&&lats.get(i+1)<latRange){
                     
@@ -148,7 +159,7 @@ public class Renderer2 extends JFrame{
 
             
         }
-        int scale = 4;//scale where drawings are on map... 
+        int scale = 1;//scale where drawings are on map... 
         
         // lots of crap 
         public void renderFrame(){
