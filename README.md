@@ -1,6 +1,19 @@
 # TrafficSimProject
-TAMUCT COSC-3320-110 Programmers Group 1
+___________              _____  _____.__        
+\__    ___/___________ _/ ____\/ ____\__| ____  
+  |    |  \_  __ \__  \\   __\\   __\|  |/ ___\ 
+  |    |   |  | \// __ \|  |   |  |  |  \  \___ 
+  |____|   |__|  (____  /__|   |__|  |__|\___  >
+                      \/                     \/ 
+  _________.__              .__          __                
+ /   _____/|__| _____  __ __|  | _____ _/  |_  ___________ 
+ \_____  \ |  |/     \|  |  \  | \__  \\   __\/  _ \_  __ \
+ /        \|  |  Y Y  \  |  /  |__/ __ \|  | (  <_> )  | \/
+/_______  /|__|__|_|  /____/|____(____  /__|  \____/|__|   
+        \/          \/                \/                   
 
+TAMUCT COSC-3320-110 Programmers Group 1
+======================================================================================================================
 Tasks:
 
 Priority 1: Building a tree out of the road and intersection data. 
@@ -12,6 +25,7 @@ the coordinates of nodes correctly. This needs to be fixed so we can visually se
 Priority 2: Get Get set up to keep track of revisions.
 https://netbeans.org/kb/docs/ide/git.html#branch
 
+=======================================================================================================================
 9/21/2018 COMPLETED: Determining order of nodes in a road. This is important for drawing the roads correctly on the map.
 I am thinking going through list of nodes and then doing distance formula distance=sqrt((x1-x2)^2+(y1-y2)^2)
 to find the shortest distances to two nodes from and one node in a road will work to figure their correct order.
