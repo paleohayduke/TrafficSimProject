@@ -26,14 +26,14 @@ public class TrafficSimProject {
         // use this to read the .osm file, reader has a couple methods, refer
         // to its class file
         
-        MapReader reader = new MapReader("./src/TestMap.osm");
+        MapReader reader = new MapReader("./src/MediumMap.osm");
  //       MapReader reader = new MapReader("./src/KilleenMap.osm");
         
  
  // TEST 
-        System.out.println(reader.roads.get(0).getNodes().get(0).getRef());
-        System.out.println(reader.roads.get(0).getNodes().get(0).getLong());
-        System.out.println(reader.roads.get(0).getNodes().get(0).getLat()); 
+//        System.out.println(reader.roads.get(0).getNodes().get(0).getRef());
+//        System.out.println(reader.roads.get(0).getNodes().get(0).getLong());
+//        System.out.println(reader.roads.get(0).getNodes().get(0).getLat()); 
 //        System.out.println(reader.roads.get(0).getIntersections().get(0).getSecondary()); 
         
         
@@ -42,10 +42,17 @@ public class TrafficSimProject {
 
         
 
-        Renderer display = new Renderer(reader.minLat,reader.maxLat,reader.minLon,reader.maxLon);
-        display.setMap(reader.getRoads());
-
+        Renderer2 display = new Renderer2(reader.getRoads(),reader.minLat,reader.maxLat,reader.minLon,reader.maxLon);
+        display.setMap();
         
+        for(int i = 0; i<reader.getRoads().size();i++){
+            System.out.println("ROAD #: "+i);
+            System.out.println("INTERSECTIONS: "+ reader.getRoads().get(i).intersections.size());
+            for(int j=0;j<reader.getRoads().get(i).intersections.size();j++){
+                System.out.println("\tNODE: LON: " + reader.getRoads().get(i).intersections.get(j).getLong() + " LAT: "+ reader.getRoads().get(i).nodeList.get(j).getLong());
+                System.out.println("\tNODE ID: "+reader.getRoads().get(i).intersections.get(j).getRef());
+            }
+        }
     }
 
 }

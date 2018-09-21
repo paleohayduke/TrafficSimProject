@@ -113,7 +113,7 @@ public class MapReader {
     // this does everything, it needs improvement and to be tidyed up.
     // can modularize this code
     private void getListOfNd(NodeList wayList){
-        try{
+  //      try{
             
             //This is the start og going through the unfiltered <ways> to
             // build up our Roads
@@ -210,11 +210,11 @@ public class MapReader {
                 
             }
         }
-        catch(Exception ex){
-            System.out.println("error; private void getListOfNd");
-            System.out.println(ex.getMessage());
-        }
-    }
+ //       catch(Exception ex){
+ //           System.out.println("error; private void getListOfNd");
+ //           System.out.println(ex.getMessage());
+ //       }
+ //   }
     
 
     // this function is for testing if a <way> is a road vs something else
@@ -285,7 +285,7 @@ public class MapReader {
     //
     // Currently it searches linearly, I'll try to walk through what it does now
     // that corresponds to regular linear search.
-    private Nd makeNd(long ref){
+    private Nd makeNdOLD(long ref){
         
         Nd nd = new Nd();   // the Nd is one of our data types that holds the
                             // node data: ref, longitude, latitude
@@ -328,6 +328,85 @@ public class MapReader {
     }
     
     
+    //
+    
+
+    ArrayList<Nd> arrayAllNodes = new ArrayList<Nd>();
+    
+    private void makeNodeList(){
+        for(int i = 0; i<allNodes.getLength();i++){
+            
+            Node tempNode = allNodes.item(i);
+            Element showElement = (Element)tempNode;
+            
+            
+            Nd nd = new Nd();
+            nd.setRef(Long.parseLong(showElement.getAttribute("id")));
+            nd.setLat(Double.parseDouble(showElement.getAttribute("lat")));
+            nd.setLong(Double.parseDouble(showElement.getAttribute("lon")));
+            System.out.println("................................................." +i);
+            arrayAllNodes.add(nd);
+        }
+    }
+    
+    
+    //SORT ALLNODES
+    private void sortAllNodes(){
+        
+        for(int i = 0;i<arrayAllNodes.size()-1;i++){
+            
+            for(int j = i+1;j<arrayAllNodes.size();j++){
+                
+                Nd tempNd = arrayAllNodes.get(i);
+                
+                if(arrayAllNodes.get(i).getRef()<arrayAllNodes.get(j).getRef()){
+                    arrayAllNodes.get(i).setRef(arrayAllNodes.get(j).getRef());
+                    arrayAllNodes.get(i).setLong(arrayAllNodes.get(j).getLong());
+                    arrayAllNodes.get(i).setLat(arrayAllNodes.get(j).getLat());
+                    
+                    arrayAllNodes.get(j).setRef(tempNd.getRef());
+                    arrayAllNodes.get(j).setLong(tempNd.getLong());
+                    arrayAllNodes.get(j).setLat(tempNd.getLat());
+                    
+                }
+            }
+        }
+    }
+    
+//BINARY IMPLEMENTATION    
+    private Nd makeNd(long ref){
+//        makeNodeList();
+//        sortAllNodes();
+        Nd nd = new Nd();   // the Nd is one of our data types that holds the
+                            // node data: ref, longitude, latitude
+        
+        int left=0;
+        int right = allNodes.getLength();
+        while(left<=right){
+            int index = (left+right)/2;
+            Node temp = allNodes.item(index);   //pulls an individual node from 
+                                                //list of all nodes
+            Element showElement = (Element)temp;// this convets it to Element
+                                                    // to let us get the attributes
+//            System.out.println("index "+index);
+//            System.out.println("***********************"+Double.parseDouble(showElement.getAttribute("id")));
+            if(ref==(Double.parseDouble(showElement.getAttribute("id")))){
+                nd.setRef(ref); // Set reference ID number of the node
+                nd.setLat(Double.parseDouble(showElement.getAttribute("lat")));  // seting latitude
+                nd.setLong(Double.parseDouble(showElement.getAttribute("lon"))); // setting longitude
+                return nd;
+            }else if(ref>(Double.parseDouble(showElement.getAttribute("id")))){
+                left=index+1;
+            }else if(ref<Double.parseDouble(showElement.getAttribute("id"))){
+                right = index-1;
+            }
+                
+        }
+        
+        return nd;
+    }
+    
+    
     // 
     // gets all the intersections and adds them to the roads. 
     // This code runs but it has not been tested to see if it
@@ -343,7 +422,8 @@ public class MapReader {
             
             for(int j=0;j<road.nodeList.size();j++){
                 for(int k=0;k<road2.nodeList.size();k++){
-                    if(road.getNodes().get(j).getRef()==road2.getNodes().get(k).getRef()){
+                    if(road.getNodes().get(j).getRef()<road2.getNodes().get(k).getRef()+.00001&&
+                            road.getNodes().get(j).getRef()>road2.getNodes().get(k).getRef()-.00001){
                         IntersectNd tempIntersect = new IntersectNd();
                         tempIntersect.setLat(road.getNodes().get(j).getLat());
                         tempIntersect.setLong(road.getNodes().get(j).getLong());
@@ -361,4 +441,12 @@ public class MapReader {
         }
         
     }
+    
+    
+    //https://en.wikipedia.org/wiki/Prim%27s_algorithm
+    //
+    //
+    //
+    //
+    
 }
