@@ -16,12 +16,11 @@ Tasks:
 Priority 1: Building a tree out of the road and intersection data. 
 -Dependent task: Implementing a graph transversal algorithm for route selection.
 
+Priority 1: Come up with car objects that can travel across the map.
 
 Priority 2: Get Git set up to keep track of revisions.
 
-
 Priority 3: Map is displaying upside down because origin (0,0) is top left corner for the JFrame.
-
 
 COMPLETED 9/22/2018: Renderer needs to be reworked. I just slapped it together to see if the program was getting
 the coordinates of nodes correctly. This needs to be fixed so we can visually see what we are doing. 
