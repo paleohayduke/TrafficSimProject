@@ -45,14 +45,7 @@ public class TrafficSimProject {
         Renderer3 display = new Renderer3(reader.getRoads(),reader.minLat,reader.maxLat,reader.minLon,reader.maxLon);
         display.setMap();
         
-        for(int i = 0; i<reader.getRoads().size();i++){
-            System.out.println("ROAD #: "+i);
-            System.out.println("INTERSECTIONS: "+ reader.getRoads().get(i).intersections.size());
-            for(int j=0;j<reader.getRoads().get(i).intersections.size();j++){
-                System.out.println("\tNODE: LON: " + reader.getRoads().get(i).intersections.get(j).getLong() + " LAT: "+ reader.getRoads().get(i).nodeList.get(j).getLong());
-                System.out.println("\tNODE ID: "+reader.getRoads().get(i).intersections.get(j).getRef());
-            }
-        }
+
     }
 
 }

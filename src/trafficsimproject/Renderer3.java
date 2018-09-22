@@ -21,6 +21,7 @@ import javax.swing.JFrame;
  *
  * @author paleo
  */
+//THIS IS THE GOOD ONE!!!!!!!!!!!!!!!
 public class Renderer3 extends JFrame{
 
 
@@ -31,7 +32,7 @@ public class Renderer3 extends JFrame{
     //drawRoad = new Line2D.Float(lons.get(i)/scale,lats.get(i)/scale,lons.get(i+1)/scale,lats.get(i+1)/scale);
     
     //
-    double scale = 5;
+    double scale = 10;
     int scale1 = 100000;
     public void setMap(){
 
@@ -59,8 +60,10 @@ public class Renderer3 extends JFrame{
                 intersectShapes.add(tempCept);
             }
         }
-        System.out.println("maxLon"+minLon);
+        System.out.println("minLon"+minLon);
+        System.out.println("maxLon"+maxLon);
         System.out.println("minLat"+minLat);
+        System.out.println("maxLat"+maxLon);
     }
     
 
@@ -123,13 +126,13 @@ public class Renderer3 extends JFrame{
             for(int i=0; i<intersectShapes.size();i++){
                 graph2.setPaint(Color.RED);
                 graph2.draw(intersectShapes.get(i));
-                System.out.println("*********************************************************DRAWING INTERCEPT");
-                System.out.println("INTERSECT X: "+intersectShapes.get(i).getBounds().x);
-                System.out.println("INTERSECT Y: "+intersectShapes.get(i).getBounds().y);
+ //               System.out.println("*********************************************************DRAWING INTERCEPT");
+ //               System.out.println("INTERSECT X: "+intersectShapes.get(i).getBounds().x);
+ //               System.out.println("INTERSECT Y: "+intersectShapes.get(i).getBounds().y);
             }
             
             
-            System.out.println("SIZE OF WINDOW: " + (maxLon*100000-minLon*100000) + " " +(maxLat*100000-minLat*100000) );
+//            System.out.println("SIZE OF WINDOW: " + (maxLon*100000-minLon*100000) + " " +(maxLat*100000-minLat*100000) );
 
             
         }

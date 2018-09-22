@@ -133,7 +133,7 @@ public class MapReader {
                 //This is making a node list of all the nodes (nd) that
                 // make up the <way> 
                 NodeList ndList = showElement.getElementsByTagName("nd");
-                System.out.println("way" + way.toString());
+//                System.out.println("way" + way.toString());
 
                 ////////
                 ///////// you need a node list of nds from ways
@@ -149,7 +149,7 @@ public class MapReader {
                 
 
 
-                System.out.println(++roadCounter);
+                System.out.println("Road # "+ ++roadCounter);
 
                 // grabbing id of the Road
                 int roadID = Integer.parseInt(showElement.getAttribute("id"));
@@ -175,7 +175,7 @@ public class MapReader {
                     
                     
                     
-                    System.out.println(nd.toString());
+                    //System.out.println(nd.toString());
                     
                     // Ref is the ID# of a Nd (a node that makes up a road)
                     long ref = Long.parseLong(ndShowElement.getAttribute("ref"));
@@ -190,7 +190,7 @@ public class MapReader {
                     tempRoad.addNode(tempNd);
                     
                     
-                    System.out.println(ndShowElement.getAttribute("ref"));
+                    //System.out.println(ndShowElement.getAttribute("ref"));
 //                    for(int k = 0; k<refList.getLength();k++){
 //                        Node ref = refList.item(k);
 //                        Element refShowElement = (Element)ref;
@@ -461,6 +461,7 @@ public class MapReader {
                             tempNode.setLong(roads.get(i).nodeList.get(j).getLong());
                             tempNode.setRef(roads.get(i).nodeList.get(j).getRef());
                             roads.get(i).addIntersection(tempNode);
+                            System.out.println("Found Intercept");
                         }
                     }
                     
