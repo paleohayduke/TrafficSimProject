@@ -136,16 +136,19 @@ public class Renderer2 extends JFrame{
                 
                 
                 //// drawing roads?
-                Shape drawRoad;
-                if(!skip&&i<lons.size()-1&&// i-counter<lons.size()-1&&
-                        lons.get(i)>0&&lats.get(i)>0&&lons.get(i+1)>0&&lats.get(i+1)>0
-                        &&lons.get(i)<lonRange&&lats.get(i)<latRange&&lons.get(i+1)<lonRange&&lats.get(i+1)<latRange){
+                Shape drawRoad = new Line2D.Float(0,0,0,0);
+                if(!skip&&i<lons.size()-1){//&&// i-counter<lons.size()-1&&
+ //                       lons.get(i)>0&&lats.get(i)>0&&lons.get(i+1)>0&&lats.get(i+1)>0
+ //                       &&lons.get(i)<lonRange&&lats.get(i)<latRange&&lons.get(i+1)<lonRange&&lats.get(i+1)<latRange){
                     
                     //System.out.println(roads.get(j).nodeList.size()+"nodes in"+j);
                     
                     drawRoad = new Line2D.Float(lons.get(i)/scale,lats.get(i)/scale,lons.get(i+1)/scale,lats.get(i+1)/scale);
                     System.out.println(" DRAWING ROAD");
-                    graph2.draw(drawRoad);
+                    try{
+                        graph2.draw(drawRoad);
+                    }catch(Exception e){
+                    }
                 }
                 
                 
@@ -159,7 +162,7 @@ public class Renderer2 extends JFrame{
 
             
         }
-        int scale = 5;//scale where drawings are on map... 
+        int scale = 1;//scale where drawings are on map... 
         
         // lots of crap 
         public void renderFrame(){

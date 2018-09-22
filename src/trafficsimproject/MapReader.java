@@ -407,11 +407,12 @@ public class MapReader {
     }
     
     
-    // 
+    // *9/22/2018 This thing is wrong, Revise
+    //
     // gets all the intersections and adds them to the roads. 
     // This code runs but it has not been tested to see if it
     // is working correctly. 
-    void setIntersections(){
+    void setIntersectionsOLD(){
         
         
         for(int i = 1; i< roads.size();i++){
@@ -440,6 +441,33 @@ public class MapReader {
             
         }
         
+    }
+    
+    void setIntersections(){
+        for(int i = 0;i<roads.size();i++){
+            for(int j =0;j<roads.get(i).nodeList.size();j++){
+                for(int k = 0; k<roads.size();k++){
+                    if(k==i){
+                        continue;
+                    }
+                    
+                    for(int l=0;l<roads.get(k).nodeList.size();l++){
+                        if(roads.get(i).nodeList.get(j).getLat()==roads.get(k).nodeList.get(l).getLat()
+                                &&roads.get(i).nodeList.get(j).getLong()==roads.get(k).nodeList.get(l).getLong()){
+                            IntersectNd tempNode = new IntersectNd();
+///////////////////////////////WORK ON THIS
+
+                            tempNode.setLat(roads.get(i).nodeList.get(j).getLat());
+                            tempNode.setLong(roads.get(i).nodeList.get(j).getLong());
+                            tempNode.setRef(roads.get(i).nodeList.get(j).getRef());
+                            roads.get(i).addIntersection(tempNode);
+                        }
+                    }
+                    
+                    
+                }
+            }
+        }
     }
     
     

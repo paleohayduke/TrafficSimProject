@@ -42,7 +42,7 @@ public class TrafficSimProject {
 
         
 
-        Renderer2 display = new Renderer2(reader.getRoads(),reader.minLat,reader.maxLat,reader.minLon,reader.maxLon);
+        Renderer3 display = new Renderer3(reader.getRoads(),reader.minLat,reader.maxLat,reader.minLon,reader.maxLon);
         display.setMap();
         
         for(int i = 0; i<reader.getRoads().size();i++){
