@@ -16,7 +16,11 @@ Tasks:
 Priority 1: Building a tree out of the road and intersection data. 
 -Dependent task: Implementing a graph transversal algorithm for route selection.
 
-Priority 1: Come up with car objects that can travel across the map.
+Priority 1: Come up with car objects that can travel across the map (faster, slower, turn).
+*acceleration rate,deceleration rate, methods for movement. 
+
+Priority 1: Write a function to figure out intersection type (stop sign, stoplight, 3 way stop, 1 way stop, etc)
+and speed limits from the .OSM file.
 
 Priority 2: Get Git set up to keep track of revisions.
 
