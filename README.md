@@ -11,20 +11,31 @@ This is an informative video on constructing an algorithm to find the shortest
 path between two points on a graph. 
 https://youtu.be/gGQ-vAmdAOI
 
-Tasks:
+TODO:
 
-Priority 1: Building a tree out of the road and intersection data. 
+Building a tree out of the road and intersection data. 
 -Dependent task: Implementing a graph transversal algorithm for route selection.
+*This needs to be at least A* because of the amount of nodes we will have
+    
+ Come up with car objects.
+Variables for acceleration rate,deceleration rate,
+methods for moving
+Come up with ideas.  
 
-Priority 1: Come up with car objects that can travel across the map (faster, slower, turn).
-*acceleration rate,deceleration rate, methods for movement. 
+Collect intersection type data (stopsign, stoplight, speed limit).
 
-Priority 1: Write a function to figure out intersection type (stop sign, stoplight, 3 way stop, 1 way stop, etc)
-and speed limits from the .OSM file.
+Get Git set up to keep track of revisions.
 
-Priority 2: Get Git set up to keep track of revisions.
+GUI 
+-mouse scroll wheel for zoom, ability to click and drag to move aroudn the map
+-buttons... lots of them 
+-click on nodes
+-test functions 
 
-Priority 3: Map is displaying upside down because origin (0,0) is top left corner for the JFrame.
+BUG 
+
+Map is displaying upside down because origin (0,0) is top left corner for the JFrame.
+Need to flip vertically.
 
 COMPLETED 9/22/2018: Renderer needs to be reworked. I just slapped it together to see if the program was getting
 the coordinates of nodes correctly. This needs to be fixed so we can visually see what we are doing. 
@@ -37,7 +48,7 @@ There are lots of nodes on curves so that shouldnt cause a problem but some of t
 
 COMPLETED 9/21/2018: Reimplement the method "private Nd makeND(long ref){ }" inside the "MapReader" as a binary search. 
 *important to test the program with a map of the entire city of killeen to fullfil requirements. 
-
+O(n) vs O(log(n)) on test map at 28,000 nodes, that is 28,000/14 = 1000 times faster.  
 
 
 
