@@ -5,9 +5,7 @@
  */
 package trafficsimproject;
 
-import org.xml.sax.*;
-import org.w3c.dom.*;
-import javax.xml.parsers.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -26,26 +24,31 @@ public class TrafficSimProject {
         // use this to read the .osm file, reader has a couple methods, refer
         // to its class file
         
-        MapReader reader = new MapReader("./src/MediumMap.osm");
+        MapReader reader = new MapReader("./src/HomeMap.osm");
  //       MapReader reader = new MapReader("./src/KilleenMap.osm");
-        
- 
- // TEST 
-//        System.out.println(reader.roads.get(0).getNodes().get(0).getRef());
-//        System.out.println(reader.roads.get(0).getNodes().get(0).getLong());
-//        System.out.println(reader.roads.get(0).getNodes().get(0).getLat()); 
-//        System.out.println(reader.roads.get(0).getIntersections().get(0).getSecondary()); 
-        
-        
-        
-        
 
         
 
         Renderer3 display = new Renderer3(reader.getRoads(),reader.minLat,reader.maxLat,reader.minLon,reader.maxLon);
         display.setMap();
         
-
+        
+        
+        GraphBuilder gb = new GraphBuilder(reader.getRoads());
+        
+        for(int i = 0;i<gb.roads.size();i++){
+            System.out.println("road#: "+i);
+            System.out.println("intercepts: "+ gb.roads.get(i).intersections.size());
+            for(int j = 0;j<gb.roads.get(i).intersections.size();j++){
+                System.out.println("intersect ref:\t"+gb.roads.get(i).intersections.get(j).getRef());
+            }
+            for(int j = 0; j<gb.roads.get(i).nodeList.size();j++){
+                System.out.println( "\tnode ref:\t"+gb.roads.get(i).nodeList.get(j).getRef());
+                System.out.println( "\tconnections:"+gb.roads.get(i).nodeList.get(j).connections.size());
+                
+            }
+        }
+        System.out.println("end"+gb.roads.size());
     }
 
 }

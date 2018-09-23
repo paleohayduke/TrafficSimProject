@@ -32,7 +32,7 @@ public class Renderer3 extends JFrame{
     //drawRoad = new Line2D.Float(lons.get(i)/scale,lats.get(i)/scale,lons.get(i+1)/scale,lats.get(i+1)/scale);
     
     //
-    double scale = 5;
+    double scale = 1;
     int scale1 = 100000;
     public void setMap(){
 

@@ -16,10 +16,20 @@ import java.util.ArrayList;
 public class IntersectNd extends Nd {
     
     private long secondaryRef = 0;
+    ArrayList<Nd> connections = new ArrayList<Nd>();
+    ArrayList<Double> weights = new ArrayList<Double>();
+    
     
     IntersectNd(){
         
     }
+
+    
+    public void addEdge(Nd node){
+        
+    }
+    
+    
 
     void setSecondary(long ref){
         this.secondaryRef=ref;

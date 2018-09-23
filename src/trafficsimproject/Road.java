@@ -19,11 +19,21 @@ public class Road {
     ArrayList<Nd> nodeList = new ArrayList<Nd>();  // Nodes that make up road
     ArrayList<IntersectNd> intersections = new ArrayList<IntersectNd>();
     ArrayList<Double> distList = new ArrayList<Double>(); // distances between nodes
+
+    
     public double distance =0;
     
     Road(){
         
     }
+    
+    public void buildLocalIntercets(){
+        for(int i = 0; i< nodeList.size()-1;i++){
+            nodeList.get(i).addConnection(nodeList.get(i+1), calcDistance(nodeList.get(i),nodeList.get(i+1)));
+            nodeList.get(i+1).addConnection(nodeList.get(i), calcDistance(nodeList.get(i+1),nodeList.get(i)));
+        }
+    }
+    
     public void setID(int id){
         this.id = id;
     }
@@ -56,8 +66,6 @@ public class Road {
             distList.add(dist);
             distance+=dist;
         }
-        
-        
         
     }
     
