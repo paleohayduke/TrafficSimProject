@@ -2,37 +2,25 @@
 
 TAMUCT COSC-3320-110 Programmers Group 1
 
-BREAKDOWN OF CURRENT OUTPUT:
-
-road#: 6 
-intercepts: 1   //this is how many intersections the road has with other roads
-intersept ref:	149209137
-	node ref:	149447096   // each of these is a node of the road
-	connections:1   
-	node ref:	149447111   
-	connections:2
-	node ref:	149209137
-	connections:2
-
-*NOTE ON CONNECTONS: before the roads get their intersections a 4 node road will
-have connections like this: 1, 2, 2, 1. if there the values are greater than this
-pattern then there is intersection at the node with the raised value. 
-
 
 Announcements:
-The map is displaying and is finding all intersections correctly. We've got
+9/23/2018 There individual nodes can be built into a tree structure that gives
+every node a pointer to its connecting nodes along with edge weight data. I'm
+working on an "Auto" class that can traverse the nodes while keeping track
+of its current position. It takes a set of "directions" that are in the
+form of a list of integers. each integer represents the index of the appropriate
+connecting node. 
+
+9/22/2018 The map is displaying and is finding all intersections correctly. We've got
 everything we need to set up a graph of the roads and then implement a 
 graph traversal algorithm.
-
-This is an informative video on constructing an algorithm to find the shortest
-path between two points on a graph. 
-
+-ww
 
 TODO:
 -Come up with car objects.
  *in progress  class Auto
 
--Implement a graph search.
+-Implement a graph search. Watch this video and the one after it.
 https://www.youtube.com/watch?v=j1H3jAAGlEA
 
 -Collect intersection type data (stopsign, stoplight, speed limit).
@@ -69,3 +57,19 @@ O(n) vs O(log(n)) on test map at 28,000 nodes, that is 28,000/14 = 1000 times fa
 
 
 
+BREAKDOWN OF CURRENT OUTPUT:
+
+road#: 6 
+intercepts: 1   //this is how many intersections the road has with other roads
+intersept ref:	149209137
+	node ref:	149447096   // each of these is a node of the road
+	connections:1   
+	node ref:	149447111   
+	connections:2
+	node ref:	149209137
+	connections:2
+
+*NOTE ON CONNECTONS: before the roads get their intersections a 4 node road will
+have connections like this: 1, 2, 2, 1. if there the values are greater than this
+pattern then there is intersection at the node with the raised value. 
+-ww
