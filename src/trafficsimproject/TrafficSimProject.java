@@ -29,12 +29,14 @@ public class TrafficSimProject {
 
         
 
-        Renderer3 display = new Renderer3(reader.getRoads(),reader.minLat,reader.maxLat,reader.minLon,reader.maxLon);
-        display.setMap();
+        
         
         
         
         GraphBuilder gb = new GraphBuilder(reader.getRoads());
+        
+        Renderer3 display = new Renderer3(gb.getRoads(),reader.minLat,reader.maxLat,reader.minLon,reader.maxLon);
+        display.setMap();
         
         for(int i = 0;i<gb.roads.size();i++){
             System.out.println("road#: "+i);

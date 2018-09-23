@@ -31,9 +31,12 @@ public class Renderer3 extends JFrame{
 
     //drawRoad = new Line2D.Float(lons.get(i)/scale,lats.get(i)/scale,lons.get(i+1)/scale,lats.get(i+1)/scale);
     
-    //
+    //for adjusting map
     double scale = 1;
+    
+    //for transforming the long&lat to pixels
     int scale1 = 100000;
+    
     public void setMap(){
 
         for(int i = 0; i<roads.size();i++){
@@ -41,10 +44,10 @@ public class Renderer3 extends JFrame{
             for(int j = 0 ; j<roads.get(i).nodeList.size()-1;j++){
 
 
-                Double y1=(roads.get(i).nodeList.get(j).getLat()*scale1-minLat*scale1);
-                Double x1=roads.get(i).nodeList.get(j).getLong()*scale1-minLon*scale1;
-                Double y2=(roads.get(i).nodeList.get(j+1).getLat()*scale1-minLat*scale1);
-                Double x2=roads.get(i).nodeList.get(j+1).getLong()*scale1-minLon*scale1;
+                Double y1=(roads.get(i).nodeList.get(j).getLat()-minLat)*scale1;
+                Double x1=(roads.get(i).nodeList.get(j).getLong()-minLon)*scale1;
+                Double y2=(roads.get(i).nodeList.get(j+1).getLat()-minLat)*scale1;
+                Double x2=(roads.get(i).nodeList.get(j+1).getLong()-minLon)*scale1;
                 
                 Shape tempRoad = new Line2D.Double(x1/scale,y1/scale,x2/scale,y2/scale);
 
@@ -52,8 +55,8 @@ public class Renderer3 extends JFrame{
                 
             }
             for(int j=0; j<roads.get(i).intersections.size();j++){
-                Double x1 = roads.get(i).intersections.get(j).getLong()*scale1-minLon*scale1;
-                Double y1 = roads.get(i).intersections.get(j).getLat()*scale1-minLat*scale1;
+                Double x1 = (roads.get(i).intersections.get(j).getLong()-minLon)*scale1;
+                Double y1 = (roads.get(i).intersections.get(j).getLat()-minLat)*scale1;
                 
 
                 Shape tempCept = new Rectangle2D.Double(x1/scale,y1/scale,5,5);
@@ -87,8 +90,8 @@ public class Renderer3 extends JFrame{
         this.maxLon=maxLon;
         this.maxLat=maxLat;// i made these global because of testing. sys out.prints are all debug testing related
         
-        latRange = (int)(maxLat*scale1-minLat*scale1);// calculate the size of the window
-        lonRange = (int)(maxLon*scale1- minLon*scale1);
+        latRange = (int)((maxLat-minLat)*scale1);// calculate the size of the window
+        lonRange = (int)((maxLon- minLon)*scale1);
         System.out.println("SIZE OF WINDOW: " + lonRange + " " +latRange );
         this.setSize(lonRange,latRange); // regular stuff for jframe 
         

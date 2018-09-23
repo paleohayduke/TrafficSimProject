@@ -47,6 +47,16 @@ public class GraphBuilder {
         }
     }
     
+    
+    public ArrayList<Integer> findRoute(Nd start, Nd end){
+        ArrayList<Integer> directions = new ArrayList<Integer>();
+        
+        
+        return directions;
+    }
+    
+    
+    
     private Nd findNode(long ref){
         Nd temp = new Nd();
         for(int i = 0; i<roads.size();i++){
@@ -58,5 +68,9 @@ public class GraphBuilder {
         }
         
         return temp;
+    }
+    
+    public ArrayList<Road> getRoads(){
+        return roads;
     }
 }
