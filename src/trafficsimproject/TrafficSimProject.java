@@ -40,10 +40,14 @@ public class TrafficSimProject {
         // HERE WE GO
         Scanner sc = new Scanner(System.in);
         String pauseStr = sc.next();
+        
+        
         display.setAutoPos(gb.roads.get(5).nodeList.get(2));
         pauseStr = sc.next();
+        
         display.setAutoPos(gb.roads.get(5).nodeList.get(3));
         pauseStr = sc.next();
+        
         
         for(int i = 0;i<gb.roads.size();i++){
             System.out.println("road#: "+i);
