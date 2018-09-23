@@ -24,7 +24,7 @@ public class TrafficSimProject {
         // use this to read the .osm file, reader has a couple methods, refer
         // to its class file
         
-        MapReader reader = new MapReader("./src/HomeMap.osm");
+        MapReader reader = new MapReader("./src/KilleenMap.osm");
  //       MapReader reader = new MapReader("./src/KilleenMap.osm");
 
         

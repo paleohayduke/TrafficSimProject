@@ -34,6 +34,7 @@ GUI
 -buttons... lots of them 
 -click on nodes
 -test functions 
+-load 
 
 BUG 
 
