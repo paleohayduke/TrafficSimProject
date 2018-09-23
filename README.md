@@ -30,7 +30,7 @@ path between two points on a graph.
 
 TODO:
 -Come up with car objects.
- *in progress  
+ *in progress  class Auto
 
 -Implement a graph search.
 https://www.youtube.com/watch?v=j1H3jAAGlEA
