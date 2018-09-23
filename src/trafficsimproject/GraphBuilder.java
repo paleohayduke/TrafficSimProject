@@ -33,18 +33,12 @@ public class GraphBuilder {
                 
             // check each node again all intersections. 
                 for(int k=0;k<roads.get(i).getIntersections().size();k++){
-//                  System.out.println("Intersect Ref: " + roads.get(i).getIntersections().get(j).getRef());
-                   
-
-//
-//                   if(roads.get(i).nodeList.get(j).getLat()==roads.get(i).getIntersections().get(k).getLat()
-//                           &&roads.get(i).nodeList.get(j).getLong()==roads.get(i).getIntersections().get(k).getLong()){
 
                    if(roads.get(i).nodeList.get(j).getRef()==roads.get(i).getIntersections().get(k).getRef()){
                        //MUST FIND AND LINK ALL instance of this intersect across all roads
                        Nd tempNode = findNode(roads.get(i).nodeList.get(j).getRef());
                        roads.get(i).nodeList.get(j).addConnection(tempNode, 0);
-                       System.out.println("IM WORKING******");
+//                       System.out.println("IM WORKING******");
                        
                    }
                 }

@@ -16,14 +16,16 @@ TODO:
 -Implement a graph search.
 https://www.youtube.com/watch?v=j1H3jAAGlEA
     
- Come up with car objects.
-Variables for acceleration rate,deceleration rate,
-methods for moving
-Come up with ideas.  
+-Come up with car objects.
+    Variables for acceleration rate,deceleration rate,
+    methods for moving
+    Come up with ideas.  
 
-Collect intersection type data (stopsign, stoplight, speed limit).
+-Collect intersection type data (stopsign, stoplight, speed limit).
 
-Get Git set up to keep track of revisions.
+-Get Git set up to keep track of revisions.
+
+-File open/save for _processed_ map data
 
 GUI 
 -mouse scroll wheel for zoom, ability to click and drag to move aroudn the map

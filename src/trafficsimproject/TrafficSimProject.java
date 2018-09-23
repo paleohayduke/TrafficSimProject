@@ -40,7 +40,7 @@ public class TrafficSimProject {
             System.out.println("road#: "+i);
             System.out.println("intercepts: "+ gb.roads.get(i).intersections.size());
             for(int j = 0;j<gb.roads.get(i).intersections.size();j++){
-                System.out.println("intersect ref:\t"+gb.roads.get(i).intersections.get(j).getRef());
+                System.out.println("intersept ref:\t"+gb.roads.get(i).intersections.get(j).getRef());
             }
             for(int j = 0; j<gb.roads.get(i).nodeList.size();j++){
                 System.out.println( "\tnode ref:\t"+gb.roads.get(i).nodeList.get(j).getRef());
