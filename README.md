@@ -2,6 +2,23 @@
 
 TAMUCT COSC-3320-110 Programmers Group 1
 
+BREAKDOWN OF CURRENT OUTPUT:
+
+road#: 6 
+intercepts: 1   //this is how many intersections the road has with other roads
+intersept ref:	149209137
+	node ref:	149447096   // each of these is a node of the road
+	connections:1   
+	node ref:	149447111   
+	connections:2
+	node ref:	149209137
+	connections:2
+
+*NOTE ON CONNECTONS: before the roads get their intersections a 4 node road will
+have connections like this: 1, 2, 2, 1. if there the values are greater than this
+pattern then there is intersection at the node with the raised value. 
+
+
 Announcements:
 The map is displaying and is finding all intersections correctly. We've got
 everything we need to set up a graph of the roads and then implement a 
@@ -12,14 +29,11 @@ path between two points on a graph.
 
 
 TODO:
+-Come up with car objects.
+ *in progress  
 
 -Implement a graph search.
 https://www.youtube.com/watch?v=j1H3jAAGlEA
-    
--Come up with car objects.
-    Variables for acceleration rate,deceleration rate,
-    methods for moving
-    Come up with ideas.  
 
 -Collect intersection type data (stopsign, stoplight, speed limit).
 
