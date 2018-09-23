@@ -9,13 +9,12 @@ graph traversal algorithm.
 
 This is an informative video on constructing an algorithm to find the shortest
 path between two points on a graph. 
-https://youtu.be/gGQ-vAmdAOI
+
 
 TODO:
 
-Building a tree out of the road and intersection data. 
--Dependent task: Implementing a graph transversal algorithm for route selection.
-*This needs to be at least A* because of the amount of nodes we will have
+-Implement a graph search.
+https://www.youtube.com/watch?v=j1H3jAAGlEA
     
  Come up with car objects.
 Variables for acceleration rate,deceleration rate,
@@ -36,6 +35,8 @@ BUG
 
 Map is displaying upside down because origin (0,0) is top left corner for the JFrame.
 Need to flip vertically.
+
+COMPLETED 9/23/2018: Building a tree out of the road and intersection data. 
 
 COMPLETED 9/22/2018: Renderer needs to be reworked. I just slapped it together to see if the program was getting
 the coordinates of nodes correctly. This needs to be fixed so we can visually see what we are doing. 
