@@ -5,7 +5,7 @@
  */
 package trafficsimproject;
 
-import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -24,7 +24,7 @@ public class TrafficSimProject {
         // use this to read the .osm file, reader has a couple methods, refer
         // to its class file
         
-        MapReader reader = new MapReader("./src/KilleenMap.osm");
+        MapReader reader = new MapReader("./src/HomeMap.osm");
  //       MapReader reader = new MapReader("./src/KilleenMap.osm");
 
         
@@ -37,6 +37,13 @@ public class TrafficSimProject {
         
         Renderer3 display = new Renderer3(gb.getRoads(),reader.minLat,reader.maxLat,reader.minLon,reader.maxLon);
         display.setMap();
+        // HERE WE GO
+        Scanner sc = new Scanner(System.in);
+        String pauseStr = sc.next();
+        display.setAutoPos(gb.roads.get(5).nodeList.get(2));
+        pauseStr = sc.next();
+        display.setAutoPos(gb.roads.get(5).nodeList.get(3));
+        pauseStr = sc.next();
         
         for(int i = 0;i<gb.roads.size();i++){
             System.out.println("road#: "+i);

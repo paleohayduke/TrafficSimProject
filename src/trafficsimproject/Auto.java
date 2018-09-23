@@ -34,7 +34,7 @@ public class Auto {
     public void setDirections(Nd start, ArrayList<Integer> directions){
         this.directions=directions;
         setPos(start);
-        nextNode = start.connections.get(directions.get(directionIndex));
+        nextNode = start.connections.get(directions.get(directionIndex++));
     }
 
     public void setPos(Nd node){
@@ -48,8 +48,13 @@ public class Auto {
 
     public void step(){
         //CHECK IF DONE
-        
-        currentNode=nextNode;
+        if(directionIndex>=directions.size()){
+            return;
+        }
+        // this is temporary
+        // write function call in Node to get coords from a node specifically
+        currentNode.setLat(nextNode.getLat());
+        currentNode.setLong(nextNode.getLong());
 
         nextNode=nextNode.connections.get(directionIndex++);
     }

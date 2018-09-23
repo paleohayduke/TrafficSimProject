@@ -32,7 +32,7 @@ public class Renderer3 extends JFrame{
     //drawRoad = new Line2D.Float(lons.get(i)/scale,lats.get(i)/scale,lons.get(i+1)/scale,lats.get(i+1)/scale);
     
     //for adjusting map
-    double scale = 10;
+    double scale = 1;
     
     //for transforming the long&lat to pixels
     int scale1 = 100000;
@@ -69,6 +69,16 @@ public class Renderer3 extends JFrame{
         System.out.println("maxLat"+maxLon);
     }
     
+    
+    Shape testCar = new Rectangle2D.Double(0,0,0,0);
+    public void setAutoPos(Nd node){
+        Double x1=(node.getLong()-minLon)*scale1;
+        Double y1=(node.getLat()-minLat)*scale1;
+        
+        testCar = new Rectangle2D.Double(x1/scale,y1/scale,10,10);
+        
+        drawWindow();
+    }
 
     
     // I was using these to test some things but a few of the functions
@@ -80,6 +90,9 @@ public class Renderer3 extends JFrame{
     int latRange=0;
     int lonRange=0;
     
+    Graphics2D graph2;
+    
+    
     // this is the constructor... i was using it as a spot to 
     // test code in the class.it takes the values for max and min borders of
     // the whole map as parameters.
@@ -90,6 +103,21 @@ public class Renderer3 extends JFrame{
         this.maxLon=maxLon;
         this.maxLat=maxLat;// i made these global because of testing. sys out.prints are all debug testing related
         
+        drawWindow();
+//        latRange = (int)((maxLat-minLat)*scale1);// calculate the size of the window
+//        lonRange = (int)((maxLon- minLon)*scale1);
+//        System.out.println("SIZE OF WINDOW: " + lonRange + " " +latRange );
+//        this.setSize(lonRange,latRange); // regular stuff for jframe 
+//        
+//        this.setTitle("Traffic Sim");
+//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.add(new DrawStuff(), BorderLayout.CENTER);
+//        this.setVisible(true);
+        
+        
+    }
+    
+    public void drawWindow(){
         latRange = (int)((maxLat-minLat)*scale1);// calculate the size of the window
         lonRange = (int)((maxLon- minLon)*scale1);
         System.out.println("SIZE OF WINDOW: " + lonRange + " " +latRange );
@@ -99,15 +127,16 @@ public class Renderer3 extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(new DrawStuff(), BorderLayout.CENTER);
         this.setVisible(true);
-        
-        
+
     }
+    
+
     
     // this draws stuff
     // 
     private class DrawStuff extends JComponent{
         public void paint(Graphics g){
-            Graphics2D graph2 = (Graphics2D)g;
+            graph2 = (Graphics2D)g;
             
             //see how it looks
             graph2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -134,6 +163,9 @@ public class Renderer3 extends JFrame{
  //               System.out.println("INTERSECT Y: "+intersectShapes.get(i).getBounds().y);
             }
             
+            //TEST CAR
+            graph2.setPaint(Color.GREEN);
+            graph2.draw(testCar);
             
 //            System.out.println("SIZE OF WINDOW: " + (maxLon*100000-minLon*100000) + " " +(maxLat*100000-minLat*100000) );
 
