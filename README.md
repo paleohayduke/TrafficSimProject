@@ -6,8 +6,15 @@ TAMUCT COSC-3320-110 Programmers Group 1
 Announcements:
 
 9/24/2018 There is a new Directions class. It has some stuff to build lists of
-directions for the car to follow. We could write a couple different pathfinding
-algorithms. 
+directions for the car to follow. Pathfinding algorithm needs to generate a
+list of choices that the car will make at each node. The automobile can take the
+direction list and it will travel from a starting node through the route with every
+call of the .step() function. The renderer must be called separately to display
+the car on the map. When we generate many cars we will update the cars position 
+in the geographic system and then form a list of coordinates (and possibly orientations) 
+along with type to send to the renderer to display. 
+There is a findRoute() in Directions but it is very buggy. 
+
 
 9/23/2018 There individual nodes can be built into a tree structure that gives
 every node a pointer to its connecting nodes along with edge weight data. I'm
