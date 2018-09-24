@@ -2,6 +2,9 @@
 
 TAMUCT COSC-3320-110 Programmers Group 1
 
+If you need help figuring this out, let me know. If you have some time, review
+the code so far and give feedback. I'll take some time this week to improve
+the comments.
 
 Announcements:
 
@@ -18,6 +21,8 @@ in the geographic system and then form a list of coordinates (and possibly orien
 along with type to send to the renderer to display. 
 There is a findRoute() in Directions but it is very buggy, see BUGS. 
 -ww
+Cleaned up main and made a Simulation class to make things more manageable. 
+Need to fix protected vs private vs public on a lot of stuff. 
 
 9/23/2018 There individual nodes can be built into a tree structure that gives
 every node a pointer to its connecting nodes along with edge weight data. I'm

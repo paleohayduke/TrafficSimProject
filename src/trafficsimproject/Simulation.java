@@ -15,17 +15,25 @@ import java.util.Scanner;
 public class Simulation {
     
     private ArrayList<Road> roads = new ArrayList<Road>();
-    Renderer display;
+    private Renderer display;
     
-    double minLat=0;
-    double minLon=0;
-    double maxLon=0;
-    double maxLat =0;
+    // TODO: localize the scope of these variables
+    private double minLat=0;
+    private double minLon=0;
+    private double maxLon=0;
+    private double maxLat =0;
     
+    //you'll have to use openMap() yourself
     Simulation(){
         
     }
     
+    //constructor to start the object up while loading a file
+    Simulation(String fileName){
+        openMap(fileName);
+    }
+    
+    //opens map
     public void openMap(String fileName){
         MapReader reader = new MapReader(fileName);
         GraphBuilder gb = new GraphBuilder(reader.getRoads());
@@ -37,6 +45,7 @@ public class Simulation {
         
     }
     
+    // to start renderer
     public void startRenderer(){
         this.display = new Renderer(roads,minLat,maxLat,minLon,maxLon);
         display.setScale(1);
@@ -45,7 +54,8 @@ public class Simulation {
         
     }
     
-  
+    
+    // Need to create framework of methods to handle cars
     public void demo() {
         if(roads.size()<1){
             System.out.println("You must load a map first");
