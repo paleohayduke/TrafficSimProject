@@ -55,12 +55,24 @@ public class Directions {
             
             for(int i =0;i< current.connections.size();i++){
 
-                Directions tempDirection= new Directions(queue.get(0));
-                queue.remove(0);
+                Directions tempDirection= new Directions();
+                
+                
+                if(queue.size()>0){
+                    tempDirection = new Directions(queue.get(0));
+                    queue.remove(0);
+                }
                 
                 //get current node
+                current=start;
                 for(int j=0;j<tempDirection.directions.size();j++){
-                    current=current.connections.get(j);
+                    current=current.connections.get(tempDirection.directions.get(j));
+                    if(current.getRef()==end.getRef()){
+                        System.out.println("FOUND ROUTE");
+                        found=true;
+                        return tempDirection;
+                        
+                    }
                 }
                 
                 // add direction list with score to queue

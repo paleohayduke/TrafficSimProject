@@ -62,9 +62,16 @@ public class TrafficSimProject {
             }
         }
         System.out.println("end"+gb.roads.size());
+        
+        Directions testDir = new Directions();
+        Directions route = testDir.findRoute(gb.roads, gb.roads.get(3).nodeList.get(0), gb.roads.get(5).nodeList.get(4));
+        for(int i =0;i<route.directions.size();i++){
+            System.out.println(route.directions.get(i));
+        }
+        
     }
     
-    Directions testDir = new Directions();
-    testDir.findRoute();
+    
+
 
 }
