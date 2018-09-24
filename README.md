@@ -4,6 +4,11 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 
 Announcements:
+
+9/24/2018 There is a new Directions class. It has some stuff to build lists of
+directions for the car to follow. We could write a couple different pathfinding
+algorithms. 
+
 9/23/2018 There individual nodes can be built into a tree structure that gives
 every node a pointer to its connecting nodes along with edge weight data. I'm
 working on an "Auto" class that can traverse the nodes while keeping track
@@ -19,8 +24,10 @@ graph traversal algorithm.
 TODO:
 -Come up with car objects.
  *in progress  class Auto
+ *needs to calculate distance on the map in longitude and latitude between nodes,
+    *vector representation of velocity is a solution. 
 
--Implement a graph search. Watch this video and the one after it.
+-Implement a graph search. 
 https://www.youtube.com/watch?v=j1H3jAAGlEA
 
 -Collect intersection type data (stopsign, stoplight, speed limit).
@@ -36,10 +43,16 @@ GUI
 -test functions 
 -load 
 
-BUG 
+BUGS
 
 Map is displaying upside down because origin (0,0) is top left corner for the JFrame.
 Need to flip vertically.
+
+findRoute() sort of works. Need to check if the problem is in the algorithm (likely)
+or something with the linking of nodes crossing roads (in some test cases a path
+will be generated that involves changing roads at intersections, but sometimes
+the algorithm gets stuck in an infinite loop, need to review the code but im too
+tired atm). 
 
 COMPLETED 9/23/2018: Building a tree out of the road and intersection data. 
 
