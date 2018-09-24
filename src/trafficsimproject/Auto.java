@@ -69,7 +69,8 @@ public class Auto {
         System.out.println("STEP");
         System.out.println("LAT "+currentNode.getLat());
         System.out.println("LON "+currentNode.getLong());
-
+        
+        
         nextNode=nextNode.connections.get(directions.next());
     }
     

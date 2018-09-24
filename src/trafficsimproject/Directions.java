@@ -35,10 +35,10 @@ public class Directions {
     }
     
     public boolean inProgress(){
-        if (stepIndex==directions.size()){
-            return false;
+        if (stepIndex<directions.size()){
+            return true;
         }
-        else return true;
+        else return false;
     }
     
     int stepIndex=0;

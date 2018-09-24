@@ -36,6 +36,7 @@ public class TrafficSimProject {
         GraphBuilder gb = new GraphBuilder(reader.getRoads());
         
         Renderer3 display = new Renderer3(gb.getRoads(),reader.minLat,reader.maxLat,reader.minLon,reader.maxLon);
+        display.setScale(1);
         display.setMap();
         // HERE WE GO
         Scanner sc = new Scanner(System.in);
@@ -63,13 +64,23 @@ public class TrafficSimProject {
         }
         System.out.println("end"+gb.roads.size());
         
-        Directions testDir = new Directions(gb.roads.get(1).nodeList.get(0));
-//        Directions route = testDir.findRoute(gb.roads, gb.roads.get(3).nodeList.get(0), gb.roads.get(5).nodeList.get(4));
-        Directions route = testDir.findRoute(gb.roads, gb.roads.get(1).nodeList.get(0), gb.roads.get(1).nodeList.get(9));        
+        Directions testDir = new Directions(gb.roads.get(0).nodeList.get(1));
+        Directions route = testDir.findRoute(gb.roads, gb.roads.get(0).nodeList.get(1), gb.roads.get(1).nodeList.get(9));        
         
-        route.start = gb.roads.get(1).nodeList.get(0);
+
+
+       
+       // Directions testDir = new Directions(gb.roads.get(424).nodeList.get(0));
+       // Directions route = testDir.findRoute(gb.roads, gb.roads.get(424).nodeList.get(0), gb.roads.get(42).nodeList.get(9));        
         
+
         
+        route.start = gb.roads.get(0).nodeList.get(1);
+        
+//        Directions route = testDir.findRoute(gb.roads, gb.roads.get(5).nodeList.get(3), gb.roads.get(0).nodeList.get(5));        
+//        
+//        route.start = gb.roads.get(5).nodeList.get(3);
+
         for(int i =0;i<route.directions.size();i++){
             System.out.println(route.directions.get(i));
         }
@@ -99,6 +110,25 @@ public class TrafficSimProject {
         display.setAutoPos(test.currentNode);        
 
         pauseStr = sc.next();
+              test.step();
+        display.setAutoPos(test.currentNode);        
+
+        pauseStr = sc.next();
+              test.step();
+        display.setAutoPos(test.currentNode);   
+        
+                        pauseStr = sc.next();
+              test.step();
+        display.setAutoPos(test.currentNode);        
+
+        pauseStr = sc.next();
+              test.step();
+        display.setAutoPos(test.currentNode);        
+
+        pauseStr = sc.next();
+              test.step();
+        display.setAutoPos(test.currentNode);
+                pauseStr = sc.next();
               test.step();
         display.setAutoPos(test.currentNode);        
 

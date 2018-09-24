@@ -33,8 +33,12 @@ public class Renderer3 extends JFrame{
     
     //for adjusting map
     double scale = 1;
-    
+    public void setScale(double scale){
+        this.scale = scale;
+    }    
     //for transforming the long&lat to pixels
+    
+
     int scale1 = 100000;
     
     public void setMap(){
