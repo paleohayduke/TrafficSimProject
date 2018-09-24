@@ -5,6 +5,9 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 Announcements:
 
+Edit this text document with anything you do while working on the project. We can
+turn this in as an appendix on reports. 
+
 9/24/2018 There is a new Directions class. It has some stuff to build lists of
 directions for the car to follow. Pathfinding algorithm needs to generate a
 list of choices that the car will make at each node. The automobile can take the
@@ -13,8 +16,8 @@ call of the .step() function. The renderer must be called separately to display
 the car on the map. When we generate many cars we will update the cars position 
 in the geographic system and then form a list of coordinates (and possibly orientations) 
 along with type to send to the renderer to display. 
-There is a findRoute() in Directions but it is very buggy. 
-
+There is a findRoute() in Directions but it is very buggy, see BUGS. 
+-ww
 
 9/23/2018 There individual nodes can be built into a tree structure that gives
 every node a pointer to its connecting nodes along with edge weight data. I'm
@@ -22,6 +25,7 @@ working on an "Auto" class that can traverse the nodes while keeping track
 of its current position. It takes a set of "directions" that are in the
 form of a list of integers. each integer represents the index of the appropriate
 connecting node. 
+-ww
 
 9/22/2018 The map is displaying and is finding all intersections correctly. We've got
 everything we need to set up a graph of the roads and then implement a 
@@ -93,4 +97,3 @@ intersept ref:	149209137
 *NOTE ON CONNECTONS: before the roads get their intersections a 4 node road will
 have connections like this: 1, 2, 2, 1. if there the values are greater than this
 pattern then there is intersection at the node with the raised value. 
--ww
