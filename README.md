@@ -4,12 +4,21 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 If you need help figuring this out, let me know. If you have some time, review
 the code so far and give feedback. I'll take some time this week to improve
-the comments.
+the comments. 
+
+
 
 Announcements:
 
 Edit this text document with anything you do while working on the project. We can
 turn this in as an appendix on reports. 
+
+
+9/24/2018 DEMO:
+Once the demo loads, you can press a key into the console and hit enter to cause
+a car to take a "step". Each step will traverse one node towards the car's
+destination. The code is in the Simulation class under demo().
+
 
 9/24/2018 There is a new Directions class. It has some stuff to build lists of
 directions for the car to follow. Pathfinding algorithm needs to generate a
