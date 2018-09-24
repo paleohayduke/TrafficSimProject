@@ -50,4 +50,14 @@ public class Nd {
     public double getLat(){
         return latitude;
     }    
+    
+    public double calcDistance(Nd node2){
+        double long1=this.getLong();
+        double long2=node2.getLong(); 
+        double lat1=this.getLat(); 
+        double lat2=node2.getLat();
+        double distance = Math.sqrt(Math.pow((long1-long2), 2)+Math.pow(lat1-lat2,2));
+        
+        return distance;
+    }
 }

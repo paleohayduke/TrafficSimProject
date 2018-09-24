@@ -28,7 +28,7 @@ public class Auto {
     static int carID=0;
 
     Auto(){
-
+        currentNode.setRef(carID++);
     }
     
     public void setDirections(Nd start, ArrayList<Integer> directions){
