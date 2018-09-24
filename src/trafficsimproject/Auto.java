@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Auto {
     
     double[] pos = {0,0};//lon, lat
-    ArrayList<Integer> directions = new ArrayList<Integer>();
+    Directions directions = new Directions();
     
     int directionIndex =0;
     
@@ -30,11 +30,17 @@ public class Auto {
     Auto(){
         currentNode.setRef(carID++);
     }
+    Auto(Directions dir){
+        currentNode.setRef(carID++);
+        setDirections(dir);
+    }
     
-    public void setDirections(Nd start, ArrayList<Integer> directions){
+    public void setDirections(Directions directions){
         this.directions=directions;
-        setPos(start);
-        nextNode = start.connections.get(directions.get(directionIndex++));
+        setPos(directions.start);
+        
+        //HANDLE ITERATION INSIDE THE DIRECTION CLASS!!!!!
+        nextNode = directions.start;
     }
 
     public void setPos(Nd node){
@@ -46,17 +52,25 @@ public class Auto {
         currentNode.setLong(lon);
     }
 
+    public Nd getPos(){
+        return currentNode;
+    }
+    
     public void step(){
         //CHECK IF DONE
-        if(directionIndex>=directions.size()){
+        
+        if(!directions.inProgress()){
             return;
         }
         // this is temporary
         // write function call in Node to get coords from a node specifically
         currentNode.setLat(nextNode.getLat());
         currentNode.setLong(nextNode.getLong());
+        System.out.println("STEP");
+        System.out.println("LAT "+currentNode.getLat());
+        System.out.println("LON "+currentNode.getLong());
 
-        nextNode=nextNode.connections.get(directionIndex++);
+        nextNode=nextNode.connections.get(directions.next());
     }
     
     public double calcDistance(Nd node1, Nd node2){

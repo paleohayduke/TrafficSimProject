@@ -78,6 +78,8 @@ public class Renderer3 extends JFrame{
         testCar = new Rectangle2D.Double(x1/scale,y1/scale,10,10);
         
         drawWindow();
+        
+        System.out.println("STEP");
     }
 
     

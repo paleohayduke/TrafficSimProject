@@ -34,6 +34,18 @@ public class Directions {
         this.start=start;
     }
     
+    public boolean inProgress(){
+        if (stepIndex==directions.size()){
+            return false;
+        }
+        else return true;
+    }
+    
+    int stepIndex=0;
+    public int next(){
+        return directions.get(stepIndex++);
+    }
+    
     public void add(int dir,double score){
         directions.add(dir);
         this.score = score;

@@ -42,10 +42,10 @@ public class TrafficSimProject {
 //        String pauseStr = sc.next();
         
         
-        display.setAutoPos(gb.roads.get(5).nodeList.get(2));
+ //       display.setAutoPos(gb.roads.get(5).nodeList.get(2));
  //       pauseStr = sc.next();
         
-        display.setAutoPos(gb.roads.get(5).nodeList.get(3));
+ //       display.setAutoPos(gb.roads.get(5).nodeList.get(3));
  //       pauseStr = sc.next();
         
         
@@ -63,12 +63,69 @@ public class TrafficSimProject {
         }
         System.out.println("end"+gb.roads.size());
         
-        Directions testDir = new Directions();
-        Directions route = testDir.findRoute(gb.roads, gb.roads.get(3).nodeList.get(0), gb.roads.get(5).nodeList.get(4));
+        Directions testDir = new Directions(gb.roads.get(1).nodeList.get(0));
+//        Directions route = testDir.findRoute(gb.roads, gb.roads.get(3).nodeList.get(0), gb.roads.get(5).nodeList.get(4));
+        Directions route = testDir.findRoute(gb.roads, gb.roads.get(1).nodeList.get(0), gb.roads.get(1).nodeList.get(9));        
+        
+        route.start = gb.roads.get(1).nodeList.get(0);
+        
+        
         for(int i =0;i<route.directions.size();i++){
             System.out.println(route.directions.get(i));
         }
         
+        Auto test = new Auto();
+        test.setDirections(route);
+       
+ 
+        String pauseStr = sc.next();
+              test.step();
+        display.setAutoPos(test.currentNode);
+
+        pauseStr = sc.next();
+              test.step();
+        display.setAutoPos(test.currentNode);        
+
+        pauseStr = sc.next();
+              test.step();
+        display.setAutoPos(test.currentNode);        
+
+        pauseStr = sc.next();
+              test.step();
+        display.setAutoPos(test.currentNode);        
+        
+                pauseStr = sc.next();
+              test.step();
+        display.setAutoPos(test.currentNode);        
+
+        pauseStr = sc.next();
+              test.step();
+        display.setAutoPos(test.currentNode);        
+
+        pauseStr = sc.next();
+              test.step();
+        display.setAutoPos(test.currentNode);   
+        
+                        pauseStr = sc.next();
+              test.step();
+        display.setAutoPos(test.currentNode);        
+
+        pauseStr = sc.next();
+              test.step();
+        display.setAutoPos(test.currentNode);        
+
+        pauseStr = sc.next();
+              test.step();
+        display.setAutoPos(test.currentNode);
+        
+//       display.setAutoPos(gb.roads.get(5).nodeList.get(2));
+//       pauseStr = sc.next();
+//        
+//       display.setAutoPos(gb.roads.get(5).nodeList.get(3));
+//       pauseStr = sc.next();
+       
+
+
     }
     
     
