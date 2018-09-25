@@ -46,9 +46,8 @@ public class Simulation {
     }
     
     // to start renderer
-    public void startRenderer(){
-        this.display = new Renderer(roads,minLat,maxLat,minLon,maxLon);
-        display.setScale(1);
+    public void startRenderer(double scale){
+        this.display = new Renderer(scale, roads,minLat,maxLat,minLon,maxLon);
         display.setMap();
         
         
@@ -62,8 +61,7 @@ public class Simulation {
             return;
         }
         
-        startRenderer();
-
+        startRenderer(15);
         // HERE WE GO
         Scanner sc = new Scanner(System.in);
 //        String pauseStr = sc.next();

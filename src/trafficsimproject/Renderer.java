@@ -32,6 +32,29 @@ public class Renderer extends JFrame{
     
     //for adjusting map
     double scale = 1;
+    
+    Renderer(double scale, ArrayList<Road> roads, double minLat, double maxLat, double minLon, double maxLon){
+        this.scale=scale;
+        this.roads=roads;
+        this.minLat=minLat;
+        this.minLon=minLon;
+        this.maxLon=maxLon;
+        this.maxLat=maxLat;// i made these global because of testing. sys out.prints are all debug testing related
+        
+        drawWindow();
+//        latRange = (int)((maxLat-minLat)*scale1);// calculate the size of the window
+//        lonRange = (int)((maxLon- minLon)*scale1);
+//        System.out.println("SIZE OF WINDOW: " + lonRange + " " +latRange );
+//        this.setSize(lonRange,latRange); // regular stuff for jframe 
+//        
+//        this.setTitle("Traffic Sim");
+//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.add(new DrawStuff(), BorderLayout.CENTER);
+//        this.setVisible(true);
+        
+        
+    }
+    
     public void setScale(double scale){
         this.scale = scale;
     }    
@@ -103,26 +126,7 @@ public class Renderer extends JFrame{
     // the whole map as parameters.
     
     
-    Renderer(ArrayList<Road> roads, double minLat, double maxLat, double minLon, double maxLon){
-        this.roads=roads;
-        this.minLat=minLat;
-        this.minLon=minLon;
-        this.maxLon=maxLon;
-        this.maxLat=maxLat;// i made these global because of testing. sys out.prints are all debug testing related
-        
-        drawWindow();
-//        latRange = (int)((maxLat-minLat)*scale1);// calculate the size of the window
-//        lonRange = (int)((maxLon- minLon)*scale1);
-//        System.out.println("SIZE OF WINDOW: " + lonRange + " " +latRange );
-//        this.setSize(lonRange,latRange); // regular stuff for jframe 
-//        
-//        this.setTitle("Traffic Sim");
-//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        this.add(new DrawStuff(), BorderLayout.CENTER);
-//        this.setVisible(true);
-        
-        
-    }
+    
     
     public void drawWindow(){
         latRange = (int)((maxLat-minLat)*scale1);// calculate the size of the window
