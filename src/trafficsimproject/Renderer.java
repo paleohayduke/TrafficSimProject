@@ -57,6 +57,11 @@ public class Renderer extends JFrame{
     
     public void setScale(double scale){
         this.scale = scale;
+        roadShapes = new ArrayList<>();
+        intersectShapes=new ArrayList<>();
+        setMap();
+        drawWindow();
+        
     }    
     //for transforming the long&lat to pixels
     

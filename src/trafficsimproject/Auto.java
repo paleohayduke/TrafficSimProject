@@ -6,6 +6,7 @@
 package trafficsimproject;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * 
@@ -125,5 +126,30 @@ public class Auto {
         return posNode;
 
     }
+    
+    
+    
+    
+    public void manual(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("CAR->Manual Mode");
+        for(int i =0;i<nextNode.connections.size();i++){
+            System.out.println("Connection #" + i+" "+nextNode.connections.get(i).getRef());
+        }
+        String choice = sc.nextLine();
+        if(choice=="0"){
+            
+        }else if(choice=="1"){
+            
+        }else if(choice =="2"){
+            
+        }else if (choice =="3"){
+            
+        }
+    }
+    
+
+    
+    
     
 }

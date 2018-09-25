@@ -6,6 +6,8 @@
 package trafficsimproject;
 
 import java.util.ArrayList;
+
+// get rid of these when done
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -16,6 +18,10 @@ import java.util.concurrent.TimeUnit;
 public class Simulation {
     
     private ArrayList<Road> roads = new ArrayList<Road>();
+    
+    //TODO implement this cars
+    private ArrayList<Auto> cars = new ArrayList<Auto>();
+    
     private Renderer display;
     
     // TODO: localize the scope of these variables
@@ -54,6 +60,9 @@ public class Simulation {
         
     }
     
+    public void setScale(double sca){
+        display.setScale(sca);
+    }
     
     // Need to create framework of methods to handle cars
     public void demo() {
@@ -103,21 +112,6 @@ public class Simulation {
 //        Directions route = testDir.findRoute(roads, roads.get(428).nodeList.get(0), roads.get(428).nodeList.get(5));        
 //        route.start = roads.get(428).nodeList.get(0); 
               
-       
-       
-
-       
-        
-        
-        
-        System.out.println("ROAD 0,1 connections SIZE "+roads.get(0).nodeList.get(1).connections.size());
-        System.out.println("\t0,1 lon"+roads.get(0).nodeList.get(1).getLong());
-        System.out.println("\t0,1 lat"+roads.get(0).nodeList.get(1).getLat());
-        
-        
-        
-
-        
 
         for(int i =0;i<route.directions.size();i++){
             System.out.println(route.directions.get(i));
@@ -134,13 +128,14 @@ public class Simulation {
             try{
             TimeUnit.SECONDS.sleep(1);
             }catch(Exception ex){
-                
+                System.out.println("TimeUnit.SECONDS.sleep(1)");
             }
  //           String pauseStr = sc.next();
             test.step();
             display.setAutoPos(test.posNode);
-            
+//            setScale(i);
         }
+
         
 
     }

@@ -97,15 +97,22 @@ public class Directions {
                 
                 // add direction list with score to queue
                 for(int j =0;j<current.connections.size();j++){
+//                    if(wasVisited(current.connections.get(j).getRef(),visitedRef)){
+//                        //VISITED LIST
+//                        continue;
+//                    }
+//                    visitedRef.add(current.connections.get(j).getRef());
                     Directions temp2Direction = new Directions(tempDirection);
                     temp2Direction.add(j, current.connections.get(j).calcDistance(end));
-                    System.out.println("Adding direction");
+//                    System.out.println("Adding direction");
+                    System.out.println("distance to target "+current.connections.get(j).calcDistance(end)*100);
                     queue.add(temp2Direction);
                 }          
                 
                 
                 
             }
+            started=true;
             queue=sortQueue(queue);
             
 
@@ -126,6 +133,18 @@ public class Directions {
     }
     
 
+    private boolean wasVisited(long ref, ArrayList<Long> visited){
+        boolean wasVisited = false;
+        
+        for(int i = 0;i<visited.size();i++){
+            if(ref==visited.get(i)){
+                wasVisited=true;
+                return true;
+            }
+        }
+        
+        return wasVisited;
+    }
     
     
 // this needs to be tested
@@ -143,12 +162,12 @@ public class Directions {
     
     public int compareTo(Directions d){
         if(this.score>d.score)return 1;
-        if(this.score<d.score)return-1;
+        if(this.score<d.score)return -1;
         else return 0;
     }
     public int compareTo(double score){
         if(this.score>score)return 1;
-        if(this.score<score)return-1;
+        if(this.score<score)return -1;
         else return 0;
     }
 }
