@@ -13,11 +13,8 @@ import java.util.ArrayList;
  */
 public class Auto {
     
-    double[] pos = {0,0};//lon, lat
+
     Directions directions = new Directions();
-    
-    int directionIndex =0;
-    
     
     Nd currentNode = new Nd();
     
@@ -64,14 +61,19 @@ public class Auto {
         }
         // this is temporary
         // write function call in Node to get coords from a node specifically
-        currentNode.setLat(nextNode.getLat());
-        currentNode.setLong(nextNode.getLong());
+        
+        
+
+        int choice = directions.next();
+        currentNode.setLat(nextNode.connections.get(choice).getLat());
+        currentNode.setLong(nextNode.connections.get(choice).getLong());
+        
         System.out.println("STEP");
         System.out.println("LAT "+currentNode.getLat());
         System.out.println("LON "+currentNode.getLong());
         
         
-        nextNode=nextNode.connections.get(directions.next());
+        nextNode=nextNode.connections.get(choice);
     }
     
     public double calcDistance(Nd node1, Nd node2){

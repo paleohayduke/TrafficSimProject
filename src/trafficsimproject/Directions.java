@@ -63,7 +63,7 @@ public class Directions {
 //        Nd next;//in case
         while(!found){
             Nd current=start;
-           
+            
             
             for(int i =0;i< current.connections.size();i++){
 
@@ -91,6 +91,7 @@ public class Directions {
                 for(int j =0;j<current.connections.size();j++){
                     Directions temp2Direction = new Directions(tempDirection);
                     temp2Direction.add(j, current.connections.get(j).calcDistance(end));
+                    System.out.println("Adding direction");
                     queue.add(temp2Direction);
                 }          
                 

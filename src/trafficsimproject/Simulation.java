@@ -61,7 +61,7 @@ public class Simulation {
             return;
         }
         
-        startRenderer(15);
+        startRenderer(1);
         // HERE WE GO
         Scanner sc = new Scanner(System.in);
 //        String pauseStr = sc.next();
@@ -89,22 +89,50 @@ public class Simulation {
         System.out.println("end"+roads.size());
         
         Directions testDir = new Directions(roads.get(0).nodeList.get(1));
-        Directions route = testDir.findRoute(roads, roads.get(0).nodeList.get(1), roads.get(1).nodeList.get(9));        
+        Directions route = testDir.findRoute(roads, roads.get(0).nodeList.get(1), roads.get(5).nodeList.get(4));        
 
        // Directions testDir = new Directions(gb.roads.get(424).nodeList.get(0));
        // Directions route = testDir.findRoute(gb.roads, gb.roads.get(424).nodeList.get(0), gb.roads.get(42).nodeList.get(9));        
+
+        route.start = roads.get(0).nodeList.get(1);       
+       
+       
+        System.out.println("ROAD 5,3 connections SIZE "+roads.get(5).nodeList.get(3).connections.size());
+        System.out.println("\t5,3 lon"+roads.get(5).nodeList.get(3).getLong());
+        System.out.println("\t5,3 lat"+roads.get(5).nodeList.get(3).getLat());
+        
+        System.out.println("\t connections 0 "+roads.get(5).nodeList.get(3).connections.get(0).getRef());
+        System.out.println("\tcon0 lon"+roads.get(5).nodeList.get(3).connections.get(0).getLong());
+        System.out.println("\tcon0 lat"+roads.get(5).nodeList.get(3).connections.get(0).getLat());
+        
+        System.out.println("\t connections 1 "+roads.get(5).nodeList.get(3).connections.get(1).getRef());
+        System.out.println("\tcon1 lon"+roads.get(5).nodeList.get(3).connections.get(1).getLong());
+        System.out.println("\tcon1 lat"+roads.get(5).nodeList.get(3).connections.get(1).getLat());
+        
+         System.out.println("\t connections 2 "+roads.get(5).nodeList.get(3).connections.get(2).getRef());
+        System.out.println("\tcon2 lon"+roads.get(5).nodeList.get(3).connections.get(2).getLong());
+        System.out.println("\tcon2 lat"+roads.get(5).nodeList.get(3).connections.get(2).getLat());
+       
+        
+        
+        
+        System.out.println("ROAD 0,1 connections SIZE "+roads.get(0).nodeList.get(1).connections.size());
+        System.out.println("\t0,1 lon"+roads.get(0).nodeList.get(1).getLong());
+        System.out.println("\t0,1 lat"+roads.get(0).nodeList.get(1).getLat());
+        
+        
         
 
-        
-        route.start = roads.get(0).nodeList.get(1);
         
 
         for(int i =0;i<route.directions.size();i++){
             System.out.println(route.directions.get(i));
         }
         
+        
         Auto test = new Auto();
         test.setDirections(route);
+        display.setAutoPos(test.currentNode);
        
 
         String pauseStr = sc.next();
@@ -112,7 +140,7 @@ public class Simulation {
          System.out.println("did i get here");
          System.out.println("what is test.currendNode "+test.currentNode.getRef());
          
-         display.setAutoPos(test.currentNode);
+        display.setAutoPos(test.currentNode);
 
         pauseStr = sc.next();
               test.step();
@@ -168,6 +196,11 @@ public class Simulation {
         pauseStr = sc.next();
               test.step();
         display.setAutoPos(test.currentNode);
+        
+        
+        
+         //       display.setAutoPos(gb.roads.get(5).nodeList.get(2));
+ //       pauseStr = sc.next();
         
 //       display.setAutoPos(gb.roads.get(5).nodeList.get(2));
 //       pauseStr = sc.next();

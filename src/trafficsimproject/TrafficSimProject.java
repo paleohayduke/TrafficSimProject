@@ -22,6 +22,7 @@ public class TrafficSimProject {
         Simulation sim = new Simulation();
         sim.openMap("./src/HomeMap.osm");
         sim.demo();
+//        sim.startRenderer(1);
     }
     
     
