@@ -24,6 +24,7 @@ public class Directions {
     }
     
     Directions(Directions dir){
+        start = dir.start;
         directions= new ArrayList<Integer>(dir.directions);
     }
     
@@ -52,17 +53,22 @@ public class Directions {
         
     }
     
+    
+    
     public Directions findRoute(ArrayList<Road> roads, Nd start, Nd end){
         Directions route = new Directions();
         ArrayList<Directions> queue = new ArrayList<Directions>();
         
+
+        
         ArrayList<Long> visitedRef = new ArrayList<Long>();
         boolean found = false;
         
-
+        boolean started = false;
 //        Nd next;//in case
         while(!found){
             Nd current=start;
+            
             
             
             for(int i =0;i< current.connections.size();i++){
@@ -73,6 +79,8 @@ public class Directions {
                 if(queue.size()>0){
                     tempDirection = new Directions(queue.get(0));
                     queue.remove(0);
+                }else if(queue.size()<=0&&started==true){
+                    return tempDirection;
                 }
                 
                 //get current node

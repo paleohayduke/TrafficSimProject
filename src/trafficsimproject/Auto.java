@@ -16,7 +16,7 @@ public class Auto {
 
     Directions directions = new Directions();
     
-    Nd currentNode = new Nd();
+    Nd posNode = new Nd();
     
     Nd nextNode =  new Nd();
     double distNext = 0;
@@ -25,10 +25,10 @@ public class Auto {
     static int carID=0;
 
     Auto(){
-        currentNode.setRef(carID++);
+        posNode.setRef(carID++);
     }
     Auto(Directions dir){
-        currentNode.setRef(carID++);
+        posNode.setRef(carID++);
         setDirections(dir);
     }
     
@@ -41,16 +41,28 @@ public class Auto {
     }
 
     public void setPos(Nd node){
-        currentNode.setLat(node.getLat());
-        currentNode.setLong(node.getLong());
+        posNode.setLat(node.getLat());
+        posNode.setLong(node.getLong());
     }
     public void setPos(double lon, double lat){
-        currentNode.setLat(lat);
-        currentNode.setLong(lon);
+        posNode.setLat(lat);
+        posNode.setLong(lon);
     }
 
     public Nd getPos(){
-        return currentNode;
+        return posNode;
+    }
+    
+    public void ping(){
+        System.out.println("******PING*****");
+        System.out.println("this.LON "+posNode.getLong());
+        System.out.println("this.LAT "+posNode.getLat());
+//        System.out.println("NEXT.ref "+posNode.getRef());
+//        System.out.println("NEXT.connects: "+posNode.connections.size());
+        
+//        System.out.println("next.connects REF: "+nextNode.connections.get(1).getRef());
+        
+        
     }
     
     public void step(){
@@ -65,15 +77,36 @@ public class Auto {
         
 
         int choice = directions.next();
-        currentNode.setLat(nextNode.connections.get(choice).getLat());
-        currentNode.setLong(nextNode.connections.get(choice).getLong());
+        posNode.setLat(nextNode.connections.get(choice).getLat());
+        posNode.setLong(nextNode.connections.get(choice).getLong());
         
-        System.out.println("STEP");
-        System.out.println("LAT "+currentNode.getLat());
-        System.out.println("LON "+currentNode.getLong());
+        ping();
         
         
         nextNode=nextNode.connections.get(choice);
+        
+    }
+    
+        public void stepOLD(){
+        //CHECK IF DONE
+        
+        if(!directions.inProgress()){
+            return;
+        }
+        // this is temporary
+        // write function call in Node to get coords from a node specifically
+        
+        
+
+        int choice = directions.next();
+        posNode.setLat(nextNode.connections.get(choice).getLat());
+        posNode.setLong(nextNode.connections.get(choice).getLong());
+        
+        ping();
+        
+        
+        nextNode=nextNode.connections.get(choice);
+        
     }
     
     public double calcDistance(Nd node1, Nd node2){
@@ -89,7 +122,7 @@ public class Auto {
     
     public Nd getCurrentNd(){
 
-        return currentNode;
+        return posNode;
 
     }
     

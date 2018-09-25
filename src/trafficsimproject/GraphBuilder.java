@@ -36,7 +36,7 @@ public class GraphBuilder {
 
                    if(roads.get(i).nodeList.get(j).getRef()==roads.get(i).getIntersections().get(k).getRef()){
                        //MUST FIND AND LINK ALL instance of this intersect across all roads
-                       Nd tempNode = findNode(roads.get(i).nodeList.get(j).getRef());
+                       Nd tempNode = findNode(roads.get(i).nodeList.get(j).getRef(),i,j);
                        roads.get(i).nodeList.get(j).addConnection(tempNode, 0);
 //                       System.out.println("IM WORKING******");
                        
@@ -53,10 +53,13 @@ public class GraphBuilder {
     
     
     
-    private Nd findNode(long ref){
+    private Nd findNode(long ref,int roadsIndex, int interIndex){
         Nd temp = new Nd();
         for(int i = 0; i<roads.size();i++){
             for(int j =0; j<roads.get(i).nodeList.size();j++){
+                if(i==roadsIndex&&j==interIndex){
+                    continue;
+                }
                 if(roads.get(i).nodeList.get(j).getRef()==ref){
                     temp = roads.get(i).nodeList.get(j);
                 }

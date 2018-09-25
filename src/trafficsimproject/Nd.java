@@ -31,6 +31,13 @@ public class Nd {
     Nd(){
 
     }
+    Nd(Nd node){
+        this.ref=node.ref;
+        this.latitude=node.latitude;
+        this.longitude=node.longitude;
+        this.connections= new ArrayList<Nd>(node.connections);
+        this.weights= new ArrayList<Double>(node.weights);
+    }
 
     public void setRef(long ref){
         this.ref = ref;
