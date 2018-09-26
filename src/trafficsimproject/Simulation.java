@@ -71,7 +71,7 @@ public class Simulation {
             return;
         }
         
-        startRenderer(10);
+        startRenderer(4);
         // HERE WE GO
         Scanner sc = new Scanner(System.in);
 //        String pauseStr = sc.next();
@@ -105,9 +105,9 @@ public class Simulation {
 //        route = route.findRoute(roads, roads.get(5).nodeList.get(4), roads.get(1).nodeList.get(9));   
 //        route.start = roads.get(5).nodeList.get(4); 
 
-        Directions route = new Directions(roads.get(10).nodeList.get(0));
-        route = route.findRoute(roads, roads.get(10).nodeList.get(0), roads.get(5).nodeList.get(1));   
-        route.start = roads.get(10).nodeList.get(0);       
+//        Directions route = new Directions(roads.get(10).nodeList.get(0));
+//        route = route.findRoute(roads, roads.get(10).nodeList.get(0), roads.get(5).nodeList.get(1));   
+//        route.start = roads.get(10).nodeList.get(0);       
         
 
 //MEDIUM MAP
@@ -116,9 +116,9 @@ public class Simulation {
 //        route.start = roads.get(119).nodeList.get(0);       
 
 //MEDIUM MAP
-//        Directions route = new Directions(roads.get(375).nodeList.get(0));
-//        route = route.findRoute(roads, roads.get(375).nodeList.get(0), roads.get(5).nodeList.get(1));   
-//        route.start = roads.get(375).nodeList.get(0);       
+        Directions route = new Directions(roads.get(375).nodeList.get(0));
+        route = route.findRoute(roads, roads.get(375).nodeList.get(0), roads.get(5).nodeList.get(1));   
+        route.start = roads.get(375).nodeList.get(0);       
         
         
 // MEDIUMMAP        

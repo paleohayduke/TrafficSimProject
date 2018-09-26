@@ -60,15 +60,16 @@ graph traversal algorithm.
 -ww
 
 TODO:
--Come up with car objects.
- *in progress  class Auto
- *needs to calculate distance on the map in longitude and latitude between nodes,
-    *vector representation of velocity is a solution. 
 
--Implement a graph search. 
-https://www.youtube.com/watch?v=j1H3jAAGlEA
+-Renderer needs to rebuilt. Its doing a lot of unnecessary work.
+
+-Implement update of car position between nodes. Solve for x and y from
+distance formula, Pythagorean theorem, vectors. 
 
 -Collect intersection type data (stopsign, stoplight, speed limit).
+Reevaluate MapReader-write some functions that take tags as parameter to
+easily search the OSM file. Need to be able to display any queried data in
+the renderer! 
 
 -Get Git set up to keep track of revisions.
 
@@ -86,7 +87,11 @@ BUGS
 Map is displaying upside down because origin (0,0) is top left corner for the JFrame.
 Need to flip vertically.
 
-findRoute() sort of works. Need to check if the problem is in the algorithm (likely)
+COMPLETED TASKS
+
+COMPLETED 9/26/2018: Implement a graph search. 
+
+COMPLETED 9/26/2018 BUG FIXED findRoute() sort of works. Need to check if the problem is in the algorithm (likely)
 or something with the linking of nodes crossing roads (in some test cases a path
 will be generated that involves changing roads at intersections, but sometimes
 the algorithm gets stuck in an infinite loop, need to review the code but im too
