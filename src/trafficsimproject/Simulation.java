@@ -101,17 +101,13 @@ public class Simulation {
         
         //fix this 
         Directions route = new Directions(roads.get(5).nodeList.get(4));
-        route = route.findRoute(roads, roads.get(5).nodeList.get(4), roads.get(1).nodeList.get(9));     
+//        route = route.findRoute(roads, roads.get(5).nodeList.get(4), roads.get(1).nodeList.get(9));     
+        route = route.findRoute(roads, roads.get(5).nodeList.get(4), roads.get(1).nodeList.get(9));   
         route.start = roads.get(5).nodeList.get(4); 
         
-        
-//        Directions testDir = new Directions(roads.get(0).nodeList.get(1));
-//        Directions route = testDir.findRoute(roads, roads.get(0).nodeList.get(1), roads.get(5).nodeList.get(4));        
-
-//        Directions testDir = new Directions(roads.get(428).nodeList.get(0));
-//        Directions route = testDir.findRoute(roads, roads.get(428).nodeList.get(0), roads.get(428).nodeList.get(5));        
-//        route.start = roads.get(428).nodeList.get(0); 
-              
+//        Directions route = new Directions(roads.get(1).nodeList.get(9));
+//        route = route.findRoute(roads, roads.get(1).nodeList.get(9), roads.get(5).nodeList.get(0));   
+//        route.start = roads.get(1).nodeList.get(9);       
 
         for(int i =0;i<route.directions.size();i++){
             System.out.println(route.directions.get(i));
@@ -135,7 +131,16 @@ public class Simulation {
             display.setAutoPos(test.posNode);
 //            setScale(i);
         }
-
+        
+        while(true){
+            
+ //           String pauseStr = sc.next();
+            test.debug();
+            display.setAutoPos(test.posNode);
+//            setScale(i);
+        }
+        
+        
         
 
     }

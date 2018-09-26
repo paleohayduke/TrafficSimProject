@@ -19,7 +19,7 @@ public class Auto {
     
     Nd posNode = new Nd();
     
-    Nd nextNode =  new Nd();
+    Nd waypointNode =  new Nd();
     double distNext = 0;
     double velocity=0;
     
@@ -38,7 +38,7 @@ public class Auto {
         setPos(directions.start);
         
         //HANDLE ITERATION INSIDE THE DIRECTION CLASS!!!!!
-        nextNode = directions.start;
+        waypointNode = directions.start;
     }
 
     public void setPos(Nd node){
@@ -78,13 +78,13 @@ public class Auto {
         
 
         int choice = directions.next();
-        posNode.setLat(nextNode.connections.get(choice).getLat());
-        posNode.setLong(nextNode.connections.get(choice).getLong());
+        posNode.setLat(waypointNode.connections.get(choice).getLat());
+        posNode.setLong(waypointNode.connections.get(choice).getLong());
         
         ping();
         
         
-        nextNode=nextNode.connections.get(choice);
+        waypointNode=waypointNode.connections.get(choice);
         
     }
     
@@ -100,13 +100,13 @@ public class Auto {
         
 
         int choice = directions.next();
-        posNode.setLat(nextNode.connections.get(choice).getLat());
-        posNode.setLong(nextNode.connections.get(choice).getLong());
+        posNode.setLat(waypointNode.connections.get(choice).getLat());
+        posNode.setLong(waypointNode.connections.get(choice).getLong());
         
         ping();
         
         
-        nextNode=nextNode.connections.get(choice);
+        waypointNode=waypointNode.connections.get(choice);
         
     }
     
@@ -130,23 +130,33 @@ public class Auto {
     
     
     
-    public void manual(){
+    public void debug(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("CAR->Manual Mode");
-        for(int i =0;i<nextNode.connections.size();i++){
-            System.out.println("Connection #" + i+" "+nextNode.connections.get(i).getRef());
+//        boolean running = true;
+//        while(running){
+        System.out.println("***DEBUG***");
+        System.out.println(" ref: " +waypointNode.getRef());
+        for(int i =0;i<waypointNode.connections.size();i++){
+            System.out.println("  Connection #" + i+" "+waypointNode.connections.get(i).getRef());
+           //FIND ROAD CONNECTIONS() 
         }
         String choice = sc.nextLine();
-        if(choice=="0"){
-            
-        }else if(choice=="1"){
-            
-        }else if(choice =="2"){
-            
-        }else if (choice =="3"){
-            
+        if(choice.charAt(0)=='q'){
+            System.out.println("ending debug");
+//            running=false;
+        }else{
+            try{
+            waypointNode=waypointNode.connections.get(Integer.parseInt(choice));
+            posNode.setLat(waypointNode.getLat());
+            posNode.setLong(waypointNode.getLong());
+            }catch(Exception ex){
+                
+            }
         }
+//        }
+        return;
     }
+    
     
 
     

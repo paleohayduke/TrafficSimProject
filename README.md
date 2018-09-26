@@ -13,6 +13,13 @@ Announcements:
 Edit this text document with anything you do while working on the project. We can
 turn this in as an appendix on reports. 
 
+9/26/2018 The demo now animates in a loop. I added a debug() method to the
+Auto class. call the debug method after your car already has a waypoint assigned 
+to its waypointNode and you can manually traverse the nodes. waypointNodes 
+represent the next node the car is supposed to take on a route. 
+Debugging of the node system revealed that the map nodes are all correctly
+linked. Since the node system is fine, the bug is most probably in 
+Direction routeFine(). *see BUGS  
 
 9/24/2018 DEMO:
 Once the demo loads, you can press a key into the console and hit enter to cause
