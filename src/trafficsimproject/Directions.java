@@ -53,23 +53,89 @@ public class Directions {
         
     }
     
+
     
     
+
     public Directions findRoute(ArrayList<Road> roads, Nd start, Nd end){
         Directions route = new Directions();
         ArrayList<Directions> queue = new ArrayList<Directions>();
-        
+        ArrayList<Long> visitedRef = new ArrayList<Long>();
+        ArrayList<Long> visitedRef2 = new ArrayList<Long>();
+        boolean found = false;        
+        boolean started = false;
 
         
-        ArrayList<Long> visitedRef = new ArrayList<Long>();
-        boolean found = false;
+        while(!found){
+            
+
+
+            Directions tempDirection= new Directions();
+                
+                
+            if(queue.size()>0){
+                tempDirection = new Directions(queue.get(0));
+                queue.remove(0);
+            }
+            else if(queue.isEmpty()&&started==true){
+                System.out.println("NO RESULT");
+                return tempDirection;
+                
+            }
+                
+            Nd current=start;
+            for(int j=0;j<tempDirection.directions.size();j++){
+                current=current.connections.get(tempDirection.directions.get(j));
+                if(current.getRef()==end.getRef()){
+                    System.out.println("FOUND ROUTE");
+                    found=true;
+                    return tempDirection;
+                     
+                }
+            }
+                
+            int count=0;
+            if(wasVisited(current.getRef(),visitedRef)){
+                    if(wasVisited(current.getRef(),visitedRef2)){
+                        continue;
+                    }
+                    else{
+                        visitedRef2.add(current.getRef());
+                        System.out.println("visitedRef2");
+                    }
+            }
+            else{
+                visitedRef.add(current.getRef());
+                System.out.println("visitedRef1");
+            }
+            for(int j =0;j<current.connections.size();j++){
+                
+                Directions temp2Direction = new Directions(tempDirection);
+                temp2Direction.add(j, current.connections.get(j).calcDistance(end));
+                System.out.println("distance to target "+current.connections.get(j).calcDistance(end)*100
+                +" turn: "+j);
+                queue.add(temp2Direction);
+            }          
+        started=true;
+        queue=sortQueue(queue);
+            
+        }
         
+        return route;
+    }
+    
+    public Directions findRouteOLD(ArrayList<Road> roads, Nd start, Nd end){
+        Directions route = new Directions();
+        ArrayList<Directions> queue = new ArrayList<Directions>();
+        ArrayList<Long> visitedRef = new ArrayList<Long>();
+        
+        
+        boolean found = false;        
         boolean started = false;
-//        Nd next;//in case
+
+        
         while(!found){
             Nd current=start;
-            
-            
             
             for(int i =0;i< current.connections.size();i++){
 

@@ -2,16 +2,22 @@
 
 TAMUCT COSC-3320-110 Programmers Group 1
 
-If you need help figuring this out, let me know. If you have some time, review
-the code so far and give feedback. I'll take some time this week to improve
-the comments. 
-
-
-
 Announcements:
 
 Edit this text document with anything you do while working on the project. We can
 turn this in as an appendix on reports. 
+
+9/26/2018 It looks like routeFind() is fixed. You can enter a start node and
+end node and it will automatically generate a path and animate the car taking
+the nodes between both points. A new bug has come up, when you first run the
+program, if you use the medium map or larger, the window will not update the
+animation until after you MINIMIZE the window and then open it back up. 
+The renderer needs to be rebuilt and a controller/handler for setting up cars 
+needs to be written. The car controller needs to be able to generate a 
+defined amount of cars and give all of them random start and end nodes. The
+controller needs to hold the cars in a list and update them all iteratively, 
+every "step". After they are all updated a list of all the cars positions needs
+to be passed to the renderer to update the next frame. 
 
 9/26/2018 The demo now animates in a loop. I added a debug() method to the
 Auto class. call the debug method after your car already has a waypoint assigned 
@@ -19,7 +25,7 @@ to its waypointNode and you can manually traverse the nodes. waypointNodes
 represent the next node the car is supposed to take on a route. 
 Debugging of the node system revealed that the map nodes are all correctly
 linked. Since the node system is fine, the bug is most probably in 
-Direction routeFine(). *see BUGS  
+Direction routeFind(). *see BUGS  
 
 9/24/2018 DEMO:
 Once the demo loads, you can press a key into the console and hit enter to cause

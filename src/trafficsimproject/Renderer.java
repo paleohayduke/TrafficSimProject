@@ -85,14 +85,14 @@ public class Renderer extends JFrame{
                 roadShapes.add(tempRoad);
                 
             }
-            for(int j=0; j<roads.get(i).intersections.size();j++){
-                Double x1 = (roads.get(i).intersections.get(j).getLong()-minLon)*scale1;
-                Double y1 = (roads.get(i).intersections.get(j).getLat()-minLat)*scale1;
-                
-
-                Shape tempCept = new Rectangle2D.Double(x1/scale,y1/scale,5,5);
-                intersectShapes.add(tempCept);
-            }
+//            for(int j=0; j<roads.get(i).intersections.size();j++){
+//                Double x1 = (roads.get(i).intersections.get(j).getLong()-minLon)*scale1;
+//                Double y1 = (roads.get(i).intersections.get(j).getLat()-minLat)*scale1;
+//                
+//
+//                Shape tempCept = new Rectangle2D.Double(x1/scale,y1/scale,5,5);
+//                intersectShapes.add(tempCept);
+//            }
         }
         System.out.println("minLon"+minLon);
         System.out.println("maxLon"+maxLon);
@@ -110,7 +110,7 @@ public class Renderer extends JFrame{
         
         drawWindow();
         
-        System.out.println("STEP");
+//        System.out.println("STEP");
     }
 
     
@@ -131,7 +131,9 @@ public class Renderer extends JFrame{
     // the whole map as parameters.
     
     
-    
+    private void updateFrame(){
+        
+    }
     
     public void drawWindow(){
         latRange = (int)((maxLat-minLat)*scale1);// calculate the size of the window

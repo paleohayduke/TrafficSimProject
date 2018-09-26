@@ -71,7 +71,7 @@ public class Simulation {
             return;
         }
         
-        startRenderer(2);
+        startRenderer(10);
         // HERE WE GO
         Scanner sc = new Scanner(System.in);
 //        String pauseStr = sc.next();
@@ -100,14 +100,31 @@ public class Simulation {
 
         
         //fix this 
-        Directions route = new Directions(roads.get(5).nodeList.get(4));
-//        route = route.findRoute(roads, roads.get(5).nodeList.get(4), roads.get(1).nodeList.get(9));     
-        route = route.findRoute(roads, roads.get(5).nodeList.get(4), roads.get(1).nodeList.get(9));   
-        route.start = roads.get(5).nodeList.get(4); 
+//        Directions route = new Directions(roads.get(5).nodeList.get(4));
+////        route = route.findRoute(roads, roads.get(5).nodeList.get(4), roads.get(1).nodeList.get(9));     
+//        route = route.findRoute(roads, roads.get(5).nodeList.get(4), roads.get(1).nodeList.get(9));   
+//        route.start = roads.get(5).nodeList.get(4); 
+
+        Directions route = new Directions(roads.get(10).nodeList.get(0));
+        route = route.findRoute(roads, roads.get(10).nodeList.get(0), roads.get(5).nodeList.get(1));   
+        route.start = roads.get(10).nodeList.get(0);       
         
-//        Directions route = new Directions(roads.get(1).nodeList.get(9));
-//        route = route.findRoute(roads, roads.get(1).nodeList.get(9), roads.get(5).nodeList.get(0));   
-//        route.start = roads.get(1).nodeList.get(9);       
+
+//MEDIUM MAP
+//        Directions route = new Directions(roads.get(119).nodeList.get(0));
+//        route = route.findRoute(roads, roads.get(119).nodeList.get(0), roads.get(5).nodeList.get(1));   
+//        route.start = roads.get(119).nodeList.get(0);       
+
+//MEDIUM MAP
+//        Directions route = new Directions(roads.get(375).nodeList.get(0));
+//        route = route.findRoute(roads, roads.get(375).nodeList.get(0), roads.get(5).nodeList.get(1));   
+//        route.start = roads.get(375).nodeList.get(0);       
+        
+        
+// MEDIUMMAP        
+//        Directions route = new Directions(roads.get(440).nodeList.get(0));
+//        route = route.findRoute(roads, roads.get(440).nodeList.get(0), roads.get(5).nodeList.get(1));   
+//        route.start = roads.get(440).nodeList.get(0);       
 
         for(int i =0;i<route.directions.size();i++){
             System.out.println(route.directions.get(i));
@@ -128,6 +145,7 @@ public class Simulation {
             }
  //           String pauseStr = sc.next();
             test.step();
+            System.out.println("Frame "+i);
             display.setAutoPos(test.posNode);
 //            setScale(i);
         }
