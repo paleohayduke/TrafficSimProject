@@ -60,7 +60,7 @@ public class Auto {
     }
     
     public void ping(){
-        System.out.println("******PING*****");
+        System.out.println("****CAR**** #"+ posNode.getRef());
         System.out.println("this.LON "+posNode.getLong());
         System.out.println("this.LAT "+posNode.getLat());
         System.out.println("distNext "+posNode.calcDistance(waypointNode));
@@ -105,7 +105,7 @@ public class Auto {
         double y2=waypointNode.getLat();
         double d = velocity*timeIncrement;
         double D = posNode.calcDistance(waypointNode);
-        System.out.println("D="+D+" d="+d);
+//        System.out.println("D="+D+" d="+d);
         
         if(D==0){
             nextWaypoint();
@@ -117,7 +117,7 @@ public class Auto {
             nextWaypoint();
         }
         if(d<D){
-            System.out.println("d<D");
+//            System.out.println("d<D");
             double x3 = -(x1-x2)*(d/D)+x1;
             double y3 = -(y1-y2)*(d/D)+y1;
             posNode.setLat(y3);
@@ -141,7 +141,7 @@ public class Auto {
         int choice = directions.next();
         posNode.setLat(waypointNode.getLat());
         posNode.setLong(waypointNode.getLong());
-        System.out.println("choice="+choice);
+//        System.out.println("choice="+choice);
         waypointNode=waypointNode.connections.get(choice);
     }
     
@@ -151,7 +151,7 @@ public class Auto {
         // write function call in Node to get coords from a node specifically
         
         
-        System.out.println("distance to waypoint: "+ posNode.calcDistance(waypointNode));
+//        System.out.println("distance to waypoint: "+ posNode.calcDistance(waypointNode));
         calcPos(velocity, timeStep);
         
         ping();

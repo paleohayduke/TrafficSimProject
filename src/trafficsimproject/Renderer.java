@@ -9,11 +9,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.AlphaComposite;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -110,6 +109,7 @@ public class Renderer extends JFrame{
 //                intersectShapes.add(tempCept);
 //            }
         }
+        
         System.out.println("minLon"+minLon);
         System.out.println("maxLon"+maxLon);
         System.out.println("minLat"+minLat);
@@ -168,6 +168,7 @@ public class Renderer extends JFrame{
     
     // this draws stuff
     // 
+    
     private class DrawStuff extends JComponent{
         public void paint(Graphics g){
             Graphics2D graph2 = (Graphics2D)g;
@@ -179,7 +180,7 @@ public class Renderer extends JFrame{
             
             graph2.setPaint(Color.BLACK);
 
-
+//            BufferedImage test = new BufferedImage(graph2.);
             for(int i =0; i<roadShapes.size();i++){
                 
                 graph2.draw(roadShapes.get(i));
@@ -210,7 +211,7 @@ public class Renderer extends JFrame{
             
 //            System.out.println("SIZE OF WINDOW: " + (maxLon*100000-minLon*100000) + " " +(maxLat*100000-minLat*100000) );
             graph2.dispose();
-
+            g.dispose();
             
         }
 

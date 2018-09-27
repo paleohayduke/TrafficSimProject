@@ -10,6 +10,9 @@ turn this in as an appendix on reports.
 9/27/2018 5:04 AM the automobile can now update its position based on time and
 velocity, this means it now moves smoothly between nodes.   
 
+You can now spawn variable amount of cars at once, setCars(int numOfCars). 
+Look at main() in TrafficSimProject for more details. 
+
 9/26/2018 It looks like routeFind() is fixed. You can enter a start node and
 end node and it will automatically generate a path and animate the car taking
 the nodes between both points. A new bug has come up, when you first run the

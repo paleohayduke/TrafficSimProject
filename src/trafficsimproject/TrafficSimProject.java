@@ -35,7 +35,7 @@ public class TrafficSimProject {
                 System.out.println("TimeUnit.SECONDS.sleep(1)");
             }
  //           String pauseStr = sc.next();
-            sim.step();
+            sim.step(0.0001, .5);
             System.out.println("Frame "+i);
             sim.updateRenderer();
 //            setScale(i);
