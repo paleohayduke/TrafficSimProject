@@ -7,6 +7,9 @@ Announcements:
 Edit this text document with anything you do while working on the project. We can
 turn this in as an appendix on reports. 
 
+9/27/2018 5:04 AM the automobile can now update its position based on time and
+velocity, this means it now moves smoothly between nodes.   
+
 9/26/2018 It looks like routeFind() is fixed. You can enter a start node and
 end node and it will automatically generate a path and animate the car taking
 the nodes between both points. A new bug has come up, when you first run the
