@@ -51,6 +51,9 @@ public class Directions {
     
     int stepIndex=0;
     public int next(){
+        if(directions.isEmpty()){
+            return 0;
+        }
         return directions.get(stepIndex++);
     }
     
@@ -60,7 +63,13 @@ public class Directions {
         
     }
     
-
+    private boolean empty = false;
+    public void setEmpty(){
+        empty=true;
+    }
+    public boolean isEmpty(){
+        return empty;
+    }
     
     
 
@@ -86,6 +95,7 @@ public class Directions {
             }
             else if(queue.isEmpty()&&started==true){
                 System.out.println("NO RESULT");
+                tempDirection.setEmpty();
                 return tempDirection;
                 
             }
@@ -108,19 +118,19 @@ public class Directions {
                     }
                     else{
                         visitedRef2.add(current.getRef());
-                        System.out.println("visitedRef2");
+//                        System.out.println("visitedRef2");
                     }
             }
             else{
                 visitedRef.add(current.getRef());
-                System.out.println("visitedRef1");
+//                System.out.println("visitedRef1");
             }
             for(int j =0;j<current.connections.size();j++){
                 
                 Directions temp2Direction = new Directions(tempDirection);
                 temp2Direction.add(j, current.connections.get(j).calcDistance(end));
-                System.out.println("distance to target "+current.connections.get(j).calcDistance(end)*100
-                +" turn: "+j);
+//                System.out.println("distance to target "+current.connections.get(j).calcDistance(end)*100
+//                +" turn: "+j);
                 queue.add(temp2Direction);
             }          
         started=true;

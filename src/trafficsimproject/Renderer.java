@@ -13,6 +13,7 @@ import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.AlphaComposite;
 import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -27,6 +28,7 @@ public class Renderer extends JFrame{
     ArrayList<Road> roads;
     ArrayList<Shape> roadShapes = new ArrayList<Shape>();
     ArrayList<Shape> intersectShapes = new ArrayList<Shape>();
+    ArrayList<Shape> carShapes = new ArrayList<Shape>();
 
     //drawRoad = new Line2D.Float(lons.get(i)/scale,lats.get(i)/scale,lons.get(i+1)/scale,lats.get(i+1)/scale);
     
@@ -59,6 +61,7 @@ public class Renderer extends JFrame{
         this.scale = scale;
         roadShapes = new ArrayList<>();
         intersectShapes=new ArrayList<>();
+        
         setMap();
         drawWindow();
         
@@ -67,6 +70,19 @@ public class Renderer extends JFrame{
     
 
     int scale1 = 100000;
+    
+    
+    public void stepCars(ArrayList<Auto> cars){
+        carShapes = new ArrayList<Shape>();
+        for(int i =0; i<cars.size();i++){
+            Double x1=(cars.get(i).posNode.getLong()-minLon)*scale1;
+            Double y1=(cars.get(i).posNode.getLat()-minLat)*scale1;
+        
+            Shape carPos = new Rectangle2D.Double(x1/scale-10,y1/scale-10,20,20);
+            carShapes.add(carPos);
+        }
+        drawWindow();
+    }
     
     public void setMap(){
 
@@ -81,7 +97,7 @@ public class Renderer extends JFrame{
                 Double x2=(roads.get(i).nodeList.get(j+1).getLong()-minLon)*scale1;
                 
                 Shape tempRoad = new Line2D.Double(x1/scale,y1/scale,x2/scale,y2/scale);
-
+//                AlphaComposite alpha = new AlphaComposite();
                 roadShapes.add(tempRoad);
                 
             }
@@ -123,7 +139,7 @@ public class Renderer extends JFrame{
     int latRange=0;
     int lonRange=0;
     
-    Graphics2D graph2;
+    //Graphics2D graph2;
     
     
     // this is the constructor... i was using it as a spot to 
@@ -154,39 +170,46 @@ public class Renderer extends JFrame{
     // 
     private class DrawStuff extends JComponent{
         public void paint(Graphics g){
-            graph2 = (Graphics2D)g;
+            Graphics2D graph2 = (Graphics2D)g;
             
-            //see how it looks
-            graph2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                    RenderingHints.VALUE_ANTIALIAS_ON);
-//            Shape drawLine = new Line2D.Float(20,90,55,250);
+
+//            graph2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+//                    RenderingHints.VALUE_ANTIALIAS_ON);
+
             
             graph2.setPaint(Color.BLACK);
-            //graph2.draw(drawLine);
-            
-            // this is where the points are drawn on the screen
 
-            int counter = 0;
+
             for(int i =0; i<roadShapes.size();i++){
                 
                 graph2.draw(roadShapes.get(i));
 
                 
             }
-            for(int i=0; i<intersectShapes.size();i++){
-                graph2.setPaint(Color.RED);
-                graph2.draw(intersectShapes.get(i));
- //               System.out.println("*********************************************************DRAWING INTERCEPT");
- //               System.out.println("INTERSECT X: "+intersectShapes.get(i).getBounds().x);
- //               System.out.println("INTERSECT Y: "+intersectShapes.get(i).getBounds().y);
+            
+            graph2.setPaint(Color.GREEN);
+            
+            for(int i =0; i<carShapes.size();i++){
+                
+                graph2.draw(carShapes.get(i));
+
+                
             }
             
+//            for(int i=0; i<intersectShapes.size();i++){
+//                graph2.setPaint(Color.RED);
+//                graph2.draw(intersectShapes.get(i));
+// //               System.out.println("*********************************************************DRAWING INTERCEPT");
+// //               System.out.println("INTERSECT X: "+intersectShapes.get(i).getBounds().x);
+// //               System.out.println("INTERSECT Y: "+intersectShapes.get(i).getBounds().y);
+//            }
+            
             //TEST CAR
-            graph2.setPaint(Color.GREEN);
-            graph2.draw(testCar);
+//            graph2.setPaint(Color.GREEN);
+//            graph2.draw(testCar);
             
 //            System.out.println("SIZE OF WINDOW: " + (maxLon*100000-minLon*100000) + " " +(maxLat*100000-minLat*100000) );
-            
+            graph2.dispose();
 
             
         }

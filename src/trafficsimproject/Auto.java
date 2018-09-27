@@ -38,7 +38,12 @@ public class Auto {
         setPos(directions.start);
         
         //HANDLE ITERATION INSIDE THE DIRECTION CLASS!!!!!
+        try{
         waypointNode = directions.start.connections.get(this.directions.next());
+        }
+        catch(Exception e){
+            
+        }
     }
 
     public void setPos(Nd node){
@@ -140,14 +145,14 @@ public class Auto {
         waypointNode=waypointNode.connections.get(choice);
     }
     
-    public void step(){
+    public void step(double velocity, double timeStep){
         //CHECK IF DONE
         // this is temporary
         // write function call in Node to get coords from a node specifically
         
         
         System.out.println("distance to waypoint: "+ posNode.calcDistance(waypointNode));
-        calcPos(0.0001, .4);
+        calcPos(velocity, timeStep);
         
         ping();
         

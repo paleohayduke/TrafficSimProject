@@ -6,6 +6,7 @@
 package trafficsimproject;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 // get rid of these when done
 import java.util.Scanner;
@@ -102,17 +103,29 @@ public class Simulation {
 //        Directions route = new Directions(roads.get(119).nodeList.get(0));
 //        route = route.findRoute(roads, roads.get(119).nodeList.get(0), roads.get(5).nodeList.get(1));   
 //        route.start = roads.get(119).nodeList.get(0);       
+        
 
+        //rand direction generator
 //MEDIUM MAP
-        Directions route = new Directions(roads.get(375).nodeList.get(0));
-        route = route.findRoute(roads, roads.get(375).nodeList.get(0), roads.get(5).nodeList.get(1));   
-        route.start = roads.get(375).nodeList.get(0);       
+//        Directions route = new Directions(roads.get(375).nodeList.get(0));
+//        route = route.findRoute(roads, roads.get(375).nodeList.get(0), roads.get(5).nodeList.get(1));   
+//        route.start = roads.get(375).nodeList.get(0);       
         
         
 // MEDIUMMAP        
 //        Directions route = new Directions(roads.get(440).nodeList.get(0));
 //        route = route.findRoute(roads, roads.get(440).nodeList.get(0), roads.get(5).nodeList.get(1));   
 //        route.start = roads.get(440).nodeList.get(0);       
+        
+        Random rand = new Random();
+        int roadNum1 = rand.nextInt(roads.size());
+        int nodeNum1 = rand.nextInt(roads.get(roadNum1).nodeList.size());
+        int roadNum2 = rand.nextInt(roads.size());
+        int nodeNum2 = rand.nextInt(roads.get(roadNum2).nodeList.size());
+        Directions route = new Directions(roads.get(roadNum1).nodeList.get(nodeNum1));
+        route = route.findRoute(roads, roads.get(roadNum1).nodeList.get(nodeNum1), roads.get(roadNum2).nodeList.get(nodeNum2));   
+        route.start = roads.get(roadNum1).nodeList.get(nodeNum1);       
+
 
         for(int i =0;i<route.directions.size();i++){
             System.out.println(route.directions.get(i));
@@ -133,7 +146,7 @@ public class Simulation {
                 System.out.println("TimeUnit.SECONDS.sleep(1)");
             }
  //           String pauseStr = sc.next();
-            test.step();
+            test.step(0.0001, .4);
             System.out.println("Frame "+i);
             display.setAutoPos(test.posNode);
 //            setScale(i);
@@ -169,6 +182,71 @@ public class Simulation {
         System.out.println("end"+roads.size());
     }
     
+    
+    public void setCars(int totalCars){
+        Random rand = new Random();
+        for(int i = 0;i<totalCars;i++){
+            boolean repeat = true;
 
+
+            int roadNum1=0; 
+            int nodeNum1=0; 
+            int roadNum2=0; 
+            int nodeNum2=0;
+            Directions route=new Directions(); 
+           
+            while(repeat){
+                roadNum1 = rand.nextInt(roads.size());
+                nodeNum1 = rand.nextInt(roads.get(roadNum1).nodeList.size());
+                roadNum2 = rand.nextInt(roads.size());
+                nodeNum2 = rand.nextInt(roads.get(roadNum2).nodeList.size());
+                route = new Directions(roads.get(roadNum1).nodeList.get(nodeNum1));
+                route = route.findRoute(roads, roads.get(roadNum1).nodeList.get(nodeNum1), roads.get(roadNum2).nodeList.get(nodeNum2));
+    
+                if(!route.isEmpty()){
+                    repeat=false;
+                }
+            }
+  
+            
+
+            
+            route.start = roads.get(roadNum1).nodeList.get(nodeNum1);
+            
+            Auto tempCar = new Auto();
+            tempCar.setDirections(route);
+            cars.add(tempCar);
+            
+        }
+//        System.out.println("Cars Size="+cars.size());
+
+    }
+    
+    public void step(){
+           
+        for(int j=0;j<cars.size();j++){
+            cars.get(j).step(0.0001, .4);
+                    
+        }
+    
+        
+        
+    }
+    
+    
+    public void step(double velocity, double stepSize){
+           
+        for(int j=0;j<cars.size();j++){
+            cars.get(j).step(velocity,stepSize);
+                    
+        }
+    
+
+        
+    }
+    
+    public void updateRenderer(){
+        display.stepCars(cars);
+    }
 
 }
