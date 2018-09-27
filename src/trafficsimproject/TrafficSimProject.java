@@ -21,21 +21,21 @@ public class TrafficSimProject {
      */
     public static void main(String[] args) {
         Simulation sim = new Simulation();
-        sim.openMap("./src/MediumMap.osm");
+        sim.openMap("./src/HomeMap.osm");
         sim.setCars(100);
-        sim.startRenderer(5);
+        sim.startRenderer(1);
 //       sim.step();
 //        sim.updateRenderer();
         for(int i =0;i<111111100;i++){
             
             try{
                 
-                TimeUnit.MILLISECONDS.sleep(250);
+                TimeUnit.MILLISECONDS.sleep(20);
             }catch(Exception ex){
                 System.out.println("TimeUnit.SECONDS.sleep(1)");
             }
  //           String pauseStr = sc.next();
-            sim.step(0.0001, .5);
+            sim.step(0.0001, .05);
             System.out.println("Frame "+i);
             sim.updateRenderer();
 //            setScale(i);
