@@ -38,7 +38,7 @@ public class Auto {
         setPos(directions.start);
         
         //HANDLE ITERATION INSIDE THE DIRECTION CLASS!!!!!
-        waypointNode = directions.start;
+        waypointNode = directions.start.connections.get(this.directions.next());
     }
 
     public void setPos(Nd node){
@@ -58,6 +58,8 @@ public class Auto {
         System.out.println("******PING*****");
         System.out.println("this.LON "+posNode.getLong());
         System.out.println("this.LAT "+posNode.getLat());
+        System.out.println("distNext "+posNode.calcDistance(waypointNode));
+        
 //        System.out.println("NEXT.ref "+posNode.getRef());
 //        System.out.println("NEXT.connects: "+posNode.connections.size());
         
@@ -65,50 +67,97 @@ public class Auto {
         
         
     }
+
+    public void stepOLD(){
+    
+        //CHECK IF DONE
+        
+        if(!directions.inProgress()){
+            return;
+        }
+        // this is temporary
+        // write function call in Node to get coords from a node specifically
+        
+        
+
+        int choice = directions.next();
+        posNode.setLat(waypointNode.connections.get(choice).getLat());
+        posNode.setLong(waypointNode.connections.get(choice).getLong());
+        
+        ping();
+        
+        
+        waypointNode=waypointNode.connections.get(choice);
+        
+    
+    }
+    
+    public void calcPos(double velocity, double timeIncrement){
+        
+        double x1=posNode.getLong();
+        double y1=posNode.getLat();
+        double x2=waypointNode.getLong();
+        double y2=waypointNode.getLat();
+        double d = velocity*timeIncrement;
+        double D = posNode.calcDistance(waypointNode);
+        System.out.println("D="+D+" d="+d);
+        
+        if(D==0){
+            nextWaypoint();
+        }
+
+        if(d>D){
+            d=d-D;
+            
+            nextWaypoint();
+        }
+        if(d<D){
+            System.out.println("d<D");
+            double x3 = -(x1-x2)*(d/D)+x1;
+            double y3 = -(y1-y2)*(d/D)+y1;
+            posNode.setLat(y3);
+            posNode.setLong(x3);
+
+        }
+        
+        
+
+    }
+    
+    public void nextWaypoint(){
+        //CHECK IF DONE
+        
+        if(!directions.inProgress()){
+            System.out.println("!inProgress()");
+            return;
+            
+        }
+
+        int choice = directions.next();
+        posNode.setLat(waypointNode.getLat());
+        posNode.setLong(waypointNode.getLong());
+        System.out.println("choice="+choice);
+        waypointNode=waypointNode.connections.get(choice);
+    }
     
     public void step(){
         //CHECK IF DONE
-        
-        if(!directions.inProgress()){
-            return;
-        }
         // this is temporary
         // write function call in Node to get coords from a node specifically
         
         
-
-        int choice = directions.next();
-        posNode.setLat(waypointNode.connections.get(choice).getLat());
-        posNode.setLong(waypointNode.connections.get(choice).getLong());
+        System.out.println("distance to waypoint: "+ posNode.calcDistance(waypointNode));
+        calcPos(0.0001, .4);
         
         ping();
         
         
-        waypointNode=waypointNode.connections.get(choice);
         
     }
     
-        public void stepOLD(){
-        //CHECK IF DONE
-        
-        if(!directions.inProgress()){
-            return;
-        }
-        // this is temporary
-        // write function call in Node to get coords from a node specifically
-        
+
         
 
-        int choice = directions.next();
-        posNode.setLat(waypointNode.connections.get(choice).getLat());
-        posNode.setLong(waypointNode.connections.get(choice).getLong());
-        
-        ping();
-        
-        
-        waypointNode=waypointNode.connections.get(choice);
-        
-    }
     
     public double calcDistance(Nd node1, Nd node2){
 

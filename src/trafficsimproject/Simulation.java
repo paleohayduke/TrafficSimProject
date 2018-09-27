@@ -84,19 +84,7 @@ public class Simulation {
  //       pauseStr = sc.next();
         
         
-        for(int i = 0;i<roads.size();i++){
-            System.out.println("road#: "+i);
-            System.out.println("intercepts: "+ roads.get(i).intersections.size());
-            for(int j = 0;j<roads.get(i).intersections.size();j++){
-                System.out.println("intersept ref:\t"+roads.get(i).intersections.get(j).getRef());
-            }
-            for(int j = 0; j<roads.get(i).nodeList.size();j++){
-                System.out.println( "\tnode ref:\t"+roads.get(i).nodeList.get(j).getRef());
-                System.out.println( "\tconnections:"+roads.get(i).nodeList.get(j).connections.size());
-                
-            }
-        }
-        System.out.println("end"+roads.size());
+        getSimInfo();
 
         
         //fix this 
@@ -136,10 +124,11 @@ public class Simulation {
         
        
         
-        for(int i =0;i<route.directions.size();i++){
+        for(int i =0;i<route.directions.size()*100;i++){
             
             try{
-            TimeUnit.SECONDS.sleep(1);
+                
+            TimeUnit.MILLISECONDS.sleep(250);
             }catch(Exception ex){
                 System.out.println("TimeUnit.SECONDS.sleep(1)");
             }
@@ -163,6 +152,22 @@ public class Simulation {
 
     }
     
+    // return this shit as a string
+    public void getSimInfo(){
+        for(int i = 0;i<roads.size();i++){
+            System.out.println("road#: "+i);
+            System.out.println("intercepts: "+ roads.get(i).intersections.size());
+            for(int j = 0;j<roads.get(i).intersections.size();j++){
+                System.out.println("intersept ref:\t"+roads.get(i).intersections.get(j).getRef());
+            }
+            for(int j = 0; j<roads.get(i).nodeList.size();j++){
+                System.out.println( "\tnode ref:\t"+roads.get(i).nodeList.get(j).getRef());
+                System.out.println( "\tconnections:"+roads.get(i).nodeList.get(j).connections.size());
+                
+            }
+        }
+        System.out.println("end"+roads.size());
+    }
     
 
 

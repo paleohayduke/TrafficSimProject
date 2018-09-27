@@ -106,7 +106,7 @@ public class Renderer extends JFrame{
         Double x1=(node.getLong()-minLon)*scale1;
         Double y1=(node.getLat()-minLat)*scale1;
         
-        testCar = new Rectangle2D.Double(x1/scale,y1/scale,10,10);
+        testCar = new Rectangle2D.Double(x1/scale-10,y1/scale-10,20,20);
         
         drawWindow();
         
@@ -165,7 +165,7 @@ public class Renderer extends JFrame{
             //graph2.draw(drawLine);
             
             // this is where the points are drawn on the screen
-            
+
             int counter = 0;
             for(int i =0; i<roadShapes.size();i++){
                 
@@ -186,6 +186,7 @@ public class Renderer extends JFrame{
             graph2.draw(testCar);
             
 //            System.out.println("SIZE OF WINDOW: " + (maxLon*100000-minLon*100000) + " " +(maxLat*100000-minLat*100000) );
+            
 
             
         }

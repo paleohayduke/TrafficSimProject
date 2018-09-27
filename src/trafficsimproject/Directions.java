@@ -42,6 +42,13 @@ public class Directions {
         else return false;
     }
     
+    public boolean hasStarted(){
+        if(stepIndex==0){
+            return false;
+        }
+        else return true;
+    }
+    
     int stepIndex=0;
     public int next(){
         return directions.get(stepIndex++);
