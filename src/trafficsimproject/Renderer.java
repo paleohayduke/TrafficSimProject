@@ -121,10 +121,10 @@ public class Renderer extends JFrame{
 //            }
         }
         
-        System.out.println("minLon"+minLon);
-        System.out.println("maxLon"+maxLon);
-        System.out.println("minLat"+minLat);
-        System.out.println("maxLat"+maxLon);
+//        System.out.println("minLon"+minLon);
+//        System.out.println("maxLon"+maxLon);
+//        System.out.println("minLat"+minLat);
+//        System.out.println("maxLat"+maxLon);
     }
     
     
@@ -294,22 +294,7 @@ public class Renderer extends JFrame{
             g.dispose();
             
         }
-        // lots of crap 
-        public void renderFrame(){
-            
-        }
-        
-        public void newFrame(){
-            
-        }
-        
-        public void addLine(int x1, int y1, int x2, int y2){
-            
-        }
-        
-        public void addPoint(int x, int y){
-            
-        }
+
         
         
         

@@ -10,6 +10,11 @@ turn this in as an appendix on reports.
 9/28/2019 Figured out the methods of JComponent a little better and was able to 
 fix the frame rate issue in the Renderer. Works a lot better now! 
 
+List of nodes added to Nd that link to all cars who hold the node as a waypoint.
+Might carry previous node to help figure orientation for handling stop signs.
+Stop lights should be much simpler.  
+
+
 9/27/2018 The automobile can now update its position based on time and
 velocity, this means it now moves smoothly between nodes.   
 
@@ -70,10 +75,9 @@ graph traversal algorithm.
 
 TODO:
 
--Renderer needs to rebuilt. Its doing a lot of unnecessary work.
+-Stoplights and stop signs.
 
--Implement update of car position between nodes. Solve for x and y from
-distance formula, Pythagorean theorem, vectors. 
+-Test mouse and button functionality
 
 -Collect intersection type data (stopsign, stoplight, speed limit).
 Reevaluate MapReader-write some functions that take tags as parameter to
@@ -97,6 +101,12 @@ Map is displaying upside down because origin (0,0) is top left corner for the JF
 Need to flip vertically.
 
 COMPLETED TASKS
+
+COMPLETED 9/28/2018: Fixed frame rate issue and the minimize-maximize bug
+Renderer needs to rebuilt. Its doing a lot of unnecessary work.
+
+COMPLETED  9/27/2019 Implement update of car position between nodes. Solve for x and y from
+distance formula, Pythagorean theorem, vectors. 
 
 COMPLETED 9/26/2018: Implement a graph search. 
 

@@ -18,8 +18,9 @@ public class Nd {
     private long ref = 0;
     private double longitude = 0;
     private double latitude = 0;
+    boolean isIntersection = false;
 
-    
+    ArrayList<Nd> cars = new ArrayList<Nd>();
     ArrayList<Nd> connections = new ArrayList<Nd>();
     ArrayList<Double> weights = new ArrayList<Double>();
  
@@ -57,6 +58,13 @@ public class Nd {
     public double getLat(){
         return latitude;
     }    
+    
+    public void addCar(Nd carNode){
+        cars.add(carNode);
+    }
+    public void removeCar(Nd carNode){
+        cars.remove(carNode);
+    }
     
     public double calcDistance(Nd node2){
         double long1=this.getLong();

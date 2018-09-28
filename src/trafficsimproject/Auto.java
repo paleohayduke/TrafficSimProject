@@ -131,7 +131,7 @@ public class Auto {
     
     public void nextWaypoint(){
         //CHECK IF DONE
-        
+        waypointNode.removeCar(posNode);
         if(!directions.inProgress()){
             System.out.println("!inProgress()");
             return;
@@ -143,6 +143,7 @@ public class Auto {
         posNode.setLong(waypointNode.getLong());
 //        System.out.println("choice="+choice);
         waypointNode=waypointNode.connections.get(choice);
+        waypointNode.addCar(posNode);
     }
     
     public void step(double velocity, double timeStep){
