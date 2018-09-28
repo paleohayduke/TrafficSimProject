@@ -38,6 +38,9 @@ public class GraphBuilder {
                        //MUST FIND AND LINK ALL instance of this intersect across all roads
                        Nd tempNode = findNode(roads.get(i).nodeList.get(j).getRef(),i,j);
                        roads.get(i).nodeList.get(j).addConnection(tempNode, 0);
+                       if(!tempNode.connections.contains(roads.get(i).nodeList.get(j))){
+                           tempNode.addConnection(roads.get(i).nodeList.get(j), 0);
+                       }
 //                       System.out.println("IM WORKING******");
                        
                    }

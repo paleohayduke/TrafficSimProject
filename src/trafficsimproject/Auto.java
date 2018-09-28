@@ -133,7 +133,7 @@ public class Auto {
         //CHECK IF DONE
         waypointNode.removeCar(posNode);
         if(!directions.inProgress()){
-            System.out.println("!inProgress()");
+//            System.out.println("!inProgress()");
             return;
             
         }
@@ -155,7 +155,7 @@ public class Auto {
 //        System.out.println("distance to waypoint: "+ posNode.calcDistance(waypointNode));
         calcPos(velocity, timeStep);
         
-        ping();
+        //ping();
         
         
         

@@ -75,8 +75,7 @@ public class MapReader {
         
         //tells us how many roads we got. the process to get the number of
         // roads is in getListOfNd
-        System.out.println("Number of Roads: " + roads.size()+ "\nRodeCounter: "
-        +roadCounter);
+        System.out.println("Number of Roads: " + roads.size());
         
         setIntersections();
     }

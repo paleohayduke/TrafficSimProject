@@ -12,7 +12,11 @@ fix the frame rate issue in the Renderer. Works a lot better now!
 
 List of nodes added to Nd that link to all cars who hold the node as a waypoint.
 Might carry previous node to help figure orientation for handling stop signs.
-Stop lights should be much simpler.  
+Stop lights should be much simpler. Idea: build stop lights or stop signs
+with mouse... map building tools.
+
+New bug, sometimes the cars will cycle through more than one node when
+updating waypoint. 
 
 
 9/27/2018 The automobile can now update its position based on time and
@@ -97,6 +101,9 @@ GUI
 
 BUGS
 
+Sometimes the cars will cycle through more than one node when
+updating their waypoint. Might be a problem with node connections. 
+
 Map is displaying upside down because origin (0,0) is top left corner for the JFrame.
 Need to flip vertically.
 
@@ -130,21 +137,3 @@ There are lots of nodes on curves so that shouldnt cause a problem but some of t
 COMPLETED 9/21/2018: Reimplement the method "private Nd makeND(long ref){ }" inside the "MapReader" as a binary search. 
 *important to test the program with a map of the entire city of killeen to fullfil requirements. 
 O(n) vs O(log(n)) on test map at 28,000 nodes, that is 28,000/14 = 1000 times faster.  
-
-
-
-BREAKDOWN OF CURRENT OUTPUT:
-
-road#: 6 
-intercepts: 1   //this is how many intersections the road has with other roads
-intersept ref:	149209137
-	node ref:	149447096   // each of these is a node of the road
-	connections:1   
-	node ref:	149447111   
-	connections:2
-	node ref:	149209137
-	connections:2
-
-*NOTE ON CONNECTONS: before the roads get their intersections a 4 node road will
-have connections like this: 1, 2, 2, 1. if there the values are greater than this
-pattern then there is intersection at the node with the raised value. 
