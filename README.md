@@ -17,6 +17,7 @@ with mouse... map building tools.
 
 New bug, sometimes the cars will cycle through more than one node when
 updating waypoint. 
+-Check on the... d/D, im thinking its when D gets near 0 or something. 
 
 Pathfinding causes hiccups in frame rate on the full size Killeen map when
 Random() picks two points that do not connect, leaving the algorithm to 

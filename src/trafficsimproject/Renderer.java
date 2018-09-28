@@ -165,7 +165,7 @@ public class Renderer extends JFrame{
     public void drawWindow(){
         latRange = (int)((maxLat-minLat)*scale1);// calculate the size of the window
         lonRange = (int)((maxLon- minLon)*scale1);
-        System.out.println("SIZE OF WINDOW: " + lonRange + " " +latRange );
+        System.out.println("SIZE OF WINDOW: " + lonRange/scale + " " +latRange/scale );
         this.setSize(lonRange,latRange); // regular stuff for jframe 
         
         this.setTitle("Traffic Sim");
