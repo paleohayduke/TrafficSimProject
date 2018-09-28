@@ -26,11 +26,11 @@ public class TrafficSimProject {
     
     static void demo(){
         Simulation sim = new Simulation();
-        sim.openMap("./src/MediumMap.osm"); // pick the map
+//        sim.openMap("./src/KilleenMap.osm"); // pick the map
+        sim.openMap("./src/MediumMap.osm");
         sim.setCars(200); // 200 is the amount of cars 
-        sim.startRenderer(4);// 4 is the scale
-//       sim.step();
-//        sim.updateRenderer();
+//        sim.startRenderer(8);// 8 is the scale
+        sim.startRenderer(4);
         for(int i =0;i<111111100;i++){ //play for a long time
             sim.step(0.00015, .05);            
             try{

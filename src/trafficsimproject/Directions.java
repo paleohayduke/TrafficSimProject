@@ -94,7 +94,7 @@ public class Directions {
                 queue.remove(0);
             }
             else if(queue.isEmpty()&&started==true){
-                System.out.println("NO RESULT");
+//                System.out.println("NO RESULT");
                 tempDirection.setEmpty();
                 return tempDirection;
                 
@@ -104,7 +104,7 @@ public class Directions {
             for(int j=0;j<tempDirection.directions.size();j++){
                 current=current.connections.get(tempDirection.directions.get(j));
                 if(current.getRef()==end.getRef()){
-                    System.out.println("FOUND ROUTE");
+ //                   System.out.println("FOUND ROUTE");
                     found=true;
                     return tempDirection;
                      

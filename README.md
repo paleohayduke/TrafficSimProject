@@ -18,7 +18,6 @@ with mouse... map building tools.
 New bug, sometimes the cars will cycle through more than one node when
 updating waypoint. 
 
-
 9/27/2018 The automobile can now update its position based on time and
 velocity, this means it now moves smoothly between nodes.   
 

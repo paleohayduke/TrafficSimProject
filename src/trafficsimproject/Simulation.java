@@ -186,32 +186,32 @@ public class Simulation {
     public void setCars(int totalCars){
         Random rand = new Random();
         for(int i = 0;i<totalCars;i++){
-            boolean repeat = true;
-
-
-            int roadNum1=0; 
-            int nodeNum1=0; 
-            int roadNum2=0; 
-            int nodeNum2=0;
-            Directions route=new Directions(); 
-           
-            while(repeat){
-                roadNum1 = rand.nextInt(roads.size());
-                nodeNum1 = rand.nextInt(roads.get(roadNum1).nodeList.size());
-                roadNum2 = rand.nextInt(roads.size());
-                nodeNum2 = rand.nextInt(roads.get(roadNum2).nodeList.size());
-                route = new Directions(roads.get(roadNum1).nodeList.get(nodeNum1));
-                route = route.findRoute(roads, roads.get(roadNum1).nodeList.get(nodeNum1), roads.get(roadNum2).nodeList.get(nodeNum2));
-    
-                if(!route.isEmpty()){
-                    repeat=false;
-                }
-            }
+//            boolean repeat = true;
+//
+//
+//            int roadNum1=0; 
+//            int nodeNum1=0; 
+//            int roadNum2=0; 
+//            int nodeNum2=0;
+            Directions route=makeDirection(); 
+//           
+//            while(repeat){
+//                roadNum1 = rand.nextInt(roads.size());
+//                nodeNum1 = rand.nextInt(roads.get(roadNum1).nodeList.size());
+//                roadNum2 = rand.nextInt(roads.size());
+//                nodeNum2 = rand.nextInt(roads.get(roadNum2).nodeList.size());
+//                route = new Directions(roads.get(roadNum1).nodeList.get(nodeNum1));
+//                route = route.findRoute(roads, roads.get(roadNum1).nodeList.get(nodeNum1), roads.get(roadNum2).nodeList.get(nodeNum2));
+//    
+//                if(!route.isEmpty()){
+//                    repeat=false;
+//                }
+//            }
   
             
 
             
-            route.start = roads.get(roadNum1).nodeList.get(nodeNum1);
+//            route.start = roads.get(roadNum1).nodeList.get(nodeNum1);
             
             Auto tempCar = new Auto();
             tempCar.setDirections(route);
@@ -222,11 +222,56 @@ public class Simulation {
 
     }
     
+    public Directions makeDirection(){
+        boolean repeat = true;
+        Random rand = new Random();
+        Directions route = new Directions();
+        while(repeat){
+            int roadNum1 = rand.nextInt(roads.size());
+            int nodeNum1 = rand.nextInt(roads.get(roadNum1).nodeList.size());
+            int roadNum2 = rand.nextInt(roads.size());
+            int nodeNum2 = rand.nextInt(roads.get(roadNum2).nodeList.size());
+            route = new Directions(roads.get(roadNum1).nodeList.get(nodeNum1));
+            route = route.findRoute(roads, roads.get(roadNum1).nodeList.get(nodeNum1), roads.get(roadNum2).nodeList.get(nodeNum2));
+            route.start = roads.get(roadNum1).nodeList.get(nodeNum1);
+            
+            if(!route.isEmpty()){
+                repeat=false;
+            }
+        }
+        
+        return route;
+        
+    }
+    
+    public Directions makeDirection(Nd start){
+        boolean repeat = true;
+        Random rand = new Random();
+        Directions route = new Directions();
+        while(repeat){
+            int roadNum2 = rand.nextInt(roads.size());
+            int nodeNum2 = rand.nextInt(roads.get(roadNum2).nodeList.size());
+            route = new Directions(start);
+            route = route.findRoute(roads, start, roads.get(roadNum2).nodeList.get(nodeNum2));
+            route.start = start;
+            
+            if(!route.isEmpty()){
+                repeat=false;
+            }
+        }
+        
+        return route;
+        
+    }
+    
     public void step(){
            
         for(int j=0;j<cars.size();j++){
             cars.get(j).step(0.0001, .4);
-                    
+            if(!cars.get(j).directions.inProgress()){
+                cars.get(j).setDirections(makeDirection(cars.get(j).waypointNode));
+                System.out.println("makeDirection()");
+            }
         }
     
         
@@ -238,7 +283,10 @@ public class Simulation {
            
         for(int j=0;j<cars.size();j++){
             cars.get(j).step(velocity,stepSize);
-                    
+            if(!cars.get(j).directions.inProgress()){
+                cars.get(j).setDirections(makeDirection());
+ //               System.out.println("makeDirection()");
+            }        
         }
     
 
