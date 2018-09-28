@@ -106,12 +106,14 @@ public class Auto {
         double d = velocity*timeIncrement;
         double D = posNode.calcDistance(waypointNode);
 //        System.out.println("D="+D+" d="+d);
-        
-        if(D==0){
-            nextWaypoint();
-        }
 
-        if(d>D){
+//EDITED OUT 9/28/2018 7:00AM 
+// I think this fixed the jumping around... 
+//        if(D==0){
+//            nextWaypoint();
+//        }
+
+        if(d>=D){
             d=d-D;
             
             nextWaypoint();
@@ -139,8 +141,10 @@ public class Auto {
         }
 
         int choice = directions.next();
-        posNode.setLat(waypointNode.getLat());
-        posNode.setLong(waypointNode.getLong());
+        //DISABLED 9/28/2018 7:09AM dont think we need this at current
+        // frame rates. 
+        //posNode.setLat(waypointNode.getLat());
+        //posNode.setLong(waypointNode.getLong());
 //        System.out.println("choice="+choice);
         waypointNode=waypointNode.connections.get(choice);
         waypointNode.addCar(posNode);

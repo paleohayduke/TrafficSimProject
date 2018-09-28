@@ -105,23 +105,24 @@ GUI
 
 BUGS
 
-Sometimes the cars will cycle through more than one node when
-updating their waypoint. Might be a problem with node connections. 
-
 Map is displaying upside down because origin (0,0) is top left corner for the JFrame.
 Need to flip vertically.
 
 COMPLETED TASKS
 
+COMPLETED 9/28/2018: Sometimes the cars will cycle through more than one node when
+updating their waypoint. Might be a problem with node connections. 
+*problem was with updating the waypoint and posNode of auto. 
+
 COMPLETED 9/28/2018: Fixed frame rate issue and the minimize-maximize bug
 Renderer needs to rebuilt. Its doing a lot of unnecessary work.
 
-COMPLETED  9/27/2019 Implement update of car position between nodes. Solve for x and y from
+COMPLETED  9/27/2019: Implement update of car position between nodes. Solve for x and y from
 distance formula, Pythagorean theorem, vectors. 
 
 COMPLETED 9/26/2018: Implement a graph search. 
 
-COMPLETED 9/26/2018 BUG FIXED findRoute() sort of works. Need to check if the problem is in the algorithm (likely)
+COMPLETED 9/26/2018 BUG FIXED: findRoute() sort of works. Need to check if the problem is in the algorithm (likely)
 or something with the linking of nodes crossing roads (in some test cases a path
 will be generated that involves changing roads at intersections, but sometimes
 the algorithm gets stuck in an infinite loop, need to review the code but im too

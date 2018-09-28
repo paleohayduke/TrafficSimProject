@@ -284,7 +284,8 @@ public class Simulation {
         for(int j=0;j<cars.size();j++){
             cars.get(j).step(velocity,stepSize);
             if(!cars.get(j).directions.inProgress()){
-                cars.get(j).setDirections(makeDirection());
+                cars.get(j).setDirections(makeDirection(cars.get(j).waypointNode));
+//                cars.get(j).setDirections(makeDirection(cars.get(j).waypointNode));
  //               System.out.println("makeDirection()");
             }        
         }
