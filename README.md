@@ -7,7 +7,10 @@ Announcements:
 Edit this text document with anything you do while working on the project. We can
 turn this in as an appendix on reports. 
 
-9/27/2018 5:04 AM the automobile can now update its position based on time and
+9/28/2019 Figured out the methods of JComponent a little better and was able to 
+fix the frame rate issue in the Renderer. Works a lot better now! 
+
+9/27/2018 The automobile can now update its position based on time and
 velocity, this means it now moves smoothly between nodes.   
 
 You can now spawn variable amount of cars at once, setCars(int numOfCars). 

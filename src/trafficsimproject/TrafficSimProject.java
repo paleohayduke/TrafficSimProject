@@ -21,9 +21,9 @@ public class TrafficSimProject {
      */
     public static void main(String[] args) {
         Simulation sim = new Simulation();
-        sim.openMap("./src/HomeMap.osm");
-        sim.setCars(100);
-        sim.startRenderer(1);
+        sim.openMap("./src/MediumMap.osm");
+        sim.setCars(200);
+        sim.startRenderer(4);
 //       sim.step();
 //        sim.updateRenderer();
         for(int i =0;i<111111100;i++){
@@ -35,7 +35,7 @@ public class TrafficSimProject {
                 System.out.println("TimeUnit.SECONDS.sleep(1)");
             }
  //           String pauseStr = sc.next();
-            sim.step(0.0001, .05);
+            sim.step(0.00015, .05);
             System.out.println("Frame "+i);
             sim.updateRenderer();
 //            setScale(i);

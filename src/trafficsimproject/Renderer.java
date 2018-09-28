@@ -23,11 +23,14 @@ import javax.swing.JFrame;
  */
 public class Renderer extends JFrame{
 
-
-    ArrayList<Road> roads;
+    DrawStuff drawer = new DrawStuff();
+    ArrayList<Road> roads = new ArrayList<>();
+    ArrayList<Auto> cars = new ArrayList<>();
     ArrayList<Shape> roadShapes = new ArrayList<Shape>();
     ArrayList<Shape> intersectShapes = new ArrayList<Shape>();
     ArrayList<Shape> carShapes = new ArrayList<Shape>();
+    
+    
 
     //drawRoad = new Line2D.Float(lons.get(i)/scale,lats.get(i)/scale,lons.get(i+1)/scale,lats.get(i+1)/scale);
     
@@ -72,6 +75,12 @@ public class Renderer extends JFrame{
     
     
     public void stepCars(ArrayList<Auto> cars){
+        this.cars=cars;
+        drawer.repaint();
+        //drawWindow();
+    }
+    
+    public void stepCarsOLD(ArrayList<Auto> cars){
         carShapes = new ArrayList<Shape>();
         for(int i =0; i<cars.size();i++){
             Double x1=(cars.get(i).posNode.getLong()-minLon)*scale1;
@@ -80,8 +89,10 @@ public class Renderer extends JFrame{
             Shape carPos = new Rectangle2D.Double(x1/scale-10,y1/scale-10,20,20);
             carShapes.add(carPos);
         }
+//        drawer.repaint();
         drawWindow();
     }
+    
     
     public void setMap(){
 
@@ -159,7 +170,7 @@ public class Renderer extends JFrame{
         
         this.setTitle("Traffic Sim");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.add(new DrawStuff(), BorderLayout.CENTER);
+        this.add(drawer, BorderLayout.CENTER);
         this.setVisible(true);
 
     }
@@ -190,12 +201,24 @@ public class Renderer extends JFrame{
             
             graph2.setPaint(Color.GREEN);
             
-            for(int i =0; i<carShapes.size();i++){
-                
-                graph2.draw(carShapes.get(i));
+//            for(int i =0; i<carShapes.size();i++){
+//                
+//                graph2.draw(carShapes.get(i));
+//
+//                
+//            }
 
-                
+//            carShapes = new ArrayList<Shape>();
+            for(int i =0; i<cars.size();i++){
+                Double x1=(cars.get(i).posNode.getLong()-minLon)*scale1;
+                Double y1=(cars.get(i).posNode.getLat()-minLat)*scale1;
+        
+                Shape carPos = new Rectangle2D.Double(x1/scale-10,y1/scale-10,20,20);
+ //               carShapes.add(carPos);
+                graph2.draw(carPos);
             }
+
+
             
 //            for(int i=0; i<intersectShapes.size();i++){
 //                graph2.setPaint(Color.RED);
@@ -215,7 +238,62 @@ public class Renderer extends JFrame{
             
         }
 
+        public void paintComponent(Graphics g){
+            Graphics2D graph2 = (Graphics2D)g;
+            
+
+//            graph2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+//                    RenderingHints.VALUE_ANTIALIAS_ON);
+
+            
+//            graph2.setPaint(Color.BLACK);
+//
+////            BufferedImage test = new BufferedImage(graph2.);
+//            for(int i =0; i<roadShapes.size();i++){
+//                
+//                graph2.draw(roadShapes.get(i));
+//
+//                
+//            }
+            
+            graph2.setPaint(Color.GREEN);
+            
+//            for(int i =0; i<carShapes.size();i++){
+//                
+//                graph2.draw(carShapes.get(i));
+//
+//                
+//            }
+
+//            carShapes = new ArrayList<Shape>();
+            for(int i =0; i<cars.size();i++){
+                Double x1=(cars.get(i).posNode.getLong()-minLon)*scale1;
+                Double y1=(cars.get(i).posNode.getLat()-minLat)*scale1;
         
+                Shape carPos = new Rectangle2D.Double(x1/scale-10,y1/scale-10,20,20);
+ //               carShapes.add(carPos);
+                graph2.draw(carPos);
+            }
+
+
+            
+//            for(int i=0; i<intersectShapes.size();i++){
+//                graph2.setPaint(Color.RED);
+//                graph2.draw(intersectShapes.get(i));
+// //               System.out.println("*********************************************************DRAWING INTERCEPT");
+// //               System.out.println("INTERSECT X: "+intersectShapes.get(i).getBounds().x);
+// //               System.out.println("INTERSECT Y: "+intersectShapes.get(i).getBounds().y);
+//            }
+            
+            //TEST CAR
+//            graph2.setPaint(Color.GREEN);
+//            graph2.draw(testCar);
+            
+//            System.out.println("SIZE OF WINDOW: " + (maxLon*100000-minLon*100000) + " " +(maxLat*100000-minLat*100000) );
+            graph2.dispose();
+            g.dispose();
+            
+        }
         // lots of crap 
         public void renderFrame(){
             

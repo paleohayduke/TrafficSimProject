@@ -148,12 +148,15 @@ public class MapReader {
                 }
                 
 
+                ++roadCounter;
+                if(i%100==0){
+                    System.out.println("...building Road # "+ roadCounter);
+                }
 
-                System.out.println("Road # "+ ++roadCounter);
 
                 // grabbing id of the Road
                 int roadID = Integer.parseInt(showElement.getAttribute("id"));
-                System.out.println("Road ID: " + roadID);
+//                System.out.println("Road ID: " + roadID);
 
 //////////////// tempRoad is made to build a road that holds all its nodes 
 //////////////// with all their data. After it is built, it is added to
@@ -461,7 +464,7 @@ public class MapReader {
                             tempNode.setLong(roads.get(i).nodeList.get(j).getLong());
                             tempNode.setRef(roads.get(i).nodeList.get(j).getRef());
                             roads.get(i).addIntersection(tempNode);
-                            System.out.println("Found Intercept");
+//                            System.out.println("Found Intercept");
                         }
                     }
                     
