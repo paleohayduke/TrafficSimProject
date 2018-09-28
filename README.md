@@ -18,6 +18,10 @@ with mouse... map building tools.
 New bug, sometimes the cars will cycle through more than one node when
 updating waypoint. 
 
+Pathfinding causes hiccups in frame rate on the full size Killeen map when
+Random() picks two points that do not connect, leaving the algorithm to 
+(sometimes) search the _entire_ map. 
+
 9/27/2018 The automobile can now update its position based on time and
 velocity, this means it now moves smoothly between nodes.   
 
