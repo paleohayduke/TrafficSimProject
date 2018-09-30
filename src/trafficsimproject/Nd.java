@@ -25,6 +25,7 @@ public class Nd {
     ArrayList<Nd> cars = new ArrayList<Nd>();
     ArrayList<Nd> connections = new ArrayList<Nd>();
     ArrayList<Double> weights = new ArrayList<Double>();
+    ArrayList<Nd> stopQ = new ArrayList<Nd>();
  
     public void addConnection(Nd node, double weight){
         this.connections.add(node);

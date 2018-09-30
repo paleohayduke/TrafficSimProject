@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit;
  * @author paleo
  */
 public class Simulation {
-    
-    private ArrayList<Road> roads = new ArrayList<Road>();
+    GraphBuilder gb;
+//    private ArrayList<Road> roads = new ArrayList<Road>();
     
     //TODO implement this cars
     private ArrayList<Auto> cars = new ArrayList<Auto>();
@@ -47,7 +47,8 @@ public class Simulation {
         MapReader reader = new MapReader(fileName);
         GraphBuilder gb = new GraphBuilder(reader.getRoads());
 //        StopBuilder sb = new StopBuilder(gb.roads);
-        roads=gb.roads;
+//        roads=gb.roads;
+        this.gb=gb;
         minLat=reader.minLat;
         minLon=reader.minLon;
         maxLon=reader.maxLon;
@@ -57,7 +58,7 @@ public class Simulation {
     
     // to start renderer
     public void startRenderer(double scale){
-        this.display = new Renderer(scale, roads,minLat,maxLat,minLon,maxLon);
+        this.display = new Renderer(scale, gb.roads,minLat,maxLat,minLon,maxLon);
         display.setMap();
         
         
@@ -69,7 +70,7 @@ public class Simulation {
     
     // Need to create framework of methods to handle cars
     public void demo() {
-        if(roads.size()<1){
+        if(gb.roads.size()<1){
             System.out.println("You must load a map first");
             return;
         }
@@ -120,13 +121,13 @@ public class Simulation {
 //        route.start = roads.get(440).nodeList.get(0);       
         
         Random rand = new Random();
-        int roadNum1 = rand.nextInt(roads.size());
-        int nodeNum1 = rand.nextInt(roads.get(roadNum1).nodeList.size());
-        int roadNum2 = rand.nextInt(roads.size());
-        int nodeNum2 = rand.nextInt(roads.get(roadNum2).nodeList.size());
-        Directions route = new Directions(roads.get(roadNum1).nodeList.get(nodeNum1));
-        route = route.findRoute(roads, roads.get(roadNum1).nodeList.get(nodeNum1), roads.get(roadNum2).nodeList.get(nodeNum2));   
-        route.start = roads.get(roadNum1).nodeList.get(nodeNum1);       
+        int roadNum1 = rand.nextInt(gb.roads.size());
+        int nodeNum1 = rand.nextInt(gb.roads.get(roadNum1).nodeList.size());
+        int roadNum2 = rand.nextInt(gb.roads.size());
+        int nodeNum2 = rand.nextInt(gb.roads.get(roadNum2).nodeList.size());
+        Directions route = new Directions(gb.roads.get(roadNum1).nodeList.get(nodeNum1));
+        route = route.findRoute(gb.roads, gb.roads.get(roadNum1).nodeList.get(nodeNum1), gb.roads.get(roadNum2).nodeList.get(nodeNum2));   
+        route.start = gb.roads.get(roadNum1).nodeList.get(nodeNum1);       
 
 
         for(int i =0;i<route.directions.size();i++){
@@ -169,19 +170,19 @@ public class Simulation {
     
     // return this shit as a string
     public void getSimInfo(){
-        for(int i = 0;i<roads.size();i++){
+        for(int i = 0;i<gb.roads.size();i++){
             System.out.println("road#: "+i);
-            System.out.println("intercepts: "+ roads.get(i).intersections.size());
-            for(int j = 0;j<roads.get(i).intersections.size();j++){
-                System.out.println("intersept ref:\t"+roads.get(i).intersections.get(j).getRef());
+            System.out.println("intercepts: "+ gb.roads.get(i).intersections.size());
+            for(int j = 0;j<gb.roads.get(i).intersections.size();j++){
+                System.out.println("intersept ref:\t"+gb.roads.get(i).intersections.get(j).getRef());
             }
-            for(int j = 0; j<roads.get(i).nodeList.size();j++){
-                System.out.println( "\tnode ref:\t"+roads.get(i).nodeList.get(j).getRef());
-                System.out.println( "\tconnections:"+roads.get(i).nodeList.get(j).connections.size());
+            for(int j = 0; j<gb.roads.get(i).nodeList.size();j++){
+                System.out.println( "\tnode ref:\t"+gb.roads.get(i).nodeList.get(j).getRef());
+                System.out.println( "\tconnections:"+gb.roads.get(i).nodeList.get(j).connections.size());
                 
             }
         }
-        System.out.println("end"+roads.size());
+        System.out.println("end"+gb.roads.size());
     }
     
     
@@ -229,13 +230,13 @@ public class Simulation {
         Random rand = new Random();
         Directions route = new Directions();
         while(repeat){
-            int roadNum1 = rand.nextInt(roads.size());
-            int nodeNum1 = rand.nextInt(roads.get(roadNum1).nodeList.size());
-            int roadNum2 = rand.nextInt(roads.size());
-            int nodeNum2 = rand.nextInt(roads.get(roadNum2).nodeList.size());
-            route = new Directions(roads.get(roadNum1).nodeList.get(nodeNum1));
-            route = route.findRoute(roads, roads.get(roadNum1).nodeList.get(nodeNum1), roads.get(roadNum2).nodeList.get(nodeNum2));
-            route.start = roads.get(roadNum1).nodeList.get(nodeNum1);
+            int roadNum1 = rand.nextInt(gb.roads.size());
+            int nodeNum1 = rand.nextInt(gb.roads.get(roadNum1).nodeList.size());
+            int roadNum2 = rand.nextInt(gb.roads.size());
+            int nodeNum2 = rand.nextInt(gb.roads.get(roadNum2).nodeList.size());
+            route = new Directions(gb.roads.get(roadNum1).nodeList.get(nodeNum1));
+            route = route.findRoute(gb.roads, gb.roads.get(roadNum1).nodeList.get(nodeNum1), gb.roads.get(roadNum2).nodeList.get(nodeNum2));
+            route.start = gb.roads.get(roadNum1).nodeList.get(nodeNum1);
             
             if(!route.isEmpty()){
                 repeat=false;
@@ -251,10 +252,10 @@ public class Simulation {
         Random rand = new Random();
         Directions route = new Directions();
         while(repeat){
-            int roadNum2 = rand.nextInt(roads.size());
-            int nodeNum2 = rand.nextInt(roads.get(roadNum2).nodeList.size());
+            int roadNum2 = rand.nextInt(gb.roads.size());
+            int nodeNum2 = rand.nextInt(gb.roads.get(roadNum2).nodeList.size());
             route = new Directions(start);
-            route = route.findRoute(roads, start, roads.get(roadNum2).nodeList.get(nodeNum2));
+            route = route.findRoute(gb.roads, start, gb.roads.get(roadNum2).nodeList.get(nodeNum2));
             route.start = start;
             
             if(!route.isEmpty()){
@@ -266,27 +267,14 @@ public class Simulation {
         
     }
     
-    public void step(){
-           
-        for(int j=0;j<cars.size();j++){
-            if(checkStop(j)){
-                continue;
-            }
-            cars.get(j).step(0.0001, .4);
-            if(!cars.get(j).directions.inProgress()){
-                cars.get(j).setDirections(makeDirection(cars.get(j).waypointNode));
-                System.out.println("makeDirection()");
-            }
-        }
-    
-        
-        
-    }
-    
+   
     
     public void step(double velocity, double stepSize){
            
         for(int j=0;j<cars.size();j++){
+//            if(checkStop(j)){
+//                continue;
+//            }
             cars.get(j).step(velocity,stepSize);
             if(!cars.get(j).directions.inProgress()){
                 cars.get(j).setDirections(makeDirection());
@@ -300,8 +288,9 @@ public class Simulation {
     }
     
     private boolean checkStop(int carIndex){
-        cars.get(carIndex);
-        
+         if(cars.get(carIndex).stop==true){
+            return true;
+        }
         return false;
     }
     

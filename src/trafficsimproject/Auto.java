@@ -22,7 +22,7 @@ public class Auto {
     Nd waypointNode =  new Nd();
     double distNext = 0;
     double velocity=0;
-    
+    boolean stop = false;
     static int carID=0;
 
     Auto(){
@@ -40,6 +40,7 @@ public class Auto {
         //HANDLE ITERATION INSIDE THE DIRECTION CLASS!!!!!
         try{
         waypointNode = directions.start.connections.get(this.directions.next());
+        waypointNode.addCar(this.posNode);
         }
         catch(Exception e){
             
@@ -73,29 +74,7 @@ public class Auto {
         
     }
 
-    public void stepOLD(){
-    
-        //CHECK IF DONE
-        
-        if(!directions.inProgress()){
-            return;
-        }
-        // this is temporary
-        // write function call in Node to get coords from a node specifically
-        
-        
 
-        int choice = directions.next();
-        posNode.setLat(waypointNode.connections.get(choice).getLat());
-        posNode.setLong(waypointNode.connections.get(choice).getLong());
-        
-        ping();
-        
-        
-        waypointNode=waypointNode.connections.get(choice);
-        
-    
-    }
     
     public void calcPos(double velocity, double timeIncrement){
         
@@ -112,11 +91,30 @@ public class Auto {
 //        if(D==0){
 //            nextWaypoint();
 //        }
-
-        if(d>=D){
-            if(waypointNode.isStop){
-                //d=d-D;
+        
+        if(waypointNode.isStop){
+            if(D<.00016){
+                if(!waypointNode.stopQ.contains(this.posNode)){
+                    waypointNode.stopQ.add(posNode);
+//                    System.out.println("add");
+                }
+                
+                if(this.posNode==waypointNode.stopQ.get(0)){
+//                    stop=false;
+//                    System.out.println("remove");
+//                    waypointNode.stopQ.remove(this.posNode);
+                }else{
+                    System.out.println("ID="+this.posNode.getRef());
+                    System.out.println("get(0)="+waypointNode.stopQ.get(0).getRef());
+                    System.out.println("stop");
+                    d=0;
+                }
             }
+        }
+        
+        
+        if(d>=D){
+            
             d=d-D;
             
             nextWaypoint();
@@ -136,9 +134,14 @@ public class Auto {
     
     public void nextWaypoint(){
         //CHECK IF DONE
+        if(waypointNode.isStop){
+            waypointNode.stopQ.remove(this.posNode);
+        }
+
         waypointNode.removeCar(posNode);
         if(!directions.inProgress()){
 //            System.out.println("!inProgress()");
+//            waypointNode.removeCar(posNode);
             return;
             
         }

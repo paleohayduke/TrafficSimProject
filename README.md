@@ -4,8 +4,8 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 Announcements:
 
-Edit this text document with anything you do while working on the project. We can
-turn this in as an appendix on reports. 
+
+9/30/2018 Stop signs are working. Time for stop lights. 
 
 9/29/2019 Consolidated intersections into one node. Next task is making stoplights
 *Nope... that broke a lot of intersections. set it back to old technique. 
@@ -102,7 +102,7 @@ graph traversal algorithm.
 
 TODO:
 
--Stoplights and stop signs.
+-Stoplights
 https://nacto.org/publication/urban-street-design-guide/intersection-design-elements/traffic-signals/signal-cycle-lengths/
 
 -Speed limits
@@ -135,6 +135,8 @@ Map is displaying upside down because origin (0,0) is top left corner for the JF
 Need to flip vertically.
 
 COMPLETED TASKS
+
+COMPLETED 9/30/2018: Stop signs.
 
 COMPLETED 9/29/2018: Link to Road from nodes. 
 
