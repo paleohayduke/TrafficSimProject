@@ -163,6 +163,26 @@ public class MapReader {
                 Road tempRoad = new Road();
                 tempRoad.setID(roadID); 
                 
+                NodeList waynessList = showElement.getElementsByTagName("tag");
+                
+                for(int j = 0;j<waynessList.getLength();j++){
+                    Node wayNd = waynessList.item(j);
+                    Element waynessShowElement = (Element)wayNd;
+                    String wayness = waynessShowElement.getAttribute("k");
+  //                  System.out.println("ONEWAY: "+wayness);
+                    if(wayness.equals("oneway")){
+//                        System.out.println("ONEWAY");
+                        String isOneway = (waynessShowElement.getAttribute("v"));
+//                        System.out.println(isOneway);
+                        if(isOneway.equals("yes")){
+//                            System.out.println(isOneway);
+                            tempRoad.oneWay=true;
+                        }
+                    }
+                }
+                
+                
+                
                 // This cycles through all the nodes in a Road
                 for(int j=0;j<ndList.getLength();j++){
                     Nd tempNd = new Nd();// familiar pattern
@@ -189,6 +209,7 @@ public class MapReader {
 //////////////////// before we can process the entire map of killeen. 
 //////////////////// it should be lightening fast after its turned to Binary Search. 
                     tempNd=makeNd(ref);
+                    tempNd.parentRoad=tempRoad;
                     tempRoad.addNode(tempNd);
                     
                     
@@ -414,38 +435,38 @@ public class MapReader {
     // gets all the intersections and adds them to the roads. 
     // This code runs but it has not been tested to see if it
     // is working correctly. 
-    void setIntersectionsOLD(){
-        
-        
-        for(int i = 1; i< roads.size();i++){
-            Road road = roads.get(i-1);
-            Road road2 = roads.get(i);
-            
-            ArrayList<IntersectNd> intersects = new ArrayList<IntersectNd>();
-            
-            for(int j=0;j<road.nodeList.size();j++){
-                for(int k=0;k<road2.nodeList.size();k++){
-                    if(road.getNodes().get(j).getRef()<road2.getNodes().get(k).getRef()+.00001&&
-                            road.getNodes().get(j).getRef()>road2.getNodes().get(k).getRef()-.00001){
-                        IntersectNd tempIntersect = new IntersectNd();
-                        tempIntersect.setLat(road.getNodes().get(j).getLat());
-                        tempIntersect.setLong(road.getNodes().get(j).getLong());
-                        tempIntersect.setRef(road.getNodes().get(j).getRef());
-                        tempIntersect.setSecondary(road2.getNodes().get(k).getRef());
-                        
-                        intersects.add(tempIntersect);
-                        System.out.println("Intersect: ");
-                    }
-                }
-                
-            }
-            roads.get(i-1).setIntersections(intersects);
-            
-        }
-        
-    }
+//    void setIntersectionsOLDEST(){
+//        
+//        
+//        for(int i = 1; i< roads.size();i++){
+//            Road road = roads.get(i-1);
+//            Road road2 = roads.get(i);
+//            
+//            ArrayList<IntersectNd> intersects = new ArrayList<IntersectNd>();
+//            
+//            for(int j=0;j<road.nodeList.size();j++){
+//                for(int k=0;k<road2.nodeList.size();k++){
+//                    if(road.getNodes().get(j).getRef()<road2.getNodes().get(k).getRef()+.00001&&
+//                            road.getNodes().get(j).getRef()>road2.getNodes().get(k).getRef()-.00001){
+//                        IntersectNd tempIntersect = new IntersectNd();
+//                        tempIntersect.setLat(road.getNodes().get(j).getLat());
+//                        tempIntersect.setLong(road.getNodes().get(j).getLong());
+//                        tempIntersect.setRef(road.getNodes().get(j).getRef());
+//                        tempIntersect.setSecondary(road2.getNodes().get(k).getRef());
+//                        
+//                        intersects.add(tempIntersect);
+//                        System.out.println("Intersect: ");
+//                    }
+//                }
+//                
+//            }
+//            roads.get(i-1).setIntersections(intersects);
+//            
+//        }
+//        
+//    }
     
-    void setIntersections(){
+    void setIntersectionsOLD(){
         for(int i = 0;i<roads.size();i++){
             for(int j =0;j<roads.get(i).nodeList.size();j++){
                 for(int k = 0; k<roads.size();k++){
@@ -473,11 +494,33 @@ public class MapReader {
         }
     }
     
-    
-    //https://en.wikipedia.org/wiki/Prim%27s_algorithm
-    //
-    //
-    //
-    //
+        void setIntersections(){
+        for(int i = 0;i<roads.size();i++){
+            for(int j =0;j<roads.get(i).nodeList.size();j++){
+                for(int k = 0; k<roads.size();k++){
+                    if(k==i){
+                        continue;
+                    }
+                    
+                    for(int l=0;l<roads.get(k).nodeList.size();l++){
+                        if(roads.get(i).nodeList.get(j).getLat()==roads.get(k).nodeList.get(l).getLat()
+                                &&roads.get(i).nodeList.get(j).getLong()==roads.get(k).nodeList.get(l).getLong()){
+                            IntersectNd tempNode = new IntersectNd();
+///////////////////////////////WORK ON THIS
+                            tempNode.connections.add(roads.get(i).nodeList.get(j));
+                            tempNode.setLat(roads.get(i).nodeList.get(j).getLat());
+                            tempNode.setLong(roads.get(i).nodeList.get(j).getLong());
+                            tempNode.setRef(roads.get(i).nodeList.get(j).getRef());
+                            roads.get(i).addIntersection(tempNode);
+//                            System.out.println("Found Intercept");
+                        }
+                    }
+                    
+                    
+                }
+            }
+        }
+    }
+
     
 }

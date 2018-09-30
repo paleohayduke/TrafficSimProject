@@ -23,6 +23,7 @@ public class Simulation {
     //TODO implement this cars
     private ArrayList<Auto> cars = new ArrayList<Auto>();
     
+    
     private Renderer display;
     
     // TODO: localize the scope of these variables
@@ -45,6 +46,7 @@ public class Simulation {
     public void openMap(String fileName){
         MapReader reader = new MapReader(fileName);
         GraphBuilder gb = new GraphBuilder(reader.getRoads());
+//        StopBuilder sb = new StopBuilder(gb.roads);
         roads=gb.roads;
         minLat=reader.minLat;
         minLon=reader.minLon;
@@ -267,6 +269,9 @@ public class Simulation {
     public void step(){
            
         for(int j=0;j<cars.size();j++){
+            if(checkStop(j)){
+                continue;
+            }
             cars.get(j).step(0.0001, .4);
             if(!cars.get(j).directions.inProgress()){
                 cars.get(j).setDirections(makeDirection(cars.get(j).waypointNode));
@@ -284,7 +289,7 @@ public class Simulation {
         for(int j=0;j<cars.size();j++){
             cars.get(j).step(velocity,stepSize);
             if(!cars.get(j).directions.inProgress()){
-                cars.get(j).setDirections(makeDirection(cars.get(j).waypointNode));
+                cars.get(j).setDirections(makeDirection());
 //                cars.get(j).setDirections(makeDirection(cars.get(j).waypointNode));
  //               System.out.println("makeDirection()");
             }        
@@ -292,6 +297,12 @@ public class Simulation {
     
 
         
+    }
+    
+    private boolean checkStop(int carIndex){
+        cars.get(carIndex);
+        
+        return false;
     }
     
     public void updateRenderer(){

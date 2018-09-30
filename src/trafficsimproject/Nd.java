@@ -19,6 +19,8 @@ public class Nd {
     private double longitude = 0;
     private double latitude = 0;
     boolean isIntersection = false;
+    boolean isStop = false;
+    Road parentRoad = new Road();
 
     ArrayList<Nd> cars = new ArrayList<Nd>();
     ArrayList<Nd> connections = new ArrayList<Nd>();

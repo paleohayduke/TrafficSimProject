@@ -32,7 +32,7 @@ public class TrafficSimProject {
 //        sim.startRenderer(8);// 8 is the scale
         sim.startRenderer(4);
         for(int i =0;i<111111100;i++){ //play for a long time
-            sim.step(0.00015, .05);            
+            sim.step(0.00016, .05);            
             try{
                 
                 TimeUnit.MILLISECONDS.sleep(20); //

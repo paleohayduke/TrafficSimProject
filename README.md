@@ -7,6 +7,18 @@ Announcements:
 Edit this text document with anything you do while working on the project. We can
 turn this in as an appendix on reports. 
 
+9/29/2019 Consolidated intersections into one node. Next task is making stoplights
+*Nope... that broke a lot of intersections. set it back to old technique. 
+
+One way roads are now implemented. This causes an issue if u set the cars
+to generate new routes from their destination waypoint if they just got to the
+end of a oneway road that dead ends at the end of the map and a few other
+circumstances. To deal with this i set up cars to spawn at a random new starting
+location when they finish their route. 
+
+Pathfinding now takes distance traveled into account (A*). Rebuilt GraphBuilder
+to consolidate intersections into single nodes. Next step is stops. 
+
 9/28/2019 Figured out the methods of JComponent a little better and was able to 
 fix the frame rate issue in the Renderer. Works a lot better now! 
 
@@ -22,6 +34,13 @@ updating waypoint.
 Pathfinding causes hiccups in frame rate on the full size Killeen map when
 Random() picks two points that do not connect, leaving the algorithm to 
 (sometimes) search the _entire_ map. 
+
+I was thinking about signal time length for stop lights and started to
+wonder, "should we add pedestrians?". 
+https://nacto.org/publication/urban-street-design-guide/intersection-design-elements/traffic-signals/signal-cycle-lengths/
+A lot of the decisions on timing schemes depends on vehicle traffic
+AND pedestrian traffic. 
+
 
 9/27/2018 The automobile can now update its position based on time and
 velocity, this means it now moves smoothly between nodes.   
@@ -84,8 +103,15 @@ graph traversal algorithm.
 TODO:
 
 -Stoplights and stop signs.
+https://nacto.org/publication/urban-street-design-guide/intersection-design-elements/traffic-signals/signal-cycle-lengths/
 
--Test mouse and button functionality
+-Speed limits
+
+-Test play and pause button functionality.
+
+-Test mouse interaction.
+
+-Function to find a node based on its longitude and latitude. 
 
 -Collect intersection type data (stopsign, stoplight, speed limit).
 Reevaluate MapReader-write some functions that take tags as parameter to
@@ -109,6 +135,15 @@ Map is displaying upside down because origin (0,0) is top left corner for the JF
 Need to flip vertically.
 
 COMPLETED TASKS
+
+COMPLETED 9/29/2018: Link to Road from nodes. 
+
+COMPLETED 9/29/2018: Change intersection node set up.. currently every intersection is made up of
+two nodes... need to change to ONE node at each intersection... this will greatly
+simplify stop signs and stop lights. 
+
+COMPLETED 9/29/2018: Alter localRoadBuilder to implement unidirectional node connections for
+one-way roads. 
 
 COMPLETED 9/28/2018: Sometimes the cars will cycle through more than one node when
 updating their waypoint. Might be a problem with node connections. 

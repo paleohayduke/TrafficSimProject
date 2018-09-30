@@ -14,13 +14,18 @@ import java.util.ArrayList;
 public class GraphBuilder {
     
     ArrayList<Road> roads = new ArrayList<Road>();
-    
+    ArrayList<Nd> intersects = new ArrayList<Nd>();
     
 
-    GraphBuilder(ArrayList<Road> roads){
+    GraphBuilder(ArrayList<Road> roads, int OLDVERSION){
         this.roads=roads;
         //go through each road
-        for(int i = 0;i<roads.size();i++){ 
+        int counter =0;
+        for(int i = 0;i<roads.size();i++){
+            counter++;
+            if(counter%100==0){
+                System.out.println("...building intersections # "+counter);
+            }
             //REMEMBER TO UNCOMMENT THIS
             roads.get(i).buildLocalIntercets();
             
@@ -34,15 +39,24 @@ public class GraphBuilder {
             // check each node again all intersections. 
                 for(int k=0;k<roads.get(i).getIntersections().size();k++){
 
+                    //9/29/2018 4:15AM TODO:
+                    // intersection found.... make a new node to connect them here
+                    // and make a list of intersection nodes that we can grab from
+                    // here. this list will be for handling stops. 
+                    
                    if(roads.get(i).nodeList.get(j).getRef()==roads.get(i).getIntersections().get(k).getRef()){
                        //MUST FIND AND LINK ALL instance of this intersect across all roads
                        Nd tempNode = findNode(roads.get(i).nodeList.get(j).getRef(),i,j);
+//                       makeIntersectNode(roads.get(i).nodeList.get(j),tempNode);
+                       
+
+
                        roads.get(i).nodeList.get(j).addConnection(tempNode, 0);
                        if(!tempNode.connections.contains(roads.get(i).nodeList.get(j))){
                            tempNode.addConnection(roads.get(i).nodeList.get(j), 0);
                        }
-//                       System.out.println("IM WORKING******");
-                       
+////                       System.out.println("IM WORKING******");
+//                       
                    }
                 }
                 
@@ -50,10 +64,100 @@ public class GraphBuilder {
         }
     }
     
+        GraphBuilder(ArrayList<Road> roads){
+        this.roads=roads;
+        //go through each road
+        int counter =0;
+        for(int i = 0;i<roads.size();i++){
+            counter++;
+            if(counter%100==0){
+                System.out.println("...building intersections # "+counter);
+            }
+            //REMEMBER TO UNCOMMENT THIS
+//            roads.get(i).buildLocalIntercets();
+            
+            
+//            System.out.println("Road#"+i+" size: "+roads.get(i).nodeList.size()+" intercept size: "+ roads.get(i).intersections.size());            
+
+            //Go through each node
+            for(int j = 0; j<roads.get(i).getNodes().size();j++){
+//                System.out.println("\tnode ref:"+roads.get(i).getNodes().get(j).getRef());
+                
+            // check each node again all intersections. 
+                for(int k=0;k<roads.get(i).getIntersections().size();k++){
+
+                    //9/29/2018 4:15AM TODO:
+                    // intersection found.... make a new node to connect them here
+                    // and make a list of intersection nodes that we can grab from
+                    // here. this list will be for handling stops. 
+                    
+                   if(roads.get(i).nodeList.get(j).getRef()==roads.get(i).getIntersections().get(k).getRef()){
+                       //MUST FIND AND LINK ALL instance of this intersect across all roads
+//                       Nd tempNode = findNode(roads.get(i).nodeList.get(j).getRef(),i,j);
+                       Indexes foundIJ = findNodeIndex(roads.get(i).nodeList.get(j).getRef(),i,j);
+//                       if(tempNode==roads.get(i).nodeList.get(j)){
+//                           continue;
+//                       }
+                       
+                       
+                       
+                       makeIntersectNode(i,j, foundIJ);
+                       
+
+
+//                       roads.get(i).nodeList.get(j).addConnection(tempNode, 0);
+//                       if(!tempNode.connections.contains(roads.get(i).nodeList.get(j))){
+//                           tempNode.addConnection(roads.get(i).nodeList.get(j), 0);
+//                       }
+////                       System.out.println("IM WORKING******");
+//                       
+                   }
+                }
+                
+            }
+            roads.get(i).buildLocalIntercets();
+        }
+    }
     
+    private void makeIntersectNode(int i, int j, Indexes fIJ){
+    
+        if(roads.get(i).nodeList.get(j)==roads.get(fIJ.i).nodeList.get(fIJ.j)){
+            return;
+        }
+        roads.get(i).nodeList.get(j).connections.add(roads.get(fIJ.i).nodeList.get(fIJ.j));
+        roads.get(fIJ.i).nodeList.remove(fIJ.j);
+        roads.get(fIJ.i).nodeList.add(fIJ.j, roads.get(i).nodeList.get(j));
+
+        
+    }
     
 
+    //struct
+    private class Indexes{
+        int i =0;
+        int j =0;
+    }
     
+    private Indexes findNodeIndex(long ref,int roadsIndex, int interIndex){
+        Indexes indexes = new Indexes();
+        Nd temp = new Nd();
+        for(int i = 0; i<roads.size();i++){
+            for(int j =0; j<roads.get(i).nodeList.size();j++){
+                if(i==roadsIndex&&j==interIndex){
+                    continue;
+                }
+                if(roads.get(i).nodeList.get(j).getRef()==ref){
+                    temp = roads.get(i).nodeList.get(j);
+                    indexes.i=i;
+                    indexes.j=j;
+                    
+
+                }
+            }
+        }
+        
+        return indexes;
+    }
     
     
     private Nd findNode(long ref,int roadsIndex, int interIndex){
@@ -65,11 +169,17 @@ public class GraphBuilder {
                 }
                 if(roads.get(i).nodeList.get(j).getRef()==ref){
                     temp = roads.get(i).nodeList.get(j);
+                    
+
                 }
             }
         }
         
         return temp;
+    }
+    
+    public ArrayList<Nd> getIntersections(){
+        return intersects;
     }
     
     public ArrayList<Road> getRoads(){

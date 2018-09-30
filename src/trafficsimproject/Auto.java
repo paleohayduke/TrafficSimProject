@@ -114,6 +114,9 @@ public class Auto {
 //        }
 
         if(d>=D){
+            if(waypointNode.isStop){
+                //d=d-D;
+            }
             d=d-D;
             
             nextWaypoint();

@@ -19,7 +19,7 @@ public class Road {
     ArrayList<Nd> nodeList = new ArrayList<Nd>();  // Nodes that make up road
     ArrayList<IntersectNd> intersections = new ArrayList<IntersectNd>();
     ArrayList<Double> distList = new ArrayList<Double>(); // distances between nodes
-
+    boolean oneWay = false;
     
     public double distance =0;
     
@@ -30,7 +30,11 @@ public class Road {
     public void buildLocalIntercets(){
         for(int i = 0; i< nodeList.size()-1;i++){
             nodeList.get(i).addConnection(nodeList.get(i+1), calcDistance(nodeList.get(i),nodeList.get(i+1)));
-            nodeList.get(i+1).addConnection(nodeList.get(i), calcDistance(nodeList.get(i+1),nodeList.get(i)));
+            
+            if(!oneWay){
+                nodeList.get(i+1).addConnection(nodeList.get(i), calcDistance(nodeList.get(i+1),nodeList.get(i)));
+            }
+//            nodeList.get(i+1).addConnection(nodeList.get(i), calcDistance(nodeList.get(i+1),nodeList.get(i)));
         }
     }
     

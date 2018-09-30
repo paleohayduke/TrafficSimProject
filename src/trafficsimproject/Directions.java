@@ -113,13 +113,14 @@ public class Directions {
                 
             int count=0;
             if(wasVisited(current.getRef(),visitedRef)){
-                    if(wasVisited(current.getRef(),visitedRef2)){
-                        continue;
-                    }
-                    else{
-                        visitedRef2.add(current.getRef());
-//                        System.out.println("visitedRef2");
-                    }
+                continue;
+//                    if(wasVisited(current.getRef(),visitedRef2)){
+//                        continue;
+//                    }
+//                    else{
+//                        visitedRef2.add(current.getRef());
+////                        System.out.println("visitedRef2");
+//                    }
             }
             else{
                 visitedRef.add(current.getRef());
@@ -131,6 +132,11 @@ public class Directions {
                 temp2Direction.add(j, current.connections.get(j).calcDistance(end));
 //                System.out.println("distance to target "+current.connections.get(j).calcDistance(end)*100
 //                +" turn: "+j);
+
+                Double displace = current.calcDistance(current.connections.get(j));
+                
+                temp2Direction.score=temp2Direction.score+displace;
+                
                 queue.add(temp2Direction);
             }          
         started=true;
