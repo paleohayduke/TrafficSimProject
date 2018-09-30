@@ -106,6 +106,8 @@ graph traversal algorithm.
 
 TODO:
 
+-Node Info Window
+
 -Stoplights
 https://nacto.org/publication/urban-street-design-guide/intersection-design-elements/traffic-signals/signal-cycle-lengths/
 
