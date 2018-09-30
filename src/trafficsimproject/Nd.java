@@ -21,6 +21,7 @@ public class Nd {
     boolean isIntersection = false;
     boolean isStop = false;
     Road parentRoad = new Road();
+    Auto parentAuto;
 
     ArrayList<Nd> cars = new ArrayList<Nd>();
     ArrayList<Nd> connections = new ArrayList<Nd>();

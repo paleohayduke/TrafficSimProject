@@ -18,19 +18,29 @@ public class Auto {
     Directions directions = new Directions();
     
     Nd posNode = new Nd();
-    
     Nd waypointNode =  new Nd();
+    Nd lastWaypointNode = new Nd();
     double distNext = 0;
     double velocity=0;
+    double maxVelocity=0;
+    double acceleration =0;
     boolean stop = false;
     static int carID=0;
+    
+    
 
     Auto(){
         posNode.setRef(carID++);
+        setNodeParent();
     }
     Auto(Directions dir){
         posNode.setRef(carID++);
         setDirections(dir);
+        setNodeParent();
+    }
+    
+    private void setNodeParent(){
+        posNode.parentAuto=this;
     }
     
     public void setDirections(Directions directions){
@@ -74,8 +84,9 @@ public class Auto {
         
     }
 
-
-    
+    double carSpacing =.0001151;
+    double stopSpacing=0;
+    int justGo =0;
     public void calcPos(double velocity, double timeIncrement){
         
         double x1=posNode.getLong();
@@ -91,9 +102,46 @@ public class Auto {
 //        if(D==0){
 //            nextWaypoint();
 //        }
-        
+
+// this handles distance between cars
+        for(int i = 0;i< waypointNode.cars.size();i++){
+            if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==this.lastWaypointNode
+                    &&waypointNode.cars.get(i)!=this.posNode){
+                double otherDist=waypointNode.cars.get(i).calcDistance(waypointNode);
+                if(otherDist<D){
+                    double spacing = posNode.calcDistance(waypointNode.cars.get(i));
+                    if(spacing<carSpacing){
+                        justGo++;
+                        if(justGo>10){
+                            justGo=0;
+                            break;
+
+                        }
+                        d=0;
+//                        System.out.println("car distance");
+                        return;
+                    }
+                }
+            }
+            else if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==waypointNode
+                    &&waypointNode.cars.get(i).parentAuto.waypointNode!=this.lastWaypointNode){
+                if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing){
+//                    justGo++;
+                        if(justGo>50){
+                            justGo=0;
+                            break;
+
+                        }
+                    d=0;
+                    return;
+                }
+                
+            }
+        }
+
+//stopsigns
         if(waypointNode.isStop){
-            if(D<.00016){
+            if(D<.00017){
                 if(!waypointNode.stopQ.contains(this.posNode)){
                     waypointNode.stopQ.add(posNode);
 //                    System.out.println("add");
@@ -104,10 +152,17 @@ public class Auto {
 //                    System.out.println("remove");
 //                    waypointNode.stopQ.remove(this.posNode);
                 }else{
-                    System.out.println("ID="+this.posNode.getRef());
-                    System.out.println("get(0)="+waypointNode.stopQ.get(0).getRef());
-                    System.out.println("stop");
-                    d=0;
+//                    System.out.println("ID="+this.posNode.getRef());
+//                    System.out.println("get(0)="+waypointNode.stopQ.get(0).getRef());
+//                    System.out.println("stop");
+                    justGo++;
+                    if(justGo>5){
+                        justGo=0;
+                        
+
+                    }else{
+                        d=0;
+                    }
                 }
             }
         }
@@ -137,11 +192,17 @@ public class Auto {
         if(waypointNode.isStop){
             waypointNode.stopQ.remove(this.posNode);
         }
+        
+        lastWaypointNode.removeCar(posNode);
+        lastWaypointNode=waypointNode;
+        //EDITS 9/30/2019 3:00AM
+//        waypointNode.removeCar(posNode);
 
-        waypointNode.removeCar(posNode);
+
         if(!directions.inProgress()){
+            lastWaypointNode.cars.remove(this.posNode);
 //            System.out.println("!inProgress()");
-//            waypointNode.removeCar(posNode);
+            waypointNode.removeCar(posNode);
             return;
             
         }
