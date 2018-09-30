@@ -213,7 +213,7 @@ public class Renderer extends JFrame{
                 Double x1=(cars.get(i).posNode.getLong()-minLon)*scale1;
                 Double y1=(cars.get(i).posNode.getLat()-minLat)*scale1;
         
-                Shape carPos = new Rectangle2D.Double(x1/scale-10,y1/scale-10,20,20);
+                Shape carPos = new Rectangle2D.Double(x1/scale-7,y1/scale-7,14,14);
  //               carShapes.add(carPos);
                 graph2.draw(carPos);
             }
@@ -270,7 +270,7 @@ public class Renderer extends JFrame{
                 Double x1=(cars.get(i).posNode.getLong()-minLon)*scale1;
                 Double y1=(cars.get(i).posNode.getLat()-minLat)*scale1;
         
-                Shape carPos = new Rectangle2D.Double(x1/scale-10,y1/scale-10,20,20);
+                Shape carPos = new Rectangle2D.Double((x1/scale-10),(y1/scale-10),20/scale,20/scale);
  //               carShapes.add(carPos);
                 graph2.draw(carPos);
             }

@@ -21,6 +21,8 @@ public class Simulation {
 //    private ArrayList<Road> roads = new ArrayList<Road>();
     
     //TODO implement this cars
+    
+    int tickCounter =0;
     private ArrayList<Auto> cars = new ArrayList<Auto>();
     
     
@@ -273,9 +275,13 @@ public class Simulation {
     }
     
    
-    
+    double stepSize =0;
     public void step(double velocity, double stepSize){
-           
+        this.stepSize=stepSize;
+        tickCounter++;
+        if(0==tickCounter%100){
+            System.out.println("tick # "+tickCounter);
+        }   
         for(int j=0;j<cars.size();j++){
 //            if(checkStop(j)){
 //                continue;

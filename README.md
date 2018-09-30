@@ -7,6 +7,10 @@ Announcements:
 
 9/30/2018 Stop signs are working. Time for stop lights. 
 
+Cars now keep distance between each other. 
+
+A* now takes into account traffic levels at time of route generation!
+
 9/29/2019 Consolidated intersections into one node. Next task is making stoplights
 *Nope... that broke a lot of intersections. set it back to old technique. 
 

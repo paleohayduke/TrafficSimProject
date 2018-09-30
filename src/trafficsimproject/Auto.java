@@ -23,7 +23,7 @@ public class Auto {
     double distNext = 0;
     double velocity=0;
     double maxVelocity=0;
-    double acceleration =0;
+    double acceleration =.00001;
     boolean stop = false;
     static int carID=0;
     
@@ -87,6 +87,7 @@ public class Auto {
     double carSpacing =.0001151;
     double stopSpacing=0;
     int justGo =0;
+    boolean stoppedOnce=false;
     public void calcPos(double velocity, double timeIncrement){
         
         double x1=posNode.getLong();
@@ -122,6 +123,7 @@ public class Auto {
 
                         }
                         d=0;
+//                        this.velocity=0;
 //                        System.out.println("car distance");
                         return;
                     }
@@ -133,10 +135,12 @@ public class Auto {
 //                    justGo++;
                         if(justGo>50){
                             justGo=0;
+//                            this.velocity=this.maxVelocity;
                             break;
 
                         }
                     d=0;
+//                    this.velocity=0;
                     return;
                 }
                 
@@ -146,12 +150,18 @@ public class Auto {
 //stopsigns
         if(waypointNode.isStop){
             if(D<.00017){
+                
+//                if(!stoppedOnce){
+//                    this.velocity=0;
+//                    stoppedOnce=true;
+//                }
                 if(!waypointNode.stopQ.contains(this.posNode)){
                     waypointNode.stopQ.add(posNode);
 //                    System.out.println("add");
                 }
                 
                 if(this.posNode==waypointNode.stopQ.get(0)){
+                    
 //                    stop=false;
 //                    System.out.println("remove");
 //                    waypointNode.stopQ.remove(this.posNode);
@@ -166,6 +176,7 @@ public class Auto {
 
                     }else{
                         d=0;
+//                        this.velocity=0;
                     }
                 }
             }
@@ -194,6 +205,7 @@ public class Auto {
     public void nextWaypoint(){
         //CHECK IF DONE
         if(waypointNode.isStop){
+            stoppedOnce=false;
             waypointNode.stopQ.remove(this.posNode);
         }
         
@@ -221,7 +233,7 @@ public class Auto {
         waypointNode.addCar(posNode);
     }
     
-    public void step(double velocity, double timeStep){
+    public void stepOLD(double velocity, double timeStep){
         //CHECK IF DONE
         // this is temporary
         // write function call in Node to get coords from a node specifically
@@ -236,7 +248,33 @@ public class Auto {
         
     }
     
-
+//    boolean accelSet=false;
+    
+    public void step(double maxVelocity, double timeStep){
+        //CHECK IF DONE
+        // this is temporary
+        // write function call in Node to get coords from a node specifically
+        
+//        this.maxVelocity=maxVelocity;
+//        if(velocity<maxVelocity){
+//            velocity+=acceleration;
+//            if(velocity>maxVelocity){
+//                velocity=maxVelocity;
+//            }
+//        }
+//        if(!accelSet){
+//            acceleration=.00002;
+//            accelSet=true;
+//        }
+//        
+//        System.out.println("distance to waypoint: "+ posNode.calcDistance(waypointNode));
+        calcPos(maxVelocity, timeStep);
+        
+        //ping();
+        
+        
+        
+    }
         
 
     

@@ -134,8 +134,12 @@ public class Directions {
 //                +" turn: "+j);
 
                 Double displace = current.calcDistance(current.connections.get(j));
-                
-                temp2Direction.score=temp2Direction.score+displace;
+                double trafficHeur = current.connections.get(j).cars.size();
+//                System.out.println("score="+temp2Direction.score);
+//                
+//                System.out.println("displace="+displace);
+//                System.out.println("traffic="+trafficHeur);
+                temp2Direction.score=temp2Direction.score+displace+trafficHeur*.01;
                 
                 queue.add(temp2Direction);
             }          
