@@ -279,7 +279,7 @@ public class Simulation {
     public void step(double velocity, double stepSize){
         this.stepSize=stepSize;
         tickCounter++;
-        if(0==tickCounter%100){
+        if(0==tickCounter%3600){
             System.out.println("tick # "+tickCounter);
         }   
         for(int j=0;j<cars.size();j++){

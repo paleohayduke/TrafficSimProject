@@ -7,15 +7,19 @@ package trafficsimproject;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -30,6 +34,8 @@ public class Renderer extends JFrame{
     ArrayList<Shape> intersectShapes = new ArrayList<Shape>();
     ArrayList<Shape> carShapes = new ArrayList<Shape>();
     
+    //send a Nd to this with mouse! check that this is not null first. 
+    NodeInfoFrame nodeInfoFrame;
     
 
     //drawRoad = new Line2D.Float(lons.get(i)/scale,lats.get(i)/scale,lons.get(i+1)/scale,lats.get(i+1)/scale);
@@ -65,7 +71,8 @@ public class Renderer extends JFrame{
         intersectShapes=new ArrayList<>();
         
         setMap();
-        drawWindow();
+        drawer.repaint();
+        //drawWindow();
         
     }    
     //for transforming the long&lat to pixels
@@ -167,10 +174,37 @@ public class Renderer extends JFrame{
         lonRange = (int)((maxLon- minLon)*scale1);
         System.out.println("SIZE OF WINDOW: " + lonRange/scale + " " +latRange/scale );
         this.setSize(lonRange,latRange); // regular stuff for jframe 
-        
+ 
         this.setTitle("Traffic Sim");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(drawer, BorderLayout.CENTER);
+        
+        
+        JPanel toolPanel = new JPanel();
+        
+        JButton nodeToolButton = new JButton("Node");
+        nodeToolButton.setPreferredSize(new Dimension(65, 20));
+        nodeToolButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                nodeInfoFrame=new NodeInfoFrame();
+            }
+        });
+        
+        JButton carToolButton = new JButton("Car");
+        carToolButton.setPreferredSize(new Dimension(65, 20));
+        carToolButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+//                new NodeInfoFrame();
+            }
+        });
+        
+//        this.add(carToolButton, BorderLayout.NORTH);
+        toolPanel.add(nodeToolButton);
+        toolPanel.add(carToolButton);
+        toolPanel.setPreferredSize(new Dimension(300,24));
+        this.add(toolPanel, BorderLayout.NORTH);
+        //ugh, add these buttons to a frame and then put on north of thie frame
+        
         this.setVisible(true);
 
     }
