@@ -20,6 +20,7 @@ public class Nd {
     private double latitude = 0;
     boolean isIntersection = false;
     boolean isStop = false;
+    boolean isStopLight=false;
     Road parentRoad = new Road();
     Auto parentAuto;
 

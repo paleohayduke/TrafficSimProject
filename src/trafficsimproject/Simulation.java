@@ -188,6 +188,7 @@ public class Simulation {
     
     public void setCars(int totalCars){
         Random rand = new Random();
+        int routeCounter=0;
         for(int i = 0;i<totalCars;i++){
 //            boolean repeat = true;
 //
@@ -196,7 +197,11 @@ public class Simulation {
 //            int nodeNum1=0; 
 //            int roadNum2=0; 
 //            int nodeNum2=0;
-            Directions route=makeDirection(); 
+            Directions route=makeDirection();
+            routeCounter++;
+            if(routeCounter%100==0){
+                System.out.println("...route # "+routeCounter);
+            }
 //           
 //            while(repeat){
 //                roadNum1 = rand.nextInt(roads.size());

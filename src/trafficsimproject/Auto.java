@@ -103,13 +103,17 @@ public class Auto {
 //            nextWaypoint();
 //        }
 
+
+//break the following down into multiple functions
+// and add option toggle. 
 // this handles distance between cars
         for(int i = 0;i< waypointNode.cars.size();i++){
             if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==this.lastWaypointNode
                     &&waypointNode.cars.get(i)!=this.posNode){
                 double otherDist=waypointNode.cars.get(i).calcDistance(waypointNode);
                 if(otherDist<D){
-                    double spacing = posNode.calcDistance(waypointNode.cars.get(i));
+                    double spacing = D-otherDist;
+//                    double spacing = posNode.calcDistance(waypointNode.cars.get(i));
                     if(spacing<carSpacing){
                         justGo++;
                         if(justGo>10){
