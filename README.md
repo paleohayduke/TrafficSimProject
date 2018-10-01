@@ -4,6 +4,11 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 Announcements:
 
+10/1/2018
+
+There are a few buttons, pause, play, fast forward. 
+Fast forward is button clicks^2. 
+ 
 
 9/30/2018 Stop signs are working. Time for stop lights. 
 

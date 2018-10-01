@@ -280,9 +280,14 @@ public class Simulation {
    
     double stepSize =0;
     public void step(double velocity, double stepSize){
-        if(display.playSpeed==0){
-            return;
+        if(display.playSpeed!=1){
+            if(display.playSpeed==0){
+                return;
+            }else if(display.playSpeed>1){
+               stepSize=stepSize*(display.playSpeed)*(display.playSpeed);
+            }
         }
+        
         this.stepSize=stepSize;
         tickCounter++;
         if(0==tickCounter%3600){

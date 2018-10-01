@@ -204,6 +204,14 @@ public class Renderer extends JFrame{
 //                nodeInfoFrame=new NodeInfoFrame();
             }
         });
+        JButton fastPlayButton = new JButton(">>>");
+        fastPlayButton.setPreferredSize(new Dimension(65, 20));
+        fastPlayButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                playSpeed++;
+//                nodeInfoFrame=new NodeInfoFrame();
+            }
+        });
         
         JButton nodeToolButton = new JButton("Node");
         nodeToolButton.setPreferredSize(new Dimension(65, 20));
@@ -232,6 +240,7 @@ public class Renderer extends JFrame{
 //        this.add(carToolButton, BorderLayout.NORTH);  
         toolPanel.add(pauseButton);
         toolPanel.add(playButton);
+        toolPanel.add(fastPlayButton);
         toolPanel.add(nodeToolButton);
         toolPanel.add(carToolButton);
         toolPanel.add(optionsButton);

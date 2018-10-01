@@ -139,7 +139,7 @@ public class Directions {
 //                
 //                System.out.println("displace="+displace);
 //                System.out.println("traffic="+trafficHeur);
-                temp2Direction.score=temp2Direction.score+displace+trafficHeur*.001;
+                temp2Direction.score=temp2Direction.score+displace+trafficHeur*.01;
                 
                 queue.add(temp2Direction);
             }          
