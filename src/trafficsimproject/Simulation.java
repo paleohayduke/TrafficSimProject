@@ -254,6 +254,9 @@ public class Simulation {
         
     }
     
+    
+    // this is broke... way points are deleted after trip complete.. maybe not necissary. 
+    //revisit auto updatepos 
     public Directions makeDirection(Nd start){
         boolean repeat = true;
         Random rand = new Random();

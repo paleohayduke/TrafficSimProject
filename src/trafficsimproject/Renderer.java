@@ -14,6 +14,9 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -35,7 +38,7 @@ public class Renderer extends JFrame{
     ArrayList<Shape> roadShapes = new ArrayList<Shape>();
     ArrayList<Shape> intersectShapes = new ArrayList<Shape>();
     ArrayList<Shape> carShapes = new ArrayList<Shape>();
-    
+//    MouseHandler mouseHandler;
     //send a Nd to this with mouse! check that this is not null first. 
     NodeInfoFrame nodeInfoFrame;
     
@@ -235,9 +238,13 @@ public class Renderer extends JFrame{
         toolPanel.setPreferredSize(new Dimension(300,24));
         toolPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,1));
         this.add(toolPanel, BorderLayout.NORTH);
+        MouseHandler mouseHandler = new MouseHandler();
+        this.addMouseListener(mouseHandler);
+        
         //ugh, add these buttons to a frame and then put on north of thie frame
         
         this.setVisible(true);
+        
 
     }
     
@@ -245,6 +252,50 @@ public class Renderer extends JFrame{
     
     // this draws stuff
     // 
+    
+    private class MouseHandler implements MouseListener, MouseMotionListener{
+        
+        int x=0;
+        int y=0;
+
+
+        public void mouseClicked(MouseEvent e) {
+            System.out.println("clicked at, X="+e.getX()+" Y="+e.getY());
+            x=e.getX();
+            y=e.getY();
+            new NodeInfoFrame();
+        }
+
+  
+        public void mousePressed(MouseEvent e) {
+     
+        }
+
+
+        public void mouseReleased(MouseEvent e) {
+         
+        }
+
+
+        public void mouseEntered(MouseEvent e) {
+       
+        }
+
+
+        public void mouseExited(MouseEvent e) {
+   
+        }
+
+
+        public void mouseDragged(MouseEvent e) {
+
+        }
+
+        public void mouseMoved(MouseEvent e) {
+            
+        }
+        
+    }
     
     private class DrawStuff extends JComponent{
         public void paint(Graphics g){

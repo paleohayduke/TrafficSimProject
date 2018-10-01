@@ -32,17 +32,20 @@ this.setLayout(new GridLayout());
         JLabel latLabel = new JLabel("lat:");
         JLabel conLabel = new JLabel("connects:");
         JLabel carsLabel = new JLabel("cars:");
+        
         JPanel displayPanel = new JPanel();
         displayPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         displayPanel.add(refLabel);
         displayPanel.add(longLabel);
         displayPanel.add(latLabel);
-        this.add(displayPanel, BorderLayout.NORTH);
+        this.add(displayPanel, BorderLayout.WEST);
 
         JPanel conPanel = new JPanel();
         conPanel.add(conLabel);
+
         JPanel carPanel = new JPanel();
         carPanel.add(carsLabel);
+
         this.add(conPanel,BorderLayout.CENTER);
         this.add(carPanel,BorderLayout.CENTER);
         

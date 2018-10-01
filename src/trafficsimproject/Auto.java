@@ -117,7 +117,7 @@ public class Auto {
 //                    double spacing = posNode.calcDistance(waypointNode.cars.get(i));
                     if(spacing<carSpacing){
                         justGo++;
-                        if(justGo>10){
+                        if(justGo>20){
                             justGo=0;
                             break;
 
@@ -133,7 +133,7 @@ public class Auto {
                     &&waypointNode.cars.get(i).parentAuto.waypointNode!=this.lastWaypointNode){
                 if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing){
 //                    justGo++;
-                        if(justGo>50){
+                        if(justGo>100){
                             justGo=0;
 //                            this.velocity=this.maxVelocity;
                             break;
