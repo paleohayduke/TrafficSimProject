@@ -28,17 +28,17 @@ public class TrafficSimProject {
         Simulation sim = new Simulation();
 //        sim.openMap("./src/KilleenMap.osm"); // pick the map
 //        sim.startRenderer(8);// 8 is the scale
-//        sim.openMap("./src/MediumMap.osm");
-//        sim.startRenderer(4);
+        sim.openMap("./src/MediumMap.osm");
+        sim.startRenderer(4);
 //        
 //        sim.openMap("./src/KilleenTAMUCTbig.osm");
 //        sim.startRenderer(6);
 
-        sim.openMap("./src/Austin.osm");
-        sim.startRenderer(1);
-        sim.setCars(500); // 200 is the amount of cars 
-
-        for(int i =0;i<111111100;i++){ //play for a long time
+//        sim.openMap("./src/Austin.osm");
+//        sim.startRenderer(1);
+        sim.setCars(1000); // 200 is the amount of cars 
+        boolean run = true;
+        while(run){ //play for a long time
             sim.step(0.00016, .05);            
             try{
                 

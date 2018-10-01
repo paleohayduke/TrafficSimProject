@@ -250,9 +250,9 @@ public class Renderer extends JFrame{
         toolPanel.add(pauseButton);
         toolPanel.add(playButton);
         toolPanel.add(fastPlayButton);
-        toolPanel.add(nodeToolButton);
+//        toolPanel.add(nodeToolButton);
 //        toolPanel.add(carToolButton);
-        toolPanel.add(optionsButton);
+//        toolPanel.add(optionsButton);
         toolPanel.setPreferredSize(new Dimension(300,24));
         toolPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,1));
         this.add(toolPanel, BorderLayout.NORTH);
