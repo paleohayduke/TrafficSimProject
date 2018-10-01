@@ -287,6 +287,15 @@ public class Simulation {
                stepSize=stepSize*(display.playSpeed)*(display.playSpeed);
             }
         }
+        if(display.nodeSearchPlease){
+            Nd searchResult = gb.findNode(display.mouseLong, display.mouseLat);
+//            System.out.println("ndPlease");
+            display.nodeInfoFrame.node=searchResult;
+            display.nodeSearchPlease=false;
+            display.nodeInfoFrame.setFields();;
+//            display.nodeInfoFrame.repaint();
+            
+        }
         
         this.stepSize=stepSize;
         tickCounter++;

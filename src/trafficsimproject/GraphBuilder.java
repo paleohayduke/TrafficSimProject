@@ -156,4 +156,27 @@ public class GraphBuilder {
     public ArrayList<Road> getRoads(){
         return roads;
     }
+    
+    public Nd findNode(double x, double y){
+        Nd output=new Nd();
+        System.out.println("x="+x+"     y="+y);
+     
+        for(int i=0;i<roads.size();i++){
+ 
+            for(int j=0;j<roads.get(i).nodeList.size();j++){
+
+                if(roads.get(i).nodeList.get(j).getLat()<y+.0005
+                        &&roads.get(i).nodeList.get(j).getLat()>y-.0005
+                        &&roads.get(i).nodeList.get(j).getLong()>x-.0005
+                        &&roads.get(i).nodeList.get(j).getLong()<x+.0005){
+                    output=roads.get(i).nodeList.get(j);
+//                    System.out.println("FOUND IT");
+//                    System.out.println("lon="+output.getLong()+" lat="+output.getLat());
+                    return output;
+                }
+            }
+        }
+        
+        return output;
+    }
 }

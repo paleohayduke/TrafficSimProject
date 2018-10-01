@@ -43,6 +43,10 @@ public class Renderer extends JFrame{
     NodeInfoFrame nodeInfoFrame;
     
 
+    double mouseLong=0;
+    double mouseLat=0;
+    
+
     //drawRoad = new Line2D.Float(lons.get(i)/scale,lats.get(i)/scale,lons.get(i+1)/scale,lats.get(i+1)/scale);
     
     //for adjusting map
@@ -162,6 +166,7 @@ public class Renderer extends JFrame{
     int latRange=0;
     int lonRange=0;
     
+    
     //Graphics2D graph2;
     
     
@@ -174,6 +179,7 @@ public class Renderer extends JFrame{
         
     }
     
+    boolean nodeButtonOn=false;
     public void drawWindow(){
         latRange = (int)((maxLat-minLat)*scale1);// calculate the size of the window
         lonRange = (int)((maxLon- minLon)*scale1);
@@ -218,6 +224,9 @@ public class Renderer extends JFrame{
         nodeToolButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 nodeInfoFrame=new NodeInfoFrame();
+                if(nodeButtonOn){
+                    nodeButtonOn=false;
+                }else nodeButtonOn=true;
             }
         });
         
@@ -242,7 +251,7 @@ public class Renderer extends JFrame{
         toolPanel.add(playButton);
         toolPanel.add(fastPlayButton);
         toolPanel.add(nodeToolButton);
-        toolPanel.add(carToolButton);
+//        toolPanel.add(carToolButton);
         toolPanel.add(optionsButton);
         toolPanel.setPreferredSize(new Dimension(300,24));
         toolPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,1));
@@ -261,18 +270,21 @@ public class Renderer extends JFrame{
     
     // this draws stuff
     // 
-    
+        boolean nodeSearchPlease=false;
     private class MouseHandler implements MouseListener, MouseMotionListener{
         
-        int x=0;
-        int y=0;
 
 
         public void mouseClicked(MouseEvent e) {
-            System.out.println("clicked at, X="+e.getX()+" Y="+e.getY());
-            x=e.getX();
-            y=e.getY();
-            new NodeInfoFrame();
+//            System.out.println("clicked at, X="+e.getX()+" Y="+e.getY());
+            mouseLong=(e.getX()*scale)/scale1+minLon;
+            mouseLat=(e.getY()*scale)/scale1+minLat;
+
+            
+            if(nodeButtonOn){
+                nodeSearchPlease = true;
+            }
+            
         }
 
   
