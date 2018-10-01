@@ -139,7 +139,7 @@ public class Directions {
 //                
 //                System.out.println("displace="+displace);
 //                System.out.println("traffic="+trafficHeur);
-                temp2Direction.score=temp2Direction.score+displace+trafficHeur*.01;
+                temp2Direction.score=temp2Direction.score+displace+trafficHeur*.001;
                 
                 queue.add(temp2Direction);
             }          
@@ -150,80 +150,80 @@ public class Directions {
         
         return route;
     }
-    
-    public Directions findRouteOLD(ArrayList<Road> roads, Nd start, Nd end){
-        Directions route = new Directions();
-        ArrayList<Directions> queue = new ArrayList<Directions>();
-        ArrayList<Long> visitedRef = new ArrayList<Long>();
-        
-        
-        boolean found = false;        
-        boolean started = false;
-
-        
-        while(!found){
-            Nd current=start;
-            
-            for(int i =0;i< current.connections.size();i++){
-
-                Directions tempDirection= new Directions();
-                
-                
-                if(queue.size()>0){
-                    tempDirection = new Directions(queue.get(0));
-                    queue.remove(0);
-                }else if(queue.size()<=0&&started==true){
-                    return tempDirection;
-                }
-                
-                //get current node
-                current=start;
-                for(int j=0;j<tempDirection.directions.size();j++){
-                    current=current.connections.get(tempDirection.directions.get(j));
-                    if(current.getRef()==end.getRef()){
-                        System.out.println("FOUND ROUTE");
-                        found=true;
-                        return tempDirection;
-                        
-                    }
-                }
-                
-                // add direction list with score to queue
-                for(int j =0;j<current.connections.size();j++){
-//                    if(wasVisited(current.connections.get(j).getRef(),visitedRef)){
-//                        //VISITED LIST
-//                        continue;
+//    
+//    public Directions findRouteOLD(ArrayList<Road> roads, Nd start, Nd end){
+//        Directions route = new Directions();
+//        ArrayList<Directions> queue = new ArrayList<Directions>();
+//        ArrayList<Long> visitedRef = new ArrayList<Long>();
+//        
+//        
+//        boolean found = false;        
+//        boolean started = false;
+//
+//        
+//        while(!found){
+//            Nd current=start;
+//            
+//            for(int i =0;i< current.connections.size();i++){
+//
+//                Directions tempDirection= new Directions();
+//                
+//                
+//                if(queue.size()>0){
+//                    tempDirection = new Directions(queue.get(0));
+//                    queue.remove(0);
+//                }else if(queue.size()<=0&&started==true){
+//                    return tempDirection;
+//                }
+//                
+//                //get current node
+//                current=start;
+//                for(int j=0;j<tempDirection.directions.size();j++){
+//                    current=current.connections.get(tempDirection.directions.get(j));
+//                    if(current.getRef()==end.getRef()){
+//                        System.out.println("FOUND ROUTE");
+//                        found=true;
+//                        return tempDirection;
+//                        
 //                    }
-//                    visitedRef.add(current.connections.get(j).getRef());
-                    Directions temp2Direction = new Directions(tempDirection);
-                    temp2Direction.add(j, current.connections.get(j).calcDistance(end));
-//                    System.out.println("Adding direction");
-                    System.out.println("distance to target "+current.connections.get(j).calcDistance(end)*100);
-                    queue.add(temp2Direction);
-                }          
-                
-                
-                
-            }
-            started=true;
-            queue=sortQueue(queue);
-            
-
-
-            
-            
-            
-            
-            
-            
-        }
-        
-        
-        
-        
-        
-        return route;
-    }
+//                }
+//                
+//                // add direction list with score to queue
+//                for(int j =0;j<current.connections.size();j++){
+////                    if(wasVisited(current.connections.get(j).getRef(),visitedRef)){
+////                        //VISITED LIST
+////                        continue;
+////                    }
+////                    visitedRef.add(current.connections.get(j).getRef());
+//                    Directions temp2Direction = new Directions(tempDirection);
+//                    temp2Direction.add(j, current.connections.get(j).calcDistance(end));
+////                    System.out.println("Adding direction");
+//                    System.out.println("distance to target "+current.connections.get(j).calcDistance(end)*100);
+//                    queue.add(temp2Direction);
+//                }          
+//                
+//                
+//                
+//            }
+//            started=true;
+//            queue=sortQueue(queue);
+//            
+//
+//
+//            
+//            
+//            
+//            
+//            
+//            
+//        }
+//        
+//        
+//        
+//        
+//        
+//        return route;
+//    }
     
 
     private boolean wasVisited(long ref, ArrayList<Long> visited){

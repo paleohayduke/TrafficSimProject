@@ -30,7 +30,7 @@ public class TrafficSimProject {
 //        sim.startRenderer(8);// 8 is the scale
         sim.openMap("./src/MediumMap.osm");
         sim.startRenderer(4);
-        
+//        
 //        sim.openMap("./src/Austin.osm");
 //        sim.startRenderer(1);
         sim.setCars(500); // 200 is the amount of cars 
@@ -47,7 +47,7 @@ public class TrafficSimProject {
 
  //           System.out.println("Frame "+i);
             sim.updateRenderer();
-//            setScale(i);
+//            sim.setScale(i);
         }
 //        sim.demo();
 //        sim.startRenderer(1);

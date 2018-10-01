@@ -8,6 +8,7 @@ package trafficsimproject;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
@@ -26,7 +27,8 @@ import javax.swing.JPanel;
  * @author paleo
  */
 public class Renderer extends JFrame{
-
+    
+    int playSpeed = 1;
     DrawStuff drawer = new DrawStuff();
     ArrayList<Road> roads = new ArrayList<>();
     ArrayList<Auto> cars = new ArrayList<>();
@@ -182,6 +184,24 @@ public class Renderer extends JFrame{
         
         JPanel toolPanel = new JPanel();
         
+        JButton pauseButton = new JButton("||");
+        pauseButton.setPreferredSize(new Dimension(65, 20));
+        pauseButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+//                nodeInfoFrame=new NodeInfoFrame();
+                playSpeed=0;
+            }
+        });
+        
+        JButton playButton = new JButton(">");
+        playButton.setPreferredSize(new Dimension(65, 20));
+        playButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                playSpeed=1;
+//                nodeInfoFrame=new NodeInfoFrame();
+            }
+        });
+        
         JButton nodeToolButton = new JButton("Node");
         nodeToolButton.setPreferredSize(new Dimension(65, 20));
         nodeToolButton.addActionListener(new ActionListener(){
@@ -194,14 +214,26 @@ public class Renderer extends JFrame{
         carToolButton.setPreferredSize(new Dimension(65, 20));
         carToolButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-//                new NodeInfoFrame();
+                new CarInfoFrame();
+            }
+        });
+
+        JButton optionsButton = new JButton("Options");
+        optionsButton.setPreferredSize(new Dimension(80, 20));
+        optionsButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                new OptionsFrame();
             }
         });
         
-//        this.add(carToolButton, BorderLayout.NORTH);
+//        this.add(carToolButton, BorderLayout.NORTH);  
+        toolPanel.add(pauseButton);
+        toolPanel.add(playButton);
         toolPanel.add(nodeToolButton);
         toolPanel.add(carToolButton);
+        toolPanel.add(optionsButton);
         toolPanel.setPreferredSize(new Dimension(300,24));
+        toolPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,1));
         this.add(toolPanel, BorderLayout.NORTH);
         //ugh, add these buttons to a frame and then put on north of thie frame
         

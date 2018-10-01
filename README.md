@@ -11,6 +11,9 @@ Cars now keep distance between each other.
 
 A* now takes into account traffic levels at time of route generation!
 
+Pause and play functionality.
+Placeholder Frames to hold data and select options-still empty.
+
 9/29/2019 Consolidated intersections into one node. Next task is making stoplights
 *Nope... that broke a lot of intersections. set it back to old technique. 
 
@@ -141,6 +144,8 @@ Map is displaying upside down because origin (0,0) is top left corner for the JF
 Need to flip vertically.
 
 COMPLETED TASKS
+
+COMPLETED 9/30/2018: pause/play functionality
 
 COMPLETED 9/30/2018: Stop signs.
 

@@ -5,49 +5,21 @@
  */
 package trafficsimproject;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 /**
  *
  * @author paleo
  */
-public class NodeInfoFrame extends JFrame{
+public class CarInfoFrame extends JFrame{
     Nd node;
     
-    NodeInfoFrame(){
+    CarInfoFrame(){
 
         this.setSize(400,700); // regular stuff for jframe 
         
-        this.setTitle("Node Info");
-//        this.setLayout(new BorderLayout());
-this.setLayout(new GridLayout());
-
-        JLabel refLabel = new JLabel("ref:");
-        JLabel longLabel = new JLabel("long:");
-        JLabel latLabel = new JLabel("lat:");
-        JLabel conLabel = new JLabel("connects:");
-        JLabel carsLabel = new JLabel("cars:");
-        JPanel displayPanel = new JPanel();
-        displayPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        displayPanel.add(refLabel);
-        displayPanel.add(longLabel);
-        displayPanel.add(latLabel);
-        this.add(displayPanel, BorderLayout.NORTH);
-
-        JPanel conPanel = new JPanel();
-        conPanel.add(conLabel);
-        JPanel carPanel = new JPanel();
-        carPanel.add(carsLabel);
-        this.add(conPanel,BorderLayout.CENTER);
-        this.add(carPanel,BorderLayout.CENTER);
+        this.setTitle("Car Info");
         
-        
-//        this.add(refLabel);
 //        JButton nodeToolButton = new JButton("delete");
 //        nodeToolButton.addActionListener(new ActionListener(){
 //            public void actionPerformed(ActionEvent e){
