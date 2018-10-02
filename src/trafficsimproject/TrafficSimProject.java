@@ -26,23 +26,31 @@ public class TrafficSimProject {
     
     static void demo(){
         Simulation sim = new Simulation();
-        sim.openMap("./src/BigKilleen"); // pick the map
-        sim.startRenderer(10);// 8 is the scale
         
         
+//        sim.openMap("./src/BigKilleen"); // pick the map
+//        sim.startRenderer(15);// 8 is the scale
         
         
 //        sim.openMap("./src/KilleenMap.osm"); // pick the map
 //        sim.startRenderer(8);// 8 is the scale
+
+
 //        sim.openMap("./src/MediumMap.osm");
 //        sim.startRenderer(4);
-//        
-//        sim.openMap("./src/KilleenSection.osm");
-//        sim.startRenderer(4);
-////
-//        sim.openMap("./src/Austin.osm");
-//        sim.startRenderer(1);
-        sim.setCars(5000); // 200 is the amount of cars 
+     
+//
+//        sim.openMap("./src/KilleenTAMUCTbig.osm");
+//        sim.startRenderer(7);
+
+
+        sim.openMap("./src/Austin.osm");
+        sim.startRenderer(1);
+//
+////        sim.openMap("./src/HomeMap.osm");
+////        sim.startRenderer(1);
+
+        sim.setCars(200); // 200 is the amount of cars 
         boolean run = true;
         while(run){ //play for a long time
             sim.step(0.00016, .025);         //.00016.05 used to be    

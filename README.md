@@ -2,11 +2,44 @@
 
 TAMUCT COSC-3320-110 Programmers Group 1
 
+TODO:
+
+-Build stop light finder and implement stoplights.
+*start with each light giving protected left turn... Eventually get opposite
+sides to coordinate and protected left but will need multilane roads..
+Poll the waypoint node and check its car list for cars that have same lastWaypoint;
+node as themselves, from here check what lane they are in, by directly polling
+them. This will require a variable in the Auto to keep track of which lane
+it is in and also checking with the road if it is two lane or one. 
+*Grab the info for speed limits while you are at it! 
+https://nacto.org/publication/urban-street-design-guide/intersection-design-elements/traffic-signals/signal-cycle-lengths/
+*Give stoplights traffic sensors.//make this option 
+*algorithm to pair roads on either side of a stop light... 
+Draw line between intersection pt and 2 of its connections. ... 
+if there is a point on EITHER side of this line then you have found two sets of 
+matching pairs
+at light... Left turns can be done automatically if no oncomming traffic... 
+check waypoint.car who has back waypoint other than you and in the oncomming lane.
+
+
+-Speed limits
+
+-Zoom and map scroll by mouse button hold. 
+
+-Collect intersection type data (stopsign, stoplight, speed limit).
+Reevaluate MapReader-write some functions that take tags as parameter to
+easily search the OSM file. Need to be able to display any queried data in
+the renderer! 
+
+-Get Git set up to keep track of revisions.
+
+-File open/save for _processed_ map data
+
 Announcements:
+10/2/2018 https://www.openstreetmap.org/edit?editor=id#map=19/31.08832/-97.71982
+Register an account and start updating the map with traffic lights. 
 
-10/1/2018
-
-There are a few buttons, pause, play, fast forward. 
+10/1/2018 There are a few buttons, pause, play, fast forward. 
 Fast forward is button clicks^2. 
  
 Mouse position is now converted to correct long and lat. Red square dropped where
@@ -114,31 +147,7 @@ everything we need to set up a graph of the roads and then implement a
 graph traversal algorithm.
 -ww
 
-TODO:
 
--Fix the hit detection bug!!!!!!!!!!!!!!!
-
--Node Info Window
-
--Stoplights
-https://nacto.org/publication/urban-street-design-guide/intersection-design-elements/traffic-signals/signal-cycle-lengths/
-
--Speed limits
-
--Test play and pause button functionality.
-
--Test mouse interaction.
-
--Function to find a node based on its longitude and latitude. 
-
--Collect intersection type data (stopsign, stoplight, speed limit).
-Reevaluate MapReader-write some functions that take tags as parameter to
-easily search the OSM file. Need to be able to display any queried data in
-the renderer! 
-
--Get Git set up to keep track of revisions.
-
--File open/save for _processed_ map data
 
 GUI 
 -mouse scroll wheel for zoom, ability to click and drag to move aroudn the map
@@ -154,6 +163,15 @@ a bandaid to deal alleviate symptoms. Investigate and fix root cause!!!
 
 COMPLETED TASKS
 
+COMPLETED 10/2/2018 BUG: fix california stoppers 
+
+COMPLETED 10/1/2018: -Test play and pause button functionality.
+
+COMPLETED 10/1/2018:-Test mouse interaction.
+
+COMPLETED 10/1/2018:-Function to find a node based on its longitude and latitude. 
+
+COMPLETED 10/1/2018 BUG: -Fix the hit detection bug!!!!!!!!!!!!!!!
 COMPLETED 10/1/2018 BUG: Map is displaying upside down because origin (0,0) is top left corner for the JFrame.
 Need to flip vertically.
 

@@ -84,7 +84,7 @@ public class Auto {
         
     }
 
-    double carSpacing =.0001151;
+    double carSpacing =.00024;
     double stopSpacing=0;
     int justGo =0;
     boolean stoppedOnce=false;
@@ -193,15 +193,22 @@ public class Auto {
 
 
 
-if(waypointNode.isStop){
+        if(waypointNode.isStop){
             if(D<.00017){
-                
+
 //                if(!stoppedOnce){
 //                    this.velocity=0;
 //                    stoppedOnce=true;
 //                }
                 if(!waypointNode.stopQ.contains(this.posNode)){
                     waypointNode.stopQ.add(posNode);
+                    stoppedOnce=true;
+                    if(waypointNode.connections.size()>3){
+                        d=0;
+                        this.velocity=0;
+                        
+                    }
+
 //                    System.out.println("add");
                 }
                 
@@ -243,7 +250,7 @@ if(waypointNode.isStop){
 
                         }
 //                        d=0;
-                        velocity=velocity-acceleration*3;
+//                        velocity=velocity-acceleration*3;
                         this.velocity=0;
 //                        System.out.println("car distance");
                         return;
@@ -262,7 +269,7 @@ if(waypointNode.isStop){
 
                         }
 //                    d=0;
-                    velocity=velocity-acceleration*3;
+//                    velocity=velocity-acceleration*3;
                     this.velocity=0;
                     return;
                 }
