@@ -219,7 +219,7 @@ public class Auto {
 
 
         if(!directions.inProgress()){
-            lastWaypointNode.cars.remove(this.posNode);
+            lastWaypointNode.removeCar(this.posNode);
 //            System.out.println("!inProgress()");
             waypointNode.removeCar(posNode);
             return false;

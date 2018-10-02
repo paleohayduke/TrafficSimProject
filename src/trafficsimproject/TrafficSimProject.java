@@ -32,11 +32,11 @@ public class TrafficSimProject {
 //        sim.startRenderer(4);
 //        
 //        sim.openMap("./src/KilleenTAMUCTbig.osm");
-//        sim.startRenderer(6);
+//        sim.startRenderer(7);
 
         sim.openMap("./src/Austin.osm");
         sim.startRenderer(1);
-        sim.setCars(500); // 200 is the amount of cars 
+        sim.setCars(400); // 200 is the amount of cars 
         boolean run = true;
         while(run){ //play for a long time
             sim.step(0.00016, .05);            

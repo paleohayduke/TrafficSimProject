@@ -311,8 +311,8 @@ public class Simulation {
 //            }
             cars.get(j).step(velocity,stepSize);
             if(!cars.get(j).directions.inProgress()){
-                cars.get(j).waypointNode.cars.remove(cars.get(j));
-                cars.get(j).lastWaypointNode.cars.remove(cars.get(j));
+                cars.get(j).waypointNode.removeCar(cars.get(j).posNode);
+                cars.get(j).lastWaypointNode.removeCar(cars.get(j).posNode);
                 cars.get(j).setDirections(makeDirection());
 //                cars.get(j).setDirections(makeDirection(cars.get(j).waypointNode));
  //               System.out.println("makeDirection()");
