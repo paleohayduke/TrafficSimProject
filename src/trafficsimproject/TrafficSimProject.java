@@ -35,7 +35,7 @@ public class TrafficSimProject {
 //        sim.openMap("./src/KilleenMap.osm"); // pick the map
 //        sim.startRenderer(8);// 8 is the scale
 
-
+//
         sim.openMap("./src/MediumMap.osm");
         sim.startRenderer(4);
      
@@ -50,7 +50,7 @@ public class TrafficSimProject {
 ////        sim.openMap("./src/HomeMap.osm");
 ////        sim.startRenderer(1);
 
-        sim.setCars(500); // 200 is the amount of cars 
+        sim.setCars(1000); // 200 is the amount of cars 
         boolean run = true;
         while(run){ //play for a long time
             sim.step(0.00016, .025);         //.00016.05 used to be    

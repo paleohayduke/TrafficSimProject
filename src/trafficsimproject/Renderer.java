@@ -249,7 +249,7 @@ public class Renderer extends JFrame{
             public void actionPerformed(ActionEvent e){
                 mouseOffSetX=0;
                 mouseOffSetY=0;
-                scale=2;
+                scale=1;
                 setMap();
             }
         });
@@ -392,18 +392,22 @@ public class Renderer extends JFrame{
             int wheelRot=e.getWheelRotation();
             System.out.println("mouse="+wheelRot);
             if(wheelRot>0){
-
-                mouseOffSetX=(int)(Renderer.this.getWidth()/scale);
-                mouseOffSetY=(int)(Renderer.this.getHeight()/scale);
                 scale++;
+
+                mouseOffSetX=(int)((Renderer.this.getWidth()/scale)+mouseOffSetX/scale);
+                mouseOffSetY=(int)((Renderer.this.getHeight()/scale)+mouseOffSetY/scale);
             }else if(wheelRot<0){
-                mouseOffSetX=(int)((Renderer.this.getWidth())/scale);
-                mouseOffSetY=(int)((Renderer.this.getHeight())/scale);
-                scale--;
-                if(scale==0){
+
+
+                if(scale-1<=0){
                     scale=1;
 
+                }else{
+                    scale--;
                 }
+                mouseOffSetX=(int)((Renderer.this.getWidth())/scale-mouseOffSetX);
+                mouseOffSetY=(int)((Renderer.this.getHeight())/scale-mouseOffSetY);
+
 
             }
             
@@ -423,7 +427,6 @@ public class Renderer extends JFrame{
 //            graph2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 //                    RenderingHints.VALUE_ANTIALIAS_ON);
 
-            
             graph2.setPaint(Color.BLACK);
 
 //            BufferedImage test = new BufferedImage(graph2.);
@@ -434,7 +437,7 @@ public class Renderer extends JFrame{
                 
             }
             
-            graph2.setPaint(Color.GREEN);
+            graph2.setPaint(Color.RED);
             
 //            for(int i =0; i<carShapes.size();i++){
 //                
@@ -448,13 +451,13 @@ public class Renderer extends JFrame{
                 Double x1=longToGrid(cars.get(i).posNode.getLong());
                 Double y1=latToGrid(cars.get(i).posNode.getLat());
         
-                Shape carPos = new Rectangle2D.Double(x1/scale-7,y1/scale-7,14,14);
+                Shape carPos = new Rectangle2D.Double(x1/scale-10/scale,y1/scale-10/scale,20/scale,20/scale);
  //               carShapes.add(carPos);
                 graph2.draw(carPos);
             }
             
             if(showClickSpot){
-                graph2.setPaint(Color.RED);
+                graph2.setPaint(Color.GREEN);
                 Shape mouseClick = new Rectangle2D.Double(longToGrid(mouseLong)/scale,latToGrid(mouseLat)/scale,10,10);
                 graph2.draw(mouseClick);
                 
