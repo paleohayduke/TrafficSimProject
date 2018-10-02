@@ -21,10 +21,9 @@ matching pairs
 at light... Left turns can be done automatically if no oncomming traffic... 
 check waypoint.car who has back waypoint other than you and in the oncomming lane.
 
+-Center camera to mouse on zoom
 
 -Speed limits
-
--Zoom and map scroll by mouse button hold. 
 
 -Collect intersection type data (stopsign, stoplight, speed limit).
 Reevaluate MapReader-write some functions that take tags as parameter to
@@ -38,6 +37,8 @@ the renderer!
 Announcements:
 10/2/2018 https://www.openstreetmap.org/edit?editor=id#map=19/31.08832/-97.71982
 Register an account and start updating the map with traffic lights. 
+
+Mouse wheel zoom and map movement implemented. Zoom needs work.  
 
 10/1/2018 There are a few buttons, pause, play, fast forward. 
 Fast forward is button clicks^2. 
@@ -158,10 +159,14 @@ GUI
 
 BUGS
 
+
+
 When hit detection is turned on, deadlock can occur at stops. Currently using
 a bandaid to deal alleviate symptoms. Investigate and fix root cause!!! 
 
 COMPLETED TASKS
+
+COMPLETED 10/2/2018: -Zoom and map scroll by mouse button hold. 
 
 COMPLETED 10/2/2018 BUG: fix california stoppers 
 

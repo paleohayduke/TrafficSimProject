@@ -17,6 +17,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -45,7 +48,8 @@ public class Renderer extends JFrame{
 
     double mouseLong=0;
     double mouseLat=0;
-    
+    int mouseOffSetX=0;
+    int mouseOffSetY=0;
 
     //drawRoad = new Line2D.Float(lons.get(i)/scale,lats.get(i)/scale,lons.get(i+1)/scale,lats.get(i+1)/scale);
     
@@ -97,11 +101,12 @@ public class Renderer extends JFrame{
     }
     
     private double latToGrid(double lat){
-        Double y1=(-lat+maxLat)*scale1;
+        Double y1=(-lat+maxLat)*scale1+mouseOffSetY*scale;
+        
         return y1;        
     }
     private double longToGrid(double lon){
-        Double x1=(lon-minLon)*scale1;
+        Double x1=(lon-minLon)*scale1+mouseOffSetX*scale;
         return x1;
     }
     
@@ -120,16 +125,23 @@ public class Renderer extends JFrame{
     
     
     public void setMap(){
+        roadShapes=new ArrayList<Shape>();
 
         for(int i = 0; i<roads.size();i++){
 
             for(int j = 0 ; j<roads.get(i).nodeList.size()-1;j++){
+                Double y1=latToGrid(roads.get(i).nodeList.get(j).getLat());
+                Double x1=longToGrid(roads.get(i).nodeList.get(j).getLong());
+                Double y2=latToGrid(roads.get(i).nodeList.get(j+1).getLat());
+                Double x2=longToGrid(roads.get(i).nodeList.get(j+1).getLong());
 
-
-                Double y1=(-roads.get(i).nodeList.get(j).getLat()+maxLat)*scale1;
-                Double x1=(roads.get(i).nodeList.get(j).getLong()-minLon)*scale1;
-                Double y2=(-roads.get(i).nodeList.get(j+1).getLat()+maxLat)*scale1;
-                Double x2=(roads.get(i).nodeList.get(j+1).getLong()-minLon)*scale1;
+                
+                
+                
+//                Double y1=(-roads.get(i).nodeList.get(j).getLat()+maxLat)*scale1;
+//                Double x1=(roads.get(i).nodeList.get(j).getLong()-minLon)*scale1;
+//                Double y2=(-roads.get(i).nodeList.get(j+1).getLat()+maxLat)*scale1;
+//                Double x2=(roads.get(i).nodeList.get(j+1).getLong()-minLon)*scale1;
                 
                 Shape tempRoad = new Line2D.Double(x1/scale,y1/scale,x2/scale,y2/scale);
 //                AlphaComposite alpha = new AlphaComposite();
@@ -230,6 +242,18 @@ public class Renderer extends JFrame{
             }
         });
         
+        
+        JButton homeButton = new JButton("(Home)");
+        homeButton.setPreferredSize(new Dimension(80, 20));
+        homeButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                mouseOffSetX=0;
+                mouseOffSetY=0;
+                scale=2;
+                setMap();
+            }
+        });
+        
         JButton nodeToolButton = new JButton("Node");
         nodeToolButton.setPreferredSize(new Dimension(65, 20));
         nodeToolButton.addActionListener(new ActionListener(){
@@ -267,6 +291,7 @@ public class Renderer extends JFrame{
         toolPanel.add(pauseButton);
         toolPanel.add(playButton);
         toolPanel.add(fastPlayButton);
+        toolPanel.add(homeButton);
         toolPanel.add(nodeToolButton);
 //        toolPanel.add(carToolButton);
         toolPanel.add(optionsButton);
@@ -275,7 +300,7 @@ public class Renderer extends JFrame{
         this.add(toolPanel, BorderLayout.NORTH);
         MouseHandler mouseHandler = new MouseHandler();
         this.addMouseListener(mouseHandler);
-        
+        this.addMouseWheelListener(mouseHandler);
         //ugh, add these buttons to a frame and then put on north of thie frame
         
         this.setVisible(true);
@@ -288,16 +313,23 @@ public class Renderer extends JFrame{
     // this draws stuff
     // 
     
+    private double xToLong(double lon){
+        return ((lon-13)*scale)/scale1+minLon;
+    }
+    private double yToLat(double lat){
+        return -((lat-60)*scale)/scale1+maxLat;
+    }
+    
     boolean nodeSearchPlease=false;
     boolean showClickSpot=true;
-    private class MouseHandler implements MouseListener, MouseMotionListener{
+    private class MouseHandler implements MouseListener, MouseMotionListener, MouseWheelListener{
         
 
 
         public void mouseClicked(MouseEvent e) {
 //            System.out.println("clicked at, X="+e.getX()+" Y="+e.getY());
-            mouseLong=((e.getX()-13)*scale)/scale1+minLon;
-            mouseLat=-((e.getY()-60)*scale)/scale1+maxLat;
+            mouseLong=((e.getX()-13-mouseOffSetX)*scale)/scale1+minLon;
+            mouseLat=-((e.getY()-60-mouseOffSetY)*scale)/scale1+maxLat;
 
             
             if(nodeButtonOn){
@@ -311,16 +343,25 @@ public class Renderer extends JFrame{
 
             }
             
+            
         }
 
-  
+        int x1;
+        int y1;
         public void mousePressed(MouseEvent e) {
-     
+            if(SwingUtilities.isRightMouseButton(e)){
+                x1=e.getX();
+                y1=e.getY();
+            }
         }
 
 
         public void mouseReleased(MouseEvent e) {
-         
+            if(SwingUtilities.isRightMouseButton(e)){
+                mouseOffSetX+=-x1+e.getX();
+                mouseOffSetY+=-y1+e.getY();
+                setMap();
+            }
         }
 
 
@@ -335,13 +376,43 @@ public class Renderer extends JFrame{
 
 
         public void mouseDragged(MouseEvent e) {
-
+        if(SwingUtilities.isRightMouseButton(e)){
+//                mouseOffSetX=-x1+e.getX();
+//                mouseOffSetY=-y1+e.getY();
+//                setMap();
+            }
         }
 
         public void mouseMoved(MouseEvent e) {
             
         }
-        
+
+
+        public void mouseWheelMoved(MouseWheelEvent e) {
+            int wheelRot=e.getWheelRotation();
+            System.out.println("mouse="+wheelRot);
+            if(wheelRot>0){
+
+                mouseOffSetX=(int)(Renderer.this.getWidth()/scale);
+                mouseOffSetY=(int)(Renderer.this.getHeight()/scale);
+                scale++;
+            }else if(wheelRot<0){
+                mouseOffSetX=(int)((Renderer.this.getWidth())/scale);
+                mouseOffSetY=(int)((Renderer.this.getHeight())/scale);
+                scale--;
+                if(scale==0){
+                    scale=1;
+
+                }
+
+            }
+            
+
+            
+            setMap();
+
+        }
+//        int wheelRot=0;
     }
     
     private class DrawStuff extends JComponent{
@@ -374,8 +445,8 @@ public class Renderer extends JFrame{
 
 //            carShapes = new ArrayList<Shape>();
             for(int i =0; i<cars.size();i++){
-                Double x1=(cars.get(i).posNode.getLong()-minLon)*scale1;
-                Double y1=(-cars.get(i).posNode.getLat()+maxLat)*scale1;
+                Double x1=longToGrid(cars.get(i).posNode.getLong());
+                Double y1=latToGrid(cars.get(i).posNode.getLat());
         
                 Shape carPos = new Rectangle2D.Double(x1/scale-7,y1/scale-7,14,14);
  //               carShapes.add(carPos);
@@ -440,8 +511,8 @@ public class Renderer extends JFrame{
 
 //            carShapes = new ArrayList<Shape>();
             for(int i =0; i<cars.size();i++){
-                Double x1=(cars.get(i).posNode.getLong()-minLon)*scale1;
-                Double y1=(cars.get(i).posNode.getLat()-minLat)*scale1;
+                Double x1=longToGrid(cars.get(i).posNode.getLong());
+                Double y1=latToGrid(cars.get(i).posNode.getLat());
         
                 Shape carPos = new Rectangle2D.Double((x1/scale-10),(y1/scale-10),20/scale,20/scale);
  //               carShapes.add(carPos);
