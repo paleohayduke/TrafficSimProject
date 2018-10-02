@@ -81,47 +81,12 @@ public class Simulation {
         startRenderer(4);
         // HERE WE GO
         Scanner sc = new Scanner(System.in);
-//        String pauseStr = sc.next();
-        
-        
- //       display.setAutoPos(gb.roads.get(5).nodeList.get(2));
- //       pauseStr = sc.next();
-        
- //       display.setAutoPos(gb.roads.get(5).nodeList.get(3));
- //       pauseStr = sc.next();
-        
+
         
         getSimInfo();
 
         
-        //fix this 
-//        Directions route = new Directions(roads.get(5).nodeList.get(4));
-////        route = route.findRoute(roads, roads.get(5).nodeList.get(4), roads.get(1).nodeList.get(9));     
-//        route = route.findRoute(roads, roads.get(5).nodeList.get(4), roads.get(1).nodeList.get(9));   
-//        route.start = roads.get(5).nodeList.get(4); 
-
-//        Directions route = new Directions(roads.get(10).nodeList.get(0));
-//        route = route.findRoute(roads, roads.get(10).nodeList.get(0), roads.get(5).nodeList.get(1));   
-//        route.start = roads.get(10).nodeList.get(0);       
-        
-
-//MEDIUM MAP
-//        Directions route = new Directions(roads.get(119).nodeList.get(0));
-//        route = route.findRoute(roads, roads.get(119).nodeList.get(0), roads.get(5).nodeList.get(1));   
-//        route.start = roads.get(119).nodeList.get(0);       
-        
-
-        //rand direction generator
-//MEDIUM MAP
-//        Directions route = new Directions(roads.get(375).nodeList.get(0));
-//        route = route.findRoute(roads, roads.get(375).nodeList.get(0), roads.get(5).nodeList.get(1));   
-//        route.start = roads.get(375).nodeList.get(0);       
-        
-        
-// MEDIUMMAP        
-//        Directions route = new Directions(roads.get(440).nodeList.get(0));
-//        route = route.findRoute(roads, roads.get(440).nodeList.get(0), roads.get(5).nodeList.get(1));   
-//        route.start = roads.get(440).nodeList.get(0);       
+ 
         
         Random rand = new Random();
         int roadNum1 = rand.nextInt(gb.roads.size());

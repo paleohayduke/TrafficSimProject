@@ -390,7 +390,7 @@ public class Renderer extends JFrame{
 
         public void mouseWheelMoved(MouseWheelEvent e) {
             int wheelRot=e.getWheelRotation();
-            System.out.println("mouse="+wheelRot);
+//            System.out.println("mouse="+wheelRot);
             if(wheelRot>0){
                 scale++;
 
@@ -404,10 +404,11 @@ public class Renderer extends JFrame{
 
                 }else{
                     scale--;
-                }
-                mouseOffSetX=(int)((Renderer.this.getWidth())/scale-mouseOffSetX);
-                mouseOffSetY=(int)((Renderer.this.getHeight())/scale-mouseOffSetY);
+                    mouseOffSetX=(int)((Renderer.this.getWidth())/scale-mouseOffSetX);
+                    mouseOffSetY=(int)((Renderer.this.getHeight())/scale-mouseOffSetY);
 
+                }
+                
 
             }
             
