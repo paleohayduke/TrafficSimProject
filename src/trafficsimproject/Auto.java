@@ -117,7 +117,7 @@ public class Auto {
 //                    double spacing = posNode.calcDistance(waypointNode.cars.get(i));
                     if(spacing<carSpacing){
                         justGo++;
-                        if(justGo>20){
+                        if(justGo>50){
                             justGo=0;
                             break;
 
@@ -183,11 +183,14 @@ public class Auto {
         }
         
         
-        if(d>=D){
+        while(d>D){
             
             d=d-D;
             
-            nextWaypoint();
+            if(!nextWaypoint()){
+                break;
+            }
+            D = posNode.calcDistance(waypointNode);
         }
         if(d<D){
 //            System.out.println("d<D");
@@ -202,7 +205,7 @@ public class Auto {
 
     }
     
-    public void nextWaypoint(){
+    public boolean nextWaypoint(){
         //CHECK IF DONE
         if(waypointNode.isStop){
             stoppedOnce=false;
@@ -219,7 +222,7 @@ public class Auto {
             lastWaypointNode.cars.remove(this.posNode);
 //            System.out.println("!inProgress()");
             waypointNode.removeCar(posNode);
-            return;
+            return false;
             
         }
 
@@ -231,6 +234,7 @@ public class Auto {
 //        System.out.println("choice="+choice);
         waypointNode=waypointNode.connections.get(choice);
         waypointNode.addCar(posNode);
+        return true;
     }
     
     public void stepOLD(double velocity, double timeStep){
