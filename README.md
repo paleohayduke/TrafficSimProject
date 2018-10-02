@@ -9,6 +9,8 @@ Announcements:
 There are a few buttons, pause, play, fast forward. 
 Fast forward is button clicks^2. 
  
+Mouse position is now converted to correct long and lat. Red square dropped where
+the engine thinks you are in lon&lat. Zoom has been fixed. 
 
 9/30/2018 Stop signs are working. Time for stop lights. 
 
@@ -149,6 +151,8 @@ Map is displaying upside down because origin (0,0) is top left corner for the JF
 Need to flip vertically.
 
 COMPLETED TASKS
+
+COMPLETED 10/1/2018: zoom broken since redesigning renderer
 
 COMPLETED 9/30/2018: pause/play functionality
 

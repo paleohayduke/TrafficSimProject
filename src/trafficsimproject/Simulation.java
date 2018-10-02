@@ -62,6 +62,7 @@ public class Simulation {
     public void startRenderer(double scale){
         this.display = new Renderer(scale, gb.roads,minLat,maxLat,minLon,maxLon);
         display.setMap();
+//        display.reSizeWindow();
         
         
     }
@@ -295,6 +296,8 @@ public class Simulation {
             display.nodeInfoFrame.setFields();;
 //            display.nodeInfoFrame.repaint();
             
+        }else if(display.nodeButtonOn){
+            display.nodeInfoFrame.setFields();
         }
         
         this.stepSize=stepSize;

@@ -78,7 +78,7 @@ public class Renderer extends JFrame{
         this.scale = scale;
         roadShapes = new ArrayList<>();
         intersectShapes=new ArrayList<>();
-        
+//        reSizeWindow();
         setMap();
         drawer.repaint();
         //drawWindow();
@@ -94,6 +94,15 @@ public class Renderer extends JFrame{
         this.cars=cars;
         drawer.repaint();
         //drawWindow();
+    }
+    
+    private double latToGrid(double lat){
+        Double y1=(-lat+maxLat)*scale1;
+        return y1;        
+    }
+    private double longToGrid(double lon){
+        Double x1=(lon-minLon)*scale1;
+        return x1;
     }
     
     public void stepCarsOLD(ArrayList<Auto> cars){
@@ -117,9 +126,9 @@ public class Renderer extends JFrame{
             for(int j = 0 ; j<roads.get(i).nodeList.size()-1;j++){
 
 
-                Double y1=(roads.get(i).nodeList.get(j).getLat()-minLat)*scale1;
+                Double y1=(-roads.get(i).nodeList.get(j).getLat()+maxLat)*scale1;
                 Double x1=(roads.get(i).nodeList.get(j).getLong()-minLon)*scale1;
-                Double y2=(roads.get(i).nodeList.get(j+1).getLat()-minLat)*scale1;
+                Double y2=(-roads.get(i).nodeList.get(j+1).getLat()+maxLat)*scale1;
                 Double x2=(roads.get(i).nodeList.get(j+1).getLong()-minLon)*scale1;
                 
                 Shape tempRoad = new Line2D.Double(x1/scale,y1/scale,x2/scale,y2/scale);
@@ -178,7 +187,9 @@ public class Renderer extends JFrame{
     private void updateFrame(){
         
     }
-    
+    public void reSizeWindow(){
+        this.setSize((int)(((maxLon- minLon)*scale1)/scale),(int)(((maxLat-minLat)*scale1)/scale));
+    }
     boolean nodeButtonOn=false;
     public void drawWindow(){
         latRange = (int)((maxLat-minLat)*scale1);// calculate the size of the window
@@ -250,9 +261,9 @@ public class Renderer extends JFrame{
         toolPanel.add(pauseButton);
         toolPanel.add(playButton);
         toolPanel.add(fastPlayButton);
-//        toolPanel.add(nodeToolButton);
+        toolPanel.add(nodeToolButton);
 //        toolPanel.add(carToolButton);
-//        toolPanel.add(optionsButton);
+        toolPanel.add(optionsButton);
         toolPanel.setPreferredSize(new Dimension(300,24));
         toolPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,1));
         this.add(toolPanel, BorderLayout.NORTH);
@@ -270,19 +281,28 @@ public class Renderer extends JFrame{
     
     // this draws stuff
     // 
-        boolean nodeSearchPlease=false;
+    
+    boolean nodeSearchPlease=false;
+    boolean showClickSpot=true;
     private class MouseHandler implements MouseListener, MouseMotionListener{
         
 
 
         public void mouseClicked(MouseEvent e) {
 //            System.out.println("clicked at, X="+e.getX()+" Y="+e.getY());
-            mouseLong=(e.getX()*scale)/scale1+minLon;
-            mouseLat=(e.getY()*scale)/scale1+minLat;
+            mouseLong=((e.getX()-13)*scale)/scale1+minLon;
+            mouseLat=-((e.getY()-60)*scale)/scale1+maxLat;
 
             
             if(nodeButtonOn){
                 nodeSearchPlease = true;
+            }
+            if(showClickSpot){
+                
+//                System.out.println("moX="+e.getX()+" moY="+e.getY());
+//                System.out.println("clX="+longToGrid(mouseLong)/scale+" clY="+latToGrid(mouseLat)/scale);
+//                
+
             }
             
         }
@@ -349,13 +369,22 @@ public class Renderer extends JFrame{
 //            carShapes = new ArrayList<Shape>();
             for(int i =0; i<cars.size();i++){
                 Double x1=(cars.get(i).posNode.getLong()-minLon)*scale1;
-                Double y1=(cars.get(i).posNode.getLat()-minLat)*scale1;
+                Double y1=(-cars.get(i).posNode.getLat()+maxLat)*scale1;
         
                 Shape carPos = new Rectangle2D.Double(x1/scale-7,y1/scale-7,14,14);
  //               carShapes.add(carPos);
                 graph2.draw(carPos);
             }
+            
+            if(showClickSpot){
+                graph2.setPaint(Color.RED);
+                Shape mouseClick = new Rectangle2D.Double(longToGrid(mouseLong)/scale,latToGrid(mouseLat)/scale,10,10);
+                graph2.draw(mouseClick);
+                
+                
 
+            }
+            
 
             
 //            for(int i=0; i<intersectShapes.size();i++){
