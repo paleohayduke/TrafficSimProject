@@ -23,10 +23,10 @@ public class Auto {
     double distNext = 0;
     double velocity=0;
     double maxVelocity=0;
-    double acceleration =.00001;
+    double acceleration =.000025;
     boolean stop = false;
     static int carID=0;
-    
+    boolean accelerationOn=true;
     
 
     Auto(){
@@ -88,7 +88,15 @@ public class Auto {
     double stopSpacing=0;
     int justGo =0;
     boolean stoppedOnce=false;
-    public void calcPos(double velocity, double timeIncrement){
+    public void calcPos(double newVelocity, double timeIncrement){
+        if(accelerationOn){
+            if(velocity<newVelocity){
+                velocity=velocity+acceleration*timeIncrement;
+            }
+            
+        }else{
+            velocity=newVelocity;
+        }
         
         double x1=posNode.getLong();
         double y1=posNode.getLat();
@@ -108,47 +116,84 @@ public class Auto {
 //break the following down into multiple functions
 // and add option toggle. 
 // this handles distance between cars
-        for(int i = 0;i< waypointNode.cars.size();i++){
-            if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==this.lastWaypointNode
-                    &&waypointNode.cars.get(i)!=this.posNode){
-                double otherDist=waypointNode.cars.get(i).calcDistance(waypointNode);
-                if(otherDist<D){
-                    double spacing = D-otherDist;
-//                    double spacing = posNode.calcDistance(waypointNode.cars.get(i));
-                    if(spacing<carSpacing){
-                        justGo++;
-                        if(justGo>50){
-                            justGo=0;
-                            break;
+//        if(waypointNode.isStop){
+//            if(D<.00017){
+//                
+////                if(!stoppedOnce){
+////                    this.velocity=0;
+////                    stoppedOnce=true;
+////                }
+//                if(!waypointNode.stopQ.contains(this.posNode)){
+//                    waypointNode.stopQ.add(posNode);
+////                    System.out.println("add");
+//                }
+//                
+//                if(this.posNode==waypointNode.stopQ.get(0)){
+//                    
+////                    stop=false;
+////                    System.out.println("remove");
+////                    waypointNode.stopQ.remove(this.posNode);
+//                }else{
+////                    System.out.println("ID="+this.posNode.getRef());
+////                    System.out.println("get(0)="+waypointNode.stopQ.get(0).getRef());
+////                    System.out.println("stop");
+////                    justGo++;
+//                    if(justGo>20){
+//                        justGo=0;
+//                        
+//
+//                    }else{
+//                        d=0;
+////                        this.velocity=0;
+//                    }
+//                }
+//            }
+//        }
+//        else{
+//            for(int i = 0;i< waypointNode.cars.size();i++){
+//            if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==this.lastWaypointNode
+//                    &&waypointNode.cars.get(i)!=this.posNode){
+//                double otherDist=waypointNode.cars.get(i).calcDistance(waypointNode);
+//                if(otherDist<D){
+//                    double spacing = D-otherDist;
+////                    double spacing = posNode.calcDistance(waypointNode.cars.get(i));
+//                    if(spacing<carSpacing){
+//                        justGo++;
+//                        if(justGo>50){
+//                            justGo=0;
+//                            break;
+//
+//                        }
+//                        d=0;
+////                        this.velocity=0;
+////                        System.out.println("car distance");
+//                        return;
+//                    }
+//                }
+//            }
+//            else if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==waypointNode
+//                    &&waypointNode.cars.get(i).parentAuto.waypointNode!=this.lastWaypointNode){
+//                if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing){
+//                    justGo++;
+//                        if(justGo>100){
+//                            justGo=0;
+////                            this.velocity=this.maxVelocity;
+//                            break;
+//
+//                        }
+//                    d=0;
+////                    this.velocity=0;
+//                    return;
+//                }
+//                
+//            }
+//        }
+//        }
 
-                        }
-                        d=0;
-//                        this.velocity=0;
-//                        System.out.println("car distance");
-                        return;
-                    }
-                }
-            }
-            else if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==waypointNode
-                    &&waypointNode.cars.get(i).parentAuto.waypointNode!=this.lastWaypointNode){
-                if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing){
-                    justGo++;
-                        if(justGo>100){
-                            justGo=0;
-//                            this.velocity=this.maxVelocity;
-                            break;
 
-                        }
-                    d=0;
-//                    this.velocity=0;
-                    return;
-                }
-                
-            }
-        }
 
-//stopsigns
-        if(waypointNode.isStop){
+
+if(waypointNode.isStop){
             if(D<.00017){
                 
 //                if(!stoppedOnce){
@@ -161,7 +206,7 @@ public class Auto {
                 }
                 
                 if(this.posNode==waypointNode.stopQ.get(0)){
-                    
+//                    d=velocity*timeIncrement;
 //                    stop=false;
 //                    System.out.println("remove");
 //                    waypointNode.stopQ.remove(this.posNode);
@@ -172,15 +217,61 @@ public class Auto {
                     justGo++;
                     if(justGo>5){
                         justGo=0;
-                        
+                        d=newVelocity*timeIncrement;
 
                     }else{
                         d=0;
-//                        this.velocity=0;
+                        this.velocity=0;
                     }
                 }
             }
         }
+
+        for(int i = 0;i< waypointNode.cars.size();i++){
+            if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==this.lastWaypointNode
+                    &&waypointNode.cars.get(i)!=this.posNode){
+                double otherDist=waypointNode.cars.get(i).calcDistance(waypointNode);
+                if(otherDist<D){
+                    double spacing = D-otherDist;
+//                    double spacing = posNode.calcDistance(waypointNode.cars.get(i));
+                    if(spacing<carSpacing){
+                        justGo++;
+                        if(justGo>100){
+                            justGo=0;
+                            d=newVelocity*timeIncrement;
+                            break;
+
+                        }
+//                        d=0;
+                        velocity=velocity-acceleration*3;
+                        this.velocity=0;
+//                        System.out.println("car distance");
+                        return;
+                    }
+                }
+            }
+            else if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==waypointNode
+                    &&waypointNode.cars.get(i).parentAuto.waypointNode!=this.lastWaypointNode){
+                if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing){
+                    justGo++;
+                        if(justGo>200){
+                            justGo=0;
+                            
+                            d=newVelocity*timeIncrement;
+                            break;
+
+                        }
+//                    d=0;
+                    velocity=velocity-acceleration*3;
+                    this.velocity=0;
+                    return;
+                }
+                
+            }
+        }
+
+//stopsigns
+        
         
         
         while(d>D){
@@ -219,6 +310,7 @@ public class Auto {
 
 
         if(!directions.inProgress()){
+            waypointNode.stopQ.remove(this.posNode);
             lastWaypointNode.removeCar(this.posNode);
 //            System.out.println("!inProgress()");
             waypointNode.removeCar(posNode);

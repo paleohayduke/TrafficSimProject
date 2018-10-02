@@ -234,10 +234,16 @@ public class Renderer extends JFrame{
         nodeToolButton.setPreferredSize(new Dimension(65, 20));
         nodeToolButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                nodeInfoFrame=new NodeInfoFrame();
+//                nodeInfoFrame=new NodeInfoFrame();
                 if(nodeButtonOn){
                     nodeButtonOn=false;
-                }else nodeButtonOn=true;
+                    nodeInfoFrame.dispose();
+                }else{
+                    nodeInfoFrame=new NodeInfoFrame();
+                    nodeButtonOn=true;
+                    
+                    
+                }
             }
         });
         

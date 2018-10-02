@@ -35,6 +35,17 @@ public class Directions {
         this.start=start;
     }
     
+    
+    public int getNextIndex(){
+//        System.out.println("stepindex="+stepIndex);
+        if(stepIndex<directions.size()-1){
+            
+        
+            return stepIndex;
+        }
+        return 0;
+    }
+    
     public boolean inProgress(){
         if (stepIndex<directions.size()){
             return true;

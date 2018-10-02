@@ -278,7 +278,10 @@ public class Simulation {
         
     }
     
-   
+   // 10/2/2018 -ww 
+   // make a function to set this on its own. simulator should keep track of all
+   // this shit on its own and not rely on main()
+   // should be able to modify these options from GUI 
     double stepSize =0;
     public void step(double velocity, double stepSize){
         if(display.playSpeed!=1){
@@ -311,6 +314,8 @@ public class Simulation {
 //            }
             cars.get(j).step(velocity,stepSize);
             if(!cars.get(j).directions.inProgress()){
+                cars.get(j).waypointNode.stopQ.remove(cars.get(j).posNode);
+                
                 cars.get(j).waypointNode.removeCar(cars.get(j).posNode);
                 cars.get(j).lastWaypointNode.removeCar(cars.get(j).posNode);
                 cars.get(j).setDirections(makeDirection());

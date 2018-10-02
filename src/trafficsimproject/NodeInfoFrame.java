@@ -28,10 +28,13 @@ public class NodeInfoFrame extends JFrame{
     NodeInfoFrame(){
 
         this.setSize(420,200); // regular stuff for jframe 
-        
+//        this.setDefaultCloseOperation(0);
+//        this.setUndecorated(true);
+
         this.setTitle("Node Info");
+//        this.setLocation(0,55);
 //        this.setLayout(new BorderLayout());
-this.setLayout(new GridLayout());
+        this.setLayout(new GridLayout());
 
         JLabel refLabel = new JLabel("ref:");
         refField = new JTextField(10);

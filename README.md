@@ -116,6 +116,8 @@ graph traversal algorithm.
 
 TODO:
 
+-Fix the hit detection bug!!!!!!!!!!!!!!!
+
 -Node Info Window
 
 -Stoplights
@@ -147,10 +149,13 @@ GUI
 
 BUGS
 
-Map is displaying upside down because origin (0,0) is top left corner for the JFrame.
-Need to flip vertically.
+When hit detection is turned on, deadlock can occur at stops. Currently using
+a bandaid to deal alleviate symptoms. Investigate and fix root cause!!! 
 
 COMPLETED TASKS
+
+COMPLETED 10/1/2018 BUG: Map is displaying upside down because origin (0,0) is top left corner for the JFrame.
+Need to flip vertically.
 
 COMPLETED 10/1/2018: zoom broken since redesigning renderer
 
