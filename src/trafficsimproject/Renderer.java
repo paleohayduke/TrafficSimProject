@@ -439,7 +439,7 @@ public class Renderer extends JFrame{
 //            graph2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 //                    RenderingHints.VALUE_ANTIALIAS_ON);
 
-            graph2.setPaint(Color.BLACK);
+            graph2.setPaint(Color.DARK_GRAY);
 
 //            BufferedImage test = new BufferedImage(graph2.);
             for(int i =0; i<roadShapes.size();i++){
@@ -469,8 +469,19 @@ public class Renderer extends JFrame{
             }
             
             if(showClickSpot){
-                graph2.setPaint(Color.GREEN);
-                Shape mouseClick = new Rectangle2D.Double(longToGrid(mouseLong)-5,latToGrid(mouseLat)-5,10,10);
+                
+
+
+                
+                Shape mouseClick = new Rectangle2D.Double();
+                if(nodeButtonOn&&(nodeInfoFrame.node!=null)){
+                    graph2.setPaint(Color.cyan);
+                    mouseClick = new Rectangle2D.Double(longToGrid(nodeInfoFrame.node.getLong())-5,latToGrid(nodeInfoFrame.node.getLat())-5,10,10);
+
+                }else{
+                    graph2.setPaint(Color.GREEN);
+                    mouseClick = new Rectangle2D.Double(longToGrid(mouseLong)-5,latToGrid(mouseLat)-5,10,10);
+                }
                 graph2.draw(mouseClick);
                 
                 

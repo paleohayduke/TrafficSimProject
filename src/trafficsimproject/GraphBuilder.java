@@ -165,10 +165,10 @@ public class GraphBuilder {
  
             for(int j=0;j<roads.get(i).nodeList.size();j++){
 
-                if(roads.get(i).nodeList.get(j).getLat()<y+.0005
-                        &&roads.get(i).nodeList.get(j).getLat()>y-.0005
-                        &&roads.get(i).nodeList.get(j).getLong()>x-.0005
-                        &&roads.get(i).nodeList.get(j).getLong()<x+.0005){
+                if(roads.get(i).nodeList.get(j).getLat()<y+.0002
+                        &&roads.get(i).nodeList.get(j).getLat()>y-.0002
+                        &&roads.get(i).nodeList.get(j).getLong()>x-.0002
+                        &&roads.get(i).nodeList.get(j).getLong()<x+.0002){
                     output=roads.get(i).nodeList.get(j);
 //                    System.out.println("FOUND IT");
 //                    System.out.println("lon="+output.getLong()+" lat="+output.getLat());
