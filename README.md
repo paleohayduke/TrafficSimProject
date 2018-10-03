@@ -150,21 +150,14 @@ graph traversal algorithm.
 
 
 
-GUI 
--mouse scroll wheel for zoom, ability to click and drag to move aroudn the map
--buttons... lots of them 
--click on nodes
--test functions 
--load 
-
 BUGS
 
 
 
-When hit detection is turned on, deadlock can occur at stops. Currently using
-a bandaid to deal alleviate symptoms. Investigate and fix root cause!!! 
-
 COMPLETED TASKS
+
+COMPLETED 10/3/2018: When hit detection is turned on, deadlock can occur at stops. Currently using
+a bandaid to deal alleviate symptoms. Investigate and fix root cause!!! 
 
 COMPLETED 10/2/2018: -Zoom and map scroll by mouse button hold. 
 
