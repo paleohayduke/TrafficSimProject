@@ -46,6 +46,8 @@ public class Renderer extends JFrame{
     NodeInfoFrame nodeInfoFrame;
     
 
+    int originalX=0;
+    int originalY=0;
     double mouseLong=0;
     double mouseLat=0;
     int mouseOffSetX=0;
@@ -101,12 +103,12 @@ public class Renderer extends JFrame{
     }
     
     private double latToGrid(double lat){
-        Double y1=(-lat+maxLat)*scale1+mouseOffSetY*scale;
+        Double y1=(-lat+maxLat)*scale1/scale+mouseOffSetY;
         
         return y1;        
     }
     private double longToGrid(double lon){
-        Double x1=(lon-minLon)*scale1+mouseOffSetX*scale;
+        Double x1=(lon-minLon)*scale1/scale+mouseOffSetX;
         return x1;
     }
     
@@ -143,7 +145,7 @@ public class Renderer extends JFrame{
 //                Double y2=(-roads.get(i).nodeList.get(j+1).getLat()+maxLat)*scale1;
 //                Double x2=(roads.get(i).nodeList.get(j+1).getLong()-minLon)*scale1;
                 
-                Shape tempRoad = new Line2D.Double(x1/scale,y1/scale,x2/scale,y2/scale);
+                Shape tempRoad = new Line2D.Double(x1,y1,x2,y2);
 //                AlphaComposite alpha = new AlphaComposite();
                 roadShapes.add(tempRoad);
                 
@@ -208,7 +210,7 @@ public class Renderer extends JFrame{
         lonRange = (int)((maxLon- minLon)*scale1);
         System.out.println("SIZE OF WINDOW: " + lonRange/scale + " " +latRange/scale );
         this.setSize(lonRange,latRange); // regular stuff for jframe 
- 
+//        System.out.println(lonRange+" "+latRange);
         this.setTitle("Traffic Sim");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(drawer, BorderLayout.CENTER);
@@ -391,12 +393,14 @@ public class Renderer extends JFrame{
         public void mouseWheelMoved(MouseWheelEvent e) {
             int wheelRot=e.getWheelRotation();
 //            System.out.println("mouse="+wheelRot);
-            if(wheelRot>0){
+            if(wheelRot>0){//zoom out
+
                 scale++;
 
-                mouseOffSetX=(int)((Renderer.this.getWidth()/scale)+mouseOffSetX/scale);
-                mouseOffSetY=(int)((Renderer.this.getHeight()/scale)+mouseOffSetY/scale);
-            }else if(wheelRot<0){
+                    mouseOffSetX-=(int)((mouseOffSetX-Renderer.this.getWidth()/2)/scale);
+                    mouseOffSetY-=(int)((mouseOffSetY-Renderer.this.getHeight()/2)/scale);
+            }else if(wheelRot<0){//zoom in
+
 
 
                 if(scale-1<=0){
@@ -404,8 +408,14 @@ public class Renderer extends JFrame{
 
                 }else{
                     scale--;
-                    mouseOffSetX=(int)((Renderer.this.getWidth())/scale-mouseOffSetX);
-                    mouseOffSetY=(int)((Renderer.this.getHeight())/scale-mouseOffSetY);
+
+
+                    mouseOffSetX+=(int)((mouseOffSetX-Renderer.this.getWidth()/2)/scale);
+                    mouseOffSetY+=(int)((mouseOffSetY-Renderer.this.getHeight()/2)/scale);
+                    
+                    
+
+                    
 
                 }
                 
@@ -452,14 +462,14 @@ public class Renderer extends JFrame{
                 Double x1=longToGrid(cars.get(i).posNode.getLong());
                 Double y1=latToGrid(cars.get(i).posNode.getLat());
         
-                Shape carPos = new Rectangle2D.Double(x1/scale-10/scale,y1/scale-10/scale,20/scale,20/scale);
+                Shape carPos = new Rectangle2D.Double(x1-10/scale,y1-10/scale,20/scale,20/scale);
  //               carShapes.add(carPos);
                 graph2.draw(carPos);
             }
             
             if(showClickSpot){
                 graph2.setPaint(Color.GREEN);
-                Shape mouseClick = new Rectangle2D.Double(longToGrid(mouseLong)/scale,latToGrid(mouseLat)/scale,10,10);
+                Shape mouseClick = new Rectangle2D.Double(longToGrid(mouseLong),latToGrid(mouseLat),10,10);
                 graph2.draw(mouseClick);
                 
                 
