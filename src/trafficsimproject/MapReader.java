@@ -238,7 +238,10 @@ public class MapReader {
  //           System.out.println(ex.getMessage());
  //       }
  //   }
-    
+    public void makeTrafficLightList(Element elem){
+        NodeList list = elem.getElementsByTagName("tag");
+        
+    }
 
     // this function is for testing if a <way> is a road vs something else
     private boolean isRoad(Element showElement){
