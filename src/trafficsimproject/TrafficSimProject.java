@@ -26,18 +26,19 @@ public class TrafficSimProject {
     
     static void demo(){
         Simulation sim = new Simulation();
-        
+
+//        sim.loadMap();        
         
 //        sim.openMap("./src/BigKilleen"); // pick the map
 //        sim.startRenderer(15);// 8 is the scale
         
         
-        sim.openMap("./src/KilleenMap.osm"); // pick the map
-        sim.startRenderer(8);// 8 is the scale
+//        sim.openMap("./src/KilleenMap.osm"); // pick the map
+//        sim.startRenderer(8);// 8 is the scale
 
 //
-//        sim.openMap("./src/MediumMap.osm");
-//        sim.startRenderer(4);
+        sim.openMap("./src/MediumMap.osm");
+        sim.startRenderer(4);
      
 //
 //        sim.openMap("./src/KilleenTAMUCTbig.osm");

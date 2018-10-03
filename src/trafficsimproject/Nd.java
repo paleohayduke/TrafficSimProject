@@ -5,6 +5,7 @@
  */
 package trafficsimproject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 // This is a Node, Node was a reserved word and 
 // Nd is used to indicate a Node for a <way> in the original .OSM file.
 // its as u see
-public class Nd {
+public class Nd implements Serializable {
     private long ref = 0;
     private double longitude = 0;
     private double latitude = 0;

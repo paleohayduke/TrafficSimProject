@@ -410,8 +410,8 @@ public class Renderer extends JFrame{
                     scale--;
 
 
-                    mouseOffSetX+=(int)((mouseOffSetX-Renderer.this.getWidth()/2)/scale);
-                    mouseOffSetY+=(int)((mouseOffSetY-Renderer.this.getHeight()/2)/scale);
+                    mouseOffSetX+=(int)((mouseOffSetX-e.getX())/scale);
+                    mouseOffSetY+=(int)((mouseOffSetY-e.getY())/scale);
                     
                     
 

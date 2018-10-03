@@ -5,6 +5,7 @@
  */
 package trafficsimproject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,7 +14,7 @@ import java.util.Comparator;
  *
  * @author paleo
  */
-public class Directions {
+public class Directions implements Serializable {
     
     Nd start;
     ArrayList<Integer> directions = new ArrayList<Integer>();

@@ -5,6 +5,10 @@
  */
 package trafficsimproject;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -55,7 +59,33 @@ public class Simulation {
         minLon=reader.minLon;
         maxLon=reader.maxLon;
         maxLat =reader.maxLat;
+//        saveMap();
         
+    }
+    
+    public void saveMap(){
+        String fName ="./src/roads.obj";
+        try{
+            FileOutputStream fileOut = new FileOutputStream(fName);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(gb.roads);
+            System.out.println("file saved");
+        }catch(Exception e){
+            System.out.println("system out oops*******");
+        }
+    }
+    
+    public void loadMap(){
+        String fName ="./src/roads.obj";
+        try{
+            FileInputStream fileIn = new FileInputStream(fName);
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+            gb=(GraphBuilder)objectIn.readObject();
+            
+            
+        }catch(Exception e){
+            System.out.println(e.getMessage());            
+        }
     }
     
     // to start renderer
