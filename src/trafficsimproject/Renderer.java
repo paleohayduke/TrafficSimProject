@@ -330,8 +330,8 @@ public class Renderer extends JFrame{
 
         public void mouseClicked(MouseEvent e) {
 //            System.out.println("clicked at, X="+e.getX()+" Y="+e.getY());
-            mouseLong=((e.getX()-13-mouseOffSetX)*scale)/scale1+minLon;
-            mouseLat=-((e.getY()-60-mouseOffSetY)*scale)/scale1+maxLat;
+            mouseLong=((e.getX()-8-mouseOffSetX)*scale)/scale1+minLon;
+            mouseLat=-((e.getY()-55-mouseOffSetY)*scale)/scale1+maxLat;
 
             
             if(nodeButtonOn){
@@ -397,21 +397,22 @@ public class Renderer extends JFrame{
 
                 scale++;
 
-                    mouseOffSetX-=(int)((mouseOffSetX-Renderer.this.getWidth()/2)/scale);
-                    mouseOffSetY-=(int)((mouseOffSetY-Renderer.this.getHeight()/2)/scale);
+                    mouseOffSetX-=(int)((mouseOffSetX-e.getX()+8)/scale);
+                    mouseOffSetY-=(int)((mouseOffSetY-e.getY()+55)/scale);
             }else if(wheelRot<0){//zoom in
 
 
 
                 if(scale-1<=0){
                     scale=1;
+                    
 
                 }else{
                     scale--;
 
 
-                    mouseOffSetX+=(int)((mouseOffSetX-e.getX())/scale);
-                    mouseOffSetY+=(int)((mouseOffSetY-e.getY())/scale);
+                    mouseOffSetX+=(int)((mouseOffSetX-e.getX()+8)/scale);//8 and 55 are offsets
+                    mouseOffSetY+=(int)((mouseOffSetY-e.getY()+55)/scale);
                     
                     
 
@@ -469,7 +470,7 @@ public class Renderer extends JFrame{
             
             if(showClickSpot){
                 graph2.setPaint(Color.GREEN);
-                Shape mouseClick = new Rectangle2D.Double(longToGrid(mouseLong),latToGrid(mouseLat),10,10);
+                Shape mouseClick = new Rectangle2D.Double(longToGrid(mouseLong)-5,latToGrid(mouseLat)-5,10,10);
                 graph2.draw(mouseClick);
                 
                 

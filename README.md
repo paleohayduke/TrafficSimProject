@@ -45,8 +45,10 @@ the renderer!
 
 -File open/save for _processed_ map data
 
-Announcements:
-10/3/2018 Mouse wheel now zooms to where the mouse pointer is located, 
+ANNOUNCEMENTS:
+
+10/3/2018 Mouse wheel now zooms map while keeping focus of object under the
+mouse cursor (just like Google maps). Pretty sweet.  
 
 10/2/2018 https://www.openstreetmap.org/edit?editor=id#map=19/31.08832/-97.71982
 Register an account and start updating the map with traffic lights. 
