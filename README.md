@@ -4,6 +4,19 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
+-Connect to GUI
+
+-Clock
+
+-Bool on node that cars will recognize as an "accident". car will check
+every node to see if book is there and if it is then it will regenerate a
+route from its lastWaypoint to its destination ignoring the bad node. 
+Need to write an if() in routeFinder to treat accident flagged nodes
+as dead ends. Alternative is to simply disable the connections on the node
+and the ones surrounding it... this will require making sure that the
+cars will not try to access an element of their direction list that is out of
+bounds. 
+
 -Build stop light finder and implement stoplights.
 *start with each light giving protected left turn... Eventually get opposite
 sides to coordinate and protected left but will need multilane roads..

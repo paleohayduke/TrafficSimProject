@@ -5,14 +5,14 @@
  */
 package trafficsimproject;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * 
  * @author paleo
  */
-public class Auto implements Serializable{
+public class Auto {
     
 
     Directions directions = new Directions();

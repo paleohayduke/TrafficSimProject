@@ -5,7 +5,6 @@
  */
 package trafficsimproject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -14,7 +13,7 @@ import java.util.ArrayList;
  */
 
 // just a Nd with info about who this node intersects with 
-public class IntersectNd extends Nd implements Serializable {
+public class IntersectNd extends Nd {
     
     private long secondaryRef = 0;
     ArrayList<Nd> connections = new ArrayList<Nd>();

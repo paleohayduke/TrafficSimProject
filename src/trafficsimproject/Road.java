@@ -5,7 +5,6 @@
  */
 package trafficsimproject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +14,7 @@ import java.util.ArrayList;
  */
 
 // creates a Road data type for us. 
-public class Road implements Serializable {
+public class Road {
     private int id = 0;   //identification # of road
     ArrayList<Nd> nodeList = new ArrayList<Nd>();  // Nodes that make up road
     ArrayList<IntersectNd> intersections = new ArrayList<IntersectNd>();

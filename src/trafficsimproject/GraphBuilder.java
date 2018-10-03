@@ -5,14 +5,13 @@
  */
 package trafficsimproject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author paleo
  */
-public class GraphBuilder implements Serializable{
+public class GraphBuilder {
     
     ArrayList<Road> roads = new ArrayList<Road>();
 //    ArrayList<Nd> intersects = new ArrayList<Nd>();
