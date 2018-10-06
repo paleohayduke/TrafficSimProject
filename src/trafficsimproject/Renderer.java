@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -46,8 +47,8 @@ public class Renderer extends JFrame{
     NodeInfoFrame nodeInfoFrame;
     
 
-    int originalX=0;
-    int originalY=0;
+
+
     double mouseLong=0;
     double mouseLat=0;
     int mouseOffSetX=0;
@@ -198,13 +199,19 @@ public class Renderer extends JFrame{
     // the whole map as parameters.
     
     
-    private void updateFrame(){
-        
-    }
+
     public void reSizeWindow(){
         this.setSize((int)(((maxLon- minLon)*scale1)/scale),(int)(((maxLat-minLat)*scale1)/scale));
     }
+    
+    JLabel timeLabel= new JLabel("clock: 00:00:00");
+    
+    TimeFrame timeFrame;
+    
     boolean nodeButtonOn=false;
+    boolean timeButtonOn=false;
+
+    
     public void drawWindow(){
         latRange = (int)((maxLat-minLat)*scale1);// calculate the size of the window
         lonRange = (int)((maxLon- minLon)*scale1);
@@ -273,11 +280,20 @@ public class Renderer extends JFrame{
             }
         });
         
-        JButton carToolButton = new JButton("Car");
-        carToolButton.setPreferredSize(new Dimension(65, 20));
-        carToolButton.addActionListener(new ActionListener(){
+        JButton timeButton = new JButton("SetTime");
+        timeButton.setPreferredSize(new Dimension(85, 20));
+        timeButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                new CarInfoFrame();
+                
+                if(timeButtonOn){
+                    timeButtonOn=false;
+                    timeFrame.dispose();
+                }else{
+                    timeFrame=new TimeFrame();
+                    timeButtonOn=true;
+                    
+                    
+                }
             }
         });
 
@@ -289,16 +305,18 @@ public class Renderer extends JFrame{
             }
         });
         
-//        this.add(carToolButton, BorderLayout.NORTH);  
+//        this.add(carToolButton, BorderLayout.NORTH); 
+        toolPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,1));
         toolPanel.add(pauseButton);
         toolPanel.add(playButton);
         toolPanel.add(fastPlayButton);
-        toolPanel.add(homeButton);
+//        toolPanel.add(homeButton);
         toolPanel.add(nodeToolButton);
-//        toolPanel.add(carToolButton);
-        toolPanel.add(optionsButton);
+//        toolPanel.add(optionsButton);
+        toolPanel.add(timeButton);
+        toolPanel.add(timeLabel);
         toolPanel.setPreferredSize(new Dimension(300,24));
-        toolPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,1));
+//        toolPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,1));
         this.add(toolPanel, BorderLayout.NORTH);
         MouseHandler mouseHandler = new MouseHandler();
         this.addMouseListener(mouseHandler);

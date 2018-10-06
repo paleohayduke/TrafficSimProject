@@ -8,9 +8,13 @@ package trafficsimproject;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -25,9 +29,14 @@ public class NodeInfoFrame extends JFrame{
         JTextField latField = new JTextField(10);
         JTextArea carArea = new JTextArea(7,12);
         JTextArea conArea = new JTextArea(7,12);
+        JRadioButton stopYes = new JRadioButton("true");
+        JRadioButton stopNo = new JRadioButton("false");        
+        ButtonGroup stopButtons = new ButtonGroup();
+        
+        
     NodeInfoFrame(){
 
-        this.setSize(420,200); // regular stuff for jframe 
+        this.setSize(500,200); // regular stuff for jframe 
 //        this.setDefaultCloseOperation(0);
 //        this.setUndecorated(true);
 
@@ -66,10 +75,22 @@ public class NodeInfoFrame extends JFrame{
         JPanel carPanel = new JPanel();
         carPanel.add(carsLabel);
         carPanel.add(carArea);
-
+        JLabel stopLabel = new JLabel("StopNode? ");
+        stopYes = new JRadioButton("true");
+        stopNo = new JRadioButton("false");
+        stopYes.addActionListener(new RadioButtonListener());
+        stopNo.addActionListener(new RadioButtonListener());
+        
+        stopButtons = new ButtonGroup();
+        stopButtons.add(stopYes);
+        stopButtons.add(stopNo);        
+        JPanel stopPanel = new JPanel();
+        stopPanel.add(stopLabel);
+        stopPanel.add(stopYes);
+        stopPanel.add(stopNo);
         this.add(conPanel,BorderLayout.CENTER);
         this.add(carPanel,BorderLayout.CENTER);
-        
+        this.add(stopPanel,BorderLayout.SOUTH);        
         
 //        this.add(refLabel);
 //        JButton nodeToolButton = new JButton("delete");
@@ -111,10 +132,33 @@ public class NodeInfoFrame extends JFrame{
       
         }
         carArea.setText(output);
+        
+        if(node.isStop){
+            stopButtons.setSelected(stopYes.getModel(), true);
+
+            
+        }else{
+            stopButtons.setSelected(stopNo.getModel(), true);
+            
+        }
     }
     //functions to edit the node
     //make functions to cycle through its connections.
     //maybe open another window that has info on cars connected to a node.
     //display graphs and charts
+    
+    private class RadioButtonListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource()==stopYes){
+                node.isStop=true;
+            }
+            if(e.getSource()==stopNo ){
+                node.isStop=false;
+            }
+        }
+        
+    }
     
 }

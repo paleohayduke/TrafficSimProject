@@ -101,71 +101,7 @@ public class Simulation {
         display.setScale(sca);
     }
     
-    // Need to create framework of methods to handle cars
-    public void demo() {
-        if(gb.roads.size()<1){
-            System.out.println("You must load a map first");
-            return;
-        }
-        
-        startRenderer(4);
-        // HERE WE GO
-        Scanner sc = new Scanner(System.in);
 
-        
-        getSimInfo();
-
-        
- 
-        
-        Random rand = new Random();
-        int roadNum1 = rand.nextInt(gb.roads.size());
-        int nodeNum1 = rand.nextInt(gb.roads.get(roadNum1).nodeList.size());
-        int roadNum2 = rand.nextInt(gb.roads.size());
-        int nodeNum2 = rand.nextInt(gb.roads.get(roadNum2).nodeList.size());
-        Directions route = new Directions(gb.roads.get(roadNum1).nodeList.get(nodeNum1));
-        route = route.findRoute(gb.roads, gb.roads.get(roadNum1).nodeList.get(nodeNum1), gb.roads.get(roadNum2).nodeList.get(nodeNum2));   
-        route.start = gb.roads.get(roadNum1).nodeList.get(nodeNum1);       
-
-
-        for(int i =0;i<route.directions.size();i++){
-            System.out.println(route.directions.get(i));
-        }
-        
-        
-        Auto test = new Auto();
-        test.setDirections(route);
-        
-       
-        
-        for(int i =0;i<route.directions.size()*100;i++){
-            
-            try{
-                
-            TimeUnit.MILLISECONDS.sleep(250);
-            }catch(Exception ex){
-                System.out.println("TimeUnit.SECONDS.sleep(1)");
-            }
- //           String pauseStr = sc.next();
-            test.step(0.0001, .4);
-            System.out.println("Frame "+i);
-            display.setAutoPos(test.posNode);
-//            setScale(i);
-        }
-        
-        while(true){
-            
- //           String pauseStr = sc.next();
-            test.debug();
-            display.setAutoPos(test.posNode);
-//            setScale(i);
-        }
-        
-        
-        
-
-    }
-    
     // return this shit as a string
     public void getSimInfo(){
         for(int i = 0;i<gb.roads.size();i++){
@@ -277,8 +213,30 @@ public class Simulation {
    // make a function to set this on its own. simulator should keep track of all
    // this shit on its own and not rely on main()
    // should be able to modify these options from GUI 
+    
+    private void updateClock(){
+       
+        String curTime=("clock: "+String.format("%02d", clock.hour)+":"+String.format("%02d", clock.min)+":"+String.format("%02d", (int)clock.second));
+        display.timeLabel.setText(curTime);
+        clock.minAlarm=false;
+//          
+    }
+    
     double stepSize =0;
-    public void step(double velocity, double stepSize){
+    SimClock clock = new SimClock();
+    boolean fastForward = false;
+    double ffstep=3600;
+//    double fpsFrames=0;
+    public void step(double velocity, double stepSize){       
+//        System.out.println(System.currentTimeMillis());
+
+        tickCounter++;
+//        if(0==tickCounter%3600){
+//            System.out.println("tick # "+tickCounter);
+//        }   
+        
+
+        
         if(display.playSpeed!=1){
             if(display.playSpeed==0){
                 return;
@@ -286,6 +244,48 @@ public class Simulation {
                stepSize=stepSize*(display.playSpeed)*(display.playSpeed);
             }
         }
+        
+        if(fastForward){
+            
+//            if(clock.targetHour-clock.hour<2){
+//                stepSize=64;
+//            }
+
+            if(clock.targetFound){
+//                System.out.println("clock.targetFound");
+                display.playSpeed=2;
+                clock.targetFound=false;
+                fastForward=false;
+            }else{
+                stepSize=ffstep;
+            }
+            
+            
+        }
+        clock.stepSec(stepSize);
+        updateClock();
+//        if(clock.minAlarm){
+////            fpsFrames=System.currentTimeMillis()-fpsFrames;
+//            updateClock();
+////            System.out.println("fps"+fpsFrames/tickCounter);
+////            tickCounter=0;
+//        }
+        
+        if(display.timeFrame!=null){
+            if(display.timeFrame.changeTime==true){
+                int steps=clock.stepsTill(stepSize, display.timeFrame.hour, 0);
+                System.out.println("secs to new time"+steps/stepSize);
+                clock.setTarget(display.timeFrame.hour);
+                fastForward=true;
+//                clock.stepSec(steps*stepSize);
+//                stepSize*=steps;
+//                updateClock();
+                display.timeFrame.changeTime=false;
+            }
+        }
+        
+        
+
         if(display.nodeSearchPlease){
             Nd searchResult = gb.findNode(display.mouseLong, display.mouseLat);
 //            System.out.println("ndPlease");
@@ -299,10 +299,7 @@ public class Simulation {
         }
         
         this.stepSize=stepSize;
-        tickCounter++;
-        if(0==tickCounter%3600){
-            System.out.println("tick # "+tickCounter);
-        }   
+
         for(int j=0;j<cars.size();j++){
 //            if(checkStop(j)){
 //                continue;
