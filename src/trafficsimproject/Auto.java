@@ -12,6 +12,24 @@ import java.util.Scanner;
  * 
  * @author paleo
  */
+/*
+//******************************************************
+//***  Class Name
+//***  Class Author (i.e. Your name)
+//******************************************************
+//*** Purpose of the class (Why did you write this class?)
+//***
+//******************************************************
+//*** Date
+//******************************************************
+//*** List of changes with dates. 
+//******************************************************
+//*** Look at this!
+//*** List all the places in the code where you did something interesting,
+//*** clever or elegant.  If you did good work in this program and you want
+//*** me to consider it in your grade, point it out here.
+//*******************************************************
+*/
 public class Auto {
     
 
@@ -28,6 +46,23 @@ public class Auto {
     static int carID=0;
     boolean accelerationOn=true;
     
+
+    
+    
+    
+//******************************************************
+//***  Method Name
+//***  Method Author (i.e. Your name)
+//******************************************************
+//*** Purpose of the Method (Why did you write this Method?)
+//*** Method Inputs:
+//*** List all the method parameters with their expected value ranges
+//*** Return value:
+//*** If this is a function list the return data type and the expected range of 
+//*** values to be returned.
+//******************************************************
+//*** Date
+//******************************************************
 
     Auto(){
         posNode.setRef(carID++);
@@ -88,7 +123,8 @@ public class Auto {
     double stopSpacing=0;
     int justGo =0;
     boolean stoppedOnce=false;
-    public void calcPos(double newVelocity, double timeIncrement){
+    public void calcPos(double timeIncrement){
+        double newVelocity = waypointNode.speedLimit;
         if(accelerationOn){
             if(velocity<newVelocity){
                 velocity=velocity+acceleration*timeIncrement;
@@ -336,24 +372,11 @@ public class Auto {
         return true;
     }
     
-    public void stepOLD(double velocity, double timeStep){
-        //CHECK IF DONE
-        // this is temporary
-        // write function call in Node to get coords from a node specifically
-        
-        
-//        System.out.println("distance to waypoint: "+ posNode.calcDistance(waypointNode));
-        calcPos(velocity, timeStep);
-        
-        //ping();
-        
-        
-        
-    }
+
     
 //    boolean accelSet=false;
     
-    public void step(double maxVelocity, double timeStep){
+    public void step(double timeStep){
         //CHECK IF DONE
         // this is temporary
         // write function call in Node to get coords from a node specifically
@@ -371,7 +394,7 @@ public class Auto {
 //        }
 //        
 //        System.out.println("distance to waypoint: "+ posNode.calcDistance(waypointNode));
-        calcPos(maxVelocity, timeStep);
+        calcPos(timeStep);
         
         //ping();
         

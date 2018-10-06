@@ -285,7 +285,17 @@ public class Simulation {
         }
         
         
-
+        if(display.carSearchPlease){
+            Auto searchResult = findAuto(display.mouseLong,display.mouseLat);
+            display.carsPanel.auto=searchResult;
+            display.carSearchPlease=false;
+            display.carsPanel.setFields();
+            
+            
+        }
+        else if(display.carButtonOn){
+            display.carsPanel.setFields();
+        }
         if(display.nodeSearchPlease){
             Nd searchResult = gb.findNode(display.mouseLong, display.mouseLat);
 //            System.out.println("ndPlease");
@@ -294,7 +304,8 @@ public class Simulation {
             display.nodeInfoFrame.setFields();;
 //            display.nodeInfoFrame.repaint();
             
-        }else if(display.nodeButtonOn){
+        }
+        else if(display.nodeButtonOn){
             display.nodeInfoFrame.setFields();
         }
         
@@ -304,7 +315,7 @@ public class Simulation {
 //            if(checkStop(j)){
 //                continue;
 //            }
-            cars.get(j).step(velocity,stepSize);
+            cars.get(j).step(stepSize);
             if(!cars.get(j).directions.inProgress()){
                 cars.get(j).waypointNode.stopQ.remove(cars.get(j).posNode);
                 
@@ -330,5 +341,28 @@ public class Simulation {
     public void updateRenderer(){
         display.stepCars(cars);
     }
+    
+    private Auto findAuto(double x, double y){
+        Auto output=new Auto();
+//        System.out.println("x="+x+"     y="+y);
+     
+        for(int i=0;i<cars.size();i++){
+            if(cars.get(i).posNode.getLat()<y+.0002
+                    &&cars.get(i).posNode.getLat()>y-.0002
+                    &&cars.get(i).posNode.getLong()>x-.0002
+                    &&cars.get(i).posNode.getLong()<x+.0002){
+                
+                output=cars.get(i);
+//                    System.out.println("FOUND IT");
+//                    System.out.println("lon="+output.getLong()+" lat="+output.getLat());
+                return output;
+            }
+        }
+        
+        
+        return output;
+    
+    }
+
 
 }

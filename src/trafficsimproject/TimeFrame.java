@@ -40,8 +40,8 @@ public class TimeFrame extends JFrame{
         timeSlide.setPaintLabels(true);
         timeSlide.setLabelTable(timeSlide.createStandardLabels(1));
 
-        ChangeEvent event = new ChangeEvent();
-        timeSlide.addChangeListener(event);
+        //ChangeEvent event = new ChangeEvent();
+        //timeSlide.addChangeListener(event);
 
         this.add(timeSlide,BorderLayout.NORTH);
         setTime = new JButton("Set");
@@ -49,13 +49,14 @@ public class TimeFrame extends JFrame{
         setTime.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 changeTime=true;
+                hour=timeSlide.getValue();
             }
         });
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(setTime);
         this.add(buttonPanel,BorderLayout.SOUTH);
         this.setVisible(true);
-//        this.setAlwaysOnTop(true);
+        this.setAlwaysOnTop(true);
     }
     
     void setTime(String strTime){
@@ -66,14 +67,14 @@ public class TimeFrame extends JFrame{
     // once you got the node fill all data about it
     // in this window.
     
-    private class ChangeEvent implements ChangeListener{
-
-        @Override
-        public void stateChanged(javax.swing.event.ChangeEvent e) {
-            hour=timeSlide.getValue();
-        }
-    
-}
+//    private class ChangeEvent implements ChangeListener{
+//
+//        @Override
+//        public void stateChanged(javax.swing.event.ChangeEvent e) {
+//            hour=timeSlide.getValue();
+//        }
+//    
+//}
 
 }
 

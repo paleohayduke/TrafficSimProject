@@ -27,16 +27,20 @@ public class NodeInfoFrame extends JFrame{
         JTextField refField = new JTextField(10);
         JTextField longField = new JTextField(10);
         JTextField latField = new JTextField(10);
+        JTextField speedField = new JTextField(5);
+        
         JTextArea carArea = new JTextArea(7,12);
         JTextArea conArea = new JTextArea(7,12);
+        
         JRadioButton stopYes = new JRadioButton("true");
         JRadioButton stopNo = new JRadioButton("false");        
         ButtonGroup stopButtons = new ButtonGroup();
         
         
+        
     NodeInfoFrame(){
 
-        this.setSize(500,200); // regular stuff for jframe 
+        this.setSize(500,300); // regular stuff for jframe 
 //        this.setDefaultCloseOperation(0);
 //        this.setUndecorated(true);
 
@@ -51,6 +55,7 @@ public class NodeInfoFrame extends JFrame{
         longField = new JTextField(10);
         JLabel latLabel = new JLabel("lat:");
         latField = new JTextField(10);
+        
         JLabel conLabel = new JLabel("connects:");
         JLabel carsLabel = new JLabel("cars:");
         
@@ -60,11 +65,26 @@ public class NodeInfoFrame extends JFrame{
         displayPanel.add(refLabel);
         displayPanel.add(refField);
         
+        JLabel speedLabel = new JLabel("speed:");
+        speedField = new JTextField(10);
+        
+        JLabel speedEditLabel = new JLabel("edit speed");
+        JTextField speedEditField = new JTextField(10);
+        speedEditField.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                node.speedLimit=Double.parseDouble(speedEditField.getText());
+            }
+        });
         
         displayPanel.add(longLabel);
         displayPanel.add(longField);
         displayPanel.add(latLabel);
         displayPanel.add(latField);
+        displayPanel.add(speedLabel);
+        displayPanel.add(speedField);
+        displayPanel.add(speedEditLabel);
+        displayPanel.add(speedEditField);
+        
         this.add(displayPanel, BorderLayout.WEST);
 
         JPanel conPanel = new JPanel();
@@ -122,13 +142,13 @@ public class NodeInfoFrame extends JFrame{
         latField.setText(Double.toString(node.getLat()));
         String output = "";
         for(int i=0;i<node.connections.size();i++){
-            output=output+Long.toString(node.connections.get(i).getRef())+"\n";
+            output=output+"  "+Long.toString(node.connections.get(i).getRef())+"\n";
         }
         conArea.setText(output);
         
         output="";
         for(int i=0;i<node.cars.size();i++){
-            output=output+Long.toString(node.cars.get(i).getRef())+"\n";
+            output=output+"  "+Long.toString(node.cars.get(i).getRef())+"\n";
       
         }
         carArea.setText(output);
@@ -141,6 +161,9 @@ public class NodeInfoFrame extends JFrame{
             stopButtons.setSelected(stopNo.getModel(), true);
             
         }
+        
+        speedField.setText(Double.toString(node.speedLimit));
+        
     }
     //functions to edit the node
     //make functions to cycle through its connections.

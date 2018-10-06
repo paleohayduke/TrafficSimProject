@@ -45,7 +45,7 @@ public class Renderer extends JFrame{
 //    MouseHandler mouseHandler;
     //send a Nd to this with mouse! check that this is not null first. 
     NodeInfoFrame nodeInfoFrame;
-    
+    CarInfoFrame carsPanel;
 
 
 
@@ -210,7 +210,7 @@ public class Renderer extends JFrame{
     
     boolean nodeButtonOn=false;
     boolean timeButtonOn=false;
-
+    boolean carButtonOn=false;
     
     public void drawWindow(){
         latRange = (int)((maxLat-minLat)*scale1);// calculate the size of the window
@@ -297,11 +297,23 @@ public class Renderer extends JFrame{
             }
         });
 
-        JButton optionsButton = new JButton("Options");
-        optionsButton.setPreferredSize(new Dimension(80, 20));
-        optionsButton.addActionListener(new ActionListener(){
+        JButton carsButton = new JButton("Car");
+        carsButton.setPreferredSize(new Dimension(65, 20));
+        carsButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                new OptionsFrame();
+                
+                
+                if(carButtonOn){
+                    carButtonOn=false;
+                    nodeInfoFrame.dispose();
+                }else{
+                    carsPanel=new CarInfoFrame();
+                    
+                    carButtonOn=true;
+                    
+                    
+                }
+                
             }
         });
         
@@ -312,6 +324,7 @@ public class Renderer extends JFrame{
         toolPanel.add(fastPlayButton);
 //        toolPanel.add(homeButton);
         toolPanel.add(nodeToolButton);
+        toolPanel.add(carsButton);
 //        toolPanel.add(optionsButton);
         toolPanel.add(timeButton);
         toolPanel.add(timeLabel);
@@ -340,6 +353,7 @@ public class Renderer extends JFrame{
         return -((lat-60)*scale)/scale1+maxLat;
     }
     
+    boolean carSearchPlease=false;
     boolean nodeSearchPlease=false;
     boolean showClickSpot=true;
     private class MouseHandler implements MouseListener, MouseMotionListener, MouseWheelListener{
@@ -351,8 +365,12 @@ public class Renderer extends JFrame{
             mouseLong=((e.getX()-8-mouseOffSetX)*scale)/scale1+minLon;
             mouseLat=-((e.getY()-55-mouseOffSetY)*scale)/scale1+maxLat;
 
-            
-            if(nodeButtonOn){
+            if(carButtonOn){
+                carSearchPlease=true;
+//                nodeSearchPlease = false;
+//                nodeInfoFrame.dispose();
+            }
+            else if(nodeButtonOn){
                 nodeSearchPlease = true;
             }
             if(showClickSpot){
@@ -492,7 +510,12 @@ public class Renderer extends JFrame{
 
                 
                 Shape mouseClick = new Rectangle2D.Double();
-                if(nodeButtonOn&&(nodeInfoFrame.node!=null)){
+                
+                if(carButtonOn&&carsPanel.auto!=null){
+                    graph2.setPaint(Color.MAGENTA);
+                    mouseClick = new Rectangle2D.Double(longToGrid(carsPanel.auto.posNode.getLong())-12,latToGrid(carsPanel.auto.posNode.getLat())-12,24,24);
+                    
+                }else if(nodeButtonOn&&(nodeInfoFrame.node!=null)){
                     graph2.setPaint(Color.cyan);
                     mouseClick = new Rectangle2D.Double(longToGrid(nodeInfoFrame.node.getLong())-5,latToGrid(nodeInfoFrame.node.getLat())-5,10,10);
 
@@ -501,6 +524,7 @@ public class Renderer extends JFrame{
                     mouseClick = new Rectangle2D.Double(longToGrid(mouseLong)-5,latToGrid(mouseLat)-5,10,10);
                 }
                 graph2.draw(mouseClick);
+
                 
                 
 
