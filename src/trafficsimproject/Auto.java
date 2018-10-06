@@ -41,7 +41,7 @@ public class Auto {
     double distNext = 0;
     double velocity=0;
     double maxVelocity=0;
-    double acceleration =.000025;
+    double acceleration =.000030;
     boolean stop = false;
     static int carID=0;
     boolean accelerationOn=true;

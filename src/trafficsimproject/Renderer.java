@@ -305,7 +305,7 @@ public class Renderer extends JFrame{
                 
                 if(carButtonOn){
                     carButtonOn=false;
-                    nodeInfoFrame.dispose();
+                    carsPanel.dispose();
                 }else{
                     carsPanel=new CarInfoFrame();
                     
@@ -370,16 +370,16 @@ public class Renderer extends JFrame{
 //                nodeSearchPlease = false;
 //                nodeInfoFrame.dispose();
             }
-            else if(nodeButtonOn){
+            if(nodeButtonOn){
                 nodeSearchPlease = true;
             }
-            if(showClickSpot){
-                
-//                System.out.println("moX="+e.getX()+" moY="+e.getY());
-//                System.out.println("clX="+longToGrid(mouseLong)/scale+" clY="+latToGrid(mouseLat)/scale);
+//            if(showClickSpot){
 //                
-
-            }
+////                System.out.println("moX="+e.getX()+" moY="+e.getY());
+////                System.out.println("clX="+longToGrid(mouseLong)/scale+" clY="+latToGrid(mouseLat)/scale);
+////                
+//
+//            }
             
             
         }
@@ -514,16 +514,19 @@ public class Renderer extends JFrame{
                 if(carButtonOn&&carsPanel.auto!=null){
                     graph2.setPaint(Color.MAGENTA);
                     mouseClick = new Rectangle2D.Double(longToGrid(carsPanel.auto.posNode.getLong())-12,latToGrid(carsPanel.auto.posNode.getLat())-12,24,24);
-                    
-                }else if(nodeButtonOn&&(nodeInfoFrame.node!=null)){
+                    graph2.draw(mouseClick);
+                }
+                if(nodeButtonOn&&(nodeInfoFrame.node!=null)){
                     graph2.setPaint(Color.cyan);
                     mouseClick = new Rectangle2D.Double(longToGrid(nodeInfoFrame.node.getLong())-5,latToGrid(nodeInfoFrame.node.getLat())-5,10,10);
-
-                }else{
+                    graph2.draw(mouseClick);
+                }
+                else if(!carButtonOn){
                     graph2.setPaint(Color.GREEN);
                     mouseClick = new Rectangle2D.Double(longToGrid(mouseLong)-5,latToGrid(mouseLat)-5,10,10);
+                    graph2.draw(mouseClick);
                 }
-                graph2.draw(mouseClick);
+                
 
                 
                 
