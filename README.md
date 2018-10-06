@@ -4,48 +4,39 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
+-Implement "major disaster" scenario. Click a spot on the map and every car
+will run away from it and attempt to path OFF of the map (evacuation simulation). 
+
+-Traffic traffic load and flow rate.
+
+-Create data structure to save processed and edited map data. 
+
+-Multiselection of nodes to change speed limits
+
+-Ability to add new nodes
+
+-Editing connections between nodes
+
 -Connect to GUI
 
--Clock
+-Toggle hiding a node from pathfinding and eliciting reroute from cars 
+attempting to route through them.  
 
--Bool on node that cars will recognize as an "accident". car will check
-every node to see if book is there and if it is then it will regenerate a
-route from its lastWaypoint to its destination ignoring the bad node. 
-Need to write an if() in routeFinder to treat accident flagged nodes
-as dead ends. Alternative is to simply disable the connections on the node
-and the ones surrounding it... this will require making sure that the
-cars will not try to access an element of their direction list that is out of
-bounds. 
-
--Build stop light finder and implement stoplights.
-*start with each light giving protected left turn... Eventually get opposite
-sides to coordinate and protected left but will need multilane roads..
-Poll the waypoint node and check its car list for cars that have same lastWaypoint;
-node as themselves, from here check what lane they are in, by directly polling
-them. This will require a variable in the Auto to keep track of which lane
-it is in and also checking with the road if it is two lane or one. 
-*Grab the info for speed limits while you are at it! 
-https://nacto.org/publication/urban-street-design-guide/intersection-design-elements/traffic-signals/signal-cycle-lengths/
-*Give stoplights traffic sensors.//make this option 
-*algorithm to pair roads on either side of a stop light... 
-Draw line between intersection pt and 2 of its connections. ... 
-if there is a point on EITHER side of this line then you have found two sets of 
-matching pairs
-at light... Left turns can be done automatically if no oncomming traffic... 
-check waypoint.car who has back waypoint other than you and in the oncomming lane.
-
--Speed limits
-
--Collect intersection type data (stopsign, stoplight, speed limit).
-Reevaluate MapReader-write some functions that take tags as parameter to
-easily search the OSM file. Need to be able to display any queried data in
-the renderer! 
+-Build Stop lights. manual placement
 
 -Get Git set up to keep track of revisions.
 
 -File open/save for _processed_ map data
 
 ANNOUNCEMENTS:
+10/6/2018 Set time frame with a hour select slider introduced. Fast forwards to
+whatever time you select. A car selector that draws a rectangle on a clicked car
+if you have the car frame open. You can now set speed limits of individual nodes
+from the node info screen...I'll make a tool to select groups of nodes by mouse
+and by entire roads. 
+You can toggle accidents on a car to cause it to stop and block traffic. 
+Once we finish the current TODO list, we will have fulfilled all project 
+requirements.
 
 10/3/2018 Mouse wheel now zooms map while keeping focus of object under the
 mouse cursor (just like Google maps). Pretty sweet.  
@@ -170,6 +161,10 @@ BUGS
 
 
 COMPLETED TASKS
+
+COMPLETED 10/6/2018: Clock & Set Time
+
+COMPLETED 10/6/2018: Speed limits *by node
 
 COMPLETED 10/3/2018: -Center camera to mouse on zoom
 

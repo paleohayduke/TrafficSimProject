@@ -25,9 +25,9 @@ import javax.swing.JTextField;
  */
 public class CarInfoFrame extends JFrame{
     Auto auto= new Auto();
-        JTextField idField = new JTextField(10);
-        JTextField longField = new JTextField(10);
-        JTextField latField = new JTextField(10);
+        JTextField idField = new JTextField(8);
+        JTextField longField = new JTextField(8);
+        JTextField latField = new JTextField(8);
         JTextArea carArea = new JTextArea(7,12);
         JTextArea conArea = new JTextArea(7,12);
         JRadioButton stopYes = new JRadioButton("true");
@@ -37,7 +37,7 @@ public class CarInfoFrame extends JFrame{
         
     CarInfoFrame(){
 
-        this.setSize(500,200); // regular stuff for jframe 
+        this.setSize(220,200); // regular stuff for jframe 
 //        this.setDefaultCloseOperation(0);
 //        this.setUndecorated(true);
 
@@ -47,11 +47,11 @@ public class CarInfoFrame extends JFrame{
         this.setLayout(new GridLayout());
 
         JLabel idLabel = new JLabel("ID:");
-        idField = new JTextField(10);
+        idField = new JTextField(8);
         JLabel longLabel = new JLabel("long:");
-        longField = new JTextField(10);
+        longField = new JTextField(8);
         JLabel latLabel = new JLabel("lat:");
-        latField = new JTextField(10);
+        latField = new JTextField(8);
         JLabel conLabel = new JLabel("connects:");
         JLabel carsLabel = new JLabel("cars:");
         
@@ -76,7 +76,7 @@ public class CarInfoFrame extends JFrame{
         JPanel carPanel = new JPanel();
         carPanel.add(carsLabel);
         carPanel.add(carArea);
-        JLabel stopLabel = new JLabel("StopNode? ");
+        JLabel stopLabel = new JLabel("accident? ");
         stopYes = new JRadioButton("true");
         stopNo = new JRadioButton("false");
         stopYes.addActionListener(new RadioButtonListener());
@@ -86,12 +86,12 @@ public class CarInfoFrame extends JFrame{
         stopButtons.add(stopYes);
         stopButtons.add(stopNo);        
         JPanel stopPanel = new JPanel();
-        stopPanel.add(stopLabel);
-        stopPanel.add(stopYes);
-        stopPanel.add(stopNo);
+        stopPanel.add(stopLabel,BorderLayout.NORTH);
+        stopPanel.add(stopYes,BorderLayout.CENTER);
+        stopPanel.add(stopNo,BorderLayout.CENTER);
 //        this.add(conPanel,BorderLayout.CENTER);
 //        this.add(carPanel,BorderLayout.CENTER);
-//        this.add(stopPanel,BorderLayout.SOUTH);        
+        this.add(stopPanel,BorderLayout.SOUTH);        
         
 //        this.add(refLabel);
 //        JButton nodeToolButton = new JButton("delete");
@@ -134,7 +134,7 @@ public class CarInfoFrame extends JFrame{
         }
         carArea.setText(output);
         
-        if(auto.posNode.isStop){
+        if(auto.stop){
             stopButtons.setSelected(stopYes.getModel(), true);
 
             
@@ -153,10 +153,10 @@ public class CarInfoFrame extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getSource()==stopYes){
-                auto.posNode.isStop=true;
+                auto.stop=true;
             }
             if(e.getSource()==stopNo ){
-                auto.posNode.isStop=false;
+                auto.stop=false;
             }
         }
         

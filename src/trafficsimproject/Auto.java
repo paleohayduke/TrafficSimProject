@@ -377,6 +377,9 @@ public class Auto {
 //    boolean accelSet=false;
     
     public void step(double timeStep){
+        if(stop){
+            return;
+        }
         //CHECK IF DONE
         // this is temporary
         // write function call in Node to get coords from a node specifically
