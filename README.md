@@ -28,20 +28,26 @@ will run away from it and attempt to path OFF of the map (evacuation simulation)
 -Set Git up to keep track of revisions.
 
 ANNOUNCEMENTS:
+
+10/7/2018 A* mode that takes speed limits into account. The need for multiple lanes including
+turn lanes and stop lights becomes obvious when you turn this on. 
+(high congestion on "primary" and "trunk" roads).
+*Adjusted the traffic congestion heuristic on the A* and its performing a lot
+better.
+
 10/6/2018 Set time frame with a hour select slider introduced. Fast forwards to
 whatever time you select. A car selector that draws a rectangle on a clicked car
 if you have the car frame open. You can now set speed limits of individual nodes
 from the node info screen...I'll make a tool to select groups of nodes by mouse
 and by entire roads. 
+
 You can toggle accidents on a car to cause it to stop and block traffic. 
 Once we finish the current TODO list, we will have fulfilled all project 
 requirements.
+
 Traffic Flow Rate is displayed in main window toolbar.
 Roads now set speed from OSM file depending on whether they are a trunk,
 primary, secondary or residential.
-A* mode that takes speed limits into account. The need for multiple lanes including
-turn lanes and stop lights becomes obvious when you turn this on. 
-(high congestion on "primary" and "trunk" roads)
 
 10/3/2018 Mouse wheel now zooms map while keeping focus of object under the
 mouse cursor (just like Google maps). Pretty sweet.  
@@ -167,12 +173,11 @@ BUGS
 
 COMPLETED TASKS
 
-COMPLETED 10/6/2018:-Adjust A* to take speed limit into account
-*code is commented out. 
+COMPLETED 10/7/2018:-Adjust A* to take speed limit into account
 
-COMPLETED 10/6/2018: Set speed limit from OSM file.
+COMPLETED 10/7/2018: Set speed limit from OSM file.
 
-COMPLETED 10/6/2018: change speed limits by Road
+COMPLETED 10/7/2018: change speed limits by Road
 
 COMPLETED 10/6/2018: Traffic traffic load and flow rate. Increment counter as cars reach destination
 and respawn.

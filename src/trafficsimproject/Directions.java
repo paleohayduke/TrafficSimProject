@@ -83,7 +83,8 @@ public class Directions {
     }
     
     
-
+    double traffHeurWeight=2;
+    
     public Directions findRoute(ArrayList<Road> roads, Nd start, Nd end){
         Directions route = new Directions();
         ArrayList<Directions> queue = new ArrayList<Directions>();
@@ -140,17 +141,17 @@ public class Directions {
             for(int j =0;j<current.connections.size();j++){
                 
                 Directions temp2Direction = new Directions(tempDirection);
-                temp2Direction.add(j, current.connections.get(j).calcDistance(end));
-//                temp2Direction.add(j, current.connections.get(j).calcDistance(end)/.00016);
+//                temp2Direction.add(j, current.connections.get(j).calcDistance(end));
+                temp2Direction.add(j, current.connections.get(j).calcDistance(end)/.00026);
 
-                Double displace = current.calcDistance(current.connections.get(j));
-//                Double displace = current.calcDistance(current.connections.get(j))/current.connections.get(j).speedLimit;
+//                Double displace = current.calcDistance(current.connections.get(j));
+                Double displace = current.calcDistance(current.connections.get(j))/current.connections.get(j).speedLimit;
                 double trafficHeur = current.connections.get(j).cars.size();
 //                System.out.println("score="+temp2Direction.score);
 //                
 //                System.out.println("displace="+displace);
 //                System.out.println("traffic="+trafficHeur);
-                temp2Direction.score=temp2Direction.score+displace+trafficHeur*.001;
+                temp2Direction.score=temp2Direction.score+displace+trafficHeur*(traffHeurWeight);
                 
                 queue.add(temp2Direction);
             }          
