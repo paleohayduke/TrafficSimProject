@@ -4,6 +4,9 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
+-Create simulation method to start the program paused without loading cars.
+Give options to load map, pick number of cars and any other start options.
+
 -Clock needs a "how many hours since (time)" function.  
 
 -Average trip length display
