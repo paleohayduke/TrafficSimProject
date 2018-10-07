@@ -15,11 +15,16 @@ public class FileBuilder {
     ArrayList<NdBuilder> nds;
     ArrayList<RoadBuilder> rds;
     ArrayList<DirectionBuilder> dirs;
+    ArrayList<Road> roads;
     
-    //
     FileBuilder(){
         
     }
+    //
+    FileBuilder(ArrayList<Road> roads){
+        this.roads=roads;
+    }
+    
     
     
 }

@@ -36,7 +36,8 @@ will run away from it and attempt to path OFF of the map (evacuation simulation)
 
 ANNOUNCEMENTS:
 
-10/7/2018 running route generator and simulator on separate threads.
+10/7/2018 concurrency enabled: multiple route generators, running on seperate
+threads, keep a buffer full of generated routes.
 
 10/7/2018 A* mode that takes speed limits into account... uses time instead of 
 distance as its metric. 

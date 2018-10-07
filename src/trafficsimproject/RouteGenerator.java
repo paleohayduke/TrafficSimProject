@@ -54,7 +54,7 @@ public class RouteGenerator implements Runnable{
         while(run){
             try{
                 buffer.blockingPut(makeDirection());
-                System.out.println("buffer.put");
+//                System.out.println("buffer.put");
             }catch(Exception ex){
                 
             }

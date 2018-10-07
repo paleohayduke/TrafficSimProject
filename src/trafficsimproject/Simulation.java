@@ -131,7 +131,19 @@ public class Simulation implements Runnable{
 //            int nodeNum1=0; 
 //            int roadNum2=0; 
 //            int nodeNum2=0;
-            Directions route=makeDirection();
+            Directions route = new Directions();
+//                    =makeDirection();
+            
+            
+            try{
+                route=(buffer.blockingGet());
+                    
+            }catch(Exception ex){
+                    
+            }
+            
+            
+            
             routeCounter++;
             if(routeCounter%100==0){
                 System.out.println("...route # "+routeCounter);
@@ -407,6 +419,7 @@ public class Simulation implements Runnable{
     @Override
     public void run() {
 //        System.out.println("RUN");
+        setCars(carTotal);
         while(run){
 //            System.out.println("RUN");
             try{
@@ -418,6 +431,6 @@ public class Simulation implements Runnable{
             }
         }
     }
-
+    int carTotal=500;
 
 }
