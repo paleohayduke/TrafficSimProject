@@ -4,13 +4,6 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
--Create thread to handle path finding. 
-Create an array to hold 10 directions, as new cars are generated, they will pull
-from the array to get their directions(disposing of source direction) and the 
-direction thread will then make a new direction, based on current traffic
-conditions, to replace it... If there are no new directions, car can go inactive
-until a new route is ready. 
-
 -Create simulation method to start the program paused without loading cars.
 Give options to load map, pick number of cars and any other start options.
 
@@ -42,6 +35,8 @@ will run away from it and attempt to path OFF of the map (evacuation simulation)
 -Set Git up to keep track of revisions.
 
 ANNOUNCEMENTS:
+
+10/7/2018 running route generator and simulator on separate threads.
 
 10/7/2018 A* mode that takes speed limits into account... uses time instead of 
 distance as its metric. 
@@ -185,6 +180,13 @@ BUGS
 
 
 COMPLETED TASKS
+
+COMPLETED 10/7/2018: -Create thread to handle path finding. 
+Create an array to hold 10 directions, as new cars are generated, they will pull
+from the array to get their directions(disposing of source direction) and the 
+direction thread will then make a new direction, based on current traffic
+conditions, to replace it... If there are no new directions, car can go inactive
+until a new route is ready. 
 
 COMPLETED 10/7/2018: -makeDirection() in Simulation needs to be able to set a minimum distance
 between start and end point. 

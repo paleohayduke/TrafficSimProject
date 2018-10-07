@@ -341,8 +341,9 @@ public class Simulation implements Runnable{
             if(!cars.get(j).directions.inProgress()){
                 routesCompleted++;
                 display.totalCar.setText("    routes completed="+routesCompleted);
-                
-                display.flowRate.setText("    rate="+(int)((routesCompleted/((tickCounter*stepSize)))*3600)+"/hour");
+                int flowRate = (int)((routesCompleted/((tickCounter*stepSize)))*3600);
+                display.flowRate.setText("    rate="+flowRate+"/hour    "
+                +flowRate*24+"/day");
 
                 cars.get(j).waypointNode.stopQ.remove(cars.get(j).posNode);
                 
