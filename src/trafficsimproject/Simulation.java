@@ -164,7 +164,10 @@ public class Simulation {
 
     }
     
+
+    
     public Directions makeDirection(){
+
         boolean repeat = true;
         Random rand = new Random();
         Directions route = new Directions();
@@ -226,7 +229,10 @@ public class Simulation {
     SimClock clock = new SimClock();
     boolean fastForward = false;
     double ffstep=3600;
+    int routesCompleted=0;
 //    double fpsFrames=0;
+    
+    
     public void step(double velocity, double stepSize){       
 //        System.out.println(System.currentTimeMillis());
 
@@ -308,6 +314,18 @@ public class Simulation {
         else if(display.nodeButtonOn){
             display.nodeInfoFrame.setFields();
         }
+        if(display.roadSearchPlease){
+            Nd searchResult = gb.findNode(display.mouseLong, display.mouseLat);
+//            System.out.println("ndPlease");
+            display.roadFrame.setRoad(searchResult);
+            display.roadSearchPlease=false;
+            display.roadFrame.setFields();;
+//            display.nodeInfoFrame.repaint();
+            
+        }
+        else if(display.roadButtonOn&&display.roadFrame.road!=null){
+            display.roadFrame.setFields();
+        }
         
         this.stepSize=stepSize;
 
@@ -317,6 +335,12 @@ public class Simulation {
 //            }
             cars.get(j).step(stepSize);
             if(!cars.get(j).directions.inProgress()){
+                routesCompleted++;
+                display.totalCar.setText("    routes completed="+routesCompleted);
+                
+                display.flowRate.setText("    rate="+(int)((routesCompleted/((tickCounter*stepSize)))*3600)+"/hour");
+                
+
                 cars.get(j).waypointNode.stopQ.remove(cars.get(j).posNode);
                 
                 cars.get(j).waypointNode.removeCar(cars.get(j).posNode);

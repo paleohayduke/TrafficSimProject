@@ -141,10 +141,10 @@ public class Directions {
                 
                 Directions temp2Direction = new Directions(tempDirection);
                 temp2Direction.add(j, current.connections.get(j).calcDistance(end));
-//                System.out.println("distance to target "+current.connections.get(j).calcDistance(end)*100
-//                +" turn: "+j);
+//                temp2Direction.add(j, current.connections.get(j).calcDistance(end)/.00016);
 
                 Double displace = current.calcDistance(current.connections.get(j));
+//                Double displace = current.calcDistance(current.connections.get(j))/current.connections.get(j).speedLimit;
                 double trafficHeur = current.connections.get(j).cars.size();
 //                System.out.println("score="+temp2Direction.score);
 //                

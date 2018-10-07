@@ -205,13 +205,15 @@ public class Renderer extends JFrame{
     }
     
     JLabel timeLabel= new JLabel("clock: 00:00:00");
-    
+    JLabel totalCar = new JLabel("completed: ");
+    JLabel flowRate = new JLabel("   flow: ");
     TimeFrame timeFrame;
+    RoadFrame roadFrame;
     
     boolean nodeButtonOn=false;
     boolean timeButtonOn=false;
     boolean carButtonOn=false;
-    
+    boolean roadButtonOn=false;
     public void drawWindow(){
         latRange = (int)((maxLat-minLat)*scale1);// calculate the size of the window
         lonRange = (int)((maxLon- minLon)*scale1);
@@ -279,6 +281,24 @@ public class Renderer extends JFrame{
                 }
             }
         });
+        JButton roadButton = new JButton("Road");
+        roadButton.setPreferredSize(new Dimension(65, 20));
+        roadButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+//                nodeInfoFrame=new NodeInfoFrame();
+                if(roadButtonOn){
+                    roadButtonOn=false;
+                    roadFrame.dispose();
+                }else{
+                    roadFrame=new RoadFrame();
+                    roadButtonOn=true;
+//                    nodeButtonOn=false;
+//                    nodeInfoFrame.dispose();
+                    
+                    
+                }
+            }
+        });
         
         JButton timeButton = new JButton("SetTime");
         timeButton.setPreferredSize(new Dimension(85, 20));
@@ -324,10 +344,18 @@ public class Renderer extends JFrame{
         toolPanel.add(fastPlayButton);
 //        toolPanel.add(homeButton);
         toolPanel.add(nodeToolButton);
+        toolPanel.add(roadButton);
         toolPanel.add(carsButton);
 //        toolPanel.add(optionsButton);
         toolPanel.add(timeButton);
         toolPanel.add(timeLabel);
+        
+        totalCar = new JLabel("    completed: ");
+        toolPanel.add(totalCar);
+        flowRate = new JLabel("    rate: ");
+        toolPanel.add(flowRate);
+        
+        
         toolPanel.setPreferredSize(new Dimension(300,24));
 //        toolPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,1));
         this.add(toolPanel, BorderLayout.NORTH);
@@ -355,6 +383,7 @@ public class Renderer extends JFrame{
     
     boolean carSearchPlease=false;
     boolean nodeSearchPlease=false;
+    boolean roadSearchPlease=false;
     boolean showClickSpot=true;
     private class MouseHandler implements MouseListener, MouseMotionListener, MouseWheelListener{
         
@@ -370,9 +399,13 @@ public class Renderer extends JFrame{
 //                nodeSearchPlease = false;
 //                nodeInfoFrame.dispose();
             }
+            if (roadButtonOn){
+                roadSearchPlease=true;
+            }
             if(nodeButtonOn){
                 nodeSearchPlease = true;
             }
+            
 //            if(showClickSpot){
 //                
 ////                System.out.println("moX="+e.getX()+" moY="+e.getY());
@@ -501,6 +534,10 @@ public class Renderer extends JFrame{
         
                 Shape carPos = new Rectangle2D.Double(x1-10/scale,y1-10/scale,20/scale,20/scale);
  //               carShapes.add(carPos);
+                if(cars.get(i).stop){
+                    graph2.setPaint(Color.gray);
+                }else
+                    graph2.setPaint(Color.RED);
                 graph2.draw(carPos);
             }
             
@@ -510,7 +547,14 @@ public class Renderer extends JFrame{
 
                 
                 Shape mouseClick = new Rectangle2D.Double();
-                
+                if(roadButtonOn&&roadFrame.road!=null){
+                    graph2.setPaint(Color.blue);
+                    for(int ndInd=0;ndInd<roadFrame.road.nodeList.size();ndInd++){
+
+                        mouseClick = new Rectangle2D.Double(longToGrid(roadFrame.road.nodeList.get(ndInd).getLong())-5,latToGrid(roadFrame.road.nodeList.get(ndInd).getLat())-5,10,10);
+                        graph2.draw(mouseClick);
+                    }
+                }
                 if(carButtonOn&&carsPanel.auto!=null){
                     graph2.setPaint(Color.MAGENTA);
                     mouseClick = new Rectangle2D.Double(longToGrid(carsPanel.auto.posNode.getLong())-12,latToGrid(carsPanel.auto.posNode.getLat())-12,24,24);
@@ -521,7 +565,7 @@ public class Renderer extends JFrame{
                     mouseClick = new Rectangle2D.Double(longToGrid(nodeInfoFrame.node.getLong())-5,latToGrid(nodeInfoFrame.node.getLat())-5,10,10);
                     graph2.draw(mouseClick);
                 }
-                else if(!carButtonOn){
+                if(!carButtonOn&&!nodeButtonOn&&!roadButtonOn){
                     graph2.setPaint(Color.GREEN);
                     mouseClick = new Rectangle2D.Double(longToGrid(mouseLong)-5,latToGrid(mouseLat)-5,10,10);
                     graph2.draw(mouseClick);

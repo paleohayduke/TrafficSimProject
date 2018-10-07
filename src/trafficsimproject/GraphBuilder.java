@@ -35,6 +35,7 @@ public class GraphBuilder {
 
             //Go through each node
             for(int j = 0; j<roads.get(i).getNodes().size();j++){
+                roads.get(i).nodeList.get(j).speedLimit=roads.get(i).speed;
 //                System.out.println("\tnode ref:"+roads.get(i).getNodes().get(j).getRef());
                 
             // check each node again all intersections. 
@@ -159,7 +160,7 @@ public class GraphBuilder {
     
     public Nd findNode(double x, double y){
         Nd output=new Nd();
-        System.out.println("x="+x+"     y="+y);
+//        System.out.println("x="+x+"     y="+y);
      
         for(int i=0;i<roads.size();i++){
  

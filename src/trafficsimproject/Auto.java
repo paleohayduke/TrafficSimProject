@@ -41,7 +41,7 @@ public class Auto {
     double distNext = 0;
     double velocity=0;
     double maxVelocity=0;
-    double acceleration =.000030;
+    double acceleration =.000047;
     boolean stop = false;
     static int carID=0;
     boolean accelerationOn=true;
@@ -279,7 +279,7 @@ public class Auto {
 //                    double spacing = posNode.calcDistance(waypointNode.cars.get(i));
                     if(spacing<carSpacing){
                         justGo++;
-                        if(justGo>100){
+                        if(justGo>50){
                             justGo=0;
                             d=newVelocity*timeIncrement;
                             break;
@@ -291,13 +291,30 @@ public class Auto {
 //                        System.out.println("car distance");
                         return;
                     }
+//                    else if(spacing<carSpacing*5){
+//                        justGo++;
+//                        if(justGo>50){
+//                            justGo=0;
+//                            d=newVelocity*timeIncrement;
+//                            break;
+//
+//                        }
+////                        d=0;
+////                        velocity=velocity-acceleration*3;
+//                        this.velocity=velocity-acceleration*timeIncrement;
+//                        if(this.velocity<0){
+//                            this.velocity=0;
+//                        }
+////                        System.out.println("car distance");
+//                        
+//                    }
                 }
             }
             else if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==waypointNode
                     &&waypointNode.cars.get(i).parentAuto.waypointNode!=this.lastWaypointNode){
                 if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing){
                     justGo++;
-                        if(justGo>200){
+                        if(justGo>100){
                             justGo=0;
                             
                             d=newVelocity*timeIncrement;

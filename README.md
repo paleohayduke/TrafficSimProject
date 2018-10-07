@@ -4,29 +4,28 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
--Implement "major disaster" scenario. Click a spot on the map and every car
-will run away from it and attempt to path OFF of the map (evacuation simulation). 
+-Editing connections between nodes. Make connection display in NodeInfoFrame
+a selectable list to jump between nodes.
 
--Traffic traffic load and flow rate.
-
--Create data structure to save processed and edited map data. 
-
--Multiselection of nodes to change speed limits
+-Build Stop lights. manual placement with node info tool
 
 -Ability to add new nodes
 
--Editing connections between nodes
+-Merge current tool windows into a menu that docks on the side of the window.
+(like photoshop).  
 
--Connect to GUI
+-Create data structure to save processed and edited map data. Needs to be 
+enough to let GraphBuilder do its job. 
 
 -Toggle hiding a node from pathfinding and eliciting reroute from cars 
 attempting to route through them.  
 
--Build Stop lights. manual placement
+-Implement "major disaster" scenario. Click a spot on the map and every car
+will run away from it and attempt to path OFF of the map (evacuation simulation). 
 
--Get Git set up to keep track of revisions.
+-Connect to GUI
 
--File open/save for _processed_ map data
+-Set Git up to keep track of revisions.
 
 ANNOUNCEMENTS:
 10/6/2018 Set time frame with a hour select slider introduced. Fast forwards to
@@ -37,6 +36,12 @@ and by entire roads.
 You can toggle accidents on a car to cause it to stop and block traffic. 
 Once we finish the current TODO list, we will have fulfilled all project 
 requirements.
+Traffic Flow Rate is displayed in main window toolbar.
+Roads now set speed from OSM file depending on whether they are a trunk,
+primary, secondary or residential.
+A* mode that takes speed limits into account. The need for multiple lanes including
+turn lanes and stop lights becomes obvious when you turn this on. 
+(high congestion on "primary" and "trunk" roads)
 
 10/3/2018 Mouse wheel now zooms map while keeping focus of object under the
 mouse cursor (just like Google maps). Pretty sweet.  
@@ -161,6 +166,16 @@ BUGS
 
 
 COMPLETED TASKS
+
+COMPLETED 10/6/2018:-Adjust A* to take speed limit into account
+*code is commented out. 
+
+COMPLETED 10/6/2018: Set speed limit from OSM file.
+
+COMPLETED 10/6/2018: change speed limits by Road
+
+COMPLETED 10/6/2018: Traffic traffic load and flow rate. Increment counter as cars reach destination
+and respawn.
 
 COMPLETED 10/6/2018: Clock & Set Time
 

@@ -178,6 +178,18 @@ public class MapReader {
 //                            System.out.println(isOneway);
                             tempRoad.oneWay=true;
                         }
+                      
+                    }  ////////////// WORKING HERE*********************
+                    else if(wayness.equals("highway")){
+//                        System.out.println("ONEWAY");
+                        String roadType = (waynessShowElement.getAttribute("v"));
+//                        System.out.println(isOneway);
+                        if(roadType.equals("primary")||roadType.equals("primary_link")||roadType.equals("trunk_link")||roadType.equals("trunk")){
+//                            System.out.println(isOneway);
+                            tempRoad.speed=.00037;
+                        }else if(roadType.equals("secondary")||roadType.equals("secondary_link")){
+                            tempRoad.speed=.00027;
+                        }
                     }
                 }
                 
@@ -420,6 +432,29 @@ public class MapReader {
                 nd.setRef(ref); // Set reference ID number of the node
                 nd.setLat(Double.parseDouble(showElement.getAttribute("lat")));  // seting latitude
                 nd.setLong(Double.parseDouble(showElement.getAttribute("lon"))); // setting longitude
+                
+                
+                // set node as traffic signal..... these are not always on
+                // intersections.... not so useful... 
+//                NodeList lightList = showElement.getElementsByTagName("tag");
+//                for(int tagI=0;tagI<lightList.getLength();tagI++){
+//                    Node lightNode = lightList.item(tagI);
+//                    Element lightElement = (Element)lightNode;
+//                    String typeNode = lightElement.getAttribute("k");
+//                    
+////                    System.out.println("type "+typeNode);
+//                    
+//                    if(typeNode.equals("highway")){
+//                        String isLight=lightElement.getAttribute("v");
+//                        if(isLight.equals("traffic_signals")){
+//                            nd.isStopLight=true;
+//                        }
+//                    }
+//   
+//                }
+
+                    
+                
                 return nd;
             }else if(ref>(Double.parseDouble(showElement.getAttribute("id")))){
                 left=index+1;
@@ -506,8 +541,7 @@ public class MapReader {
                     }
                     
                     for(int l=0;l<roads.get(k).nodeList.size();l++){
-                        if(roads.get(i).nodeList.get(j).getLat()==roads.get(k).nodeList.get(l).getLat()
-                                &&roads.get(i).nodeList.get(j).getLong()==roads.get(k).nodeList.get(l).getLong()){
+                        if(roads.get(i).nodeList.get(j).getRef()==roads.get(k).nodeList.get(l).getRef()){
                             IntersectNd tempNode = new IntersectNd();
 ///////////////////////////////WORK ON THIS
                             tempNode.connections.add(roads.get(i).nodeList.get(j));

@@ -24,23 +24,26 @@ import javax.swing.JTextField;
  */
 public class NodeInfoFrame extends JFrame{
     Nd node= new Nd();
-        JTextField refField = new JTextField(10);
-        JTextField longField = new JTextField(10);
-        JTextField latField = new JTextField(10);
+        JTextField refField = new JTextField(5);
+        JTextField longField = new JTextField(5);
+        JTextField latField = new JTextField(5);
         JTextField speedField = new JTextField(5);
         
-        JTextArea carArea = new JTextArea(7,12);
-        JTextArea conArea = new JTextArea(7,12);
+        JTextArea carArea = new JTextArea(7,7);
+        JTextArea conArea = new JTextArea(7,7);
         
         JRadioButton stopYes = new JRadioButton("true");
         JRadioButton stopNo = new JRadioButton("false");        
         ButtonGroup stopButtons = new ButtonGroup();
         
+        JRadioButton lightYes = new JRadioButton("true");
+        JRadioButton lightNo = new JRadioButton("false");        
+        ButtonGroup lightButtons = new ButtonGroup();
         
         
     NodeInfoFrame(){
 
-        this.setSize(500,300); // regular stuff for jframe 
+        this.setSize(440,300); // regular stuff for jframe 
 //        this.setDefaultCloseOperation(0);
 //        this.setUndecorated(true);
 
@@ -50,11 +53,11 @@ public class NodeInfoFrame extends JFrame{
         this.setLayout(new GridLayout());
 
         JLabel refLabel = new JLabel("ref:");
-        refField = new JTextField(10);
+        refField = new JTextField(5);
         JLabel longLabel = new JLabel("long:");
-        longField = new JTextField(10);
+        longField = new JTextField(5);
         JLabel latLabel = new JLabel("lat:");
-        latField = new JTextField(10);
+        latField = new JTextField(5);
         
         JLabel conLabel = new JLabel("connects:");
         JLabel carsLabel = new JLabel("cars:");
@@ -66,10 +69,10 @@ public class NodeInfoFrame extends JFrame{
         displayPanel.add(refField);
         
         JLabel speedLabel = new JLabel("speed:");
-        speedField = new JTextField(10);
+        speedField = new JTextField(5);
         
         JLabel speedEditLabel = new JLabel("edit speed");
-        JTextField speedEditField = new JTextField(10);
+        JTextField speedEditField = new JTextField(5);
         speedEditField.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 node.speedLimit=Double.parseDouble(speedEditField.getText());
@@ -95,6 +98,7 @@ public class NodeInfoFrame extends JFrame{
         JPanel carPanel = new JPanel();
         carPanel.add(carsLabel);
         carPanel.add(carArea);
+        
         JLabel stopLabel = new JLabel("StopNode? ");
         stopYes = new JRadioButton("true");
         stopNo = new JRadioButton("false");
@@ -108,10 +112,25 @@ public class NodeInfoFrame extends JFrame{
         stopPanel.add(stopLabel);
         stopPanel.add(stopYes);
         stopPanel.add(stopNo);
+        
+        JLabel lightLabel = new JLabel("StopLight? ");
+        lightYes = new JRadioButton("true");
+        lightNo = new JRadioButton("false");
+        lightYes.addActionListener(new LightRadioButtonListener());
+        lightNo.addActionListener(new LightRadioButtonListener());
+        
+        lightButtons = new ButtonGroup();
+        lightButtons.add(lightYes);
+        lightButtons.add(lightNo);        
+        JPanel lightPanel = new JPanel();
+        lightPanel.add(lightLabel);
+        lightPanel.add(lightYes);
+        lightPanel.add(lightNo);
+        
         this.add(conPanel,BorderLayout.CENTER);
         this.add(carPanel,BorderLayout.CENTER);
         this.add(stopPanel,BorderLayout.SOUTH);        
-        
+        this.add(lightPanel,BorderLayout.SOUTH);
 //        this.add(refLabel);
 //        JButton nodeToolButton = new JButton("delete");
 //        nodeToolButton.addActionListener(new ActionListener(){
@@ -162,6 +181,15 @@ public class NodeInfoFrame extends JFrame{
             
         }
         
+        if(node.isStopLight){
+            lightButtons.setSelected(lightYes.getModel(), true);
+
+            
+        }else{
+            lightButtons.setSelected(lightNo.getModel(), true);
+            
+        }
+        
         speedField.setText(Double.toString(node.speedLimit));
         
     }
@@ -184,4 +212,17 @@ public class NodeInfoFrame extends JFrame{
         
     }
     
+    private class LightRadioButtonListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource()==lightYes){
+                node.isStopLight=true;
+            }
+            if(e.getSource()==stopNo ){
+                node.isStopLight=false;
+            }
+        }
+        
+    }
 }

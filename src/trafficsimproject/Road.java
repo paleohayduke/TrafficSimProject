@@ -20,7 +20,7 @@ public class Road {
     ArrayList<IntersectNd> intersections = new ArrayList<IntersectNd>();
     ArrayList<Double> distList = new ArrayList<Double>(); // distances between nodes
     boolean oneWay = false;
-    
+    public double speed=.00016;
     public double distance =0;
     
     Road(){
