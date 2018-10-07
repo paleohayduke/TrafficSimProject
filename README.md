@@ -176,6 +176,9 @@ BUGS
 
 COMPLETED TASKS
 
+COMPLETED 10/7/2018: -makeDirection() in Simulation needs to be able to set a minimum distance
+between start and end point. 
+
 COMPLETED 10/7/2018:-Adjust A* to take speed limit into account
 
 COMPLETED 10/7/2018: Set speed limit from OSM file.
@@ -205,6 +208,7 @@ COMPLETED 10/1/2018:-Test mouse interaction.
 COMPLETED 10/1/2018:-Function to find a node based on its longitude and latitude. 
 
 COMPLETED 10/1/2018 BUG: -Fix the hit detection bug!!!!!!!!!!!!!!!
+
 COMPLETED 10/1/2018 BUG: Map is displaying upside down because origin (0,0) is top left corner for the JFrame.
 Need to flip vertically.
 

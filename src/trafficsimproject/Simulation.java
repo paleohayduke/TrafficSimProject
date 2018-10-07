@@ -165,7 +165,7 @@ public class Simulation {
     }
     
 
-    
+
     public Directions makeDirection(){
 
         boolean repeat = true;
@@ -176,6 +176,10 @@ public class Simulation {
             int nodeNum1 = rand.nextInt(gb.roads.get(roadNum1).nodeList.size());
             int roadNum2 = rand.nextInt(gb.roads.size());
             int nodeNum2 = rand.nextInt(gb.roads.get(roadNum2).nodeList.size());
+            if(gb.roads.get(roadNum1).nodeList.get(nodeNum1).calcDistance(gb.roads.get(roadNum2).nodeList.get(nodeNum2))<(maxLon-minLon)/4){
+//                System.out.println("continue="+(maxLon-minLon)/4);
+                continue;
+            }
             route = new Directions(gb.roads.get(roadNum1).nodeList.get(nodeNum1));
             route = route.findRoute(gb.roads, gb.roads.get(roadNum1).nodeList.get(nodeNum1), gb.roads.get(roadNum2).nodeList.get(nodeNum2));
             route.start = gb.roads.get(roadNum1).nodeList.get(nodeNum1);
