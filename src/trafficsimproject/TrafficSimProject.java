@@ -33,8 +33,12 @@ public class TrafficSimProject {
 //        sim.startRenderer(15);// 8 is the scale
         
         
-        sim.openMap("./src/KilleenMap.osm"); // pick the map
-        sim.startRenderer(8);// 8 is the scale
+//        sim.openMap("./src/KilleenMap.osm"); // pick the map
+//        sim.startRenderer(8);// 8 is the scale
+
+        sim.openMap("./src/full.osm"); // pick the map
+        sim.startRenderer(15);// 8 is the scale
+
 
 ////
 //        sim.openMap("./src/MediumMap.osm");
