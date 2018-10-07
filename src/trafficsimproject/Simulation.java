@@ -339,7 +339,6 @@ public class Simulation {
                 display.totalCar.setText("    routes completed="+routesCompleted);
                 
                 display.flowRate.setText("    rate="+(int)((routesCompleted/((tickCounter*stepSize)))*3600)+"/hour");
-                
 
                 cars.get(j).waypointNode.stopQ.remove(cars.get(j).posNode);
                 

@@ -4,6 +4,10 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
+-Clock needs a "how many hours since (time)" function.  
+
+-Average trip length display
+
 -Editing connections between nodes. Make connection display in NodeInfoFrame
 a selectable list to jump between nodes.
 
@@ -29,11 +33,10 @@ will run away from it and attempt to path OFF of the map (evacuation simulation)
 
 ANNOUNCEMENTS:
 
-10/7/2018 A* mode that takes speed limits into account. The need for multiple lanes including
-turn lanes and stop lights becomes obvious when you turn this on. 
-(high congestion on "primary" and "trunk" roads).
-*Adjusted the traffic congestion heuristic on the A* and its performing a lot
-better.
+10/7/2018 A* mode that takes speed limits into account... uses time instead of 
+distance as its metric. 
+*Adjusted the traffic congestion heuristic on the A*. make slider to adjust this
+from a menu.
 
 10/6/2018 Set time frame with a hour select slider introduced. Fast forwards to
 whatever time you select. A car selector that draws a rectangle on a clicked car

@@ -83,7 +83,7 @@ public class Directions {
     }
     
     
-    double traffHeurWeight=2;
+    double traffHeurWeight=5;
     
     public Directions findRoute(ArrayList<Road> roads, Nd start, Nd end){
         Directions route = new Directions();
