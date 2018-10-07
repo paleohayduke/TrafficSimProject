@@ -28,6 +28,7 @@ public class CarInfoFrame extends JFrame{
         JTextField idField = new JTextField(8);
         JTextField longField = new JTextField(8);
         JTextField latField = new JTextField(8);
+        JTextField velocityField = new JTextField(8);
         JTextArea carArea = new JTextArea(7,12);
         JTextArea conArea = new JTextArea(7,12);
         JRadioButton stopYes = new JRadioButton("true");
@@ -37,7 +38,7 @@ public class CarInfoFrame extends JFrame{
         
     CarInfoFrame(){
 
-        this.setSize(220,200); // regular stuff for jframe 
+        this.setSize(220,230); // regular stuff for jframe 
 //        this.setDefaultCloseOperation(0);
 //        this.setUndecorated(true);
 
@@ -61,11 +62,13 @@ public class CarInfoFrame extends JFrame{
         displayPanel.add(idLabel);
         displayPanel.add(idField);
         
-        
+        JLabel velocityLabel = new JLabel("velocity:");
         displayPanel.add(longLabel);
         displayPanel.add(longField);
         displayPanel.add(latLabel);
         displayPanel.add(latField);
+        displayPanel.add(velocityLabel);
+        displayPanel.add(velocityField);
         this.add(displayPanel, BorderLayout.WEST);
 
         JPanel conPanel = new JPanel();
@@ -142,6 +145,7 @@ public class CarInfoFrame extends JFrame{
             stopButtons.setSelected(stopNo.getModel(), true);
             
         }
+        velocityField.setText(Double.toString(auto.velocity));
     }
     //functions to edit the node
     //make functions to cycle through its connections.

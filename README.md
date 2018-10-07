@@ -4,6 +4,13 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
+-Create thread to handle path finding. 
+Create an array to hold 10 directions, as new cars are generated, they will pull
+from the array to get their directions(disposing of source direction) and the 
+direction thread will then make a new direction, based on current traffic
+conditions, to replace it... If there are no new directions, car can go inactive
+until a new route is ready. 
+
 -Create simulation method to start the program paused without loading cars.
 Give options to load map, pick number of cars and any other start options.
 

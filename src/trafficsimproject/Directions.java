@@ -16,8 +16,11 @@ import java.util.Comparator;
 public class Directions {
     
     Nd start;
+    Nd end;
     ArrayList<Integer> directions = new ArrayList<Integer>();
     public double score;
+    int stepIndex=0;
+
     
     Directions(){
         
@@ -60,7 +63,7 @@ public class Directions {
         else return true;
     }
     
-    int stepIndex=0;
+
     public int next(){
         if(directions.isEmpty()){
             return 0;
@@ -86,6 +89,7 @@ public class Directions {
     double traffHeurWeight=5;
     
     public Directions findRoute(ArrayList<Road> roads, Nd start, Nd end){
+        this.end=end;
         Directions route = new Directions();
         ArrayList<Directions> queue = new ArrayList<Directions>();
         ArrayList<Long> visitedRef = new ArrayList<Long>();

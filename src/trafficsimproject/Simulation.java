@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author paleo
  */
-public class Simulation {
+public class Simulation implements Runnable{
     GraphBuilder gb;
 //    private ArrayList<Road> roads = new ArrayList<Road>();
     
@@ -30,14 +30,14 @@ public class Simulation {
     private ArrayList<Auto> cars = new ArrayList<Auto>();
     
     
-    private Renderer display;
+    Renderer display;
     
     // TODO: localize the scope of these variables
     private double minLat=0;
     private double minLon=0;
     private double maxLon=0;
     private double maxLat =0;
-    
+    boolean run=true;
     //you'll have to use openMap() yourself
     Simulation(){
         
@@ -348,7 +348,14 @@ public class Simulation {
                 
                 cars.get(j).waypointNode.removeCar(cars.get(j).posNode);
                 cars.get(j).lastWaypointNode.removeCar(cars.get(j).posNode);
-                cars.get(j).setDirections(makeDirection());
+//                cars.get(j).setDirections(makeDirection());
+                try{
+                    cars.get(j).setDirections(buffer.blockingGet());
+                    
+                }catch(Exception ex){
+                    
+                }
+                
 //                cars.get(j).setDirections(makeDirection(cars.get(j).waypointNode));
  //               System.out.println("makeDirection()");
             }        
@@ -389,6 +396,26 @@ public class Simulation {
         
         return output;
     
+    }
+    
+    RouteBuffer buffer = new RouteBuffer();
+    public void setBuffer(RouteBuffer buffer){
+        this.buffer=buffer;
+    }
+
+    @Override
+    public void run() {
+//        System.out.println("RUN");
+        while(run){
+//            System.out.println("RUN");
+            try{
+                step(0.00016, .022);
+                Thread.sleep(20);
+                updateRenderer();
+            }catch(Exception ex){
+                
+            }
+        }
     }
 
 
