@@ -16,7 +16,7 @@ public class RouteBuffer implements Buffer{
     public final ArrayBlockingQueue<Directions> buffer;
     
     RouteBuffer(){
-        buffer = new ArrayBlockingQueue<Directions>(20);
+        buffer = new ArrayBlockingQueue<Directions>(28);
     }
     
 

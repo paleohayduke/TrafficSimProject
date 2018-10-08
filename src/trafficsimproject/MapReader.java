@@ -184,10 +184,13 @@ public class MapReader {
 //                        System.out.println("ONEWAY");
                         String roadType = (waynessShowElement.getAttribute("v"));
 //                        System.out.println(isOneway);
-                        if(roadType.equals("primary")||roadType.equals("primary_link")||roadType.equals("trunk_link")||roadType.equals("trunk")){
+                        if(roadType.equals("primary")||roadType.equals("primary_link")
+                                ||roadType.equals("trunk_link")||roadType.equals("trunk")
+                                ||roadType.equals("motorway")||roadType.equals("motorway_link")){
 //                            System.out.println(isOneway);
-                            tempRoad.speed=.00037;
-                        }else if(roadType.equals("secondary")||roadType.equals("secondary_link")){
+                            tempRoad.speed=.0004;
+                        }else if(roadType.equals("secondary")||roadType.equals("secondary_link")
+                        ||roadType.equals("service")||roadType.equals("service_link")){
                             tempRoad.speed=.00027;
                         }
                     }

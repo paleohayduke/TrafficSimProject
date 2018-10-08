@@ -14,6 +14,12 @@ Give options to load map, pick number of cars and any other start options.
 -Editing connections between nodes. Make connection display in NodeInfoFrame
 a selectable list to jump between nodes.
 
+-multi lane roads
+
+-Display cars offset from center of road depending on their lane. 
+
+-Car passing
+
 -Build Stop lights. manual placement with node info tool
 
 -Ability to add new nodes
