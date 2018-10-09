@@ -350,7 +350,8 @@ public class Simulation implements Runnable{
 //            System.out.println("ndPlease");
             display.nodeInfoFrame.node=searchResult;
             display.nodeSearchPlease=false;
-            display.nodeInfoFrame.setFields();;
+            display.nodeInfoFrame.setFields();
+            display.nodeInfoFrame.setFieldsOnce();
 //            display.nodeInfoFrame.repaint();
             
         }

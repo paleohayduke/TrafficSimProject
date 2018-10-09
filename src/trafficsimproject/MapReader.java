@@ -192,6 +192,8 @@ public class MapReader {
                         }else if(roadType.equals("secondary")||roadType.equals("secondary_link")
                         ||roadType.equals("service")||roadType.equals("service_link")){
                             tempRoad.speed=.00027;
+                        }else if(roadType.equals("tertiary")||roadType.equals("tertiary_link")){
+                            tempRoad.speed=.00022;
                         }
                     }
                 }
@@ -277,6 +279,12 @@ public class MapReader {
 //            System.out.println(tagShowElement.getAttribute("k"));
             String tagString = tagShowElement.getAttribute("k");
             if(tagString.equalsIgnoreCase("highway")){
+                
+                String wayType = tagShowElement.getAttribute("v");
+                if(wayType.equals("footway")||wayType.equals("path")){
+//                    System.out.println("footway");
+                    return false;
+                }
                 return true;
             }
             //////////// 
@@ -286,7 +294,8 @@ public class MapReader {
         return isRoad;
     }
     
-    
+    ///
+
     //private void getListOfWays(){
     //    
     //}
@@ -311,64 +320,7 @@ public class MapReader {
         return null;
     }
     
-    
-    
-    // TODO: reimplement as binary search
-    // Preamble
-    // This function currently takes a long ref which identifies a node ID
-    // in a road... The nodes linked by the road do not include longitude and 
-    // lattitude data... but luckily there are indpendent <node>'s in the file,
-    // seperate from the <ways> that do have the location data.. 
-    // 
-    // After the function finds the node that has longitude and latitude data,
-    // it constructs a temporare node (Nd nd) that has all the datafields of a 
-    // Node filled out and then returns it.
-    //
-    // Currently it searches linearly, I'll try to walk through what it does now
-    // that corresponds to regular linear search.
-    private Nd makeNdOLD(long ref){
-        
-        Nd nd = new Nd();   // the Nd is one of our data types that holds the
-                            // node data: ref, longitude, latitude
-        
-        // this loop goes through _all_ of the Nodes on the map. 
-        for(int i = 0; i<allNodes.getLength();i++){
-            Node tempNode = allNodes.item(i);   //pulls an individual node from 
-                                                //list of all nodes
-            Element showElement = (Element)tempNode;// this convets it to Element
-                                                    // to let us get the attributes
-//            System.out.println("\tsearching for match... try:"+i);
-
-
-            // This is where we see if ref IDs match between nodes. 
-            // if they do match, then we grab the Longitude and Lattitude
-            // data from the Nd nd. 
-            if(ref==Long.parseLong(showElement.getAttribute("id"))){
-                System.out.println("FOUND A MATCH: "+showElement.getAttribute("id") );
-                nd.setRef(ref); // Set reference ID number of the node
-                nd.setLat(Double.parseDouble(showElement.getAttribute("lat")));  // seting latitude
-                nd.setLong(Double.parseDouble(showElement.getAttribute("lon"))); // setting longitude
-
-
-                System.out.println("setLat " + nd.getLat());                
-                System.out.println("setLon " + nd.getLong());
- //               startIndex=i;
-                return nd; // return back a Completed node. 
-            }
-
-            
-                
-        }
-        
-        
-        
-        
-        
-        
-        return nd;
-    }
-    
-    
+ 
     //
     
 
@@ -436,26 +388,6 @@ public class MapReader {
                 nd.setLat(Double.parseDouble(showElement.getAttribute("lat")));  // seting latitude
                 nd.setLong(Double.parseDouble(showElement.getAttribute("lon"))); // setting longitude
                 
-                
-                // set node as traffic signal..... these are not always on
-                // intersections.... not so useful... 
-//                NodeList lightList = showElement.getElementsByTagName("tag");
-//                for(int tagI=0;tagI<lightList.getLength();tagI++){
-//                    Node lightNode = lightList.item(tagI);
-//                    Element lightElement = (Element)lightNode;
-//                    String typeNode = lightElement.getAttribute("k");
-//                    
-////                    System.out.println("type "+typeNode);
-//                    
-//                    if(typeNode.equals("highway")){
-//                        String isLight=lightElement.getAttribute("v");
-//                        if(isLight.equals("traffic_signals")){
-//                            nd.isStopLight=true;
-//                        }
-//                    }
-//   
-//                }
-
                     
                 
                 return nd;
@@ -470,70 +402,7 @@ public class MapReader {
         return nd;
     }
     
-    
-    // *9/22/2018 This thing is wrong, Revise
-    //
-    // gets all the intersections and adds them to the roads. 
-    // This code runs but it has not been tested to see if it
-    // is working correctly. 
-//    void setIntersectionsOLDEST(){
-//        
-//        
-//        for(int i = 1; i< roads.size();i++){
-//            Road road = roads.get(i-1);
-//            Road road2 = roads.get(i);
-//            
-//            ArrayList<IntersectNd> intersects = new ArrayList<IntersectNd>();
-//            
-//            for(int j=0;j<road.nodeList.size();j++){
-//                for(int k=0;k<road2.nodeList.size();k++){
-//                    if(road.getNodes().get(j).getRef()<road2.getNodes().get(k).getRef()+.00001&&
-//                            road.getNodes().get(j).getRef()>road2.getNodes().get(k).getRef()-.00001){
-//                        IntersectNd tempIntersect = new IntersectNd();
-//                        tempIntersect.setLat(road.getNodes().get(j).getLat());
-//                        tempIntersect.setLong(road.getNodes().get(j).getLong());
-//                        tempIntersect.setRef(road.getNodes().get(j).getRef());
-//                        tempIntersect.setSecondary(road2.getNodes().get(k).getRef());
-//                        
-//                        intersects.add(tempIntersect);
-//                        System.out.println("Intersect: ");
-//                    }
-//                }
-//                
-//            }
-//            roads.get(i-1).setIntersections(intersects);
-//            
-//        }
-//        
-//    }
-    
-    void setIntersectionsOLD(){
-        for(int i = 0;i<roads.size();i++){
-            for(int j =0;j<roads.get(i).nodeList.size();j++){
-                for(int k = 0; k<roads.size();k++){
-                    if(k==i){
-                        continue;
-                    }
-                    
-                    for(int l=0;l<roads.get(k).nodeList.size();l++){
-                        if(roads.get(i).nodeList.get(j).getLat()==roads.get(k).nodeList.get(l).getLat()
-                                &&roads.get(i).nodeList.get(j).getLong()==roads.get(k).nodeList.get(l).getLong()){
-                            IntersectNd tempNode = new IntersectNd();
-///////////////////////////////WORK ON THIS
 
-                            tempNode.setLat(roads.get(i).nodeList.get(j).getLat());
-                            tempNode.setLong(roads.get(i).nodeList.get(j).getLong());
-                            tempNode.setRef(roads.get(i).nodeList.get(j).getRef());
-                            roads.get(i).addIntersection(tempNode);
-//                            System.out.println("Found Intercept");
-                        }
-                    }
-                    
-                    
-                }
-            }
-        }
-    }
     
         void setIntersections(){
         for(int i = 0;i<roads.size();i++){

@@ -349,7 +349,7 @@ public class Renderer extends JFrame{
         toolPanel.add(pauseButton);
         toolPanel.add(playButton);
         toolPanel.add(fastPlayButton);
-        toolPanel.add(homeButton);
+//        toolPanel.add(homeButton);
         toolPanel.add(nodeToolButton);
         toolPanel.add(roadButton);
         toolPanel.add(carsButton);
@@ -411,6 +411,7 @@ public class Renderer extends JFrame{
             }
             if(nodeButtonOn){
                 nodeSearchPlease = true;
+                
             }
             
 //            if(showClickSpot){

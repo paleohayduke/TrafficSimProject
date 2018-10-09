@@ -54,13 +54,13 @@ public class NodeInfoFrame extends JFrame{
 
         JLabel refLabel = new JLabel("ref:");
         refField = new JTextField(7);
-        refField.setEnabled(false);
+//        refField.setEnabled(false);
         JLabel longLabel = new JLabel("long:");
         longField = new JTextField(7);
-        longField.setEnabled(false);
+//        longField.setEnabled(false);
         JLabel latLabel = new JLabel("lat:");
         latField = new JTextField(7);
-        latField.setEnabled(false);
+//        latField.setEnabled(false);
         
         JLabel conLabel = new JLabel("connects:");
         JLabel carsLabel = new JLabel("cars:");
@@ -96,7 +96,7 @@ public class NodeInfoFrame extends JFrame{
         JPanel conPanel = new JPanel();
         conPanel.add(conLabel);
         conArea.setWrapStyleWord(true);
-        conArea.setEnabled(false);
+//        conArea.setEnabled(false);
         conPanel.add(conArea);
 
         JPanel carPanel = new JPanel();
@@ -159,8 +159,8 @@ public class NodeInfoFrame extends JFrame{
 //            JTextField refField = new JTextField(6);
 //        JTextField longField = new JTextField(6);
 //        JTextField latField = new JTextField(6);
-    public void setFields(){
-
+    
+    public void setFieldsOnce(){
         refField.setText( Long.toString(node.getRef()));
         longField.setText(Double.toString(node.getLong()));
         latField.setText(Double.toString(node.getLat()));
@@ -169,8 +169,11 @@ public class NodeInfoFrame extends JFrame{
             output=output+"  "+Long.toString(node.connections.get(i).getRef())+"\n";
         }
         conArea.setText(output);
+    }
+    public void setFields(){
+
         
-        output="";
+        String output="";
         for(int i=0;i<node.cars.size();i++){
             output=output+"  "+Long.toString(node.cars.get(i).getRef())+"\n";
       

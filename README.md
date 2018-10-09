@@ -49,6 +49,9 @@ ANNOUNCEMENTS:
 10/9/2018 Can save processed map files as well as batches of direction files. 
 Loading time is a few orders of magnitude better. 
 
+Changed sort to find min in A*. Fixed node intersections: they are using highways
+now. Bunch of other little bug fixes. 
+
 10/8/2018 https://www.kcentv.com/article/news/local/killeen-neighborhood-it-takes-20-minutes-to-get-out-of-our-subdivision/600300276
 The sim predicts this. The area in the link  is consistently the most congested area 
 in MediumMap.osm.

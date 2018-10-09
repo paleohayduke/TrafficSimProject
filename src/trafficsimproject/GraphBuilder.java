@@ -50,14 +50,17 @@ public class GraphBuilder {
                    if(roads.get(i).nodeList.get(j).getRef()==roads.get(i).getIntersections().get(k).getRef()){
                        //MUST FIND AND LINK ALL instance of this intersect across all roads
 //                       Nd tempNode = findNode(roads.get(i).nodeList.get(j).getRef(),i,j);
-                       Indexes foundIJ = findNodeIndex(roads.get(i).nodeList.get(j).getRef(),i,j);
+                       ArrayList<Indexes> foundIJs = findNodeIndex(roads.get(i).nodeList.get(j).getRef(),i,j);
 //                       if(tempNode==roads.get(i).nodeList.get(j)){
 //                           continue;
 //                       }
                        
                        
-                       
-                       makeIntersectNode(i,j, foundIJ);
+                       for(int l =0; l<foundIJs.size();l++){
+//                           System.out.println("foundIJs.size()"+foundIJs.size());
+                            makeIntersectNode(i,j, foundIJs.get(l));
+                           
+                       }
                        
 
 
@@ -73,7 +76,7 @@ public class GraphBuilder {
             }
             roads.get(i).buildLocalIntercets();
         }
-        buildStops();
+//        buildStops();
     }
     
     private void makeIntersectNode(int i, int j, Indexes fIJ){
@@ -97,8 +100,29 @@ public class GraphBuilder {
         int j =0;
     }
     
-    private Indexes findNodeIndex(long ref,int roadsIndex, int interIndex){
-        Indexes indexes = new Indexes();
+//    private Indexes findNodeIndexOLD(long ref,int roadsIndex, int interIndex){
+//        Indexes indexes = new Indexes();
+//        Nd temp = new Nd();
+//        for(int i = 0; i<roads.size();i++){
+//            for(int j =0; j<roads.get(i).nodeList.size();j++){
+//                if(i==roadsIndex&&j==interIndex){
+//                    continue;
+//                }
+//                if(roads.get(i).nodeList.get(j).getRef()==ref){
+//                    temp = roads.get(i).nodeList.get(j);
+//                    indexes.i=i;
+//                    indexes.j=j;
+//                    
+//
+//                }
+//            }
+//        }
+//        
+//        return indexes;
+//    }
+    
+    private ArrayList<Indexes> findNodeIndex(long ref,int roadsIndex, int interIndex){
+        ArrayList<Indexes> indexes = new ArrayList();
         Nd temp = new Nd();
         for(int i = 0; i<roads.size();i++){
             for(int j =0; j<roads.get(i).nodeList.size();j++){
@@ -107,8 +131,10 @@ public class GraphBuilder {
                 }
                 if(roads.get(i).nodeList.get(j).getRef()==ref){
                     temp = roads.get(i).nodeList.get(j);
-                    indexes.i=i;
-                    indexes.j=j;
+                    Indexes index = new Indexes();
+                    index.i=i;
+                    index.j=j;
+                    indexes.add(index);
                     
 
                 }
@@ -117,7 +143,8 @@ public class GraphBuilder {
         
         return indexes;
     }
-    
+
+
     
     private Nd findNode(long ref,int roadsIndex, int interIndex){
         Nd temp = new Nd();
@@ -139,21 +166,21 @@ public class GraphBuilder {
     
 
     
-    public void buildStops(){
-        for(int i=0;i<roads.size();i++){
-            for(int j=0;j<roads.get(i).nodeList.size();j++){
-                
-                if(roads.get(i).nodeList.get(j).connections.size()>2){
-                    stops.add(roads.get(i).nodeList.get(j));
-//                    System.out.println("found stop, size="+roads.get(i).nodeList.get(j).connections.size());
-                }
-            }
-        }
-    }
-    
-    public ArrayList<Nd> getStops(){
-        return stops;
-    }
+//    public void buildStops(){
+//        for(int i=0;i<roads.size();i++){
+//            for(int j=0;j<roads.get(i).nodeList.size();j++){
+//                
+//                if(roads.get(i).nodeList.get(j).connections.size()>2){
+//                    stops.add(roads.get(i).nodeList.get(j));
+////                    System.out.println("found stop, size="+roads.get(i).nodeList.get(j).connections.size());
+//                }
+//            }
+//        }
+//    }
+//    
+//    public ArrayList<Nd> getStops(){
+//        return stops;
+//    }
     
     public ArrayList<Road> getRoads(){
         return roads;
