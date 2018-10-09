@@ -33,10 +33,10 @@ public class Simulation implements Runnable{
     Renderer display;
     
     // TODO: localize the scope of these variables
-    private double minLat=0;
-    private double minLon=0;
-    private double maxLon=0;
-    private double maxLat =0;
+    public double minLat=0;
+    public double minLon=0;
+    public double maxLon=0;
+    public double maxLat =0;
     boolean run=true;
     //you'll have to use openMap() yourself
     Simulation(){
@@ -62,6 +62,30 @@ public class Simulation implements Runnable{
 //        saveMap();
         
     }
+    
+    
+    public void openPro(String fName){
+//        MapReader reader = new MapReader(fileName);
+        FileBuilder fb = new FileBuilder();
+        fb.readFile(fName);
+
+
+        GraphBuilder graphb = new GraphBuilder(fb.roads);
+//        StopBuilder sb = new StopBuilder(gb.roads);
+//        roads=gb.roads;
+        this.gb=graphb;
+        this.minLat=fb.boundBuilder.minLat;
+        this.maxLat=fb.boundBuilder.maxLat;
+        this.minLon=fb.boundBuilder.minLon;
+        this.maxLon=fb.boundBuilder.maxLon;
+ 
+        loadCars(fb.readDirectionsFile("mapDIR"));
+        
+        
+//        saveMap();
+        
+    }
+    
     
     public void saveMap(){
         String fName ="./src/roads.obj";
@@ -414,15 +438,119 @@ public class Simulation implements Runnable{
     
     }
     
+    
+    
+    public ArrayList<Directions> saveCars(int totalCars){
+        ArrayList<Directions> directions = new ArrayList();
+        Random rand = new Random();
+        int routeCounter=0;
+        for(int i = 0;i<totalCars;i++){
+//            boolean repeat = true;
+//
+//
+//            int roadNum1=0; 
+//            int nodeNum1=0; 
+//            int roadNum2=0; 
+//            int nodeNum2=0;
+            Directions route = new Directions();
+//                    =makeDirection();
+            
+            
+            try{
+                route=(buffer.blockingGet());
+                    
+            }catch(Exception ex){
+                    
+            }
+            
+            
+            
+            routeCounter++;
+            if(routeCounter%100==0){
+                System.out.println("...route # "+routeCounter);
+            }
+//           
+//            while(repeat){
+//                roadNum1 = rand.nextInt(roads.size());
+//                nodeNum1 = rand.nextInt(roads.get(roadNum1).nodeList.size());
+//                roadNum2 = rand.nextInt(roads.size());
+//                nodeNum2 = rand.nextInt(roads.get(roadNum2).nodeList.size());
+//                route = new Directions(roads.get(roadNum1).nodeList.get(nodeNum1));
+//                route = route.findRoute(roads, roads.get(roadNum1).nodeList.get(nodeNum1), roads.get(roadNum2).nodeList.get(nodeNum2));
+//    
+//                if(!route.isEmpty()){
+//                    repeat=false;
+//                }
+//            }
+  
+            
+
+            
+//            route.start = roads.get(roadNum1).nodeList.get(nodeNum1);
+            
+            directions.add(route);
+//            tempCar.setDirections(route);
+            
+        }
+//        System.out.println("Cars Size="+cars.size());
+        return directions;
+
+
+    }
+    
+    
+    public void loadCars(ArrayList<Directions> directions){
+        for(int i = 0;i<directions.size();i++){
+//            boolean repeat = true;
+//
+//
+//            int roadNum1=0; 
+//            int nodeNum1=0; 
+//            int roadNum2=0; 
+//            int nodeNum2=0;
+            
+            
+            int routeCounter=0;
+            routeCounter++;
+            if(routeCounter%100==0){
+                System.out.println("...route # "+routeCounter);
+            }
+            Auto tempCar = new Auto();
+            tempCar.setDirections(directions.get(i));
+            cars.add(tempCar);
+            
+        }
+//        System.out.println("Cars Size="+cars.size());
+
+    }
+    
     RouteBuffer buffer = new RouteBuffer();
     public void setBuffer(RouteBuffer buffer){
         this.buffer=buffer;
     }
 
+    
+    boolean saveCars=false;
+    boolean loadCarFile=false;
     @Override
     public void run() {
 //        System.out.println("RUN");
-        setCars(carTotal);
+//        setCars(carTotal);
+        if(saveCars){
+            
+            FileBuilder fb = new FileBuilder();
+            fb.buildDirectionBuilders(saveCars(carTotal));
+            fb.writeDirectionsFile("mapDIR");
+        }else if(loadCarFile){
+//            FileBuilder fb = new FileBuilder();
+//            loadCars(fb.readDirectionsFile("mapDIR"));
+            
+            
+            
+        }else{
+            setCars(carTotal);
+        }
+        
         while(run){
 //            System.out.println("RUN");
             try{

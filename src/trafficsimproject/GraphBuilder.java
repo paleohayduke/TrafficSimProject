@@ -19,6 +19,7 @@ public class GraphBuilder {
 
     
         GraphBuilder(ArrayList<Road> roads){
+//            System.out.println("...HEY # "+roads.size());
         this.roads=roads;
         //go through each road
         int counter =0;

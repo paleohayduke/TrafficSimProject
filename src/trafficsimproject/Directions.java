@@ -91,6 +91,7 @@ public class Directions {
     public Directions findRoute(ArrayList<Road> roads, Nd start, Nd end){
         this.end=end;
         Directions route = new Directions();
+        route.end=end;
         ArrayList<Directions> queue = new ArrayList<Directions>();
         ArrayList<Long> visitedRef = new ArrayList<Long>();
         ArrayList<Long> visitedRef2 = new ArrayList<Long>();
@@ -103,10 +104,11 @@ public class Directions {
 
 
             Directions tempDirection= new Directions();
-                
+            tempDirection.end=end;    
                 
             if(queue.size()>0){
                 tempDirection = new Directions(queue.get(0));
+                tempDirection.end=end;
                 queue.remove(0);
             }
             else if(queue.isEmpty()&&started==true){
@@ -156,7 +158,7 @@ public class Directions {
 //                System.out.println("displace="+displace);
 //                System.out.println("traffic="+trafficHeur);
                 temp2Direction.score=temp2Direction.score+displace+trafficHeur*(traffHeurWeight);
-                
+                temp2Direction.end=end;
                 queue.add(temp2Direction);
             }          
         started=true;

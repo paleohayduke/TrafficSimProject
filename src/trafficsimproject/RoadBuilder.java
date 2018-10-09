@@ -18,4 +18,7 @@ public class RoadBuilder implements Serializable{
     ArrayList<NdBuilder> intersections = new ArrayList<NdBuilder>();
     boolean oneWay = false;
     public double speed=.00016;
+    RoadBuilder(){
+        
+    }
 }
