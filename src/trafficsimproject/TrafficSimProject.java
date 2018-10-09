@@ -5,7 +5,8 @@
  */
 package trafficsimproject;
 
-import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -20,7 +21,8 @@ public class TrafficSimProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        demo();
+//        demo();
+        threadTest();
         //test();
     }
     
@@ -36,13 +38,13 @@ public class TrafficSimProject {
 //        sim.openMap("./src/KilleenMap.osm"); // pick the map
 //        sim.startRenderer(8);// 8 is the scale
 
-        sim.openMap("./src/full.osm"); // pick the map
-        sim.startRenderer(15);// 8 is the scale
+//        sim.openMap("./src/full.osm"); // pick the map
+//        sim.startRenderer(15);// 8 is the scale
 
 
 ////
-//        sim.openMap("./src/MediumMap.osm");
-//        sim.startRenderer(4);
+        sim.openMap("./src/MediumMap.osm");
+        sim.startRenderer(4);
 ////     
 //
 //        sim.openMap("./src/KilleenTAMUCTbig.osm");
@@ -55,7 +57,7 @@ public class TrafficSimProject {
 ////        sim.openMap("./src/HomeMap.osm");
 ////        sim.startRenderer(1);
 
-        sim.setCars(1000); // 200 is the amount of cars 
+        sim.setCars(500); // 200 is the amount of cars 
         boolean run = true;
         while(run){ //play for a long time
             sim.step(0.00016, .022);         //.00016.05 used to be    
@@ -80,6 +82,56 @@ public class TrafficSimProject {
         simTest.openMap("./src/HomeMap.osm");
         simTest.startRenderer(1);
         
+    }
+    
+    static void threadTest(){
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        Simulation sim = new Simulation();
+
+        sim.openMap("./src/MediumMap.osm");
+        sim.startRenderer(8);
+        sim.carTotal=500;
+        
+        RouteBuffer buffer = new RouteBuffer();
+        sim.setBuffer(buffer);
+        RouteGenerator routeGen = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
+//        RouteGenerator routeGen2 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
+//        RouteGenerator routeGen3 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
+//        RouteGenerator routeGen4 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
+//        RouteGenerator routeGen5 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
+//        RouteGenerator routeGen6 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
+//        RouteGenerator routeGen7 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
+//        
+        executorService.execute(routeGen);
+//        executorService.execute(routeGen2);
+//        executorService.execute(routeGen3);
+//        executorService.execute(routeGen4);
+//        executorService.execute(routeGen5);
+//        executorService.execute(routeGen6);
+//        executorService.execute(routeGen7);
+//        sim.setCars(500); // 200 is the amount of cars 
+
+        executorService.execute(sim);
+
+        executorService.shutdown();
+
+//        boolean run = true;
+//        while(run){ //play for a long time
+//            sim.step(0.00016, .022);         //.00016.05 used to be    
+//            try{
+//                
+//                TimeUnit.MILLISECONDS.sleep(20); //
+//            }catch(Exception ex){
+//                System.out.println("TimeUnit.SECONDS.sleep(1)");
+//            }
+// //           String pauseStr = sc.next();
+//
+// //           System.out.println("Frame "+i);
+//            sim.updateRenderer();
+////            sim.setScale(i);
+//        }
+//        sim.demo();
+//        sim.startRenderer(1);
     }
 
 
