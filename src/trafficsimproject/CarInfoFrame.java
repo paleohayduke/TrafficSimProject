@@ -49,13 +49,13 @@ public class CarInfoFrame extends JFrame{
 
         JLabel idLabel = new JLabel("ID:");
         idField = new JTextField(8);
-        idField.setEditable(false);
+        idField.setEnabled(false);
         JLabel longLabel = new JLabel("long:");
         longField = new JTextField(8);
-        longField.setEditable(false);
+        longField.setEnabled(false);
         JLabel latLabel = new JLabel("lat:");
         latField = new JTextField(8);
-        latField.setEditable(false);
+        latField.setEnabled(false);
         JLabel conLabel = new JLabel("connects:");
         JLabel carsLabel = new JLabel("cars:");
         
