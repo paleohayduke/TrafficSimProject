@@ -34,9 +34,6 @@ a selectable list to jump between nodes.
 -Merge current tool windows into a menu that docks on the side of the window.
 (like photoshop).  
 
--Create data structure to save processed and edited map data. Needs to be 
-enough to let GraphBuilder do its job. 
-
 -Toggle hiding a node from pathfinding and eliciting reroute from cars 
 attempting to route through them.  
 
@@ -48,6 +45,9 @@ will run away from it and attempt to path OFF of the map (evacuation simulation)
 -Set Git up to keep track of revisions.
 
 ANNOUNCEMENTS:
+
+10/9/2018 Can save processed map files as well as batches of direction files. 
+Loading time is a few orders of magnitude better. 
 
 10/8/2018 https://www.kcentv.com/article/news/local/killeen-neighborhood-it-takes-20-minutes-to-get-out-of-our-subdivision/600300276
 The sim predicts this. The area in the link  is consistently the most congested area 
@@ -198,6 +198,9 @@ BUGS
 
 
 COMPLETED TASKS
+
+COMPLETED 10/9/2018: -Create data structure to save processed and edited map data. Needs to be 
+enough to let GraphBuilder do its job. 
 
 COMPLETED 10/7/2018: -Create thread to handle path finding. 
 Create an array to hold 10 directions, as new cars are generated, they will pull
