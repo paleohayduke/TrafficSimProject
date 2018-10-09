@@ -95,20 +95,20 @@ public class TrafficSimProject {
         RouteBuffer buffer = new RouteBuffer();
         sim.setBuffer(buffer);
         RouteGenerator routeGen = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
-//        RouteGenerator routeGen2 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
-//        RouteGenerator routeGen3 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
-//        RouteGenerator routeGen4 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
-//        RouteGenerator routeGen5 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
-//        RouteGenerator routeGen6 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
-//        RouteGenerator routeGen7 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
-//        
+        RouteGenerator routeGen2 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
+        RouteGenerator routeGen3 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
+        RouteGenerator routeGen4 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
+        RouteGenerator routeGen5 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
+        RouteGenerator routeGen6 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
+        RouteGenerator routeGen7 = new RouteGenerator(sim.gb.roads,(sim.display.maxLat-sim.display.minLat),buffer);
+        
         executorService.execute(routeGen);
-//        executorService.execute(routeGen2);
-//        executorService.execute(routeGen3);
-//        executorService.execute(routeGen4);
-//        executorService.execute(routeGen5);
-//        executorService.execute(routeGen6);
-//        executorService.execute(routeGen7);
+        executorService.execute(routeGen2);
+        executorService.execute(routeGen3);
+        executorService.execute(routeGen4);
+        executorService.execute(routeGen5);
+        executorService.execute(routeGen6);
+        executorService.execute(routeGen7);
 //        sim.setCars(500); // 200 is the amount of cars 
 
         executorService.execute(sim);
