@@ -130,7 +130,7 @@ public class Directions {
             }
                 
             int count=0;
-            if(wasVisited(current.getRef(),visitedRef)){
+            if(wasVisited(current.getRef(),visitedRef)||current.blocked){
                 continue;
 //                    if(wasVisited(current.getRef(),visitedRef2)){
 //                        continue;

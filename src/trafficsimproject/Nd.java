@@ -21,6 +21,7 @@ public class Nd {
     boolean isIntersection = false;
     boolean isStop = false;
     boolean isStopLight=false;
+    boolean blocked = false;
     double trafficLoad = 0; //lets measure this in seconds, average car loiter time
     double speedLimit = .00016; // 44 feet per second, 30 mph.  default
     Road parentRoad = new Road();
