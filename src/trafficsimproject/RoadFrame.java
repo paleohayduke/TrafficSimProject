@@ -42,7 +42,7 @@ public class RoadFrame extends JFrame{
 
         JLabel refLabel = new JLabel("Rd ID:");
         refField = new JTextField(10);
-        
+        refField.setEnabled(false);
         
         JPanel displayPanel = new JPanel();
         displayPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -52,6 +52,7 @@ public class RoadFrame extends JFrame{
         
         JLabel speedLabel = new JLabel("speed:");
         speedField = new JTextField(10);
+        speedField.setEnabled(false);
         
         JLabel speedEditLabel = new JLabel("edit speed");
         JTextField speedEditField = new JTextField(10);
