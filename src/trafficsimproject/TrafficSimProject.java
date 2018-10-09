@@ -139,7 +139,7 @@ public class TrafficSimProject {
 //        
 //        fb.writeFile("map.pro");
         sim.openPro("map.pro");
-
+        sim.carTotal=2500;
         sim.startRenderer(2);
         sim.loadCarFile=true;
         
@@ -150,7 +150,7 @@ public class TrafficSimProject {
             
         
         
-//        sim.carTotal=2500;
+
 
         
         RouteBuffer buffer = new RouteBuffer();

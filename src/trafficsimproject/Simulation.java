@@ -555,6 +555,13 @@ public class Simulation implements Runnable{
 //            System.out.println("RUN");
             try{
                 step(0.00016, .022);
+                if(display.saveRoute){
+            
+                    FileBuilder fb = new FileBuilder();
+                    fb.buildDirectionBuilders(saveCars(carTotal));
+                    fb.writeDirectionsFile("mapDIR");
+                    display.saveRoute=false;
+                }   
                 Thread.sleep(20);
                 updateRenderer();
             }catch(Exception ex){

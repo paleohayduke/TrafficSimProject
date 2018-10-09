@@ -214,6 +214,9 @@ public class Renderer extends JFrame{
     boolean timeButtonOn=false;
     boolean carButtonOn=false;
     boolean roadButtonOn=false;
+    boolean saveRoute=false;
+    
+    
     public void drawWindow(){
         latRange = (int)((maxLat-minLat)*scale1);// calculate the size of the window
         lonRange = (int)((maxLon- minLon)*scale1);
@@ -254,14 +257,18 @@ public class Renderer extends JFrame{
         });
         
         
-        JButton homeButton = new JButton("(Home)");
+        JButton homeButton = new JButton("Save");
         homeButton.setPreferredSize(new Dimension(80, 20));
         homeButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                mouseOffSetX=0;
-                mouseOffSetY=0;
-                scale=1;
-                setMap();
+                saveRoute=true;
+                
+                
+                
+//                mouseOffSetX=0;
+//                mouseOffSetY=0;
+//                scale=1;
+//                setMap();
             }
         });
         
@@ -342,7 +349,7 @@ public class Renderer extends JFrame{
         toolPanel.add(pauseButton);
         toolPanel.add(playButton);
         toolPanel.add(fastPlayButton);
-//        toolPanel.add(homeButton);
+        toolPanel.add(homeButton);
         toolPanel.add(nodeToolButton);
         toolPanel.add(roadButton);
         toolPanel.add(carsButton);

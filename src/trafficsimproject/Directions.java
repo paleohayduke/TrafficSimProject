@@ -107,9 +107,9 @@ public class Directions {
             tempDirection.end=end;    
                 
             if(queue.size()>0){
-                tempDirection = new Directions(queue.get(0));
+                tempDirection = findLowest(queue);
                 tempDirection.end=end;
-                queue.remove(0);
+//                queue.remove(0);
             }
             else if(queue.isEmpty()&&started==true){
 //                System.out.println("NO RESULT");
@@ -281,4 +281,21 @@ public class Directions {
         if(this.score<score)return -1;
         else return 0;
     }
+    
+    private Directions findLowest(ArrayList<Directions> dirs){
+        if(dirs.size()<1){
+            return new Directions();
+        }
+        Directions dir = dirs.get(0);
+        int foundInd =0;
+        for(int i =1; i<dirs.size();i++){
+            if(dirs.get(i).score<dir.score){
+                dir=dirs.get(i);
+                foundInd=i;
+            }
+        }
+        dirs.remove(foundInd);
+        return dir;
+    }
+    
 }
