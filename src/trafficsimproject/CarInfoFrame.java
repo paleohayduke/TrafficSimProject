@@ -49,10 +49,13 @@ public class CarInfoFrame extends JFrame{
 
         JLabel idLabel = new JLabel("ID:");
         idField = new JTextField(8);
+        idField.setEditable(false);
         JLabel longLabel = new JLabel("long:");
         longField = new JTextField(8);
+        longField.setEditable(false);
         JLabel latLabel = new JLabel("lat:");
         latField = new JTextField(8);
+        latField.setEditable(false);
         JLabel conLabel = new JLabel("connects:");
         JLabel carsLabel = new JLabel("cars:");
         
@@ -68,6 +71,7 @@ public class CarInfoFrame extends JFrame{
         displayPanel.add(latLabel);
         displayPanel.add(latField);
         displayPanel.add(velocityLabel);
+        velocityField.setEditable(false);
         displayPanel.add(velocityField);
         this.add(displayPanel, BorderLayout.WEST);
 

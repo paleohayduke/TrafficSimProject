@@ -53,11 +53,14 @@ public class NodeInfoFrame extends JFrame{
         this.setLayout(new GridLayout());
 
         JLabel refLabel = new JLabel("ref:");
-        refField = new JTextField(5);
+        refField = new JTextField(7);
+        refField.setEnabled(false);
         JLabel longLabel = new JLabel("long:");
-        longField = new JTextField(5);
+        longField = new JTextField(7);
+        longField.setEnabled(false);
         JLabel latLabel = new JLabel("lat:");
-        latField = new JTextField(5);
+        latField = new JTextField(7);
+        latField.setEnabled(false);
         
         JLabel conLabel = new JLabel("connects:");
         JLabel carsLabel = new JLabel("cars:");
@@ -69,8 +72,8 @@ public class NodeInfoFrame extends JFrame{
         displayPanel.add(refField);
         
         JLabel speedLabel = new JLabel("speed:");
-        speedField = new JTextField(5);
-        
+        speedField = new JTextField(7);
+        speedField.setEnabled(false);
         JLabel speedEditLabel = new JLabel("edit speed");
         JTextField speedEditField = new JTextField(5);
         speedEditField.addActionListener(new ActionListener(){
@@ -93,10 +96,12 @@ public class NodeInfoFrame extends JFrame{
         JPanel conPanel = new JPanel();
         conPanel.add(conLabel);
         conArea.setWrapStyleWord(true);
+        conArea.setEnabled(false);
         conPanel.add(conArea);
 
         JPanel carPanel = new JPanel();
         carPanel.add(carsLabel);
+        carArea.setEnabled(false);
         carPanel.add(carArea);
         
         JLabel stopLabel = new JLabel("StopNode? ");

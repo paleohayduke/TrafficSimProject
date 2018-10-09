@@ -278,6 +278,9 @@ public class Simulation implements Runnable{
                 display.playSpeed=2;
                 clock.targetFound=false;
                 fastForward=false;
+                
+                //
+
             }else{
                 stepSize=ffstep;
             }

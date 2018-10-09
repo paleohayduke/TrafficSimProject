@@ -4,6 +4,13 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
+-4 lane roads and visual road in correct lane offset. Lanes determined between
+waypoint and lastwaypoint (between each two nodes). Calculate point a specific
+distance perpendicular to a point on a line! 
+https://stackoverflow.com/questions/17195055/calculate-a-perpendicular-offset-from-a-diagonal-line
+
+-fix JTextField caused crash
+
 -Create simulation method to start the program paused without loading cars.
 Give options to load map, pick number of cars and any other start options.
 
@@ -41,6 +48,10 @@ will run away from it and attempt to path OFF of the map (evacuation simulation)
 -Set Git up to keep track of revisions.
 
 ANNOUNCEMENTS:
+
+10/8/2018 https://www.kcentv.com/article/news/local/killeen-neighborhood-it-takes-20-minutes-to-get-out-of-our-subdivision/600300276
+The sim predicts this. The area in the link  is consistently the most congested area 
+in MediumMap.osm.
 
 10/7/2018 concurrency enabled: multiple route generators, running on seperate
 threads, keep a buffer full of generated routes.
