@@ -619,8 +619,8 @@ public class Renderer extends JFrame{
             ny=ny/norm;
         
             Nd offNode = new Nd();
-            double cx=x+.00006*nx;
-            double cy=y+.00006*ny;
+            double cx=x+.00003*nx;
+            double cy=y+.00003*ny;
             offNode.setLong(cx);
             offNode.setLat(cy);
             return offNode;

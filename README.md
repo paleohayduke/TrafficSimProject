@@ -46,6 +46,21 @@ will run away from it and attempt to path OFF of the map (evacuation simulation)
 
 ANNOUNCEMENTS:
 
+10/10/2018 IDEA: For a traffic scenario, schools can be used as destinations that
+will be weighted in a pool with the regular random destinations to simulate
+traffic when parents are picking up or dropping off their kids. Schools are
+a good choice because there are a lot of them in open street map. This system
+can later be used to direct traffic to stores, hospitals and other buildings as part
+of the regular traffic routine with the school event happening depending on the
+clock timer. Is anyone even reading this shit?
+
+10/10/2018 Cars were not slowing down upon entering lower speed limit zone... 
+now they do.
+Road width, currently we are at 12 feet lanes. 
+https://www.quora.com/How-wide-is-a-typical-town-road-in-the-US
+Eliminated more incorrect "highway" types from the OSM file, 
+"track","footway","path"
+
 10/9/2018 Cars are now offset to the right of the road to represent separate 
 lanes. Offset is in renderer... maybe do it in actual physical sim of world
 to more easily handle turns (they "jump" at the turns now). 

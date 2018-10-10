@@ -140,11 +140,11 @@ public class FileBuilder {
         boundBuilder.minLon=minLon;
         
     }
-    int ada=0;
+//    int ada=0;
     public ArrayList<RoadBuilder> buildRoadBuilders(ArrayList<Road> roads){
         rds = new ArrayList<RoadBuilder>();
         for(int i =0;i<roads.size();i++){
-            System.out.println("hello "+ada);
+//            System.out.println("hello "+ada);
             RoadBuilder tempRd=new RoadBuilder();
             tempRd.id=roads.get(i).getID();
             tempRd.speed=roads.get(i).speed;

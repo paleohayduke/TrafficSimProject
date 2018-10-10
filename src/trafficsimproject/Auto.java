@@ -130,6 +130,8 @@ public class Auto {
         if(accelerationOn){
             if(velocity<newVelocity){
                 velocity=velocity+acceleration*timeIncrement;
+            }else if(velocity>newVelocity){
+                velocity=velocity-acceleration*timeIncrement;
             }
             
         }else{

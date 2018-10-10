@@ -281,7 +281,8 @@ public class MapReader {
             if(tagString.equalsIgnoreCase("highway")){
                 
                 String wayType = tagShowElement.getAttribute("v");
-                if(wayType.equals("footway")||wayType.equals("path")){
+                if(wayType.equals("footway")||wayType.equals("path")
+                        ||wayType.equals("track")){
 //                    System.out.println("footway");
                     return false;
                 }
