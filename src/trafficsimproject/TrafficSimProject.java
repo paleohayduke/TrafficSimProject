@@ -22,9 +22,9 @@ public class TrafficSimProject {
      */
     public static void main(String[] args) {
 
-//        threadTest();
+        threadTest();
 //        fileSave();
-        fileLoad();
+//        fileLoad();
 //        fileDirectionsSave();
     }
     
@@ -183,7 +183,7 @@ public class TrafficSimProject {
         ExecutorService executorService = Executors.newCachedThreadPool();
         Simulation sim = new Simulation();
 
-        sim.openMap("./src/Austin.osm");
+        sim.openMap("./src/MediumMap.osm");
         sim.startRenderer(4);
         sim.carTotal=500;
         

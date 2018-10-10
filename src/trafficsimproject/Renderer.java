@@ -407,6 +407,7 @@ public class Renderer extends JFrame{
 //                nodeInfoFrame.dispose();
             }
             if (roadButtonOn){
+                System.out.println("roadSearchOn");
                 roadSearchPlease=true;
             }
             if(nodeButtonOn){

@@ -360,7 +360,7 @@ public class Simulation implements Runnable{
         }
         if(display.roadSearchPlease){
             Nd searchResult = gb.findNode(display.mouseLong, display.mouseLat);
-//            System.out.println("ndPlease");
+            System.out.println("rdPlease"+searchResult.getRef());
             display.roadFrame.setRoad(searchResult);
             display.roadSearchPlease=false;
             display.roadFrame.setFields();;

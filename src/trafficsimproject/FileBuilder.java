@@ -201,6 +201,7 @@ public class FileBuilder {
                 iNd.setLat(rds.get(i).intersections.get(j).latitude);
                 iNd.setLong(rds.get(i).intersections.get(j).longitude);
                 iNd.isIntersection=rds.get(i).intersections.get(j).isIntersection;
+                iNd.parentRoad=tempRoad;
                 tempRoad.intersections.add(iNd);
                                 
             }
@@ -214,6 +215,7 @@ public class FileBuilder {
                 tmpNd.setLat(rds.get(i).nodeList.get(j).latitude);
                 tmpNd.setLong(rds.get(i).nodeList.get(j).longitude);
                 tmpNd.speedLimit=rds.get(i).nodeList.get(j).speedLimit;
+                tmpNd.parentRoad=tempRoad;
                 tempRoad.nodeList.add(tmpNd);   
             }
             roads.add(tempRoad);
