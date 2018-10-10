@@ -46,6 +46,14 @@ will run away from it and attempt to path OFF of the map (evacuation simulation)
 
 ANNOUNCEMENTS:
 
+10/9/2018 Cars are now offset to the right of the road to represent separate 
+lanes. Offset is in renderer... maybe do it in actual physical sim of world
+to more easily handle turns (they "jump" at the turns now). 
+(consider this an EXPERIMENT)... I think instead could do this in the physical 
+model... insteadof calculating offset for the cars position every step... set 
+offset on the waypoint at begining of route leg and let car path to appropriate 
+location on its own.
+
 10/9/2018 Can save processed map files as well as batches of direction files. 
 Loading time is a few orders of magnitude better. 
 

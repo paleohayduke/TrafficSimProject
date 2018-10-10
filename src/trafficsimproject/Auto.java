@@ -123,6 +123,8 @@ public class Auto {
     double stopSpacing=0;
     int justGo =0;
     boolean stoppedOnce=false;
+    
+    
     public void calcPos(double timeIncrement){
         double newVelocity = waypointNode.speedLimit;
         if(accelerationOn){
@@ -347,6 +349,9 @@ public class Auto {
 //            System.out.println("d<D");
             double x3 = -(x1-x2)*(d/D)+x1;
             double y3 = -(y1-y2)*(d/D)+y1;
+//            Nd temp=calcOffset(posNode, x3, y3);
+//            posNode.setLong(temp.getLong());
+//            posNode.setLat(temp.getLat());
             posNode.setLat(y3);
             posNode.setLong(x3);
 
@@ -354,6 +359,23 @@ public class Auto {
         
         
 
+    }
+    
+    private Nd calcOffset(Nd posNode,double x, double y){
+        double px=posNode.getLong()-x;
+        double py=posNode.getLat()-y;
+        
+        double nx=-py;
+        double ny= px;
+        nx=nx/(Math.sqrt(Math.pow(nx, 2)+Math.pow(ny, 2)));
+        ny=ny/(Math.sqrt(Math.pow(nx, 2)+Math.pow(ny, 2)));
+        
+        Nd offNode = new Nd();
+        double cx=x+.00006*nx;
+        double cy=y+.00006*ny;
+        offNode.setLong(cx);
+        offNode.setLat(cy);
+        return offNode;
     }
     
     public boolean nextWaypoint(){

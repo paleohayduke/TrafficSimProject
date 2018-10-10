@@ -537,8 +537,11 @@ public class Renderer extends JFrame{
 
 //            carShapes = new ArrayList<Shape>();
             for(int i =0; i<cars.size();i++){
-                Double x1=longToGrid(cars.get(i).posNode.getLong());
-                Double y1=latToGrid(cars.get(i).posNode.getLat());
+                Nd drawAuto = calcOffset(cars.get(i).lastWaypointNode,cars.get(i).posNode.getLong(),cars.get(i).posNode.getLat(),cars.get(i).waypointNode);
+//                Nd drawAuto = cars.get(i).posNode;                
+                
+                Double x1=longToGrid(drawAuto.getLong());
+                Double y1=latToGrid(drawAuto.getLat());
         
                 Shape carPos = new Rectangle2D.Double(x1-10/scale,y1-10/scale,20/scale,20/scale);
  //               carShapes.add(carPos);
@@ -603,6 +606,24 @@ public class Renderer extends JFrame{
             graph2.dispose();
             g.dispose();
             
+        }
+        
+        private Nd calcOffset(Nd posNode,double x, double y, Nd endPoint){
+            double px=posNode.getLong()-endPoint.getLong();
+            double py=posNode.getLat()-endPoint.getLat();
+        
+            double nx=(-py);
+            double ny= px;
+            double norm = (Math.sqrt(nx*nx+ny*ny));
+            nx=nx/norm;
+            ny=ny/norm;
+        
+            Nd offNode = new Nd();
+            double cx=x+.00006*nx;
+            double cy=y+.00006*ny;
+            offNode.setLong(cx);
+            offNode.setLat(cy);
+            return offNode;
         }
 
         public void paintComponent(Graphics g){
