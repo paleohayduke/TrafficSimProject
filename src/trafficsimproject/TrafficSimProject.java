@@ -183,7 +183,7 @@ public class TrafficSimProject {
         ExecutorService executorService = Executors.newCachedThreadPool();
         Simulation sim = new Simulation();
 
-        sim.openMap("./src/MediumMap.osm");
+        sim.openMap("./src/Austin.osm");
         sim.startRenderer(4);
         sim.carTotal=500;
         

@@ -508,8 +508,10 @@ public class Renderer extends JFrame{
 //        int wheelRot=0;
     }
     
+    int carSize=8;
     private class DrawStuff extends JComponent{
         public void paint(Graphics g){
+            int halfCarSize=carSize/2;
             Graphics2D graph2 = (Graphics2D)g;
             
 
@@ -543,7 +545,7 @@ public class Renderer extends JFrame{
                 Double x1=longToGrid(drawAuto.getLong());
                 Double y1=latToGrid(drawAuto.getLat());
         
-                Shape carPos = new Rectangle2D.Double(x1-10/scale,y1-10/scale,20/scale,20/scale);
+                Shape carPos = new Rectangle2D.Double(x1-(halfCarSize)/scale,y1-(halfCarSize)/scale,carSize/scale,carSize/scale);
  //               carShapes.add(carPos);
                 if(cars.get(i).stop){
                     graph2.setPaint(Color.gray);
@@ -567,7 +569,7 @@ public class Renderer extends JFrame{
                     }
                 }
                 if(carButtonOn&&carsPanel.auto!=null){
-                    graph2.setPaint(Color.MAGENTA);
+                    graph2.setPaint(Color.GREEN);
                     mouseClick = new Rectangle2D.Double(longToGrid(carsPanel.auto.posNode.getLong())-12,latToGrid(carsPanel.auto.posNode.getLat())-12,24,24);
                     graph2.draw(mouseClick);
                 }
@@ -658,7 +660,7 @@ public class Renderer extends JFrame{
                 Double x1=longToGrid(cars.get(i).posNode.getLong());
                 Double y1=latToGrid(cars.get(i).posNode.getLat());
         
-                Shape carPos = new Rectangle2D.Double((x1/scale-10),(y1/scale-10),20/scale,20/scale);
+                Shape carPos = new Rectangle2D.Double((x1/scale-5),(y1/scale-5),10/scale,10/scale);
  //               carShapes.add(carPos);
                 graph2.draw(carPos);
             }

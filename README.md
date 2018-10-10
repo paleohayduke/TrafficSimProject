@@ -4,6 +4,8 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
+-
+
 -4 lane roads and visual road in correct lane offset. Lanes determined between
 waypoint and lastwaypoint (between each two nodes). Calculate point a specific
 distance perpendicular to a point on a line! 
@@ -45,6 +47,7 @@ will run away from it and attempt to path OFF of the map (evacuation simulation)
 -Set Git up to keep track of revisions.
 
 ANNOUNCEMENTS:
+10/10/2018 Turned car spacing below distance to stop before stop sign.
 
 10/10/2018 IDEA: For a traffic scenario, schools can be used as destinations that
 will be weighted in a pool with the regular random destinations to simulate
@@ -52,7 +55,8 @@ traffic when parents are picking up or dropping off their kids. Schools are
 a good choice because there are a lot of them in open street map. This system
 can later be used to direct traffic to stores, hospitals and other buildings as part
 of the regular traffic routine with the school event happening depending on the
-clock timer. Is anyone even reading this shit?
+clock timer. 
+
 
 10/10/2018 Cars were not slowing down upon entering lower speed limit zone... 
 now they do.

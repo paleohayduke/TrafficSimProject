@@ -119,7 +119,7 @@ public class Auto {
         
     }
 
-    double carSpacing =.00024;
+    double carSpacing =.00016;
     double stopSpacing=0;
     int justGo =0;
     boolean stoppedOnce=false;
@@ -419,6 +419,7 @@ public class Auto {
     
     public void step(double timeStep){
         if(stop){
+            velocity=0;
             return;
         }
         //CHECK IF DONE
