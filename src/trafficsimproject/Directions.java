@@ -20,10 +20,16 @@ public class Directions {
     ArrayList<Integer> directions = new ArrayList<Integer>();
     public double score;
     int stepIndex=0;
+//    ArrayList<Road> roads=new ArrayList<Road>();
 
     
     Directions(){
         
+    }
+    
+    Directions(Nd start, Nd end){
+        this.start=start;
+        this.end=end;
     }
     
     Directions(Directions dir){
@@ -89,6 +95,7 @@ public class Directions {
     double traffHeurWeight=5;
     
     public Directions findRoute(ArrayList<Road> roads, Nd start, Nd end){
+        this.start=start;
         this.end=end;
         Directions route = new Directions();
         route.end=end;
@@ -165,7 +172,9 @@ public class Directions {
         queue=sortQueue(queue);
             
         }
-        
+        route.start=start;
+        route.end=end;
+//        this.roads=roads;
         return route;
     }
 //    

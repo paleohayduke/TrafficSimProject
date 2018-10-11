@@ -216,7 +216,7 @@ public class Renderer extends JFrame{
     boolean carButtonOn=false;
     boolean roadButtonOn=false;
     boolean saveRoute=false;
-    
+    boolean saveMap=false;
     
     public void drawWindow(){
         latRange = (int)((maxLat-minLat)*scale1);// calculate the size of the window
@@ -258,11 +258,25 @@ public class Renderer extends JFrame{
         });
         
         
-        JButton homeButton = new JButton("Save");
-        homeButton.setPreferredSize(new Dimension(80, 20));
-        homeButton.addActionListener(new ActionListener(){
+        JButton saveRtButton = new JButton("SaveRts");
+        saveRtButton.setPreferredSize(new Dimension(100, 20));
+        saveRtButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 saveRoute=true;
+                
+                
+                
+//                mouseOffSetX=0;
+//                mouseOffSetY=0;
+//                scale=1;
+//                setMap();
+            }
+        });
+        JButton saveMapButton = new JButton("SaveMap");
+        saveMapButton.setPreferredSize(new Dimension(100, 20));
+        saveMapButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                saveMap=true;
                 
                 
                 
@@ -350,11 +364,12 @@ public class Renderer extends JFrame{
         toolPanel.add(pauseButton);
         toolPanel.add(playButton);
         toolPanel.add(fastPlayButton);
-        toolPanel.add(homeButton);
         toolPanel.add(nodeToolButton);
         toolPanel.add(roadButton);
         toolPanel.add(carsButton);
 //        toolPanel.add(optionsButton);
+        toolPanel.add(saveRtButton);
+        toolPanel.add(saveMapButton);
         toolPanel.add(timeButton);
         toolPanel.add(timeLabel);
         

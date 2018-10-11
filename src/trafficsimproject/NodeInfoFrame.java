@@ -40,6 +40,10 @@ public class NodeInfoFrame extends JFrame{
         JRadioButton lightNo = new JRadioButton("false");        
         ButtonGroup lightButtons = new ButtonGroup();
         
+        JRadioButton blockYes = new JRadioButton("true");
+        JRadioButton blockNo = new JRadioButton("false");        
+        ButtonGroup blockButtons = new ButtonGroup();
+        
         
     NodeInfoFrame(){
 
@@ -132,10 +136,26 @@ public class NodeInfoFrame extends JFrame{
         lightPanel.add(lightYes);
         lightPanel.add(lightNo);
         
+        JLabel blockLabel = new JLabel("block? ");
+        blockYes = new JRadioButton("true");
+        blockNo = new JRadioButton("false");
+        blockYes.addActionListener(new BlockRadioButtonListener());
+        blockNo.addActionListener(new BlockRadioButtonListener());
+        
+        blockButtons = new ButtonGroup();
+        blockButtons.add(blockYes);
+        blockButtons.add(blockNo);        
+        JPanel blockPanel = new JPanel();
+        blockPanel.add(blockLabel);
+        blockPanel.add(blockYes);
+        blockPanel.add(blockNo);
+        
+        
         this.add(conPanel,BorderLayout.CENTER);
         this.add(carPanel,BorderLayout.CENTER);
         this.add(stopPanel,BorderLayout.SOUTH);        
         this.add(lightPanel,BorderLayout.SOUTH);
+        this.add(blockPanel,BorderLayout.SOUTH);
 //        this.add(refLabel);
 //        JButton nodeToolButton = new JButton("delete");
 //        nodeToolButton.addActionListener(new ActionListener(){
@@ -199,6 +219,11 @@ public class NodeInfoFrame extends JFrame{
         }
         
         speedField.setText(Double.toString(node.speedLimit));
+        if(node.blocked){
+            blockButtons.setSelected(blockYes.getModel(),true);
+        }else{
+            blockButtons.setSelected(blockNo.getModel(),true);
+        }
         
     }
     //functions to edit the node
@@ -233,4 +258,19 @@ public class NodeInfoFrame extends JFrame{
         }
         
     }
+    
+    private class BlockRadioButtonListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource()==blockYes){
+                node.blocked=true;
+            }
+            if(e.getSource()==blockNo ){
+                node.blocked=false;
+            }
+        }
+        
+    }
+    
 }

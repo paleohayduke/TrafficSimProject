@@ -377,6 +377,12 @@ public class Simulation implements Runnable{
 //            if(checkStop(j)){
 //                continue;
 //            }
+//            if(cars.get(j).waypointNode.blocked){
+//                Directions tempDir = new Directions();
+//                cars.get(j).setDirections(tempDir.findRoute(gb.roads, cars.get(j).waypointNode, cars.get(j).lastWaypointNode));
+//                
+//            }
+
             cars.get(j).step(stepSize);
             if(!cars.get(j).directions.inProgress()){
                 routesCompleted++;
@@ -563,6 +569,17 @@ public class Simulation implements Runnable{
                     fb.writeDirectionsFile("mapDIR");
                     display.saveRoute=false;
                 }   
+                if(display.saveMap){
+            
+                    FileBuilder fb = new FileBuilder();
+                    fb.buildRoadBuilders(gb.roads);
+                    fb.boundBuilder.minLat=minLat;
+                    fb.boundBuilder.maxLat=maxLat;
+                    fb.boundBuilder.minLon=minLon;
+                    fb.boundBuilder.maxLon=maxLon;
+        
+                    fb.writeFile("mapEDIT.pro");
+                }
                 Thread.sleep(20);
                 updateRenderer();
             }catch(Exception ex){

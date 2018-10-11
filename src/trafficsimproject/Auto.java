@@ -258,9 +258,13 @@ public class Auto {
 //
 //    }
     
-    boolean passedIntersection = false;
+//    boolean passedIntersection = false;
+   
     
     public void calcPos(double timeIncrement){
+
+        
+        
         double newVelocity = waypointNode.speedLimit;
         if(accelerationOn){
             if(velocity<newVelocity){
@@ -410,6 +414,11 @@ public class Auto {
         }
     
     public boolean nextWaypoint(){
+        
+        
+        if(waypointNode.blocked){
+            stop=true;
+        }
 
         if(waypointNode.isStop){
             stoppedOnce=false;
