@@ -22,9 +22,9 @@ public class TrafficSimProject {
      */
     public static void main(String[] args) {
 
-//        threadTest();
+        threadTest();
 //        fileSave();
-        fileLoad();
+//        fileLoad();
 //        fileDirectionsSave();
     }
     
@@ -185,7 +185,7 @@ public class TrafficSimProject {
 
         sim.openMap("./src/MediumMap.osm");
         sim.startRenderer(4);
-        sim.carTotal=500;
+        sim.carTotal=700;
         
         RouteBuffer buffer = new RouteBuffer();
         sim.setBuffer(buffer);

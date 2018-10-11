@@ -145,18 +145,6 @@ public class Auto {
         double y2=waypointNode.getLat();
         double d = velocity*timeIncrement;
         double D = posNode.calcDistance(waypointNode);
-//        System.out.println("D="+D+" d="+d);
-
-//EDITED OUT 9/28/2018 7:00AM 
-// I think this fixed the jumping around... 
-//        if(D==0){
-//            nextWaypoint();
-//        }
-
-
-//break the following down into multiple functions
-// and add option toggle. 
-// this handles distance between cars
 
 
 
@@ -165,10 +153,7 @@ public class Auto {
         if(waypointNode.isStop){
             if(D<stopSpacing){
 
-//                if(!stoppedOnce){
-//                    this.velocity=0;
-//                    stoppedOnce=true;
-//                }
+
                 if(!waypointNode.stopQ.contains(this.posNode)){
                     waypointNode.stopQ.add(posNode);
                     stoppedOnce=true;
@@ -182,14 +167,9 @@ public class Auto {
                 }
                 
                 if(this.posNode==waypointNode.stopQ.get(0)){
-//                    d=velocity*timeIncrement;
-//                    stop=false;
-//                    System.out.println("remove");
-//                    waypointNode.stopQ.remove(this.posNode);
+
                 }else{
-//                    System.out.println("ID="+this.posNode.getRef());
-//                    System.out.println("get(0)="+waypointNode.stopQ.get(0).getRef());
-//                    System.out.println("stop");
+
                     justGo++;
                     if(justGo>5){
                         justGo=0;
@@ -224,23 +204,7 @@ public class Auto {
 //                        System.out.println("car distance");
                         return;
                     }
-//                    else if(spacing<carSpacing*5){
-//                        justGo++;
-//                        if(justGo>50){
-//                            justGo=0;
-//                            d=newVelocity*timeIncrement;
-//                            break;
-//
-//                        }
-////                        d=0;
-////                        velocity=velocity-acceleration*3;
-//                        this.velocity=velocity-acceleration*timeIncrement;
-//                        if(this.velocity<0){
-//                            this.velocity=0;
-//                        }
-////                        System.out.println("car distance");
-//                        
-//                    }
+
                 }
             }
             else if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==waypointNode
@@ -267,7 +231,7 @@ public class Auto {
         
         
         
-        while(d>(D-stopSpacing)){
+        while(d>(D)){
             
             d=d-D;
             
@@ -276,7 +240,7 @@ public class Auto {
             }
             D = posNode.calcDistance(waypointNode);
         }
-        if(d<(D-stopSpacing)){
+        if(d<(D)){
 //            System.out.println("d<D");
             double x3 = -(x1-x2)*(d/D)+x1;
             double y3 = -(y1-y2)*(d/D)+y1;
@@ -312,7 +276,6 @@ public class Auto {
         }
     
     public boolean nextWaypoint(){
-        //CHECK IF DONE
         if(waypointNode.isStop){
             stoppedOnce=false;
             waypointNode.stopQ.remove(this.posNode);
@@ -320,30 +283,17 @@ public class Auto {
         
         lastWaypointNode.removeCar(posNode);
         lastWaypointNode=waypointNode;
-        //EDITS 9/30/2019 3:00AM
-//        waypointNode.removeCar(posNode);
-
 
         if(!directions.inProgress()){
             waypointNode.stopQ.remove(this.posNode);
             lastWaypointNode.removeCar(this.posNode);
 //            System.out.println("!inProgress()");
             waypointNode.removeCar(posNode);
-            return false;
-            
+            return false;            
         }
 
         int choice = directions.next();
-        //DISABLED 9/28/2018 7:09AM dont think we need this at current
-        // frame rates. 
-        //posNode.setLat(waypointNode.getLat());
-        //posNode.setLong(waypointNode.getLong());
-//        System.out.println("choice="+choice);
-        waypointNode=waypointNode.connections.get(choice);
-        
-//        targetNode.setLat(wayPointNode);
-        
-                
+        waypointNode=waypointNode.connections.get(choice);            
         waypointNode.addCar(posNode);
         return true;
     }
