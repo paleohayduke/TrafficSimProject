@@ -138,7 +138,7 @@ public class TrafficSimProject {
 //        fb.boundBuilder.maxLon=sim.maxLon;
 //        
 //        fb.writeFile("map.pro");
-        sim.openPro("map.pro");
+        sim.openPro("mapEDIT.pro");
         sim.carTotal=2500;
         sim.startRenderer(2);
         sim.loadCarFile=true;

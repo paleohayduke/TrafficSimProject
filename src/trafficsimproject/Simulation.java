@@ -579,6 +579,7 @@ public class Simulation implements Runnable{
                     fb.boundBuilder.maxLon=maxLon;
         
                     fb.writeFile("mapEDIT.pro");
+                    display.saveMap=false;
                 }
                 Thread.sleep(20);
                 updateRenderer();
