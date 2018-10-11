@@ -47,6 +47,15 @@ will run away from it and attempt to path OFF of the map (evacuation simulation)
 -Set Git up to keep track of revisions.
 
 ANNOUNCEMENTS:
+10/11/2018 Disabled continuous offset system and changed car behavior to 
+physically move to their correct lane. They get a little tight on turns that
+have a distant connection Nd. 
+Need to set up offset on waypoint to be dependent on what lane a car is in.
+If a car gets too close in front of a car, it will change lanes if one is
+available to pass. Eventually we can add randomized preference to speed or
+drive slow (adjust their perception of the speed limits by .9 or 1.1 or 
+something like that)
+
 10/10/2018 Turned car spacing below distance to stop before stop sign.
 
 10/10/2018 IDEA: For a traffic scenario, schools can be used as destinations that

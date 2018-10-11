@@ -34,7 +34,8 @@ public class CarInfoFrame extends JFrame{
         JRadioButton stopYes = new JRadioButton("true");
         JRadioButton stopNo = new JRadioButton("false");        
         ButtonGroup stopButtons = new ButtonGroup();
-        
+        JTextField waypointField = new JTextField(16);
+        JTextField targetField = new JTextField(16);
         
     CarInfoFrame(){
 
@@ -73,16 +74,12 @@ public class CarInfoFrame extends JFrame{
         displayPanel.add(velocityLabel);
         velocityField.setEditable(false);
         displayPanel.add(velocityField);
+        displayPanel.add(waypointField);
+        displayPanel.add(targetField);
         this.add(displayPanel, BorderLayout.WEST);
 
-        JPanel conPanel = new JPanel();
-        conPanel.add(conLabel);
-        conArea.setWrapStyleWord(true);
-        conPanel.add(conArea);
 
-        JPanel carPanel = new JPanel();
-        carPanel.add(carsLabel);
-        carPanel.add(carArea);
+//
         JLabel stopLabel = new JLabel("accident? ");
         stopYes = new JRadioButton("true");
         stopNo = new JRadioButton("false");
@@ -150,6 +147,9 @@ public class CarInfoFrame extends JFrame{
             
         }
         velocityField.setText(Double.toString(auto.velocity));
+        waypointField.setText(Double.toString(auto.waypointNode.getLong())+" "+Double.toString(auto.waypointNode.getLat()));
+        targetField.setText(Double.toString(auto.targetNode.getLong())+" "+Double.toString(auto.targetNode.getLat()));
+        
     }
     //functions to edit the node
     //make functions to cycle through its connections.

@@ -48,6 +48,11 @@ public class Nd {
         this.weights= new ArrayList<Double>(node.weights);
     }
 
+    public void setPos(Nd nd){
+        setLong(nd.getLong());
+        setLat(nd.getLat());
+    }
+    
     public void setRef(long ref){
         this.ref = ref;
     }

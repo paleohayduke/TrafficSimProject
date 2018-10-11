@@ -60,6 +60,7 @@ public class Renderer extends JFrame{
     double scale = 1;
     
     Renderer(double scale, ArrayList<Road> roads, double minLat, double maxLat, double minLon, double maxLon){
+        getContentPane().setBackground(Color.getHSBColor(0, 0, 0));
         this.scale=scale;
         this.roads=roads;
         this.minLat=minLat;
@@ -529,7 +530,7 @@ public class Renderer extends JFrame{
                 
             }
             
-            graph2.setPaint(Color.RED);
+//            graph2.setPaint(Color.RED);
             
 //            for(int i =0; i<carShapes.size();i++){
 //                
@@ -540,8 +541,8 @@ public class Renderer extends JFrame{
 
 //            carShapes = new ArrayList<Shape>();
             for(int i =0; i<cars.size();i++){
-                Nd drawAuto = calcOffset(cars.get(i).lastWaypointNode,cars.get(i).posNode.getLong(),cars.get(i).posNode.getLat(),cars.get(i).waypointNode);
-//                Nd drawAuto = cars.get(i).posNode;                
+//                Nd drawAuto = calcOffset(cars.get(i).lastWaypointNode,cars.get(i).posNode.getLong(),cars.get(i).posNode.getLat(),cars.get(i).waypointNode);
+                Nd drawAuto = cars.get(i).posNode;                
                 
                 Double x1=longToGrid(drawAuto.getLong());
                 Double y1=latToGrid(drawAuto.getLat());
@@ -549,9 +550,9 @@ public class Renderer extends JFrame{
                 Shape carPos = new Rectangle2D.Double(x1-(halfCarSize)/scale,y1-(halfCarSize)/scale,carSize/scale,carSize/scale);
  //               carShapes.add(carPos);
                 if(cars.get(i).stop){
-                    graph2.setPaint(Color.gray);
-                }else
                     graph2.setPaint(Color.RED);
+                }else
+                    graph2.setPaint(Color.YELLOW);
                 graph2.draw(carPos);
             }
             
