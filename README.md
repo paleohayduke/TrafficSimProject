@@ -56,6 +56,10 @@ available to pass. Eventually we can add randomized preference to speed or
 drive slow (adjust their perception of the speed limits by .9 or 1.1 or 
 something like that)
 
+Figured a much less computationally intense method of maintaining
+correct lanes at turns. Just gotta add an extra "stop sign" node between
+intersections and all their connections. 
+
 10/10/2018 Turned car spacing below distance to stop before stop sign.
 
 10/10/2018 IDEA: For a traffic scenario, schools can be used as destinations that
