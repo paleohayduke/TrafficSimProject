@@ -4,10 +4,19 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
-10/12/2018
+-improve how turns are handled with multiple lanes (adjust where car decides to
+switch waypoints... check connection position after intersection for cars route
+then see if next connection is on left, right or same line 
+(<0,0,>0 check in range of 0 instead of at since double).
+if turn right, change waypoint BEFORE targetNode, 
+if  turning left, change waypoint AFTER targetNode
+if going straight, AT targetNode 
+Do this next. 
+if multiple lanes, move car to appropriate lane to turn 
+10/12/2018 - 10/13/2018)
 
 -make cars rectangle shaped and align their axis with their velocity vector. 
-10/12/2018
+10/12/2018-
 
 -Create simulation method to start the program paused without loading cars.
 Give options to load map, pick number of cars and any other start options.
@@ -42,6 +51,9 @@ a selectable list to jump between nodes.
 9/21/2018
 
 ANNOUNCEMENTS:
+
+10/12/2018
+
 10/12/2018 Multiple lanes enabled, cars will pass. . 
 Use this to determine how cars should turn at an intersection:
 https://math.stackexchange.com/questions/274712/calculate-on-which-side-of-a-straight-line-is-a-given-point-located
