@@ -4,44 +4,42 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
+10/12/2018
+
 -make cars rectangle shaped and align their axis with their velocity vector. 
-
--add radioboxes to NodeInfoFrame to set an entire road's number of lanes. (req 5b)
-
--4 lane roads and visual road in correct lane offset. Lanes determined between
-waypoint and lastwaypoint (between each two nodes). Calculate point a specific
-distance perpendicular to a point on a line! 
-https://stackoverflow.com/questions/17195055/calculate-a-perpendicular-offset-from-a-diagonal-line
-started 10-11-2018 
+10/12/2018
 
 -Create simulation method to start the program paused without loading cars.
 Give options to load map, pick number of cars and any other start options.
-
--Clock needs a "how many hours since (time)" function.  
-
--Average trip length display
-
--Editing connections between nodes. Make connection display in NodeInfoFrame
-a selectable list to jump between nodes.
-
-
-
--Build Stop lights. manual placement with node info tool
-
--Ability to add new nodes
-
--Merge current tool windows into a menu that docks on the side of the window.
-(like photoshop).  
-
--Toggle hiding a node from pathfinding and eliciting reroute from cars 
-attempting to route through them.  
+10/8/2018
 
 -Implement "major disaster" scenario. Click a spot on the map and every car
 will run away from it and attempt to path OFF of the map (evacuation simulation). 
+10/8/2018
 
--Connect to GUI
+-Clock needs a "how many hours since (time)" function.  
+10/8/2018
+
+-Average trip length display
+10/8/2018
+
+-Editing connections between nodes. Make connection display in NodeInfoFrame
+a selectable list to jump between nodes.
+10/1/2018
+
+
+-Build Stop lights. manual placement with node info tool
+9/28/2018
+
+-Ability to add new nodes
+9/28/2018
+
+-Merge current tool windows into a menu that docks on the side of the window.
+(like photoshop).  
+10/8/2018
 
 -Set Git up to keep track of revisions.
+9/21/2018
 
 ANNOUNCEMENTS:
 10/12/2018 Multiple lanes enabled, cars will pass. . 
@@ -255,11 +253,21 @@ BUGS
 
 COMPLETED TASKS
 
-COMPLETED 10/12/2018-multi lane roads
+COMPLETED 10/12/2018 -add radioboxes to RoadInfoFrame to set an entire road's number of lanes. (req 5b)
+
+COMPLETED 10/12/2018-multi lane roads - 4 lane roads and visual road in correct lane offset. Lanes determined between
+waypoint and lastwaypoint (between each two nodes). Calculate point a specific
+distance perpendicular to a point on a line! 
+https://stackoverflow.com/questions/17195055/calculate-a-perpendicular-offset-from-a-diagonal-line
+started 10-11-2018 
 
 COMPLETED 10/12/2018 -Car passing
 
 COMPLETED 10/12/2018 -initialize numLanes in Nd from mapreader. Update NdBuilder and FileBuilder to reflect
+
+COMPLETED 10/11/2018 -Toggle hiding a node from pathfinding and eliciting reroute from cars 
+attempting to route through them.  
+9/28/2018
 
 COMPLETED 10/10/2018 -Display cars offset from center of road depending on their lane. 
 

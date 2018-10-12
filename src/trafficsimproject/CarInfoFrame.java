@@ -39,7 +39,7 @@ public class CarInfoFrame extends JFrame{
         
     CarInfoFrame(){
 
-        this.setSize(220,230); // regular stuff for jframe 
+        this.setSize(220,300); // regular stuff for jframe 
 //        this.setDefaultCloseOperation(0);
 //        this.setUndecorated(true);
 

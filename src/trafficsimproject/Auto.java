@@ -438,15 +438,12 @@ public class Auto {
                     &&waypointNode.cars.get(i)!=this.posNode
                     &&waypointNode.cars.get(i).parentAuto.lane==targetLane){//check other lane
                 double otherDist=waypointNode.cars.get(i).calcDistance(targetNode);
-                if(otherDist<D){
-                    double spacing = D-otherDist;
-//                    double spacing = posNode.calcDistance(waypointNode.cars.get(i));
-                    if(spacing<carSpacing){
-                        clear=false;
+                
+                if(otherDist<D+.0001||otherDist>D-.0001){
+                    clear=false;
 
                         
 
-                    }
 
                 }
             }
