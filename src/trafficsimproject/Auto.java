@@ -47,6 +47,7 @@ public class Auto {
     static int carID=0;
     boolean accelerationOn=true;
     
+    int lane =1;
 
     
     
@@ -323,7 +324,8 @@ public class Auto {
 
         for(int i = 0;i< waypointNode.cars.size();i++){
             if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==this.lastWaypointNode
-                    &&waypointNode.cars.get(i)!=this.posNode){
+                    &&waypointNode.cars.get(i)!=this.posNode
+                    &&waypointNode.cars.get(i).parentAuto.lane==lane){
                 double otherDist=waypointNode.cars.get(i).calcDistance(targetNode);
                 if(otherDist<D){
                     double spacing = D-otherDist;
@@ -346,7 +348,8 @@ public class Auto {
                 }
             }
             else if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==waypointNode
-                    &&waypointNode.cars.get(i).parentAuto.waypointNode!=this.lastWaypointNode){
+                    &&waypointNode.cars.get(i).parentAuto.waypointNode!=this.lastWaypointNode
+                    &&waypointNode.cars.get(i).parentAuto.lane==lane){
                 if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing){
                     justGo++;
                         if(justGo>200){
@@ -394,8 +397,43 @@ public class Auto {
 
     }
     
+    private boolean isLaneClear(int targetLane, double D){
+        boolean clear =false;
+        
+        for(int i = 0;i< waypointNode.cars.size();i++){
+            if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==this.lastWaypointNode
+                    &&waypointNode.cars.get(i)!=this.posNode
+                    &&waypointNode.cars.get(i).parentAuto.lane==targetLane){//check other lane
+                double otherDist=waypointNode.cars.get(i).calcDistance(targetNode);
+                if(otherDist<D){
+                    double spacing = D-otherDist;
+//                    double spacing = posNode.calcDistance(waypointNode.cars.get(i));
+                    if(spacing<carSpacing){
+                        clear=false;
+
+                        
+
+                    }
+
+                }
+            }
+            else if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==waypointNode
+                    &&waypointNode.cars.get(i).parentAuto.waypointNode!=this.lastWaypointNode
+                    &&waypointNode.cars.get(i).parentAuto.lane==targetLane){
+                if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing){
+                    clear=false;
+                }
+                
+            }else{
+                clear=true;
+            }
+        }
+        
+        return clear;
+    }
+    
     //for start of leg
-        private Nd calcOffset(Nd startPoint, Nd endPoint, Nd disPoint){
+    private Nd calcOffset(Nd startPoint, Nd endPoint, Nd disPoint, double offSet){
             double px=startPoint.getLong()-endPoint.getLong();
             double py=startPoint.getLat()-endPoint.getLat();
         
@@ -406,14 +444,18 @@ public class Auto {
             ny=ny/norm;
         
             Nd offNode = new Nd();
-            double cx=disPoint.getLong()+stopSpacing*nx;
-            double cy=disPoint.getLat()+stopSpacing*ny;
+            double cx=disPoint.getLong()+offSet*nx;
+            double cy=disPoint.getLat()+offSet*ny;
             offNode.setLong(cx);
             offNode.setLat(cy);
             return offNode;
         }
-    
+
+    double laneDist1=.00004;
+    double laneDist2=.00012;        
+        
     public boolean nextWaypoint(){
+
         
         
         if(waypointNode.blocked){
@@ -444,8 +486,13 @@ public class Auto {
         
         //10/11/2018/4:55am 
         // get target..
-        
-        targetNode.setPos(calcOffset(lastWaypointNode,waypointNode,waypointNode));
+        double laneDistance =0;
+        if(lane==1){
+            laneDistance=laneDist1;
+        }else if(lane==2){
+            laneDistance=laneDist2;
+        }
+        targetNode.setPos(calcOffset(lastWaypointNode,waypointNode,waypointNode,laneDistance));
 //        targetNode.setPos((waypointNode));
 
 

@@ -22,9 +22,9 @@ public class TrafficSimProject {
      */
     public static void main(String[] args) {
 
-//        threadTest();
+        threadTest();
 //        fileSave();
-        fileLoad();
+//        fileLoad();
 //        fileDirectionsSave();
     }
     
