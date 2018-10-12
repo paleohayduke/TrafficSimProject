@@ -76,10 +76,54 @@ public class GraphBuilder {
             }
             roads.get(i).buildLocalIntercets();
         }
-//        buildStops();
+        fixIntersections();
+        
     }
-    
+        
+    private void fixIntersections(){
+       
+        for(int i=0;i<roads.size();i++){
+            if(i%100==0){
+                System.out.println("fixing Intersection "+i);
+            }
+            if(roads.get(i).numLanes==2){
+                for(int j=0;j<roads.get(i).nodeList.size();j++){
+                    roads.get(i).nodeList.get(j).numLanes=2;
+                }
+
+            }else if(roads.get(i).numLanes==3){
+                for(int j=0;j<roads.get(i).nodeList.size();j++){
+                    roads.get(i).nodeList.get(j).numLanes=3;
+                }
+            }
+            
+            if(roads.get(i).speed==.0001){
+                for(int j=0;j<roads.get(i).nodeList.size();j++){
+                    roads.get(i).nodeList.get(j).speedLimit=.0001;
+                }
+            }else if(roads.get(i).speed==.00016){
+                for(int j=0;j<roads.get(i).nodeList.size();j++){
+                    roads.get(i).nodeList.get(j).speedLimit=.00016;
+                }
+            }else if(roads.get(i).speed==.00022){
+                for(int j=0;j<roads.get(i).nodeList.size();j++){
+                    roads.get(i).nodeList.get(j).speedLimit=.00022;
+                }
+            }else if(roads.get(i).speed==.00027){
+                for(int j=0;j<roads.get(i).nodeList.size();j++){
+                    roads.get(i).nodeList.get(j).speedLimit=.00027;
+                }
+            }else if(roads.get(i).speed==.0004){
+                for(int j=0;j<roads.get(i).nodeList.size();j++){
+                    roads.get(i).nodeList.get(j).speedLimit=.0004;
+                }
+            }
+            
+        }
+    }
+
     private void makeIntersectNode(int i, int j, Indexes fIJ){
+        
     
         if(roads.get(i).nodeList.get(j)==roads.get(fIJ.i).nodeList.get(fIJ.j)){
             return;
@@ -87,6 +131,9 @@ public class GraphBuilder {
         roads.get(i).nodeList.get(j).isStop=true;
         //following line was unneeded 9/30/2018 MAKE SURE
 //        roads.get(i).nodeList.get(j).connections.add(roads.get(fIJ.i).nodeList.get(fIJ.j));
+        if(roads.get(fIJ.i).nodeList.get(fIJ.j).parentRoad.numLanes>roads.get(i).nodeList.get(j).parentRoad.numLanes){
+            roads.get(i).nodeList.get(j).numLanes=roads.get(fIJ.i).nodeList.get(fIJ.j).parentRoad.numLanes;
+        }
         roads.get(fIJ.i).nodeList.remove(fIJ.j);
         roads.get(fIJ.i).nodeList.add(fIJ.j, roads.get(i).nodeList.get(j));
 

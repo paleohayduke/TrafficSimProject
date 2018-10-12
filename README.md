@@ -4,6 +4,8 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
+-make cars rectangle shaped and align their axis with their velocity vector. 
+
 -add radioboxes to NodeInfoFrame to set an entire road's number of lanes. (req 5b)
 
 -4 lane roads and visual road in correct lane offset. Lanes determined between

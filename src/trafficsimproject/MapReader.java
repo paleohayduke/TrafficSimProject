@@ -200,6 +200,9 @@ public class MapReader {
                         }else if(roadType.equals("tertiary")||roadType.equals("tertiary_link")){
                             tempRoad.speed=.00022;
                             tempRoad.numLanes=2;
+                        }else if(roadType.equals("residential")||roadType.equals("residential_link")){
+                            tempRoad.speed=.00016;
+                            tempRoad.numLanes=2;
                         }
                     }
                 }

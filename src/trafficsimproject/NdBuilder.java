@@ -19,7 +19,7 @@ public class NdBuilder implements Serializable{
     boolean isStop = false;
     boolean isStopLight=false;
     double speedLimit = .00016; // 44 feet per second, 30 mph.  default
-    
+    int numLanes=1;
     NdBuilder(){
         
     }
