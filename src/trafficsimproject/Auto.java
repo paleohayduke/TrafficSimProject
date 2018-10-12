@@ -366,20 +366,32 @@ public class Auto {
                     &&waypointNode.cars.get(i).parentAuto.waypointNode!=this.lastWaypointNode
                     &&waypointNode.cars.get(i).parentAuto.lane==lane){
                 
-                
+                int targLane =1;
+                    if(lane==1){
+                        targLane=2;
+                    }else if(lane==2){
+                        targLane=1;
+                    }
                 if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing){
-                    justGo++;
-                        if(justGo>200){
-                            justGo=0;
+                    if(isLaneClear(targLane,D)){
+                            lane=targLane;
                             
-                            d=newVelocity*timeIncrement;
-                            break;
+                            targetNode=calcOffset(lastWaypointNode, waypointNode, waypointNode, laneDists[lane-1]);
+                        }else{
+                            justGo++;
+                            if(justGo>200){
+                                justGo=0;
+                            
+                                d=newVelocity*timeIncrement;
+                                break;
 
-                        }
+                            }
+                        
 //                    d=0;
 //                    velocity=velocity-acceleration*3;
-                    this.velocity=0;
-                    return;
+                        this.velocity=0;
+                        return;
+                    }
                 }
                 
             }

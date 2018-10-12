@@ -4,8 +4,6 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
--initialize numLanes in Nd from mapreader. Update NdBuilder and FileBuilder to reflect
-
 -add radioboxes to NodeInfoFrame to set an entire road's number of lanes. (req 5b)
 
 -4 lane roads and visual road in correct lane offset. Lanes determined between
@@ -24,9 +22,7 @@ Give options to load map, pick number of cars and any other start options.
 -Editing connections between nodes. Make connection display in NodeInfoFrame
 a selectable list to jump between nodes.
 
--multi lane roads
 
--Car passing
 
 -Build Stop lights. manual placement with node info tool
 
@@ -256,6 +252,12 @@ BUGS
 
 
 COMPLETED TASKS
+
+COMPLETED 10/12/2018-multi lane roads
+
+COMPLETED 10/12/2018 -Car passing
+
+COMPLETED 10/12/2018 -initialize numLanes in Nd from mapreader. Update NdBuilder and FileBuilder to reflect
 
 COMPLETED 10/10/2018 -Display cars offset from center of road depending on their lane. 
 

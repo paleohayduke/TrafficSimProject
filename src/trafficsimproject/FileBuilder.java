@@ -149,6 +149,7 @@ public class FileBuilder {
             tempRd.id=roads.get(i).getID();
             tempRd.speed=roads.get(i).speed;
             tempRd.oneWay=roads.get(i).oneWay;
+            tempRd.numLanes=roads.get(i).numLanes;
             for(int j=0;j<roads.get(i).intersections.size();j++){
                 NdBuilder tmpNd = new NdBuilder();
                 tmpNd.isIntersection=roads.get(i).intersections.get(j).isIntersection;
@@ -158,6 +159,7 @@ public class FileBuilder {
                 tmpNd.latitude=roads.get(i).intersections.get(j).getLat();
                 tmpNd.longitude=roads.get(i).intersections.get(j).getLong();
                 tmpNd.speedLimit=roads.get(i).intersections.get(j).speedLimit;
+                
                 tempRd.intersections.add(tmpNd);
                 
 
@@ -191,6 +193,7 @@ public class FileBuilder {
             Road tempRoad = new Road();
             tempRoad.oneWay=rds.get(i).oneWay;
             tempRoad.speed=rds.get(i).speed;
+            tempRoad.numLanes=rds.get(i).numLanes;
 //                        System.out.println("BUILDING ROADS2"+rds.size());
             for(int j=0;j<rds.get(i).intersections.size();j++){
 //                                       System.out.println("BUILDING ROADS 3 "+rds.size());
@@ -216,6 +219,7 @@ public class FileBuilder {
                 tmpNd.setLong(rds.get(i).nodeList.get(j).longitude);
                 tmpNd.speedLimit=rds.get(i).nodeList.get(j).speedLimit;
                 tmpNd.parentRoad=tempRoad;
+                tmpNd.numLanes=rds.get(i).numLanes;
                 tempRoad.nodeList.add(tmpNd);   
             }
             roads.add(tempRoad);
