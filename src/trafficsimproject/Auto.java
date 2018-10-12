@@ -367,25 +367,26 @@ public class Auto {
                     &&waypointNode.cars.get(i).parentAuto.lane==lane){
                 
                 int targLane =1;
-                    if(lane==1){
-                        targLane=2;
-                    }else if(lane==2){
-                        targLane=1;
-                    }
+                if(lane==1){
+                    targLane=2;
+                }else if(lane==2){
+                    targLane=1;
+                }
+                    
                 if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing){
                     if(isLaneClear(targLane,D)){
-                            lane=targLane;
+                        lane=targLane;
                             
-                            targetNode=calcOffset(lastWaypointNode, waypointNode, waypointNode, laneDists[lane-1]);
-                        }else{
-                            justGo++;
-                            if(justGo>200){
-                                justGo=0;
+                        targetNode=calcOffset(lastWaypointNode, waypointNode, waypointNode, laneDists[lane-1]);
+                    }else{
+                        justGo++;
+                        if(justGo>200){
+                            justGo=0;
                             
-                                d=newVelocity*timeIncrement;
-                                break;
+                            d=newVelocity*timeIncrement;
+                            break;
 
-                            }
+                        }
                         
 //                    d=0;
 //                    velocity=velocity-acceleration*3;
@@ -437,9 +438,8 @@ public class Auto {
             if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==this.lastWaypointNode
                     &&waypointNode.cars.get(i)!=this.posNode
                     &&waypointNode.cars.get(i).parentAuto.lane==targetLane){//check other lane
-                double otherDist=waypointNode.cars.get(i).calcDistance(targetNode);
-                
-                if(otherDist<D+.0001||otherDist>D-.0001){
+
+                if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing*2){
                     clear=false;
 
                         
@@ -447,10 +447,12 @@ public class Auto {
 
                 }
             }
+            
             else if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==waypointNode
                     &&waypointNode.cars.get(i).parentAuto.waypointNode!=this.lastWaypointNode
                     &&waypointNode.cars.get(i).parentAuto.lane==targetLane){
-                if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing){
+//                posNode.calcDistance(waypointNode.cars.get(i));
+                if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing*2){
                     clear=false;
                 }
                 
