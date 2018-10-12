@@ -26,6 +26,7 @@ public class Nd {
     double speedLimit = .00016; // 44 feet per second, 30 mph.  default
     Road parentRoad = new Road();
     Auto parentAuto;
+    int numLanes=1;
 
     ArrayList<Nd> cars = new ArrayList<Nd>();
     ArrayList<Nd> connections = new ArrayList<Nd>();

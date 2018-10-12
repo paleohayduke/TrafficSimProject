@@ -22,8 +22,8 @@ public class TrafficSimProject {
      */
     public static void main(String[] args) {
 
-        threadTest();
-//        fileSave();
+//        threadTest();
+        fileSave();
 //        fileLoad();
 //        fileDirectionsSave();
     }
@@ -47,7 +47,7 @@ public class TrafficSimProject {
         sim.openPro("map.pro");
 
         sim.startRenderer(2);
-        sim.carTotal=2500;
+        sim.carTotal=5000;
 
 //        
         RouteBuffer buffer = new RouteBuffer();
@@ -138,8 +138,8 @@ public class TrafficSimProject {
 //        fb.boundBuilder.maxLon=sim.maxLon;
 //        
 //        fb.writeFile("map.pro");
-        sim.openPro("mapEDIT.pro");
-        sim.carTotal=2500;
+        sim.openPro("map.pro");
+        sim.carTotal=5000;
         sim.startRenderer(2);
         sim.loadCarFile=true;
         
@@ -185,7 +185,7 @@ public class TrafficSimProject {
 
         sim.openMap("./src/MediumMap.osm");
         sim.startRenderer(4);
-        sim.carTotal=700;
+        sim.carTotal=1000;
         
         RouteBuffer buffer = new RouteBuffer();
         sim.setBuffer(buffer);

@@ -47,7 +47,7 @@ public class Auto {
     static int carID=0;
     boolean accelerationOn=true;
     
-    int lane =1;
+    int lane =1; // remember to [lane-1]
 
     
     
@@ -329,20 +329,35 @@ public class Auto {
                 double otherDist=waypointNode.cars.get(i).calcDistance(targetNode);
                 if(otherDist<D){
                     double spacing = D-otherDist;
+                    
+                    int targLane =1;
+                    if(lane==1){
+                        targLane=2;
+                    }else if(lane==2){
+                        targLane=1;
+                    }
 //                    double spacing = posNode.calcDistance(waypointNode.cars.get(i));
                     if(spacing<carSpacing){
-                        justGo++;
-                        if(justGo>100){
-                            justGo=0;
-                            d=newVelocity*timeIncrement;
-                            break;
+                        
+                        if(isLaneClear(targLane,D)){
+                            lane=targLane;
+                            
+                            targetNode=calcOffset(lastWaypointNode, waypointNode, waypointNode, laneDists[lane-1]);
+                        }else{
+                        
+                            justGo++;
+                            if(justGo>100){
+                                justGo=0;
+                                d=newVelocity*timeIncrement;
+                                break;
 
-                        }
+                            }
 //                        d=0;
 //                        velocity=velocity-acceleration*3;
-                        this.velocity=0;
+                            this.velocity=0;
 //                        System.out.println("car distance");
-                        return;
+                            return;
+                        }
                     }
 
                 }
@@ -350,6 +365,8 @@ public class Auto {
             else if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==waypointNode
                     &&waypointNode.cars.get(i).parentAuto.waypointNode!=this.lastWaypointNode
                     &&waypointNode.cars.get(i).parentAuto.lane==lane){
+                
+                
                 if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing){
                     justGo++;
                         if(justGo>200){
@@ -399,6 +416,10 @@ public class Auto {
     
     private boolean isLaneClear(int targetLane, double D){
         boolean clear =false;
+        
+        if(targetLane>waypointNode.numLanes){
+            return false;
+        }
         
         for(int i = 0;i< waypointNode.cars.size();i++){
             if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==this.lastWaypointNode
@@ -451,9 +472,10 @@ public class Auto {
             return offNode;
         }
 
-    double laneDist1=.00004;
-    double laneDist2=.00012;        
-        
+//    double laneDist1=.00004;
+//    double laneDist2=.00012;        
+    double[] laneDists={.00004,.00012,0002};
+    
     public boolean nextWaypoint(){
 
         
@@ -486,12 +508,11 @@ public class Auto {
         
         //10/11/2018/4:55am 
         // get target..
-        double laneDistance =0;
-        if(lane==1){
-            laneDistance=laneDist1;
-        }else if(lane==2){
-            laneDistance=laneDist2;
+        if(lane>waypointNode.numLanes){
+            lane=waypointNode.numLanes;
         }
+        double laneDistance =laneDists[lane-1];
+        
         targetNode.setPos(calcOffset(lastWaypointNode,waypointNode,waypointNode,laneDistance));
 //        targetNode.setPos((waypointNode));
 

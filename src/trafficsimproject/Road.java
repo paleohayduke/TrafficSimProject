@@ -22,6 +22,7 @@ public class Road {
     boolean oneWay = false;
     public double speed=.00016;
     public double distance =0;
+    int numLanes =1;
     
     Road(){
         

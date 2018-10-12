@@ -423,7 +423,7 @@ public class Renderer extends JFrame{
 //                nodeInfoFrame.dispose();
             }
             if (roadButtonOn){
-                System.out.println("roadSearchOn");
+//                System.out.println("roadSearchOn");
                 roadSearchPlease=true;
             }
             if(nodeButtonOn){
@@ -498,7 +498,7 @@ public class Renderer extends JFrame{
 
 
                 if(scale-1<=0){
-                    scale=1;
+                    scale=.5;
                     
 
                 }else{
@@ -525,7 +525,7 @@ public class Renderer extends JFrame{
 //        int wheelRot=0;
     }
     
-    int carSize=8;
+    int carSize=6;
     private class DrawStuff extends JComponent{
         public void paint(Graphics g){
             int halfCarSize=carSize/2;

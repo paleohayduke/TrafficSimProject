@@ -4,14 +4,15 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
--
+-initialize numLanes in Nd from mapreader. Update NdBuilder and FileBuilder to reflect
+
+-add radioboxes to NodeInfoFrame to set an entire road's number of lanes. (req 5b)
 
 -4 lane roads and visual road in correct lane offset. Lanes determined between
 waypoint and lastwaypoint (between each two nodes). Calculate point a specific
 distance perpendicular to a point on a line! 
 https://stackoverflow.com/questions/17195055/calculate-a-perpendicular-offset-from-a-diagonal-line
-
--fix JTextField caused crash
+started 10-11-2018 
 
 -Create simulation method to start the program paused without loading cars.
 Give options to load map, pick number of cars and any other start options.
@@ -24,8 +25,6 @@ Give options to load map, pick number of cars and any other start options.
 a selectable list to jump between nodes.
 
 -multi lane roads
-
--Display cars offset from center of road depending on their lane. 
 
 -Car passing
 
@@ -47,6 +46,22 @@ will run away from it and attempt to path OFF of the map (evacuation simulation)
 -Set Git up to keep track of revisions.
 
 ANNOUNCEMENTS:
+10/12/2018 Multiple lanes enabled, cars will pass. . 
+Use this to determine how cars should turn at an intersection:
+https://math.stackexchange.com/questions/274712/calculate-on-which-side-of-a-straight-line-is-a-given-point-located
+If waypoint is a stop... check if there is another Nd in route (Directions.stepIndx<Directions.directions.size())
+Calculate distance from node to stop.... this will work for getting the
+cars turning right to position themselves correctly and can get the ones turning
+left to at least start from middle road position... could handle them
+turning PAST the waypoint if using boolean to flag that it has passed 0 distance
+and then when it gets a positive distance away from the node, go to next waypoint...
+This should get them to maintain their lanes throughout the turns!
+
+Also use this to determine going into a turn lane!!! yay!!! 
+
+The above formula will also be used to set up realistic stoplights! 
+
+
 10/11/2018 Disabled continuous offset system and changed car behavior to 
 physically move to their correct lane. They get a little tight on turns that
 have a distant connection Nd. 
@@ -241,6 +256,8 @@ BUGS
 
 
 COMPLETED TASKS
+
+COMPLETED 10/10/2018 -Display cars offset from center of road depending on their lane. 
 
 COMPLETED 10/9/2018: -Create data structure to save processed and edited map data. Needs to be 
 enough to let GraphBuilder do its job. 

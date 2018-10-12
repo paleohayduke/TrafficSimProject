@@ -189,11 +189,17 @@ public class MapReader {
                                 ||roadType.equals("motorway")||roadType.equals("motorway_link")){
 //                            System.out.println(isOneway);
                             tempRoad.speed=.0004;
+                            tempRoad.numLanes=3;
                         }else if(roadType.equals("secondary")||roadType.equals("secondary_link")
-                        ||roadType.equals("service")||roadType.equals("service_link")){
+                        ){
                             tempRoad.speed=.00027;
+                            tempRoad.numLanes=2;
+                        }else if(roadType.equals("service")||roadType.equals("service_link")){
+                            tempRoad.speed=.0001;
+                            tempRoad.numLanes=1;
                         }else if(roadType.equals("tertiary")||roadType.equals("tertiary_link")){
                             tempRoad.speed=.00022;
+                            tempRoad.numLanes=2;
                         }
                     }
                 }
@@ -226,6 +232,7 @@ public class MapReader {
 //////////////////// before we can process the entire map of killeen. 
 //////////////////// it should be lightening fast after its turned to Binary Search. 
                     tempNd=makeNd(ref);
+                    tempNd.numLanes=tempRoad.numLanes;
                     tempNd.parentRoad=tempRoad;
                     tempRoad.addNode(tempNd);
                     

@@ -38,7 +38,7 @@ public class GraphBuilder {
             for(int j = 0; j<roads.get(i).getNodes().size();j++){
                 roads.get(i).nodeList.get(j).speedLimit=roads.get(i).speed;
 //                System.out.println("\tnode ref:"+roads.get(i).getNodes().get(j).getRef());
-                
+                roads.get(i).nodeList.get(j).numLanes=roads.get(i).numLanes;
             // check each node again all intersections. 
                 for(int k=0;k<roads.get(i).getIntersections().size();k++){
 

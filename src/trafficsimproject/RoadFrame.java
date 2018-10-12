@@ -27,11 +27,13 @@ public class RoadFrame extends JFrame{
     JTextField refField = new JTextField(10);
     JTextField speedField = new JTextField(5);
     JLabel isOneWay = new JLabel("OneWay? ");
-        
+    JLabel lanesLabel = new JLabel("Lanes: ");
+    
+
         
     RoadFrame(){
 
-        this.setSize(255,220); // regular stuff for jframe 
+        this.setSize(255,280); // regular stuff for jframe 
 //        this.setDefaultCloseOperation(0);
 //        this.setUndecorated(true);
 
@@ -91,11 +93,43 @@ public class RoadFrame extends JFrame{
 
             }
         });
+        
+        
+        
+        JButton oneLaneButton = new JButton("1 Lane");
+        oneLaneButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+//                node.speedLimit=Double.parseDouble(speedEditField.getText());
+                //TODO grab EACH node and change speed.
+                road.numLanes=1;
+                for(int i=0;i<road.nodeList.size();i++){
+                    road.nodeList.get(i).numLanes=1;
+                }
+
+
+            }
+        });
+        JButton twoLaneButton = new JButton("2 Lane");
+        twoLaneButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+//                node.speedLimit=Double.parseDouble(speedEditField.getText());
+                //TODO grab EACH node and change speed.
+                road.numLanes=2;
+                for(int i=0;i<road.nodeList.size();i++){
+                    road.nodeList.get(i).numLanes=2;
+                }
+
+
+            }
+        });
         displayPanel.add(speedLabel);
         displayPanel.add(speedField);
         displayPanel.add(speedEditLabel);
         displayPanel.add(speedEditField);
         displayPanel.add(commitButton);
+        displayPanel.add(lanesLabel);
+        displayPanel.add(oneLaneButton);
+        displayPanel.add(twoLaneButton);
 //        displayPanel.add(twoWayButton);
         this.add(displayPanel, BorderLayout.WEST);
         
@@ -138,7 +172,11 @@ public class RoadFrame extends JFrame{
             isOneWay.setText("OneWay? "+road.oneWay);
             speedField.setText(Double.toString(road.nodeList.get(0).speedLimit));
         }
+        lanesLabel.setText(Integer.toString(road.numLanes));
     }
+    
+    
+    
     
     
 }
