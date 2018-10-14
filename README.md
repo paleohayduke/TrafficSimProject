@@ -43,7 +43,7 @@ a selectable list to jump between nodes.
 
 ANNOUNCEMENTS:
 
-10/12/2018
+10/14/2018 There are actual turn lanes in addition to all the other lanes now
 
 10/12/2018 Multiple lanes enabled, cars will pass. . 
 Use this to determine how cars should turn at an intersection:
@@ -255,6 +255,8 @@ BUGS
 
 
 COMPLETED TASKS
+
+COMPLETED 10/14/2018 - added turn lanes
 
 COMPLETED 10/14/2018 --improve how turns are handled with multiple lanes (adjust where car decides to
 switch waypoints... check connection position after intersection for cars route

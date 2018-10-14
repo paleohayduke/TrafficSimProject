@@ -123,8 +123,8 @@ public class Auto {
         
     }
 
-    double carSpacing =.00016;
-    double stopSpacing=.00015;
+    double carSpacing =.00008;
+    double stopSpacing=.00006;
     int justGo =0;
     boolean stoppedOnce=false;
     
@@ -179,7 +179,7 @@ public class Auto {
                 }else{
 
                     justGo++;
-                    if(justGo>5){
+                    if(justGo>10){
                         justGo=0;
                         d=newVelocity*timeIncrement;
 
@@ -211,11 +211,11 @@ public class Auto {
                         if(isLaneClear(targLane,D)){
                             lane=targLane;
                             
-                            targetNode=calcOffset(lastWaypointNode, waypointNode, waypointNode, laneDists[lane-1]);
+                            targetNode=calcOffset(lastWaypointNode, waypointNode, waypointNode, laneDists[lane]);
                         }else{
                         
                             justGo++;
-                            if(justGo>100){
+                            if(justGo>30){
                                 justGo=0;
                                 d=newVelocity*timeIncrement;
                                 break;
@@ -246,10 +246,10 @@ public class Auto {
                     if(isLaneClear(targLane,D)){
                         lane=targLane;
                             
-                        targetNode=calcOffset(lastWaypointNode, waypointNode, waypointNode, laneDists[lane-1]);
+                        targetNode=calcOffset(lastWaypointNode, waypointNode, waypointNode, laneDists[lane]);
                     }else{
                         justGo++;
-                        if(justGo>200){
+                        if(justGo>30){
                             justGo=0;
                             
                             d=newVelocity*timeIncrement;
@@ -384,7 +384,7 @@ public class Auto {
 
 //    double laneDist1=.00004;
 //    double laneDist2=.00012;        
-    double[] laneDists={.00004,.00012,0002};
+    double[] laneDists={0,.00004,.00012,0002};
     
     public boolean nextWaypoint(){
 
@@ -437,16 +437,18 @@ public class Auto {
             stopOffset=0;
         }
         
-        
+        if(lane==0){
+            lane=1;
+        }
         if(lane>waypointNode.numLanes){
             lane=waypointNode.numLanes;
         }
         if(dirInt>0&&waypointNode.numLanes>1){
             lane=waypointNode.numLanes-1;
         }if(dirInt<0){
-            lane=1;
+            lane=0;
         }
-        double laneDistance =laneDists[lane-1];
+        double laneDistance =laneDists[lane];
         
         targetNode.setPos(calcOffset(lastWaypointNode,waypointNode,waypointNode,laneDistance));
 //        targetNode.setPos((waypointNode));
