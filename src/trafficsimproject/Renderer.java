@@ -168,6 +168,8 @@ public class Renderer extends JFrame{
 //        System.out.println("maxLat"+maxLon);
     }
     
+
+    
     
     Shape testCar = new Rectangle2D.Double(0,0,0,0);
     public void setAutoPos(Nd node){

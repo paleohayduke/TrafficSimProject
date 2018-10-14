@@ -34,7 +34,7 @@ public class RouteGenerator implements Runnable{
             int nodeNum1 = rand.nextInt(roads.get(roadNum1).nodeList.size());
             int roadNum2 = rand.nextInt(roads.size());
             int nodeNum2 = rand.nextInt(roads.get(roadNum2).nodeList.size());
-            if(roads.get(roadNum1).nodeList.get(nodeNum1).calcDistance(roads.get(roadNum2).nodeList.get(nodeNum2))<(range)/2){
+            if(roads.get(roadNum1).nodeList.get(nodeNum1).calcDistance(roads.get(roadNum2).nodeList.get(nodeNum2))<(range)/4){
 //                System.out.println("continue="+(maxLon-minLon)/4);
                 continue;
             }

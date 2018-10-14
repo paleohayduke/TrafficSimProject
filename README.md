@@ -4,14 +4,19 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
-
-
--make cars rectangle shaped and align their axis with their velocity vector. 
-10/12/2018-
-
 -Create simulation method to start the program paused without loading cars.
 Give options to load map, pick number of cars and any other start options.
+10/8/2018 *set to do 10/15/2018.hour. 
+
+Heatmap by two node segments. Do by moving average. Lines? Filled translucent rectangles (use calculate offset
+coordinate function on two nodes in line)? multiple circles? 
+10/14/2018
+
+-Average trip length display
 10/8/2018
+
+-Get a frame for general car stats&options. Display a live graph of something. 
+10/14/2018*do 10/15/2018
 
 -Implement "major disaster" scenario. Click a spot on the map and every car
 will run away from it and attempt to path OFF of the map (evacuation simulation). 
@@ -20,8 +25,10 @@ will run away from it and attempt to path OFF of the map (evacuation simulation)
 -Clock needs a "how many hours since (time)" function.  
 10/8/2018
 
--Average trip length display
-10/8/2018
+
+
+-make cars rectangle shaped and align their axis with their velocity vector. 
+10/12/2018-
 
 -Editing connections between nodes. Make connection display in NodeInfoFrame
 a selectable list to jump between nodes.
@@ -42,6 +49,12 @@ a selectable list to jump between nodes.
 9/21/2018
 
 ANNOUNCEMENTS:
+
+10/15/2018 added some tasks (stat w/ graphs, load/save/start options, heatmap)
+Maybe track stats... heave the heat map work on a rolling average. This plus
+scenarios will be cool. Need to be able to adjust min route distance while 
+running. Also change min distance to a range with weights for various distances.
+
 
 10/14/2018 There are actual turn lanes in addition to all the other lanes now
 

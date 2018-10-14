@@ -24,8 +24,8 @@ public class TrafficSimProject {
 
 //        threadTest();
 //        fileSave();
-//        fileLoad();
-        fileDirectionsSave();
+        fileLoad();
+//        fileDirectionsSave();
     }
     
     static void fileDirectionsSave(){
