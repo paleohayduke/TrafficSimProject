@@ -4,16 +4,7 @@ TAMUCT COSC-3320-110 Programmers Group 1
 
 TODO:
 
--improve how turns are handled with multiple lanes (adjust where car decides to
-switch waypoints... check connection position after intersection for cars route
-then see if next connection is on left, right or same line 
-(<0,0,>0 check in range of 0 instead of at since double).
-if turn right, change waypoint BEFORE targetNode, 
-if  turning left, change waypoint AFTER targetNode
-if going straight, AT targetNode 
-Do this next. 
-if multiple lanes, move car to appropriate lane to turn 
-10/12/2018 - 10/13/2018)
+
 
 -make cars rectangle shaped and align their axis with their velocity vector. 
 10/12/2018-
@@ -264,6 +255,17 @@ BUGS
 
 
 COMPLETED TASKS
+
+COMPLETED 10/14/2018 --improve how turns are handled with multiple lanes (adjust where car decides to
+switch waypoints... check connection position after intersection for cars route
+then see if next connection is on left, right or same line 
+(<0,0,>0 check in range of 0 instead of at since double).
+if turn right, change waypoint BEFORE targetNode, 
+if  turning left, change waypoint AFTER targetNode
+if going straight, AT targetNode 
+Do this next. 
+if multiple lanes, move car to appropriate lane to turn 
+est 10/12/2018 - 10/13/2018)
 
 COMPLETED 10/12/2018 -add radioboxes to RoadInfoFrame to set an entire road's number of lanes. (req 5b)
 

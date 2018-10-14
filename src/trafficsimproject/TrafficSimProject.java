@@ -184,7 +184,7 @@ public class TrafficSimProject {
         Simulation sim = new Simulation();
 
         sim.openMap("./src/MediumMap.osm");
-        sim.startRenderer(4);
+        sim.startRenderer(1);
         sim.carTotal=1000;
         
         RouteBuffer buffer = new RouteBuffer();

@@ -124,143 +124,12 @@ public class Auto {
     }
 
     double carSpacing =.00016;
-    double stopSpacing=.00004;
+    double stopSpacing=.00008;
     int justGo =0;
     boolean stoppedOnce=false;
     
     
-//    public void calcPosOLD(double timeIncrement){
-//        double newVelocity = waypointNode.speedLimit;
-//        if(accelerationOn){
-//            if(velocity<newVelocity){
-//                velocity=velocity+acceleration*timeIncrement;
-//            }else if(velocity>newVelocity){
-//                velocity=velocity-acceleration*timeIncrement;
-//            }
-//            
-//        }else{
-//            velocity=newVelocity;
-//        }
-//        
-//        double x1=posNode.getLong();
-//        double y1=posNode.getLat();
-//        double x2=waypointNode.getLong();
-//        double y2=waypointNode.getLat();
-//        double d = velocity*timeIncrement;
-//        double D = posNode.calcDistance(waypointNode);
-//
-//
-//
-//
-//
-//        if(waypointNode.isStop){
-//            if(D<stopSpacing){
-//
-//
-//                if(!waypointNode.stopQ.contains(this.posNode)){
-//                    waypointNode.stopQ.add(posNode);
-//                    stoppedOnce=true;
-//                    if(waypointNode.connections.size()>3){
-//                        d=0;
-//                        this.velocity=0;
-//                        
-//                    }
-//
-////                    System.out.println("add");
-//                }
-//                
-//                if(this.posNode==waypointNode.stopQ.get(0)){
-//
-//                }else{
-//
-//                    justGo++;
-//                    if(justGo>5){
-//                        justGo=0;
-//                        d=newVelocity*timeIncrement;
-//
-//                    }else{
-//                        d=0;
-//                        this.velocity=0;
-//                    }
-//                }
-//            }
-//        }
-//
-//        for(int i = 0;i< waypointNode.cars.size();i++){
-//            if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==this.lastWaypointNode
-//                    &&waypointNode.cars.get(i)!=this.posNode){
-//                double otherDist=waypointNode.cars.get(i).calcDistance(waypointNode);
-//                if(otherDist<D){
-//                    double spacing = D-otherDist;
-////                    double spacing = posNode.calcDistance(waypointNode.cars.get(i));
-//                    if(spacing<carSpacing){
-//                        justGo++;
-//                        if(justGo>100){
-//                            justGo=0;
-//                            d=newVelocity*timeIncrement;
-//                            break;
-//
-//                        }
-////                        d=0;
-////                        velocity=velocity-acceleration*3;
-//                        this.velocity=0;
-////                        System.out.println("car distance");
-//                        return;
-//                    }
-//
-//                }
-//            }
-//            else if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==waypointNode
-//                    &&waypointNode.cars.get(i).parentAuto.waypointNode!=this.lastWaypointNode){
-//                if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing){
-//                    justGo++;
-//                        if(justGo>200){
-//                            justGo=0;
-//                            
-//                            d=newVelocity*timeIncrement;
-//                            break;
-//
-//                        }
-////                    d=0;
-////                    velocity=velocity-acceleration*3;
-//                    this.velocity=0;
-//                    return;
-//                }
-//                
-//            }
-//        }
-//
-////stopsigns
-//        
-//        
-//        
-//        while(d>(D)){
-//            
-//            d=d-D;
-//            
-//            if(!nextWaypoint()){
-//                break;
-//            }
-//            D = posNode.calcDistance(waypointNode);
-//        }
-//        if(d<(D)){
-////            System.out.println("d<D");
-//            double x3 = -(x1-x2)*(d/D)+x1;
-//            double y3 = -(y1-y2)*(d/D)+y1;
-////            Nd temp=calcOffset(posNode, x3, y3);
-////            posNode.setLong(temp.getLong());
-////            posNode.setLat(temp.getLat());
-//            posNode.setLat(y3);
-//            posNode.setLong(x3);
-//
-//        }
-//        
-//        
-//
-//    }
-    
-//    boolean passedIntersection = false;
-   
+   double stopOffset =0;
     
     public void calcPos(double timeIncrement){
 
@@ -290,7 +159,7 @@ public class Auto {
 
 
         if(waypointNode.isStop){
-            if(D<stopSpacing){
+            if(D-stopOffset<stopSpacing){
 
 
                 if(!waypointNode.stopQ.contains(this.posNode)){
@@ -399,11 +268,10 @@ public class Auto {
         }
 
 //stopsigns
-        
-        
-        
-        while(d>(D)){
-            
+
+        while(d>(D-stopOffset)){
+
+                    
             d=d-D;
             
             if(!nextWaypoint()){
@@ -411,7 +279,7 @@ public class Auto {
             }
             D = posNode.calcDistance(targetNode);
         }
-        if(d<(D)){
+        if(d<(D-stopOffset)){
 //            System.out.println("d<D");
             double x3 = -(x1-x2)*(d/D)+x1;
             double y3 = -(y1-y2)*(d/D)+y1;
@@ -425,6 +293,37 @@ public class Auto {
 
         
 
+    }
+    
+//    private int calcTurnDir(){
+//        return 1;
+//    }
+    private int calcTurnDir(){
+        int turnDir=0;
+        if(directions.stepIndex<directions.directions.size()-1){
+            int connectionTurn = directions.directions.get(directions.stepIndex);
+            //A
+            if(waypointNode.connections.size()>connectionTurn
+                    &&lastWaypointNode!=null&&waypointNode!=null){
+                
+            
+            double turn=(waypointNode.connections.get(connectionTurn).getLong()-lastWaypointNode.getLong())
+                    *(waypointNode.getLat()-lastWaypointNode.getLat())
+                    -(waypointNode.connections.get(connectionTurn).getLat()-lastWaypointNode.getLat())
+                    *(waypointNode.getLong()-lastWaypointNode.getLong());
+//            System.out.println("turn d="+turn);
+            if(turn>=-.00000001&&turn<=.00000001){
+            turnDir=0;    
+            }else if(turn>.00000001){
+                turnDir=1;
+            }else if(turn<-.00000001){
+                turnDir=-1;
+            }
+            }
+        }else{
+
+        }
+        return turnDir;
     }
     
     private boolean isLaneClear(int targetLane, double D){
@@ -516,11 +415,36 @@ public class Auto {
         int choice = directions.next();
         waypointNode=waypointNode.connections.get(choice);            
         waypointNode.addCar(posNode);
-        
+//        if(waypointNode.isStop==true){
+//            System.out.println(calcTurnDir());
+//        }
         //10/11/2018/4:55am 
         // get target..
+        
+        int dirInt=0;
+        if(waypointNode.isStop==true){
+            dirInt = calcTurnDir();
+        
+        }else{
+            
+        }
+        
+        if(dirInt>0){
+            stopOffset=lane*.00004;
+        }else if(dirInt<0){
+            
+        }else{
+            stopOffset=0;
+        }
+        
+        
         if(lane>waypointNode.numLanes){
             lane=waypointNode.numLanes;
+        }
+        if(dirInt>0&&waypointNode.numLanes>1){
+            lane=waypointNode.numLanes-1;
+        }if(dirInt<0){
+            lane=1;
         }
         double laneDistance =laneDists[lane-1];
         
