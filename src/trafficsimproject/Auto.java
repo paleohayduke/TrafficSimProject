@@ -124,7 +124,7 @@ public class Auto {
     }
 
     double carSpacing =.00016;
-    double stopSpacing=.00008;
+    double stopSpacing=.00015;
     int justGo =0;
     boolean stoppedOnce=false;
     
@@ -432,7 +432,7 @@ public class Auto {
         if(dirInt>0){
             stopOffset=lane*.00004;
         }else if(dirInt<0){
-            
+//            stopOffset=-lane*.00004;
         }else{
             stopOffset=0;
         }
