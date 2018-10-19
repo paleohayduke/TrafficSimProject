@@ -50,6 +50,9 @@ a selectable list to jump between nodes.
 
 ANNOUNCEMENTS:
 
+10/18/2018 Added SplashFrame, edited Simulation.run() to get ready for loading
+window. Ability to reset sim, load different map, etc. 
+
 10/15/2018 added some tasks (stat w/ graphs, load/save/start options, heatmap)
 Maybe track stats... heave the heat map work on a rolling average. This plus
 scenarios will be cool. Need to be able to adjust min route distance while 

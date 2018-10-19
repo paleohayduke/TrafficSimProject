@@ -21,10 +21,10 @@ public class TrafficSimProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        start();
 //        threadTest();
 //        fileSave();
-        fileLoad();
+//        fileLoad();
 //        fileDirectionsSave();
     }
     
@@ -127,17 +127,8 @@ public class TrafficSimProject {
         ExecutorService executorService = Executors.newCachedThreadPool();
         Simulation sim = new Simulation();
 
-//        sim.openMap("./src/MediumMap.osm");
-//        sim.startRenderer(2);
-//        sim.carTotal=500;
-        FileBuilder fb = new FileBuilder();
-//        fb.buildRoadBuilders(sim.gb.roads);
-//        fb.boundBuilder.minLat=sim.minLat;
-//        fb.boundBuilder.maxLat=sim.maxLat;
-//        fb.boundBuilder.minLon=sim.minLon;
-//        fb.boundBuilder.maxLon=sim.maxLon;
-//        
-//        fb.writeFile("map.pro");
+
+
         sim.openPro("map.pro");
         sim.carTotal=5000;
         sim.startRenderer(2);
@@ -227,6 +218,17 @@ public class TrafficSimProject {
 //        }
 //        sim.demo();
 //        sim.startRenderer(1);
+    }
+
+    static void start(){
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        Simulation sim = new Simulation();
+     
+        executorService.execute(sim);
+
+
+        executorService.shutdown();
+
     }
 
 

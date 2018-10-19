@@ -14,6 +14,8 @@ import java.util.Random;
 
 // get rid of these when done
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -37,7 +39,7 @@ public class Simulation implements Runnable{
     public double minLon=0;
     public double maxLon=0;
     public double maxLat =0;
-    boolean run=true;
+
     //you'll have to use openMap() yourself
     Simulation(){
         
@@ -273,7 +275,7 @@ public class Simulation implements Runnable{
 //    double fpsFrames=0;
     
     
-    public void step(double velocity, double stepSize){       
+    public void step(double stepSize){       
 //        System.out.println(System.currentTimeMillis());
 
         tickCounter++;
@@ -543,6 +545,71 @@ public class Simulation implements Runnable{
     public void run() {
 //        System.out.println("RUN");
 //        setCars(carTotal);
+
+        SplashFrame sf = new SplashFrame();
+        boolean initializing=true;
+        String fileName="map.pro";
+        boolean loadPro = true;
+        while(initializing){
+
+            
+            
+
+            loadCarFile=sf.loadCarFile;
+            fileName=sf.fileName;
+
+
+            initializing=!sf.isDone();
+            try{
+                Thread.sleep(20);
+            }
+            catch(Exception ex){
+                
+            }
+            
+        }
+ 
+
+        if(loadPro){
+            openPro(fileName);
+        }else{
+            openMap(fileName);
+        }
+        carTotal=5000;
+//        loadCarFile=true;
+
+
+        startRenderer(2);        
+        sf.dispose();
+        ExecutorService executorService = Executors.newCachedThreadPool();
+
+      
+        buffer = new RouteBuffer();
+        
+        RouteGenerator routeGen = new RouteGenerator(gb.roads,(display.maxLat-display.minLat),buffer);
+        RouteGenerator routeGen2 = new RouteGenerator(gb.roads,(display.maxLat-display.minLat),buffer);
+        RouteGenerator routeGen3 = new RouteGenerator(gb.roads,(display.maxLat-display.minLat),buffer);
+        RouteGenerator routeGen4 = new RouteGenerator(gb.roads,(display.maxLat-display.minLat),buffer);
+        RouteGenerator routeGen5 = new RouteGenerator(gb.roads,(display.maxLat-display.minLat),buffer);
+        RouteGenerator routeGen6 = new RouteGenerator(gb.roads,(display.maxLat-display.minLat),buffer);
+        RouteGenerator routeGen7 = new RouteGenerator(gb.roads,(display.maxLat-display.minLat),buffer);
+        
+        executorService.execute(routeGen);
+        executorService.execute(routeGen2);
+        executorService.execute(routeGen3);
+        executorService.execute(routeGen4);
+        executorService.execute(routeGen5);
+        executorService.execute(routeGen6);
+        executorService.execute(routeGen7);
+        executorService.shutdown();
+//        sim.setCars(500); // 200 is the amount of cars 
+
+
+
+
+
+
+
         if(saveCars){
             
             FileBuilder fb = new FileBuilder();
@@ -557,11 +624,11 @@ public class Simulation implements Runnable{
         }else{
             setCars(carTotal);
         }
-        
+        boolean run=true;
         while(run){
 //            System.out.println("RUN");
             try{
-                step(0.00016, .022);
+                step(.022);
                 if(display.saveRoute){
             
                     FileBuilder fb = new FileBuilder();
@@ -587,7 +654,9 @@ public class Simulation implements Runnable{
                 
             }
         }
+
     }
+    
     int carTotal=500;
 
 }

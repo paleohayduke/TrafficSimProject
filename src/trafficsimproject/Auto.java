@@ -337,16 +337,10 @@ public class Auto {
             if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==this.lastWaypointNode
                     &&waypointNode.cars.get(i)!=this.posNode
                     &&waypointNode.cars.get(i).parentAuto.lane==targetLane){//check other lane
-
                 if(posNode.calcDistance(waypointNode.cars.get(i))<carSpacing*2){
                     clear=false;
-
-                        
-
-
                 }
-            }
-            
+            }            
             else if(waypointNode.cars.get(i).parentAuto.lastWaypointNode==waypointNode
                     &&waypointNode.cars.get(i).parentAuto.waypointNode!=this.lastWaypointNode
                     &&waypointNode.cars.get(i).parentAuto.lane==targetLane){
