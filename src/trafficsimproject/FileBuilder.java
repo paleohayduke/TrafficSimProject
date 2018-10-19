@@ -231,7 +231,7 @@ public class FileBuilder {
     
     void writeFile(String fName){
         try {
-            FileOutputStream f = new FileOutputStream(new File(fName));
+            FileOutputStream f = new FileOutputStream(new File(fName+"PRO"));
             ObjectOutputStream o = new ObjectOutputStream(f);
             
             o.writeObject(rds);
@@ -274,7 +274,8 @@ public class FileBuilder {
 
         }
         catch (Exception e) {
-            System.out.println("READING1 "+e.getMessage()+" "+e.getLocalizedMessage());
+            System.out.println("readFile READING1 "+e.getMessage()+" "+e.getLocalizedMessage());
+            System.out.println("fName "+fName);
 	}
         try {
             

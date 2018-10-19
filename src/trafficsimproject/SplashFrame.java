@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -23,8 +25,8 @@ public class SplashFrame extends JFrame{
     String fileName=("map.pro");
     int carTotal = 5000;
     boolean loadCarFile =true;
-    
-    
+    boolean parseMap =false;
+    boolean saveCars=false;
 
 
 //        openPro("map.pro");
@@ -48,7 +50,7 @@ public class SplashFrame extends JFrame{
                 JFileChooser chooser = new JFileChooser();
                 chooser.setCurrentDirectory(new java.io.File("."));
                 FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                ".pro files", "pro","osm");
+                ".pro files", "pro");
                 chooser.setFileFilter(filter);
 
                 int returnVal = chooser.showOpenDialog(chooser);
@@ -72,10 +74,61 @@ public class SplashFrame extends JFrame{
             }
         });
         
-       
+        JButton parseMapButton = new JButton("Parse Map");
+        parseMapButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                
+                
+                JFileChooser chooser = new JFileChooser();
+                chooser.setCurrentDirectory(new java.io.File("."));
+                FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                ".osm files", "osm","osmPRO");
+                chooser.setFileFilter(filter);
+                
+                int numCars = 0;
+                    boolean notVerif = true;
+                    while(notVerif){
+                        String str=JOptionPane.showInputDialog("Please input number of cars: ");
+                        try{
+                            numCars=Integer.parseInt(str);
+                            notVerif=false;
+                        }catch(Exception ex){
+                            
+                        }
+                    }
+                int returnVal = chooser.showOpenDialog(chooser);
+                if(returnVal == JFileChooser.APPROVE_OPTION) {
+                    System.out.println("You chose to open this file: " +
+                    chooser.getSelectedFile().getAbsolutePath());
+                    fileName=chooser.getSelectedFile().getAbsolutePath();
+                    
+                    // USE THIS SHIT
+                    System.out.println("name to make prjectL "+fileName.substring(0,fileName.length()-4));
+                    parseMap=true;
+                    
+                    
+                    
+                    carTotal=numCars;
+                    saveCars=true;
+                    completed=true;
+                }
+
+                
+                
+//                            System.out.println("??? "+completed);
+            }
+        });
         
-        this.add(loadMapButton);
-        this.add(startButton);
+        
+       
+        JPanel loadPanel = new JPanel();
+        
+        loadPanel.add(loadMapButton);
+        loadPanel.add(parseMapButton);
+        loadPanel.add(startButton);
+
+        
+        this.add(loadPanel);
         this.setVisible(true);
         this.setAlwaysOnTop(true);
     }

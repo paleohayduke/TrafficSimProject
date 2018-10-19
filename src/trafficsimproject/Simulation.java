@@ -81,7 +81,7 @@ public class Simulation implements Runnable{
         this.minLon=fb.boundBuilder.minLon;
         this.maxLon=fb.boundBuilder.maxLon;
  
-        loadCars(fb.readDirectionsFile("mapDIR"));
+        loadCars(fb.readDirectionsFile(fName+"DIR"));
         
         
 //        saveMap();
@@ -533,6 +533,20 @@ public class Simulation implements Runnable{
 
     }
     
+    public void parseMap(String fileName){
+        openMap(fileName);
+//        sim.startRenderer(2);
+//        sim.carTotal=500;
+        FileBuilder fb = new FileBuilder();
+        fb.buildRoadBuilders(gb.roads);
+        fb.boundBuilder.minLat=minLat;
+        fb.boundBuilder.maxLat=maxLat;
+        fb.boundBuilder.minLon=minLon;
+        fb.boundBuilder.maxLon=maxLon;
+        
+        fb.writeFile(fileName);
+    }
+    
     RouteBuffer buffer = new RouteBuffer();
     public void setBuffer(RouteBuffer buffer){
         this.buffer=buffer;
@@ -557,8 +571,12 @@ public class Simulation implements Runnable{
 
             loadCarFile=sf.loadCarFile;
             fileName=sf.fileName;
-
-
+            if(sf.parseMap==true){
+                parseMap(fileName);
+                saveCars=true;
+                carTotal=sf.carTotal;
+                
+            }
             initializing=!sf.isDone();
             try{
                 Thread.sleep(20);
@@ -572,8 +590,6 @@ public class Simulation implements Runnable{
 
         if(loadPro){
             openPro(fileName);
-        }else{
-            openMap(fileName);
         }
         carTotal=5000;
 //        loadCarFile=true;
@@ -614,7 +630,7 @@ public class Simulation implements Runnable{
             
             FileBuilder fb = new FileBuilder();
             fb.buildDirectionBuilders(saveCars(carTotal));
-            fb.writeDirectionsFile("mapDIR");
+            fb.writeDirectionsFile(fileName+"DIR");
         }else if(loadCarFile){
 //            FileBuilder fb = new FileBuilder();
 //            loadCars(fb.readDirectionsFile("mapDIR"));
